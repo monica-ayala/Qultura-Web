@@ -1,0 +1,54 @@
+<%- include('includes/header.ejs') %><div id="index-banner" class="parallax-container">
+<main>
+  
+  <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header white-text text-lighten-2"> Buenos días, Ricardo Núñez</h1>
+        <div class="row">
+          <h5 class="header col s12 white-text"> Conoce el estado de Querétaro. Conoce su cultura. </h5>
+        </div>
+        
+        <br><br>
+
+      </div>
+    </div>
+    <div class="parallax"><img src="/img/queretaro-dark.jpg" alt="background querétaro"></div>
+  </div>
+
+
+  <div class="container">
+      <div class="row flex">
+          <div class="col s10">
+            <h4 class="text-bold"> Lista de museos </h4>
+          </div>
+          <div class="col s2">
+            <a class="bottom-align waves-effect waves-light btn primary-color"><i class="material-icons left">add_box</i>Nuevo</a>
+          </div>
+        
+          
+       
+      </div>
+        
+      <ul class="cards">
+        <% for (let museo of museos){%>
+          <%if(museo.status == 1){%>
+        <li class="card-panel card-pers hoverable" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/queretaro.png');">
+          <div>
+            <h3 class="card-title white-text"><%=museo.nom_museo%></h3>
+            <div class="card-content white-text">
+              <p> Tel: <%=museo.num_museo%> 
+              </p>
+              <p><%=museo.desc_museo.substring(0, 100)%> . . .</p>
+            </div>
+          </div>
+          <div class="card-link-wrapper">
+            <a href="" class="btn-floating primary-color card-link"> <i class="material-icons left">edit</i> </a>
+          </div>
+        </li>
+        <%}%>
+        <%}%>
+      </ul>
+  </div>
+</main>
+<%- include('includes/footer.ejs') %>
