@@ -1,0 +1,38 @@
+{
+  "name": "qultura-admin",
+  "version": "1.0.0",
+  "description": "Repositorio para la parte web de Qultura",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monica-ayala/Qultura-Admin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/monica-ayala/Qultura-Admin/issues"
+  },
+  "homepage": "https://github.com/monica-ayala/Qultura-Admin#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.0.2",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "fa-icons": "^0.2.0",
+    "material-icons": "^1.11.11",
+    "materialize-css": "^1.0.0-rc.2",
+    "mysql2": "^2.3.3"
+  }
+}
