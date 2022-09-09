@@ -26,11 +26,10 @@ main {
 }
 
 .bottom-align{
-    position: absolute !important;
     bottom:0 !important;
     margin-bottom:15px
 
-}
+} 
 
 .flex {
     display: flex;
@@ -118,6 +117,13 @@ main {
     .card-pers :not(:last-child) {
       margin-right: 20px;
     }
+}
+
+.imgPicker{
+    border-radius:10px
+}
+.margin-10{
+    margin:30px
 }
   
 /* @media (min-width: 700px) {

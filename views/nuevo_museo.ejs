@@ -1,5 +1,52 @@
-<%- include('includes/header.ejs') %>
+<%- include('includes/header_image.ejs') %>
 <main>
-<div>hola</div>
+<div class="container">
+    <h1 class="white-text">Nuevo museo</h1>
+        <div class="white min-container">
+            <div class="row center margin-10">  
+                <!-- valign-wrapper -->
+                <div class="col s5">
+                    <div class="row valign-wrapper">
+                        <div class="col s10">
+                            <img class="responsive-img imgPicker" src="img/queretaro.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="col s7"> 
+                    <div class="row center">
+                        <div class="input-field col s10 offset-s1">
+                            <input placeholder="Ej: MAQRO" id="nombre_museo" type="text" class="validate">
+                            <label for="nombre_museo"> Nombre del Museo </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="row center margin-10">  
+                
+                <div class="input-field col s5 offset-s1">
+                    <input placeholder="Ej: 442-212-2357" id="num_museo" type="text" class="validate">
+                    <label for="num_museo"> Teléfono de contacto </label>
+                </div>
+                <div class="input-field col s5">
+                    <input placeholder="Ej: C. Ignacio Allende Sur 14" id="direccion_museo" type="text" class="validate">
+                    <label for="direccion_museo"> Dirección </label>
+                </div>
+                
+            </div>
+            <div class="row center margin-10">  
+                <div class="input-field col s10 offset-s1">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1"> Descripción </label>
+                </div>
+            </div>
+
+        </div>
+
+        
+    
+    
+</div>
 </main>
 <%- include('includes/footer.ejs') %>
