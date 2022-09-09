@@ -9,22 +9,30 @@ const filesystem = require('fs');
 
 // EJEMPLOS: 
 exports.view = (request, response, next) => {
-    response.render('rbac_registrar');
+  Usuario.fetchList()
+  .then(([rowsUsers,fieldData])=>{
+    response.render('rbac_registrar',{
+      usuarios:rowsUsers
+    }
+    );
+  }).catch(err=>console.log(err));
   };
-// exports.signup_get = (request, response, next) => {
-// };
 
-// exports.lista = (request, response, next) => {
-// };
 
-// exports.signup_post = (request, response, next) => {
-// };
+ exports.signup_get = (request, response, next) => {
+  response.render('login');
+ };
 
-// exports.login_get = (request, response, next) => {
-// };
 
-// exports.login_post = (request, response, next) => {
-// };
+ exports.signup_post = (request, response, next) => {
+ };
+
+ exports.login_get = (request, response, next) => {
+  response.render('login');
+ };
+
+ exports.login_post = (request, response, next) => {
+ };
 
 // exports.logout = (request, response, next) => {
 // };

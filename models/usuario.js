@@ -1,14 +1,23 @@
-// const db = require('../util/database');
+ const db = require('../util/database');
 // const bcrypt = require('bcryptjs');
 
-// module.exports = class Usuario{
-//     constructor(nombre, login, password) {
-//         this.nombre_usuario = nombre;
-//         this.login_usuario = login;
-//         this.password = password;
-//     }
+ module.exports = class Usuario{
+     constructor(nombre, correo,contrasena) {
+         this.nom_user = nombre,
+         this.correo_user = correo,
+         this.password_user = contrasena,
+         this.id_rol = 0
+     }
 
-//     static method_example(data){
-//         return db.execute('QUERY', [data]);
-//     }
-// }
+     save() {
+        return db.execute('INSERT INTO User(nom_user,correo_user,password_user,id_rol) VALUES (?,?,?,?)', 
+                [
+                    this.nom_user,this.correo_user,this.password_user,this.id_rol
+                ]    
+        );
+    }
+
+     static fetchList(){
+        return db.execute('SELECT * FROM User');
+    }
+ }
