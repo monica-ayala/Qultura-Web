@@ -2,9 +2,9 @@ const path = require("path");
 const Usuario = require("../models/usuario");
 const filesystem = require('fs');
 //const bcrypt = require("bcryptjs");
-//const { response } = require("express");
-//const { redirect } = require("express/lib/response");
-// const { getUnpackedSettings } = require("http2");
+const { response } = require("express");
+const { redirect } = require("express/lib/response");
+//const { getUnpackedSettings } = require("http2");
 // const { Usuario_Verificar } = require("../models/usuario");
 
 // EJEMPLOS: 
@@ -20,11 +20,20 @@ exports.view = (request, response, next) => {
 
 
  exports.signup_get = (request, response, next) => {
-  response.render('login');
+  response.render('signup');
  };
 
 
  exports.signup_post = (request, response, next) => {
+  const nuevo_usuario = new Usuario(
+    request.body.us_nombre,
+    request.body.us_correo,
+    request.body.us_password
+  )
+  nuevo_usuario.save()
+  .then((result)=>{
+    response.redirect("/usuario/login");
+  }).catch(err=>console.log(err))
  };
 
  exports.login_get = (request, response, next) => {
