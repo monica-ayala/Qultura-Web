@@ -8,7 +8,12 @@
                 <div class="col s5">
                     <div class="row valign-wrapper">
                         <div class="col s10">
-                            <img class="responsive-img imgPicker" src="img/queretaro.png">
+                            <div class="card">
+                                <div class="card-image">
+                                  <img src="img/queretaro.png">
+                                  <a class="btn-floating halfway-fab waves-effect waves-light primary-color"><i class="material-icons">edit</i></a>
+                                </div>
+                              </div>
                         </div>
                     </div>
                 </div>
@@ -18,6 +23,19 @@
                             <input placeholder="Ej: MAQRO" id="nombre_museo" type="text" class="validate">
                             <label for="nombre_museo"> Nombre del Museo </label>
                         </div>
+
+                    </div>
+                    <div class="row center">
+                        <div class="col offset-s1">
+                            <div class="col">
+                                <a class="btn waves-effect waves-light primary-color"><i class="material-icons left">add_box</i>Agregar salas </a>
+                            </div>
+                            <div class="col">
+                                <a class="btn waves-effect waves-light primary-color"><i class="material-icons left">calendar_month</i>Agregar horarios </a>
+                            </div>  
+                        </div>
+                        
+                        
                     </div>
                 </div>
 
@@ -30,17 +48,22 @@
                     <label for="num_museo"> Teléfono de contacto </label>
                 </div>
                 <div class="input-field col s5">
-                    <input placeholder="Ej: C. Ignacio Allende Sur 14" id="direccion_museo" type="text" class="validate">
-                    <label for="direccion_museo"> Dirección </label>
+                        <input placeholder="Ej: C. Ignacio Allende Sur 14" id="direccion_museo" type="text" class="validate">
+                    <label for="direccion_museo"> Dirección </label> 
                 </div>
-                
+                <a style="margin-right:30px;margin-top:10px" class="btn-floating waves-effect waves-light primary-color"><i class="material-icons left">location_on</i> </a>
             </div>
             <div class="row center margin-10">  
                 <div class="input-field col s10 offset-s1">
                     <textarea id="textarea1" class="materialize-textarea"></textarea>
                     <label for="textarea1"> Descripción </label>
                 </div>
+                <button class="btn waves-effect waves-light green margin-10">
+                    <i class="material-icons left">check</i>
+                    Registrar museo
+                </button>
             </div>
+
 
         </div>
 
