@@ -7,6 +7,7 @@ main {
     flex: 1 0 auto;
 }
   
+
 .primary-color{
     background-color: #0C1A30 !important;
 }
@@ -120,7 +121,7 @@ main {
 }
 
 .imgPicker{
-    border-radius:10px
+    border-radius:10px !important
 }
 .margin-10{
     margin:30px
