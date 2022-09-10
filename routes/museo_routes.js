@@ -6,6 +6,7 @@ const museo_controller = require('../controllers/museo_controller');
 // EJEMPLOS
 
 router.get('/',museo_controller.lista);
+router.get('/get',museo_controller.get_museo);
 router.get('/nuevo_museo',museo_controller.get_nuevo)
 router.post('/nuevo_museo',museo_controller.post_nuevo)
 router.get('/registro',museo_controller.register)

@@ -29,11 +29,20 @@ exports.post_nuevo=(request,response,next)=>{
 
 exports.lista=(request,response,next)=>{
   Museo.fetchList()
-    .then(([rowsMuseos, fielData]) => {
+    .then(([rowsMuseos, fieldData]) => {
       response.render('principal',{
         museos:rowsMuseos
       }
     );
+    }).catch(err => console.log(err));
+}
+
+exports.get_museo=(request,response,next)=>{
+  Museo.fetchList()
+    .then(([rowsMuseos,fieldData])=>{
+      response.status(200).json({
+        museos:rowsMuseos
+    });
     }).catch(err => console.log(err));
 }
 exports.register = (request, response, next) => {

@@ -7,6 +7,7 @@ main {
     flex: 1 0 auto;
 }
   
+
 .primary-color{
     background-color: #0C1A30 !important;
 }
@@ -26,11 +27,10 @@ main {
 }
 
 .bottom-align{
-    position: absolute !important;
     bottom:0 !important;
     margin-bottom:15px
 
-}
+} 
 
 .flex {
     display: flex;
@@ -118,6 +118,13 @@ main {
     .card-pers :not(:last-child) {
       margin-right: 20px;
     }
+}
+
+.imgPicker{
+    border-radius:10px !important
+}
+.margin-10{
+    margin:30px
 }
   
 /* @media (min-width: 700px) {
