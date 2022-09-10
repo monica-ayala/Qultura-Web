@@ -32,68 +32,35 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 const storage = multer.diskStorage({
-     destination: (request, file, callback) => {
-         //'uploads': Es el directorio del servidor donde se subirán los archivos 
-         callback(null, 'public/uploads');
-     },
-     filename: (request, file, callback) => {
-         //aquí configuramos el nombre que queremos que tenga el archivo en el servidor, 
-         //para que no haya problema si se suben 2 archivos con el mismo nombre concatenamos el timestamp
-         callback(null, new Date().getTime() + '-' + file.originalname);
-     },
- });
-
- const fileFilter=(request,file,callback)=>{
-     if(file.mimetype==='image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png'){
-          callback(null,true);
-     }else{
-          callback(null,false);
+     destination: path.join(__dirname,'/public/uploads/') ,
+     filename: function(req, file, cb){
+         cb(null, new Date().getTime() + '-' + file.originalname);
      }
+ })
+ 
+ const upload = multer({
+     storage: storage,
+     limits: {
+         fileSize: 1000000 //give no. of bytes
+     },
+ }).single('uploadFile');
+
+ function uploadFile(req, res){
+     upload(req, res, (err) =>{
+         if(err){
+             //Send error msg
+             console.log(err);
+             res.send(err);
+         }else{
+             //send correct msg
+             //res.send()
+             res.send('Successful');
+             console.log('file uploaded succcessfully');
+         }
+     });
  }
 
- var upload = multer({
-     storage:storage,
-     fileFilter:fileFilter
- })
-
- 
-app.post('/profile-upload-single', upload.single('profile-file'), function (req, res, next) {
-     // req.file is the `profile-file` file
-     // req.body will hold the text fields, if there were any
-     console.log(JSON.stringify(req.file))
-     var response = '<a href="/">Home</a><br>'
-     response += "Files uploaded successfully.<br>"
-     response += `<img src="${req.file.path}" /><br>`
-     return res.send(response)
-   })
-
-   
-app.post('/profile-upload-multiple', upload.array('profile-files', 12), function (req, res, next) {
-     // req.files is array of `profile-files` files
-     // req.body will contain the text fields, if there were any
-     var response = '<a href="/">Home</a><br>'
-     response += "Files uploaded successfully.<br>"
-     for(var i=0;i<req.files.length;i++){
-         response += `<img src="${req.files[i].path}" /><br>`
-     }
-     
-     return res.send(response)
- })
-//  app.post('uploadForm',upload.single('myImg'),async (req,res,next)=>{
-//      if(req.file){
-//           const pathName=req.file.path;
-//           res.send(req.file,pathName)
-//      }
-//  });
-// app.use(csrfProtection); 
-
-// app.use((request, response, next) => {
-//      response.locals.csrfToken = request.csrfToken();
-//      console.log("aqui inicia")
-//      console.log(request.csrfToken());
-//      console.log("aqui acaba")
-//           next();
-//     });
+ app.post('/upload', uploadFile)
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
