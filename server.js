@@ -47,17 +47,21 @@ const storage = multer.diskStorage({
 
  function uploadFile(req, res){
      upload(req, res, (err) =>{
+          console.log(res.req.file.filename)
          if(err){
              //Send error msg
              console.log(err);
-             res.send(err);
          }else{
              //send correct msg
              //res.send()
              res.send('Successful');
-             console.log('file uploaded succcessfully');
          }
+     //     res.status(200).json({
+     //      filename: 
+     //  });
      });
+     
+     
  }
 
  app.post('/upload', uploadFile)
