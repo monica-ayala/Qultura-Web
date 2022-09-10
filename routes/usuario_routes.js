@@ -15,6 +15,8 @@ router.post('/login',usuario_controller.login_post);
 
 router.get('/rol',usuario_controller.view);
 
+router.post('/rol',usuario_controller.updateUsuario);
+
 // router.get('/datos', isAuth,usuario_controller.datos);
 
 // router.get('/datos/:id_usuario', isAuth, usuario_controller.getDatosUsuario);

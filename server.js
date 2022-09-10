@@ -42,11 +42,12 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use('/usuario', usuario_routes);
 app.use('/', museo_routes);
 app.use('/museo',museo_routes)
 app.use('/guias', guia_routes);
 
-app.use('/usuario', usuario_routes);
+
 
 app.use((request, response, next) => {
      response.status(404);

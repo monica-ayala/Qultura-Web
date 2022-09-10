@@ -2,11 +2,11 @@
 // const bcrypt = require('bcryptjs');
 
  module.exports = class Usuario{
-     constructor(nombre, correo,contrasena) {
+     constructor(nombre, correo, contrasena) {
          this.nom_user = nombre,
          this.correo_user = correo,
          this.password_user = contrasena,
-         this.id_rol = 0
+         this.id_rol = 4
      }
 
      save() {
@@ -16,8 +16,18 @@
                 ]    
         );
     }
-
+    ///Unir con Museo
      static fetchList(){
         return db.execute('SELECT * FROM User');
     }
+
+    static findOne(correos_user) {
+        return db.execute('SELECT * FROM User WHERE correo_user=?',
+            [correos_user]);
+    }
+
+    static roles(){
+        return db.execute('SELECT * FROM Rol');
+    }
+
  }

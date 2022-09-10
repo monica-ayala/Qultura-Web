@@ -10,7 +10,6 @@
     <div class="parallax"><img src="/img/queretaro-dark.jpg" alt="background querétaro"></div>
   </div>
 
-
   <div class="container">
     <br>
       <input type="text" placeholder=" Usuario, Correo, Museo">
@@ -23,18 +22,18 @@
         </tr>
         </thead>
         <tbody>
-                <tr >
-                    <td>jorgeguerrero909@gmail.com</td>
-                    <td>Administrador</td>  
-                    <td>Museo de Arte de Querétaro</td>
-                    <td> <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a></td>
-                </tr>
 
-               
+          <% for (let usuario of usuarios){%>
+                <tr>
+                      <td><%= usuario.correo_user%></td>
+                    <td><%= usuario.id_rol%></td>  
+                    <td><%= usuario.nom_user%></td>
+                    <td> <a class="waves-effect waves-light btn modal-trigger" href="#modal1" >Modal</a></td>
+                </tr>
+                <%}%>
         </tbody>
     </table>
-
-
+                
 
 
   <!-- Modal Structure -->
@@ -56,9 +55,9 @@
         <div class="input-field">
             <select>
               <option value="" disabled selected>Choose your option</option>
-              <option value="1">Admin</option>
-              <option value="2">Staff de Museo</option>
-              <option value="3">Bolas</option>
+              <% for (let rol of roles){%>
+                <option selected="false" value="<%=rol.id_rol%>" id="rol<%= rol.id_rol %>"> <%=rol.nom_rol%> </option>
+            <%}%>
             </select>
             <label>Rol</label>
           </div>
@@ -66,9 +65,9 @@
         <div class="input-field">
             <select>
               <option value="" disabled selected>Choose your option</option>
-              <option value="1">Museo de Arte de Queretaro</option>
-              <option value="2">Galeria Libertad</option>
-              <option value="3">Bolas</option>
+              <% for (let museo of museos){%>
+                <option selected="false" value="<%=museo.id_museo%>" id="museo<%=museo.id_museo %>"> <%=museo.nom_museo%> </option>
+            <%}%>
             </select>
             <label>Museos</label>
           </div>
