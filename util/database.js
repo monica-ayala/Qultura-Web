@@ -19,6 +19,6 @@ const DB_AWS = {
   port: 3306
 };
 
-const pool = mysql.createPool(DB_AWS);
+const pool = mysql.createPool(DB_INTERLINK);
 
 module.exports = pool.promise();
