@@ -12,18 +12,8 @@ const { redirect } = require("express/lib/response");
 exports.view = (request, response, next) => {
   Usuario.fetchList()
   .then(([rowsUsers,fieldData])=>{
-    Usuario.roles()
-    .then(([rowsRoles,fieldData])=>{
-      Museos.fetchList()
-      .then(([rowsMuseos,fieldData])=>{
-        response.render('rbac_registrar',{
-          usuarios:rowsUsers,
-          roles:rowsRoles,
-          museos:rowsMuseos
-        }
-        );
-      }).catch(err=>console.log(err));
-    }).catch(err=>console.log(err));
+    response.render('rbac_registrar',{
+      usuarios:rowsUsers});
     }).catch(err=>console.log(err));
   };
    
@@ -79,6 +69,17 @@ exports.view = (request, response, next) => {
 
  exports.updateUsuario = (request, response, next) => {
 
+  Usuario.roles()
+  .then(([rowsRoles,fieldData])=>{
+    Museos.fetchList()
+    .then(([rowsMuseos,fieldData])=>{
+      response.status(200).json({
+        roles:rowsRoles,
+        museos:rowsMuseos
+      });
+    }).catch(err=>console.log(err));
+  }).catch(err=>console.log(err));
+  
  };
 
 // exports.usuario_post = (request, response, next) => {

@@ -28,8 +28,10 @@
                       <td><%= usuario.correo_user%></td>
                     <td><%= usuario.id_rol%></td>  
                     <td><%= usuario.nom_user%></td>
-                    <td> <a class="waves-effect waves-light btn modal-trigger" href="#modal1" >Modal</a></td>
+                    
+                    <td> <a class="waves-effect waves-light btn modal-trigger" onclick="getInfoUser()">Modal</a></td>
                 </tr>
+                <input type="hidden" value="<%=usuario.id_user%>" id="id_user">
                 <%}%>
         </tbody>
     </table>
@@ -38,13 +40,13 @@
 
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" id="modal_user">
         <div class="row">
     <div class="col s12">
 
       <div class="col s4" style="text-align: center;">
         <img src="https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=2000" height="50%" width="50%"   alt="" class="circle responsive-img">
-        <h6>Jorge Guerrero Díaz</h6>
+        <h6 id="nom_user">Jorge Guerrero Díaz</h6>
       </div>
       <div class="col s6">
           <label for="disabled">Correo Electronico:</label>
@@ -52,7 +54,7 @@
           
         <br>
         <br>
-        <div class="input-field">
+        <!---div class="input-field">
             <select>
               <option value="" disabled selected>Choose your option</option>
               <% for (let rol of roles){%>
@@ -60,9 +62,9 @@
             <%}%>
             </select>
             <label>Rol</label>
-          </div>
+          </div-->
         <br>
-        <div class="input-field">
+        <!--div class="input-field">
             <select>
               <option value="" disabled selected>Choose your option</option>
               <% for (let museo of museos){%>
@@ -70,7 +72,7 @@
             <%}%>
             </select>
             <label>Museos</label>
-          </div>
+          </div-->
       </div>
 
     </div>
@@ -87,5 +89,5 @@
   </div>
 
 
-
+  <script src="/js/script_update_user.js"></script>
   <%- include('includes/footer.ejs') %>
