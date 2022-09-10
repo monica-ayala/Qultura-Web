@@ -1,11 +1,18 @@
+$(document).ready(function(){
+    $('.modal').modal();
+  });
+
 function getInfoUser(){
 
     console.log("holi")
 
-    let modal = document.getElementById("modal_user");
-    let user_id = document.getElementById("id_user").value;
+    let modal = document.getElementById("nom_user");
     
-    let ruta ="/usuario/rol/:"+ user_id;
+    let user_id = document.getElementById("id_user").value;
+
+    let ruta ="/usuario/rol/"+ user_id;
+
+    console.log(modal, user_id);
 
 
 
@@ -24,3 +31,5 @@ function getInfoUser(){
     });
 
 }
+
+
