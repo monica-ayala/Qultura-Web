@@ -16,19 +16,27 @@
                 <img src="../img/queretaro.png" class="responsive-img imgPicker">
             </div>
             <div class="col s6">
-                <form method="POST" action="/profile-upload-single" enctype="multipart/form-data">
-                    <div class="file-field input-field">
+
+                <!-- <input type="file" name="uploadFile" id="uploadFile">
+            <input type="submit" value="upload"> -->
+
+
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file" name="uploadFile" id="uploadFile">
+                    <input type="submit" value="upload">
+                    <!-- <div class="file-field input-field">
                       <div class="btn">
                         <span>File</span>
-                        <input type="file" name="profile-file">
+                        <input type="file" name="uploadFile" id="uploadFile">
                       </div>
                       <div class="file-path-wrapper">
                         <input class="file-path validate" type="text">
                       </div>
-                      <button class="btn small primary-color waves-effect waves-light" type="submit" name="action">Submit
-                        <i class="material-icons right">send</i>
-                    </button>
-                    </div>
+                      <input type="submit" value="upload">
+                      <button class="btn small primary-color waves-effect waves-light" onclick="submitImage()">Submit
+                        <i class="material-icons right">send</i> 
+                    </button> 
+                    </div> -->
                 </form>
             </div>
             
