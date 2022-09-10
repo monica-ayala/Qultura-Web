@@ -1,3 +1,77 @@
+jQuery(document).ready(function($){
+    $("#uploadForm").submit(function() {
+        var data = new FormData($('#uploadForm')[0]);
+        $.ajax({
+            url:'/upload',
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: data,
+            success: function(res){
+                alert(res);
+            },
+            error: function(){
+                alert('Error: In sending the request!');
+            }
+        })
+    });
+    });
+
+
+// $(document).ready(function() {
+//     $("#uploadForm").submit(function() {
+//         var data = new FormData($('#uploadForm')[0]);
+//         $.ajax({
+//             url:'/upload-museum-img',
+//             type: 'POST',
+//             contentType: false,
+//             processData: false,
+//             cache: false,
+//             data: data,
+//             success: function(res){
+//                 alert(res);
+//             },
+//             error: function(){
+//                 alert('Error: In sending the request!');
+//             }
+//         })
+//     });
+// });
+
+function submitImage(){
+    image = document.getElementById("imagen_principal").files[0]
+    console.log(image)
+    //const data = new FormData();
+    //data.append("image", image);
+    //console.log(data)
+    ruta='/upload-museum-img'
+    fetch(ruta, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            //'csrf-token': csrf  - aquí iría el csrf
+        },
+        body:JSON.stringify(image)
+    })
+    .then(response => response.json())
+    .then(response => {
+        console.log("hi image")
+        
+    }).catch(err => {
+        console.log(err);
+    });
+
+    // $.ajax({
+    //     url: '/upload-museum-img',
+    //     method: 'POST',
+    //     async: false,
+    //     processData: false ,
+    //     contentType: false,
+    //     data: data
+    // })
+}  
+
 function submitMuseum() {
     // info de un museo
     console.log("entre")

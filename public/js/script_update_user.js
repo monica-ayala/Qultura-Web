@@ -3,7 +3,11 @@ $(document).ready(function(){
   });
 
 function getInfoUser(){
-
+    console.log("modal")
+    jQuery('#modal1').modal();
+    jQuery(document).ready(function(){
+        jQuery('#modal1').modal('open');
+    });
     console.log("holi")
 
     let modal = document.getElementById("nom_user");

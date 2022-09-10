@@ -11,6 +11,14 @@ const DB_INTERLINK = {
   database: process.env.MYSQL_ADDON_DB,
 };
 
-const pool = mysql.createPool(DB_INTERLINK);
+const DB_AWS = {
+  host: 'localhost',
+  user: 'root',
+  database: 'qtra',
+  password: 'QuLtu22rA',
+  port: 3306
+};
+
+const pool = mysql.createPool(DB_AWS);
 
 module.exports = pool.promise();
