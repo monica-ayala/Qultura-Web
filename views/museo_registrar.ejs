@@ -1,24 +1,141 @@
-<%- include('includes/header.ejs') %>
-<style>
-    body {
-  background-image: url('/img/queretaro-dark.jpg');
-  background-size: cover;
-}
-    .page-content {
-    background-color: aliceblue;
-    border-radius: 5px;
-}
-</style>
-
-
-<div class="container">
-    <h1 class="white-text">--MACRO--</h1>
-    <div class="page-content">
-        <div>
-            <p>jns</p>
+<%- include('includes/header_image.ejs') %>
+<main>
+  <div class="container">
+    <h1 class="white-text">@MuseoName</h1>
+    <div class="white min-container">
+      <div class="row center margin-10">
+        <!-- valign-wrapper -->
+        <div class="col s5">
+          <div class="row valign-wrapper">
+            <div class="col s10">
+              <div class="card">
+                <div class="card-image">
+                  <img src="img/queretaro.png" />
+                  <a
+                    class="btn-floating halfway-fab waves-effect waves-light primary-color"
+                    ><i class="material-icons">edit</i></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="col s7">
+          <div class="row center">
+            <div class="input-field col s10 offset-s1">
+              <input
+                placeholder="Ej: MAQRO"
+                id="nombre_museo"
+                type="text"
+                class="validate"
+              />
+              <label for="nombre_museo"> Nombre del Museo </label>
+            </div>
+            <div class="input-field col s10 offset-s1">
+                <input
+                  placeholder="Ej: 442-212-2357"
+                  id="num_museo"
+                  type="text"
+                  class="validate"
+                />
+                <label for="num_museo"> Teléfono de contacto </label>
+              </div>
+                
+                <div class="input-field col s9 offset-s1">
+                    <input placeholder="Ej: C. Ignacio Allende Sur 14" id="direccion_museo" type="text" class="validate">
+                    <label for="direccion_museo"> Dirección </label> 
+                </div>
+                <a style="margin-right:30px;margin-top:10px" class="btn-floating waves-effect waves-light primary-color"><i class="material-icons left">location_on</i> </a>
+          <div class="row center">
+            <div class="col offset-s1">
+                <!--<table>-->
+              <div class="col">
+                <a class="btn waves-effect waves-light primary-color"
+                  ><i class="material-icons left">add_box</i>Edita las salas
+                </a>
+              </div>
+              <div class="col">
+                <a class="btn waves-effect waves-light primary-color modal-trigger"  href="#modal1"
+                  ><i class="material-icons left">calendar_month</i>Modifica
+                  horarios
+                </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal Structure -->
+          <div id="modal1" class="modal">
+            <div class="modal-content">
+              <h4>Modifica los horarios</h4>
+              <table>
+                  <thead>
+                    <tr>
+                        <th>Día de la semana</th>
+                        <th>Hora Apertura</th>
+                        <th>Hora Cierre</th>
+                    </tr>
+                  </thead>
+          
+                  <tbody>
+                    <tr>
+                      <td>Lunes</td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                    </tr>
+                    <tr>
+                      <td>Martes</td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                    </tr>
+                    <tr>
+                      <td>Miercoles</td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                    </tr>
+                    <tr>
+                      <td>Jueves</td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                    </tr>
+                    <tr>
+                      <td>Viernes</td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                    </tr>
+                    <tr>
+                      <td>Sabado</td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                    </tr>
+                    <tr>
+                      <td>Domingo</td>
+                      <td><input type="time" id="appt" name="appt" required/></td>
+                      <td><input class="timepicker" placeholder="Selecciona una hora"/></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+              <a
+                href="#!"
+                class="modal-close waves-effect waves-green btn-flat"
+                >Agree</a
+              >
+            </div>
+        </div>
+      </div>       
+
+      <div class="row center margin-10">
+        <div class="input-field col s10 offset-s1">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1"> Descripción </label>
+        </div>
+        <button class="btn waves-effect waves-light green margin-10">
+          <i class="material-icons left">check</i>
+          Registrar museo
+        </button>
+      </div>
     </div>
 
-</div>
-
+</main>
 <%- include('includes/footer.ejs') %>
