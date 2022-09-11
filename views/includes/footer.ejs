@@ -28,5 +28,10 @@
 
   <script>
     M.AutoInit();
-</script>
+
+    //Para que cuente palabras en editar guia
+    $(document).ready(function() {
+    $('input#input_text, textarea#textarea2').characterCounter();
+  });
+  </script>
 </html>
