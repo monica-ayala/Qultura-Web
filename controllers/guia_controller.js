@@ -22,3 +22,8 @@ exports.get_agregarGuia = (request, response, next) => {
   console.log("Consultando Agregar Guia...")
   response.render('agregar_guia');
 }
+
+exports.post_agregarGuia = (request, response, next) => {
+  console.log("Guia Agregada...")
+  response.render('guias');
+}
