@@ -7,6 +7,10 @@ const guia_controller = require('../controllers/guia_controller');
 // EJEMPLOS
 
 router.get('/',guia_controller.view);
+router.get('/editar_guia',guia_controller.get_editarGuia);
+router.post('/editar_guia',guia_controller.post_editarGuia);
+router.get('/agregar_guia',guia_controller.get_agregarGuia);
+router.post('/agregar_guia',guia_controller.post_agregarGuia);
 
 
 module.exports = router;
