@@ -29,14 +29,14 @@
                     <td><%= usuario.id_rol%></td>  
                     <td><%= usuario.nom_user%></td>
                     
-                    <td> <button class="waves-effect waves-light btn modal-trigger"  onclick="getInfoUser()">Modal</button></td>
+                    <td> <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser()">Modal</button></td>
                 </tr>
                 <input type="hidden" value="<%=usuario.id_user%>" id="id_user">
                 <%}%>
         </tbody>
     </table>
                 
-
+    
 
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
@@ -48,13 +48,17 @@
         <img src="https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=2000" height="50%" width="50%"   alt="" class="circle responsive-img">
         <h6 id="nom_user">Jorge Guerrero Díaz</h6>
       </div>
+
       <div class="col s6">
           <label for="disabled">Correo Electronico:</label>
           <input disabled value="jorgeguerrero909@gmail.com" id="disabled" type="text" class="validate">
+        <br>
+        <br>
+        <div id="pruebita">
+          <div class="input-field">
+          <select id="mySelect">
           
-        <br>
-        <br>
-        
+        </div>
       </div>
 
     </div>
