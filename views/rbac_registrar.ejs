@@ -26,10 +26,9 @@
           <% for (let usuario of usuarios){%>
                 <tr>
                       <td><%= usuario.correo_user%></td>
-                    <td><%= usuario.id_rol%></td>  
+                    <td><%= usuario.id_user%></td>  
                     <td><%= usuario.nom_user%></td>
-                    
-                    <td> <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser()">Modal</button></td>
+                    <td> <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser()" value="<%=usuario.id_user%>" id="boton">Modal</button></td>
                 </tr>
                 <input type="hidden" value="<%=usuario.id_user%>" id="id_user">
                 <%}%>
@@ -54,10 +53,19 @@
           <input disabled value="jorgeguerrero909@gmail.com" id="disabled" type="text" class="validate">
         <br>
         <br>
-        <div id="pruebita">
+        <div>
           <div class="input-field">
-          <select id="mySelect">
-          
+          <select id="sl_roles">
+          </select>
+          <label>Rol</label>
+          </div>
+
+          <div class="input-field">
+            <select id="sl_museos">
+            </select>
+            <label>Museos</label>
+          </div>
+
         </div>
       </div>
 
