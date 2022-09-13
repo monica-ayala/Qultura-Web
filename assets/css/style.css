@@ -147,3 +147,35 @@ main {
     }
   }  */
   
+
+.customFile{
+    border-bottom: 1px solid grey;
+    /* border-radius: 20px; */
+    padding: 6px;
+    
+}
+
+.customFile::-webkit-file-upload-button{
+    background: linear-gradient(268.61deg, #0C1A30 4.48%, #254C8D 79.39%);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.customFileVideo{
+    border-bottom: 1px solid grey;
+    /* border-radius: 20px; */
+    padding: 6px;
+    
+}
+
+.customFileVideo::-webkit-file-upload-button{
+    background: white;
+    color: #243044;
+    padding: 8px 16px;
+    border: 1.5px solid #243044;
+    border-radius: 50px;
+    cursor: pointer;
+}
