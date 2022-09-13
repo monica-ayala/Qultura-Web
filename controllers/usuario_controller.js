@@ -68,20 +68,35 @@ exports.view = (request, response, next) => {
 // };
 
  exports.updateUsuario = (request, response, next) => {
-  console.log(request.params);
-  Usuario.roles()
-  .then(([rowsRoles,fieldData])=>{
-    Museos.fetchList()
-    .then(([rowsMuseos,fieldData])=>{
-      response.status(200).json({
-        roles:rowsRoles,
-        museos:rowsMuseos,
-      });
+  console.log(request.params.id_usuario);
+
+  Usuario.fecthOne(request.params.id_usuario)
+  .then(([rowUser,fieldData])=>{
+    Usuario.roles()
+    .then(([rowsRoles,fieldData])=>{
+      Museos.fetchList()
+      .then(([rowsMuseos,fieldData])=>{
+        response.status(200).json({
+          roles:rowsRoles,
+          museos:rowsMuseos,
+          usuario:rowUser
+        });
+      }).catch(err=>console.log(err));
     }).catch(err=>console.log(err));
+    
   }).catch(err=>console.log(err));
-  
+ 
  };
 
+ exports.sendUpdate=(request,response,next)=>{
+  console.log(request.body.id_rol)
+  //console.log(request.params.id_usuario)
+  Usuario.update(request.body.id_rol,request.body.id_user)
+  .then(([rows,fieldData])=>{
+      response.redirect("/usuario/rol")
+  })
+  .catch(err=>console.log(err));
+ }
 // exports.usuario_post = (request, response, next) => {
 // };
 

@@ -30,4 +30,12 @@
         return db.execute('SELECT * FROM Rol');
     }
 
+    static fecthOne(ide_user){
+        return db.execute('SELECT * FROM User WHERE id_user=?',[ide_user]);
+    }
+
+    static update(ide_rol,ide_user){
+        return db.execute('UPDATE User SET id_rol =? WHERE id_user =?',[ ide_rol,ide_user])
+    }
+
  }

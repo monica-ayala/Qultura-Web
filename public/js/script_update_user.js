@@ -1,3 +1,5 @@
+const Usuario = require("../../models/usuario");
+
 $(document).ready(function(){
     $('.formSelect').formSelect();
     $('select').formSelect();
@@ -8,6 +10,8 @@ $(document).ready(function(){
         onCloseEnd: function(){
             $('.formSelect').empty();
             $('select').empty();
+            $('.modal').empty();
+           $('modal').empty();
         }
     });
   });
@@ -17,17 +21,19 @@ $(document).ready(function(){
   });  
 
 
-function getInfoUser(){
+function getInfoUser(element){
     jQuery('#modal1').modal('open');
     
-    let magia=document.getElementById("boton").value;
+
     let selectrol=document.getElementById("sl_roles");
     let selectmuseos=document.getElementById("sl_museos");
-    let user_id = document.getElementById("id_user").value;
+    let name=document.getElementById("nom_user");
+    let user_id = element.id;
+    let correo=document.getElementById("correo");
 
+    name.innerHTML=""
+    correo.innerHTML=""
     let ruta ="/usuario/rol/"+ user_id;
-
-    console.log( magia,user_id);
 
     fetch(ruta,{
         method: 'GET',
@@ -37,11 +43,14 @@ function getInfoUser(){
     })
     .then(response => response.json())
     .then(response => {
-            console.log(response);
-            selectrol.innerHTML+='<option value="" disabled selected> Choose your option</option>'
+            
+            name.innerHTML+=response.usuario[0].nom_user
+            name.innerHTML+="<input type='hidden' value="+response.usuario[0].id_user+" id='id_user'>"
+            correo.innerHTML+='<label for="disabled">Correo Electronico:</label>'
+            correo.innerHTML+="<input disabled value="+response.usuario[0].correo_user+" id='disabled' type='text' class='validate'></input>"
+            
+            selectrol.innerHTML+='<option value="" disabled selected> '+response.usuario[0].id_rol+'</option>'
             for (let rol of response.roles){
-                //var $newOpt = $("<option>").attr("value",rol.id_rol).text(rol.nom_rol)
-                //$("#mySelect").append($newOpt);
                 selectrol.innerHTML+='<option value='+rol.id_rol+'>'+rol.nom_rol+'</option>'
             }
             $('select').formSelect();
@@ -55,13 +64,6 @@ function getInfoUser(){
             }
             $('select').formSelect();
             $("#sl_museos").trigger('contentChanged');
-
-            
-            
-            
-            
-            
-           
     }).catch(err => {
         console.log(err);
     });
@@ -69,3 +71,25 @@ function getInfoUser(){
 }
 
 
+function updateUser(){
+    let user_id = document.getElementById("id_user").value;
+    let ruta ="/usuario/rol/"+ user_id;
+    let rol= document.getElementById("sl_roles");
+    let value = rol.options[rol.selectedIndex].value;
+    console.log(user_id); 
+
+
+    data = {
+        id_rol : value,
+        id_user : user_id
+    }
+
+    fetch(ruta,{
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(data)
+    }) .then(response => response.json())
+    .catch(err=>{console.log(err)})
+}
