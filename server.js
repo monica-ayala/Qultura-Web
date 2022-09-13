@@ -25,49 +25,30 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(express.static(path.join(__dirname, 'assets')));
-app.use('/uploads', express.static('uploads'));
+
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-const storage = multer.diskStorage({
-     destination: path.join(__dirname,'/public/uploads/') ,
-     filename: function(req, file, cb){
-         cb(null, new Date().getTime() + '-' + file.originalname);
-     }
- })
- 
- const upload = multer({
-     storage: storage,
-     limits: {
-         fileSize: 1000000 //give no. of bytes
-     },
- }).single('uploadFile');
 
- function uploadFile(req, res){
-     upload(req, res, (err) =>{
-          console.log(res.req.file.filename)
-         if(err){
-             //Send error msg
-             console.log(err);
-         }else{
-             //send correct msg
-             //res.send()
-             res.send('Successful');
-         }
-     //     res.status(200).json({
-     //      filename: 
-     //  });
-     });
-     
-     
- }
-
- app.post('/upload', uploadFile)
+//MULTER 
 
 
-app.use(bodyParser.urlencoded({ extended: false }));
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, new Date().getTime() + '-' + file.originalname)
+    }
+})
+var upload = multer({ storage: storage })
+
+app.use(upload.single('url_imagen'))
+
+//MULTER
+
 
 app.use('/', museo_routes);
 app.use('/museo',museo_routes)

@@ -13,7 +13,7 @@ exports.get_nuevo=(request,response,next)=>{
 
 exports.post_nuevo=(request,response,next)=>{
   const nuevo_museo = new Museo(
-    request.body.nombre_museo,
+    request.body.nom_museo,
     request.body.desc_museo,
     request.body.ubicacion_museo,
     request.body.num_museo,
@@ -48,6 +48,32 @@ exports.get_museo=(request,response,next)=>{
 exports.register = (request, response, next) => {
   response.render('museo_registrar');
 };
+
+exports.museo_post = (request, response, next) => {
+    
+  url_imagen = request.file;
+  if((typeof(url_imagen) == "undefined")){
+      url_imagen = "";
+  }else{
+      url_imagen = request.file.filename;
+  }
+  link_ubi="placeholder"
+  const nuevo_museo = new Museo(
+    request.body.nom_museo,
+    request.body.desc_museo,
+    request.body.ubicacion_museo,
+    link_ubi,
+    request.body.num_museo,
+    url_imagen,
+    url_imagen
+  )
+  console.log(nuevo_museo)
+  nuevo_museo.save()
+  .then((result) => {
+    response.redirect ("/museo");
+  }).catch(err => console.log(err));  
+};
+
 
 // exports.post_procedencia=(request,response,next)=>{
 //     console.log(request.body.Nombre_Procedencia)
