@@ -13,6 +13,8 @@ router.get('/nuevo_museo',museo_controller.get_nuevo)
 router.post('/nuevo_museo',museo_controller.museo_post)
 //router.post('/nuevo_museo',museo_controller.post_nuevo)
 router.get('/registro',museo_controller.register)
+router.get('/:id_museo',museo_controller.get_Onemuseo)
+
 // router.get('/signup',usuario_controller.signup_get);
 
 // router.post('/signup',usuario_controller.signup_post);

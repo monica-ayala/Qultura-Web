@@ -26,4 +26,17 @@ module.exports = class Museo{
         return db.execute('SELECT * FROM Museo');
     }
 
+    static fecthOne(id_museo) {
+        return db.execute('SELECT * FROM Museo WHERE id_museo=?',
+            [id_museo]);
+    }
+
+    static update_museo(id_museo) {
+        return db.execute('UPDATE Museo SET nom_museo=?, desc_museo=?, ubicacion_museo=?, link_ubi=?, num_museo=?, imgP_museo=?, imgB_museo=?, WHERE id_museo=?',
+                [
+                    nom_museo,desc_museo,ubicacion_museo,link_ubi,num_museo,imgP_museo,imgB_museo
+                ]
+        );
+    }
+
 }
