@@ -13,12 +13,20 @@ const DB_INTERLINK = {
 
 const DB_AWS = {
   host: 'localhost',
-  user: 'root',
+  user: 'cris',
   database: 'qtra',
-  password: 'QuLtu22rA',
+  password: 'QuLtu22rA@',
   port: 3306
 };
 
 const pool = mysql.createPool(DB_INTERLINK);
+const DB_LOCAL = {
+  host: 'localhost',
+    user: 'root',
+    database: 'qultura',
+    password: ''
+};
+
+//const pool = mysql.createPool(DB_LOCAL);
 
 module.exports = pool.promise();

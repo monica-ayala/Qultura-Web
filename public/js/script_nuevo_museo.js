@@ -8,12 +8,6 @@ jQuery(document).ready(function($){
             processData: false,
             cache: false,
             data: data,
-            success: function(res){
-                alert(res);
-            },
-            error: function(){
-                alert('Error: In sending the request!');
-            }
         })
     });
     });
