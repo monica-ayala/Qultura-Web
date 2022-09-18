@@ -18,7 +18,7 @@
     }
     ///Unir con Museo
      static fetchList(){
-        return db.execute('SELECT * FROM User');
+        return db.execute('SELECT * FROM User u, Rol r WHERE u.id_rol = r.id_rol');
     }
 
     static findOne(correos_user) {
@@ -31,11 +31,16 @@
     }
 
     static fecthOne(ide_user){
-        return db.execute('SELECT * FROM User WHERE id_user=?',[ide_user]);
+        //return db.execute('SELECT * FROM User u, Rol r WHERE u.id_user=? AND u.id_rol = r.id_rol ',[ide_user]);
+        return db.execute('SELECT * FROM User u, Rol r, User_Museo um, Museo m WHERE u.id_user=? AND u.id_rol = r.id_rol AND u.id_user = um.id_user_museo AND um.id_museo_user = m.id_museo',[ide_user]);
+
     }
 
     static update(ide_rol,ide_user){
         return db.execute('UPDATE User SET id_rol =? WHERE id_user =?',[ ide_rol,ide_user])
     }
 
+    static updateMuseum(ide_user,ide_museo){
+        return db.execute('INSERT INTO User_Museo(id_user_museo, id_museo_user) VALUES (?,?)', [ide_user,ide_museo])
+    }
  }

@@ -49,14 +49,14 @@ function getInfoUser(element){
             correo.innerHTML+='<label for="disabled">Correo Electronico:</label>'
             correo.innerHTML+="<input disabled value="+response.usuario[0].correo_user+" id='disabled' type='text' class='validate'></input>"
             
-            selectrol.innerHTML+='<option value="" disabled selected> '+response.usuario[0].id_rol+'</option>'
+            selectrol.innerHTML+='<option value='+response.usuario[0].id_rol+' disabled selected> '+response.usuario[0].nom_rol+'</option>'
             for (let rol of response.roles){
                 selectrol.innerHTML+='<option value='+rol.id_rol+'>'+rol.nom_rol+'</option>'
             }
             $('select').formSelect();
             $("#sl_roles").trigger('contentChanged');
 
-            selectmuseos.innerHTML+='<option value="" disabled selected> Choose your option</option>'
+            selectmuseos.innerHTML+='<option value='+response.usuario[0].id_museo+' disabled selected>'+response.usuario[0].nom_museo+'</option>'
             for (let museo of response.museos){
                 //var $newOpt = $("<option>").attr("value",rol.id_rol).text(rol.nom_rol)
                 //$("#mySelect").append($newOpt);
@@ -64,6 +64,7 @@ function getInfoUser(element){
             }
             $('select').formSelect();
             $("#sl_museos").trigger('contentChanged');
+           
     }).catch(err => {
         console.log(err);
     });
@@ -76,12 +77,17 @@ function updateUser(){
     let ruta ="/usuario/rol/"+ user_id;
     let rol= document.getElementById("sl_roles");
     let value = rol.options[rol.selectedIndex].value;
+
+    let museo= document.getElementById("sl_museos");
+    let value_museo = museo.options[museo.selectedIndex].value;
+
     console.log(user_id); 
 
 
     data = {
         id_rol : value,
-        id_user : user_id
+        id_user : user_id,
+        id_museo : value_museo
     }
 
     fetch(ruta,{
