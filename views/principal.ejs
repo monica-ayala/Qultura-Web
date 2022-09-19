@@ -32,7 +32,7 @@
       <ul class="cards">
         <% for (let museo of museos){%>
           <%if(museo.status == 1){%>
-        <li class="card-panel card-pers hoverable" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/queretaro.png');">
+        <li class="card-panel card-pers hoverable" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/uploads/<%=museo.imgP_museo%>') no-repeat; background-size: cover;">
           <div>
             <h3 class="card-title white-text"><%=museo.nom_museo%></h3>
             <div class="card-content white-text">
