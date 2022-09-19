@@ -29,21 +29,23 @@
        
       </div>
         
-      <ul class="cards">
+      <ul id ="cards" class="cards">
         <% for (let museo of museos){%>
           <%if(museo.status == 1){%>
-        <li class="card-panel card-pers hoverable" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/queretaro.png');">
+        <li class="card-panel card-pers hoverable" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/uploads/<%=museo.imgP_museo%>') no-repeat; background-size: cover;">
+          
           <div>
+            <a class="btn-floating green card-link" style="float:right;margin:0px;margin-left:10px"> <i class="material-icons">edit</i> </a>
+            <a onclick="deleteMuseum(this)" id="<%=museo.id_museo%>" class="btn-floating red card-link" style="float:right;margin:0px"> <i class="material-icons">delete</i> </a>
             <h3 class="card-title white-text"><%=museo.nom_museo%></h3>
+            
             <div class="card-content white-text">
               <p> Tel: <%=museo.num_museo%> 
               </p>
               <p><%=museo.desc_museo.substring(0, 100)%> . . .</p>
             </div>
           </div>
-          <div class="card-link-wrapper">
-            <a href="" class="btn-floating primary-color card-link"> <i class="material-icons left">edit</i> </a>
-          </div>
+          
         </li>
         <%}%>
         <%}%>
@@ -76,4 +78,5 @@
       </ul>
   </div>
 </main>
+<script src="/js/script_delete_museo.js"></script>
 <%- include('includes/footer.ejs') %>
