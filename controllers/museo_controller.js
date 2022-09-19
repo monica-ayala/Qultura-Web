@@ -61,11 +61,23 @@ exports.museo_post = (request, response, next) => {
 };
 
 exports.soft_erase = (request, response, next) => {
-  Museo.softErase(request.body.id_museo)
-  .then((result) => {
-    response.status(200).json({});
+  Museo.softErase(request.params.id_museo,0)
+  Museo.fetchList()
+  .then(([rowsMuseos,fieldData])=>{
+    response.status(200).json({museos:rowsMuseos});
   }).catch(err => console.log(err));
+
 }
+
+exports.soft_unerase = (request, response, next) => {
+  Museo.softErase(request.body.id_museo,1)
+  Museo.fetchList()
+  .then(([rowsMuseos,fieldData])=>{
+    response.status(200).json({museos:rowsMuseos});
+  }).catch(err => console.log(err));
+
+}
+
 exports.get_Onemuseo = (request, response, next) => {
   console.log(request.params.id_usuario);
 
