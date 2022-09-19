@@ -27,8 +27,8 @@ module.exports = class Museo{
         return db.execute('SELECT * FROM Museo WHERE id_museo = ?',[id_museo])
     }
 
-    static softErase(id_museo){
-        return db.execute('UPDATE Museo SET status=0 WHERE id_museo = ?' , [id_museo])
+    static softErase(id_museo,value){
+        return db.execute('UPDATE Museo SET status=? WHERE id_museo = ?' , [value,id_museo])
     }
     static fecthOne(id_museo) {
         return db.execute('SELECT * FROM Museo WHERE id_museo=?',

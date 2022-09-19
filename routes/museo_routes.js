@@ -8,7 +8,8 @@ router.get('/',museo_controller.lista);
 router.get('/get',museo_controller.get_museo);
 router.get('/nuevo_museo',museo_controller.get_nuevo)
 router.post('/nuevo_museo',museo_controller.museo_post)
-router.post('/borrar',museo_controller.soft_erase)
+router.post('/borrar/:id_museo',museo_controller.soft_erase)
+router.post('/regresar/:id_museo',museo_controller.soft_unerase)
 router.get('/registro',museo_controller.register)
 router.get('/:id_museo',museo_controller.get_Onemuseo)
 
