@@ -16,14 +16,18 @@ module.exports = class Museo{
 
     save() {
         return db.execute('INSERT INTO Museo(nom_museo,desc_museo,ubicacion_museo,link_ubi,num_museo,imgP_museo,imgB_museo,status) VALUES (?,?,?,?,?,?,?,?)', 
-                [
-                    this.nombre_museo,this.desc_museo,this.ubicacion_museo,this.link_ubi,this.telefono_museo,this.imagen_principal,this.imagen_background,1
-                ]    
-        );
+        [this.nombre_museo,this.desc_museo,this.ubicacion_museo,this.link_ubi,this.telefono_museo,this.imagen_principal,this.imagen_background,1] );
     }
 
     static fetchList(){
         return db.execute('SELECT * FROM Museo');
     }
 
+    static fetchOne(id_museo){
+        return db.execute('SELECT * FROM Museo WHERE id_museo = ?',[id_museo])
+    }
+
+    static softErase(id_museo){
+        return db.execute('UPDATE Museo SET status=0 WHERE id_museo = ?' , [id_museo])
+    }
 }

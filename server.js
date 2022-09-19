@@ -46,6 +46,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 app.use(upload.single('url_imagen'))
+//app.use(upload.single('url_imagenB'))
 
 //MULTER
 
