@@ -1,8 +1,7 @@
 const path = require("path");
 const filesystem = require('fs');
-const Museo = require("../models/museo");
+const Museo = require("../models/museo"); 
 //const { response } = require("express");
-
 exports.view = (request, response, next) => {
     response.render('principal');
   };
@@ -61,14 +60,12 @@ exports.museo_post = (request, response, next) => {
   }).catch(err => console.log(err));  
 };
 
-<<<<<<< HEAD
 exports.soft_erase = (request, response, next) => {
   Museo.softErase(request.body.id_museo)
   .then((result) => {
     response.status(200).json({});
   }).catch(err => console.log(err));
 }
-=======
 exports.get_Onemuseo = (request, response, next) => {
   console.log(request.params.id_usuario);
 
@@ -104,4 +101,3 @@ exports.museo_update = (request,response,next)=>{
 //         })
 
 // }
->>>>>>> 8c07af9fa05cf2d3df7c3ddad2d092282c9e9a18
