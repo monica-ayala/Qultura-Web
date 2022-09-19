@@ -13,6 +13,9 @@ router.get('/nuevo_museo',museo_controller.get_nuevo)
 router.post('/nuevo_museo',museo_controller.museo_post)
 router.post('/borrar',museo_controller.soft_erase)
 router.get('/registro',museo_controller.register)
+router.get('/:id_museo',museo_controller.get_Onemuseo)
+
+
 
 
 module.exports = router;

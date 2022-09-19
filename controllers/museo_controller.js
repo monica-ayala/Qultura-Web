@@ -29,6 +29,7 @@ exports.get_museo=(request,response,next)=>{
     });
     }).catch(err => console.log(err));
 }
+
 exports.register = (request, response, next) => {
   response.render('museo_registrar');
 };
@@ -60,9 +61,47 @@ exports.museo_post = (request, response, next) => {
   }).catch(err => console.log(err));  
 };
 
+<<<<<<< HEAD
 exports.soft_erase = (request, response, next) => {
   Museo.softErase(request.body.id_museo)
   .then((result) => {
     response.status(200).json({});
   }).catch(err => console.log(err));
 }
+=======
+exports.get_Onemuseo = (request, response, next) => {
+  console.log(request.params.id_usuario);
+
+  Museo.fecthOne(request.params.id_museo)
+  .then(([rowsMuseos,fieldData])=>{
+    response.render('principal',{
+      museos:rowsMuseos
+    });
+  })
+  .catch(err=>console.log(err));
+ };
+
+exports.museo_update = (request,response,next)=>{
+
+  Museo.update_museo(request.body.id_museo)
+  .then(() => {
+    response.status(200).json({});
+  })
+  .catch(err => console.log(err));
+};
+
+
+// exports.post_procedencia=(request,response,next)=>{
+//     console.log(request.body.Nombre_Procedencia)
+//     const procedencianueva= new Procedencia(request.body.Nombre_Procedencia);
+//     procedencianueva.save()
+//         .then((result)=>{
+//             let idNuevo = result[0].insertId;
+//             response.status(200).json({id_nueva_procedencia: idNuevo});
+//         })
+//         .catch((err)=>{
+//             console.log(err);
+//         })
+
+// }
+>>>>>>> 8c07af9fa05cf2d3df7c3ddad2d092282c9e9a18

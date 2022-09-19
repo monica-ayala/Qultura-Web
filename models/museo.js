@@ -23,6 +23,7 @@ module.exports = class Museo{
         return db.execute('SELECT * FROM Museo');
     }
 
+<<<<<<< HEAD
     static fetchOne(id_museo){
         return db.execute('SELECT * FROM Museo WHERE id_museo = ?',[id_museo])
     }
@@ -30,4 +31,19 @@ module.exports = class Museo{
     static softErase(id_museo){
         return db.execute('UPDATE Museo SET status=0 WHERE id_museo = ?' , [id_museo])
     }
+=======
+    static fecthOne(id_museo) {
+        return db.execute('SELECT * FROM Museo WHERE id_museo=?',
+            [id_museo]);
+    }
+
+    static update_museo(id_museo) {
+        return db.execute('UPDATE Museo SET nom_museo=?, desc_museo=?, ubicacion_museo=?, link_ubi=?, num_museo=?, imgP_museo=?, imgB_museo=?, WHERE id_museo=?',
+                [
+                    nom_museo,desc_museo,ubicacion_museo,link_ubi,num_museo,imgP_museo,imgB_museo
+                ]
+        );
+    }
+
+>>>>>>> 8c07af9fa05cf2d3df7c3ddad2d092282c9e9a18
 }
