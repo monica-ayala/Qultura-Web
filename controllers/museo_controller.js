@@ -83,7 +83,7 @@ exports.get_Onemuseo = (request, response, next) => {
 
   Museo.fecthOne(request.params.id_museo)
   .then(([rowsMuseos,fieldData])=>{
-    response.render('principal',{
+    response.render('museo_registrar',{
       museos:rowsMuseos
     });
   })
