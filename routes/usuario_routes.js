@@ -13,7 +13,14 @@ router.get('/login',usuario_controller.login_get);
 
 router.post('/login',usuario_controller.login_post);
 
+router.get('/login_movil',usuario_controller.login_movil_get);
+router.post('/login_movil',usuario_controller.login_movil_post);
+
 router.get('/rol',usuario_controller.view);
+
+router.get('/rol/:id_usuario',usuario_controller.updateUsuario);
+
+router.post('/rol/:id_usuario',usuario_controller.sendUpdate);
 
 // router.get('/datos', isAuth,usuario_controller.datos);
 
