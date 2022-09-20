@@ -18,8 +18,6 @@ module.exports = class Solicitud{
         db.execute('DELETE FROM Solicitud_Necesidad WHERE id_solicitud_nececidad = ?', [id_solicitud])
             .then(([rows, fieldData]) => {
                 return db.execute('DELETE FROM Solicitud WHERE id_solicitud = ?', [id_solicitud])
-                    .then()
-                    .catch(err => console.log(err));
             })
             .catch(err => console.log(err));
     }
