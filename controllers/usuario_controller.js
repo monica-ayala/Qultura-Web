@@ -64,6 +64,25 @@ exports.view = (request, response, next) => {
 
  };
 
+ exports.login_movil_get = (request,response,next)=>{
+
+ }
+
+ exports.login_movil_post =(request,response,next)=>{
+  Usuario.findOne(request.body.us_correo)
+  .then(([rows,fieldData])=>{
+    if(rows.length == 1){
+      response.status(200).json({
+        usuario:rows
+      })
+    }
+  }).catch((err)=>{
+    console.log(err);
+  })
+
+ }
+
+
 // exports.logout = (request, response, next) => {
 // };
 

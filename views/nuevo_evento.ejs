@@ -1,0 +1,107 @@
+<%- include('includes/header_image.ejs') %>
+<main>
+    <script type="module" src="/js/script_maps.js"></script>
+<form id="nuevo_imagen" method="POST" enctype="multipart/form-data">
+
+
+
+  <!-- Modal Structure -->
+  <div id="modal_link" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <div id="map" style="height: 400px;width: 100%;"></div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+
+  <!-- MODAL PARA SUBIR HORARIOS -->
+
+  <div id="modal_hr" class="modal">
+    <div class="modal-content">
+      <h4>Horarios del museo</h4>
+      <p>Elegir horario del museo</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+    </div>
+  </div>
+
+
+
+<div class="container">
+    <h1 class="white-text">Nuevo museo</h1>
+    
+        <div class="white min-container">
+            <div class="row center margin-10">  
+                <!-- valign-wrapper -->
+                <div class="col s5">
+                    <div class="row valign-wrapper">
+                        <div class="col s10">
+                            <div class="card imgPicker">
+                                <div class="card-image">
+                                  <img class="imgPicker imgP" src="../img/no-img.jpg">
+                                  <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload" onclick="filebutton.click()"><i class="material-icons">edit</i></div>
+                                  <input class="file-upload" id="filebutton" type="file" name="url_imagen" style="display:none">
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s7"> 
+                    <div class="row center">
+                        <div class="input-field col s10 offset-s1">
+                            <input placeholder="Ej: MAQRO" id="nom_museo" name="nom_museo" type="text" class="validate">
+                            <label for="nom_museo"> Nombre del Museo </label>
+                        </div>
+
+                    </div>
+                    <div class="row center">
+                        <div class="col offset-s1">
+                            <div class="col">
+                                <a class="btn waves-effect waves-light primary-color"><i class="material-icons left">add_box</i>Agregar salas </a>
+                            </div>
+                            <div class="col">
+                                <a class="btn waves-effect waves-light primary-color modal-trigger" href="#modal_hr"><i class="material-icons left">calendar_month</i>Agregar horarios </a>
+                            </div>  
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="row center margin-10">  
+                
+                <div class="input-field col s5 offset-s1">
+                    <input placeholder="Ej: 442-212-2357" id="num_museo" name="num_museo" type="text" class="validate">
+                    <label for="num_museo" > Teléfono de contacto </label>
+                </div>
+                <div class="input-field col s5">
+                        <input placeholder="Ej: C. Ignacio Allende Sur 14" name="ubicacion_museo" id="ubicacion_museo" type="text" class="validate">
+                    <label for="ubicacion_museo"> Dirección </label> 
+                </div>
+                <a style="margin-right:30px;margin-top:10px" class="btn-floating waves-effect waves-light primary-color modal-trigger" href="#modal_link"><i class="material-icons left">location_on</i> </a>
+            </div>
+            <div class="row center margin-10">  
+                <div class="input-field col s10 offset-s1">
+                    <textarea id="desc_museo" name="desc_museo" class="materialize-textarea validate"></textarea>
+                    <label for="desc_museo"> Descripción </label>
+                </div>
+                
+               
+                <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
+                    <i class="material-icons left">check</i>
+                    Registrar museo
+                </button>
+            </div>
+        </div>   
+    
+</div>
+</form>
+</main>
+
+<script src="/js/script_nuevo_museo.js"></script>
+<%- include('includes/footer.ejs') %>
