@@ -1,77 +1,20 @@
 <%- include('includes/header_image.ejs') %>
 <main>
+    <script type="module" src="/js/script_maps.js"></script>
+<form id="nuevo_imagen" method="POST" enctype="multipart/form-data">
 
-  <!-- MODAL PARA SUBIR IMÁGEN -->
-  <div id="modal_img" class="modal modal-fixed-footer">
+
+
+  <!-- Modal Structure -->
+  <div id="modal_link" class="modal bottom-sheet">
     <div class="modal-content">
-        <div class="row">
-            <h4>Subir Imágen</h4>
-        </div>
-        <hr>
-        <div class="row">
-            <h5> Imágen principal </h5>
-        </div>
-        <div class="row">
-            <div class="col s6">
-                <img src="../img/queretaro.png" class="responsive-img imgPicker">
-            </div>
-            <div class="col s6">
-
-                <!-- <input type="file" name="uploadFile" id="uploadFile">
-            <input type="submit" value="upload"> -->
-
-
-                <form id="uploadForm" enctype="multipart/form-data">
-                    <input type="file" name="uploadFile" id="uploadFile">
-                    <input type="submit" value="upload">
-                    <!-- <div class="file-field input-field">
-                      <div class="btn">
-                        <span>File</span>
-                        <input type="file" name="uploadFile" id="uploadFile">
-                      </div>
-                      <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
-                      </div>
-                      <input type="submit" value="upload">
-                      <button class="btn small primary-color waves-effect waves-light" onclick="submitImage()">Submit
-                        <i class="material-icons right">send</i> 
-                    </button> 
-                    </div> -->
-                </form>
-            </div>
-            
-        </div>
-        <div class="row">
-            <h5> Imágen de fondo </h5>
-        </div>
-        <div class="row">
-            <div class="col s6">
-                <img src="../img/queretaro.png" class="responsive-img imgPicker">
-            </div>
-            <div class="col s6">
-                <form method="POST" action="/profile-upload-single" enctype="multipart/form-data">
-                    <div class="file-field input-field">
-                      <div class="btn">
-                        <span>File</span>
-                        <input type="file" name="profile-file">
-                      </div>
-                      <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
-                      </div>
-                      <button class="btn small primary-color waves-effect waves-light" type="submit" name="action">Submit
-                        <i class="material-icons right">send</i>
-                    </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        
+      <h4>Modal Header</h4>
+      <div id="map" style="height: 400px;width: 100%;"></div>
     </div>
     <div class="modal-footer">
-      <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>
   </div>
-
 
   <!-- MODAL PARA SUBIR HORARIOS -->
 
@@ -89,6 +32,7 @@
 
 <div class="container">
     <h1 class="white-text">Nuevo museo</h1>
+    
         <div class="white min-container">
             <div class="row center margin-10">  
                 <!-- valign-wrapper -->
@@ -97,8 +41,9 @@
                         <div class="col s10">
                             <div class="card imgPicker">
                                 <div class="card-image">
-                                  <img class="imgPicker" src="../img/queretaro.png">
-                                  <a class="primary-color waves-effect waves-light btn-floating halfway-fab modal-trigger" href="#modal_img"><i class="material-icons">edit</i></a>
+                                  <img class="imgPicker imgP" src="../img/no-img.jpg">
+                                  <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload" onclick="filebutton.click()"><i class="material-icons">edit</i></div>
+                                  <input class="file-upload" id="filebutton" type="file" name="url_imagen" style="display:none">
                                 </div>
                               </div>
                         </div>
@@ -107,7 +52,7 @@
                 <div class="col s7"> 
                     <div class="row center">
                         <div class="input-field col s10 offset-s1">
-                            <input placeholder="Ej: MAQRO" id="nom_museo" type="text" class="validate">
+                            <input placeholder="Ej: MAQRO" id="nom_museo" name="nom_museo" type="text" class="validate">
                             <label for="nom_museo"> Nombre del Museo </label>
                         </div>
 
@@ -131,36 +76,32 @@
             <div class="row center margin-10">  
                 
                 <div class="input-field col s5 offset-s1">
-                    <input placeholder="Ej: 442-212-2357" id="num_museo" type="text" class="validate">
-                    <label for="num_museo"> Teléfono de contacto </label>
+                    <input placeholder="Ej: 442-212-2357" id="num_museo" name="num_museo" type="text" class="validate">
+                    <label for="num_museo" > Teléfono de contacto </label>
                 </div>
                 <div class="input-field col s5">
-                        <input placeholder="Ej: C. Ignacio Allende Sur 14" id="ubicacion_museo" type="text" class="validate">
+                        <input placeholder="Ej: C. Ignacio Allende Sur 14" name="ubicacion_museo" id="ubicacion_museo" type="text" class="validate">
                     <label for="ubicacion_museo"> Dirección </label> 
                 </div>
-                <a style="margin-right:30px;margin-top:10px" class="btn-floating waves-effect waves-light primary-color"><i class="material-icons left">location_on</i> </a>
+                <a style="margin-right:30px;margin-top:10px" class="btn-floating waves-effect waves-light primary-color modal-trigger" href="#modal_link"><i class="material-icons left">location_on</i> </a>
             </div>
             <div class="row center margin-10">  
                 <div class="input-field col s10 offset-s1">
-                    <textarea id="desc_museo" class="materialize-textarea validate"></textarea>
+                    <textarea id="desc_museo" name="desc_museo" class="materialize-textarea validate"></textarea>
                     <label for="desc_museo"> Descripción </label>
                 </div>
-                <input id="link_ubi" value="test">
-                <input id="imagen_principal" value="test">
-                <input  id="imagen_background" value="test">
-                <button onclick="submitMuseum()" class="btn waves-effect waves-light green margin-10">
+                
+               
+                <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
                     <i class="material-icons left">check</i>
                     Registrar museo
                 </button>
             </div>
-
-
-        </div>
-
-        
-    
+        </div>   
     
 </div>
+</form>
 </main>
+
 <script src="/js/script_nuevo_museo.js"></script>
 <%- include('includes/footer.ejs') %>
