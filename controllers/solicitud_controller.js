@@ -15,3 +15,10 @@ exports.get_solicitudes=(request,response,next)=>{
         }).catch(err => console.log(err));
     }).catch(err => console.log(err));
 };
+
+exports.elimina_solicitud=(request,response,next)=>{
+    Solicitud.deleteOne(request.body.id_solicitud)
+      .then(([rowsSolicitud,fieldData])=>{
+        response.status(200).json({});
+      }).catch(err => console.log(err));
+  };
