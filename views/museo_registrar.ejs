@@ -1,7 +1,8 @@
 <%- include('includes/header_image.ejs') %>
 <main>
   <div class="container">
-    <h1 class="white-text">@MuseoName</h1>
+    <% for (let museo of museos){%>
+    <h1 class="white-text"><%=museo.nom_museo%></h1>
     <div class="white min-container">
       <div class="row center margin-10">
         <!-- valign-wrapper -->
@@ -10,7 +11,7 @@
             <div class="col s10">
               <div class="card">
                 <div class="card-image">
-                  <img src="img/queretaro.png" />
+                  <img src='/uploads/<%=museo.imgP_museo%>'/>
                   <a
                     class="btn-floating halfway-fab waves-effect waves-light primary-color"
                     ><i class="material-icons">edit</i></a
@@ -25,11 +26,12 @@
             <div class="input-field col s10 offset-s1">
               <input
                 placeholder="Ej: MAQRO"
-                id="nombre_museo"
+                id="nom_museo"
                 type="text"
                 class="validate"
+                value="<%=museo.nom_museo%>"
               />
-              <label for="nombre_museo"> Nombre del Museo </label>
+              <label for="nom_museo"> Nombre del Museo </label>
             </div>
             <div class="input-field col s10 offset-s1">
                 <input
@@ -37,12 +39,13 @@
                   id="num_museo"
                   type="text"
                   class="validate"
+                  value="<%=museo.num_museo%>"
                 />
                 <label for="num_museo"> Teléfono de contacto </label>
               </div>
                 
                 <div class="input-field col s9 offset-s1">
-                    <input placeholder="Ej: C. Ignacio Allende Sur 14" id="direccion_museo" type="text" class="validate">
+                    <input placeholder="Ej: C. Ignacio Allende Sur 14" id="direccion_museo" type="text" class="validate" value="<%=museo.ubicacion_museo%>">
                     <label for="direccion_museo"> Dirección </label> 
                 </div>
                 <a style="margin-right:30px;margin-top:10px" class="btn-floating waves-effect waves-light primary-color"><i class="material-icons left">location_on</i> </a>
@@ -123,19 +126,21 @@
               >
             </div>
         </div>
-      </div>       
+      </div>   
 
       <div class="row center margin-10">
         <div class="input-field col s10 offset-s1">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <textarea id="desc_museo" class="materialize-textarea"><%=museo.desc_museo%></textarea>
           <label for="textarea1"> Descripción </label>
         </div>
-        <button class="btn waves-effect waves-light green margin-10">
+        <button onclick="editMuseum(this)" id="<%=museo.id_museo%>" class="btn waves-effect waves-light green margin-10">
           <i class="material-icons left">check</i>
           Guardar cambios
         </button>
       </div>
     </div>
+    <%}%>    
 
+    <script src="/js/script_editar_museo.js"></script>
 </main>
 <%- include('includes/footer.ejs') %>
