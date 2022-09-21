@@ -12,6 +12,7 @@ const usuario_routes = require('./routes/usuario_routes');
 const museo_routes = require('./routes/museo_routes')
 const guia_routes = require('./routes/guia_routes')
 const solicitud_routes = require('./routes/solicitud_routes')
+const sala_routes = require('./routes/sala_routes')
 
 const app = express();
 
@@ -52,12 +53,13 @@ app.use(upload.single('url_imagen'))
 //MULTER
 
 
-app.use('/', museo_routes);
+
 app.use('/museo',museo_routes)
 app.use('/guias', guia_routes);
-
+app.use('/sala', sala_routes);
 app.use('/usuario', usuario_routes);
 app.use('/solicitud', solicitud_routes);
+app.use('/', museo_routes);
 
 app.use((request, response, next) => {
      response.status(404);

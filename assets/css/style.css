@@ -182,3 +182,8 @@ main {
     border-radius: 50px;
     cursor: pointer;
 }
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
