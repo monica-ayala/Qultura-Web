@@ -24,7 +24,7 @@ module.exports = class Evento{
     }
 
     static softErase(id_evento){
-        return db.execute('DELETE Evento WHERE id_evento = ?' , [id_evento])
+        return db.execute('DELETE FROM Evento WHERE id_evento = ?' , [id_evento])
     }
     static fecthOne(id_evento) {
         return db.execute('SELECT * FROM Evento WHERE id_evento=?',

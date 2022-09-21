@@ -12,9 +12,9 @@ const event_controller = require('../controllers/evento_controller');
 
 router.get('/nuevo_evento',event_controller.get_nuevo)
 router.post('/nuevo_evento',event_controller.post_nuevo)
+router.post('/borrar/evento/:id_evento',event_controller.erase)
 
 
-//router.post('/borrar/:id_museo',museo_controller.soft_erase)
 //router.post('/regresar/:id_museo',museo_controller.soft_unerase)
 //router.get('/registro',museo_controller.register)
 //router.get('/:id_museo',museo_controller.get_Onemuseo)

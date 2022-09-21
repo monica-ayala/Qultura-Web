@@ -1,6 +1,7 @@
 const path = require("path");
 const filesystem = require('fs');
 const Museo = require("../models/museo"); 
+const Evento = require("../models/evento")
 //const { response } = require("express");
 exports.view = (request, response, next) => {
     response.render('principal');
@@ -13,10 +14,13 @@ exports.get_nuevo=(request,response,next)=>{
 exports.lista=(request,response,next)=>{
   Museo.fetchList()
     .then(([rowsMuseos, fieldData]) => {
-      response.render('principal',{
-        museos:rowsMuseos
-      }
-    );
+      Evento.fetchList()
+      .then(([rowsEventos,fieldData])=>{
+        response.render('principal',{
+          museos:rowsMuseos,
+          eventos: rowsEventos
+        })
+      }).catch(err=>console.log(err));
     }).catch(err => console.log(err));
 }
 

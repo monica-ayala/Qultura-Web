@@ -24,10 +24,16 @@ exports.post_nuevo = (request, response, next) => {
       url_imagen,
       request.body.ubicacion_evento
     )
-    console.log(nuevo_evento)
     nuevo_evento.save()
     .then((result) => {
       response.redirect ("/museo");
     }).catch(err => console.log(err));  
   };
   
+exports.erase=(request,response,next)=>{
+    Evento.softErase(request.params.id_evento)
+    Evento.fetchList()
+    .then(([rowsEventos,fieldData])=>{
+      response.status(200).json({eventos:rowsEventos});
+    }).catch(err => console.log(err));
+}

@@ -28,44 +28,37 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(express.static(path.join(__dirname, 'assets')));
 
+//MULTER 
+
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, 'public/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().getTime() + '-' + file.originalname)
+  }
+})
+var upload = multer({ storage: storage })
+app.use(upload.single('url_imagen'))
+//app.use(upload.single('url_imagen'))
+
+//MULTER
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
 
-//MULTER 
 
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      console.log(file)
-
-      if (file.fieldname=="url_imagenB"){
-        cb(null, 'public/uploads/eventos')
-      }else{
-        cb(null, 'public/uploads')
-      }
-        
-    },
-    filename: function (req, file, cb) {
-      cb(null, new Date().getTime() + '-' + file.originalname)
-    }
-})
-var upload = multer({ storage: storage })
-app.use(upload.single('url_imagenB'))
-app.use(upload.single('url_imagen'))
-
-
-//MULTER
-
-
-app.use('/', museo_routes);
 app.use('/museo',museo_routes)
 app.use('/guias', guia_routes);
 app.use('/evento',evento_routes);
 app.use('/usuario', usuario_routes);
 app.use('/solicitud', solicitud_routes);
+
+app.use('/', museo_routes);
 
 app.use((request, response, next) => {
      response.status(404);
