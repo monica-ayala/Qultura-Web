@@ -61,7 +61,6 @@ exports.museo_post = (request, response, next) => {
   }else{
       url_imagen = request.file.filename;
   }
-  url_imagenB = request.file;
   console.log(request)
   link_ubi="placeholder"
   const nuevo_museo = new Museo(
@@ -111,17 +110,24 @@ exports.get_Onemuseo = (request, response, next) => {
  };
 
 exports.museo_update = (request,response,next)=>{
-  console.log("UPDATE")
+  url_imagen = request.file;
+  if((typeof(url_imagen) == "undefined")){
+      url_imagen = "";
+  }else{
+      url_imagen = request.file.filename;
+  }
+  console.log(url_imagen)
   Museo.update_museo(
     request.body.nom_museo,
     request.body.desc_museo,
-    request.body.ubicacion_museo,
+    request.body.direccion_museo,
     request.body.num_museo,
-    request.params.id_museo,
+    url_imagen,
+    request.body.id_museo,
     )
 
   .then(() => {
-    response.status(200).json({});
+    response.redirect("/");
   })
   .catch(err => console.log(err));
 };
