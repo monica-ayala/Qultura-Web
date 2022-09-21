@@ -12,6 +12,7 @@ const usuario_routes = require('./routes/usuario_routes');
 const museo_routes = require('./routes/museo_routes')
 const guia_routes = require('./routes/guia_routes')
 const solicitud_routes = require('./routes/solicitud_routes')
+const evento_routes = require('./routes/evento_routes')
 
 const app = express();
 
@@ -38,16 +39,23 @@ app.use(bodyParser.json());
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'public/uploads')
+      console.log(file)
+
+      if (file.fieldname=="url_imagenB"){
+        cb(null, 'public/uploads/eventos')
+      }else{
+        cb(null, 'public/uploads')
+      }
+        
     },
     filename: function (req, file, cb) {
       cb(null, new Date().getTime() + '-' + file.originalname)
     }
 })
 var upload = multer({ storage: storage })
-
+app.use(upload.single('url_imagenB'))
 app.use(upload.single('url_imagen'))
-//app.use(upload.single('url_imagenB'))
+
 
 //MULTER
 
@@ -55,7 +63,7 @@ app.use(upload.single('url_imagen'))
 app.use('/', museo_routes);
 app.use('/museo',museo_routes)
 app.use('/guias', guia_routes);
-
+app.use('/evento',evento_routes);
 app.use('/usuario', usuario_routes);
 app.use('/solicitud', solicitud_routes);
 
@@ -65,6 +73,7 @@ app.use((request, response, next) => {
 });
 
 const conn = require('./util/database');
+const { request } = require('express');
 
 
 async function main() {
