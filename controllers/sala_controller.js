@@ -18,19 +18,21 @@ exports.sala_get=(request,response,next)=>{
 
 exports.sala_post = (request, response, next) => {
     
-    // url_imagen = request.file;
-    // if((typeof(url_imagen) == "undefined")){
-    //     url_imagen = "";
-    // }else{
-    //     url_imagen = request.file.filename;
-    // }
-    // img_sala = request.file;
+    url_imagen = request.file;
+    if((typeof(url_imagen) == "undefined")){
+        url_imagen = "";
+    }else{
+        url_imagen = request.file.filename;
+    }
+    audio_sala = "placeholder"
+    id_museo = 1
+    
     const nueva_sala = new Sala(
       request.body.nom_sala,
       request.body.desc_sala,
-      request.body.audio_sala,
-      request.body.img_sala,
-      request.body.id_museo
+      audio_sala,
+      url_imagen,
+      id_museo
     )
     console.log(nueva_sala)
     nueva_sala.save()
