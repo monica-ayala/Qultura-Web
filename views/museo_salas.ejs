@@ -6,40 +6,40 @@
     <h1 class="white-text">Nuevo museo</h1>
     
         <div class="white min-container">
-            <div class="col">  
+            
                 <!-- valign-wrapper -->
                 
                     <% for (let sala of salas){%>
                         <%if(sala.status_sala == 1){%>
-                            <div class="row">
+                            <div class="row flex">
                                 <div class="col s4">
-                                <div class="row valign-wrapper">
-                                    <div class="col s10">
+                                    
                                         <div class="card imgPicker">
                                             <div class="card-image">
                                             <img class="imgPicker imgP" src="../img/no-img.jpg">
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    
                                 </div>
                                 <div class="col s7"> 
+                                    <div class="col s11">
                                     <div class="row">
-                                        <div class="left-align col s5">
-                                            <h4> Sala - <%=sala.nom_sala%> </h4> 
-                                            <p> <%=sala.desc_sala%> </p>
-                                        </div>
-                
+                                        <h4> Sala - <%=sala.nom_sala%> </h4>
+                                        <p> <%=sala.desc_sala%> </p>
+                                        <a class="blue-gradient-btn btn-large hoverable">
+                                            Editar Sala
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="col s1">
-                                    <button class="btn"> editar </button>
                                 </div>
+                                <!-- <div class="col s2 valign-wrapper">
+                                    
+                                </div> -->
                             </div>
                         <%}%>
                     <%}%>
                     
-            </div>
+            
         </div>   
 </div>
 </form>
