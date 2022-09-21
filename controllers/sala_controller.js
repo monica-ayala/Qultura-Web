@@ -12,6 +12,10 @@ exports.lista=(request,response,next)=>{
     }).catch(err => console.log(err));
 }
 
+exports.sala_get=(request,response,next)=>{
+  response.render('nueva_sala');
+};
+
 exports.sala_post = (request, response, next) => {
     
     // url_imagen = request.file;
@@ -34,3 +38,12 @@ exports.sala_post = (request, response, next) => {
       response.redirect ("/sala");
     }).catch(err => console.log(err));  
   };
+
+  exports.api_get_sala=(request,response,next)=>{
+    Sala.fetchList()
+      .then(([rowsSalas,fieldData])=>{
+        response.status(200).json({
+          salas: rowsSalas
+      });
+      }).catch(err => console.log(err));
+  }
