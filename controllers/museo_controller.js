@@ -93,12 +93,13 @@ exports.get_Onemuseo = (request, response, next) => {
 exports.museo_update = (request,response,next)=>{
   console.log("UPDATE")
   Museo.update_museo(
-    request.body.id_museo,
     request.body.nom_museo,
     request.body.desc_museo,
     request.body.ubicacion_museo,
     request.body.num_museo,
+    request.params.id_museo,
     )
+
   .then(() => {
     response.status(200).json({});
   })

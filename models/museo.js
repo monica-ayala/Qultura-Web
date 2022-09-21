@@ -35,10 +35,10 @@ module.exports = class Museo{
             [id_museo]);
     }
 
-    static update_museo(id_museo,nom_museo,desc_museo,ubicacion_museo,link_ubi,num_museo,imgP_museo,imgB_museo) {
-        return db.execute('UPDATE Museo SET nom_museo=?, desc_museo=?, ubicacion_museo=?, link_ubi=?, num_museo=?, imgP_museo=?, imgB_museo=?, WHERE id_museo=?',
+    static update_museo(nom_museo,desc_museo,ubicacion_museo,num_museo,id_museo) {
+        return db.execute('UPDATE Museo SET nom_museo=?, desc_museo=?, ubicacion_museo=?, num_museo=? WHERE id_museo=?',
                 [
-                    nom_museo,desc_museo,ubicacion_museo,link_ubi,num_museo,imgP_museo,imgB_museo
+                    nom_museo,desc_museo,ubicacion_museo,num_museo,id_museo
                 ]
         );
     }
