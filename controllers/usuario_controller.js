@@ -35,8 +35,12 @@ exports.view = (request, response, next) => {
   .then(([rows,fieldData])=>{
     if (rows.length==0){
       nuevo_usuario.save()
-      .then(()=>{
-        response.redirect("/usuario/login");
+      .then((result)=>{
+        Usuario.AssignMuseo(result[0].insertId)
+        .then(()=>{
+          response.redirect("/usuario/login");
+        })
+        .catch(err=>console.log(err));
       })
       .catch(err=>console.log(err));
     }else{
@@ -87,7 +91,6 @@ exports.view = (request, response, next) => {
 // };
 
  exports.updateUsuario = (request, response, next) => {
-  console.log(request.params.id_usuario);
 
   Usuario.fecthOne(request.params.id_usuario)
   .then(([rowUser,fieldData])=>{
@@ -108,8 +111,6 @@ exports.view = (request, response, next) => {
  };
 
  exports.sendUpdate=(request,response,next)=>{
-  console.log(request.body.id_museo)
-  //console.log(request.params.id_usuario)
   Usuario.update(request.body.id_rol,request.body.id_user)
     .then(([rows,fieldData])=>{
       Usuario.updateMuseum(request.body.id_user,request.body.id_museo)
