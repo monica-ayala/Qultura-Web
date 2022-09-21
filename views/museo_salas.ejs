@@ -1,0 +1,48 @@
+<%- include('includes/header_image.ejs') %>
+
+<main>
+
+<div class="container">
+    <h1 class="white-text">Nuevo museo</h1>
+    
+        <div class="white min-container">
+            <div class="col">  
+                <!-- valign-wrapper -->
+                
+                    <% for (let sala of salas){%>
+                        <%if(sala.status_sala == 1){%>
+                            <div class="row">
+                                <div class="col s4">
+                                <div class="row valign-wrapper">
+                                    <div class="col s10">
+                                        <div class="card imgPicker">
+                                            <div class="card-image">
+                                            <img class="imgPicker imgP" src="../img/no-img.jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col s7"> 
+                                    <div class="row">
+                                        <div class="left-align col s5">
+                                            <h4> Sala - <%=sala.nom_sala%> </h4> 
+                                            <p> <%=sala.desc_sala%> </p>
+                                        </div>
+                
+                                    </div>
+                                </div>
+                                <div class="col s1">
+                                    <button class="btn"> editar </button>
+                                </div>
+                            </div>
+                        <%}%>
+                    <%}%>
+                    
+            </div>
+        </div>   
+</div>
+</form>
+</main>
+
+<%- include('includes/footer.ejs') %>
