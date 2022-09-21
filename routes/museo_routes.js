@@ -12,6 +12,7 @@ router.post('/borrar/:id_museo',museo_controller.soft_erase)
 router.post('/regresar/:id_museo',museo_controller.soft_unerase)
 router.get('/registro',museo_controller.register)
 router.get('/:id_museo',museo_controller.get_Onemuseo)
+router.post('/:id_museo',museo_controller.museo_update)
 
 
 

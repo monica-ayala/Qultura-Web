@@ -26,12 +26,12 @@
             <div class="input-field col s10 offset-s1">
               <input
                 placeholder="Ej: MAQRO"
-                id="nombre_museo"
+                id="nom_museo"
                 type="text"
                 class="validate"
                 value="<%=museo.nom_museo%>"
               />
-              <label for="nombre_museo"> Nombre del Museo </label>
+              <label for="nom_museo"> Nombre del Museo </label>
             </div>
             <div class="input-field col s10 offset-s1">
                 <input
@@ -130,16 +130,17 @@
 
       <div class="row center margin-10">
         <div class="input-field col s10 offset-s1">
-          <textarea id="textarea1" class="materialize-textarea"><%=museo.desc_museo%></textarea>
+          <textarea id="desc_museo" class="materialize-textarea"><%=museo.desc_museo%></textarea>
           <label for="textarea1"> Descripción </label>
         </div>
-        <%}%>    
-        <button class="btn waves-effect waves-light green margin-10">
+        <button onclick="editMuseum(this)" id="<%=museo.id_museo%>" class="btn waves-effect waves-light green margin-10">
           <i class="material-icons left">check</i>
           Guardar cambios
         </button>
       </div>
     </div>
+    <%}%>    
 
+    <script src="/js/script_editar_museo.js"></script>
 </main>
 <%- include('includes/footer.ejs') %>
