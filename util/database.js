@@ -28,6 +28,6 @@ const DB_LOCAL = {
 
 //const pool = mysql.createPool(DB_LOCAL);
 //const pool = mysql.createPool(DB_INTERLINK);
-const pool = mysql.createPool(DB_AWS);
+const pool = mysql.createPool(DB_INTERLINK);
 
 module.exports = pool.promise();
