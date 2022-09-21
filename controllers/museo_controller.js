@@ -1,6 +1,9 @@
 const path = require("path");
 const filesystem = require('fs');
 const Museo = require("../models/museo"); 
+const Sala = require("../models/sala"); 
+const Obra = require("../models/obra"); 
+
 //const { response } = require("express");
 exports.view = (request, response, next) => {
     response.render('principal');
@@ -20,12 +23,29 @@ exports.lista=(request,response,next)=>{
     }).catch(err => console.log(err));
 }
 
-exports.get_museo=(request,response,next)=>{
+exports.get_museo_api=(request,response,next)=>{
   Museo.fetchList()
     .then(([rowsMuseos,fieldData])=>{
       response.status(200).json({
         museos:rowsMuseos
     });
+    }).catch(err => console.log(err));
+}
+
+exports.get_all_api=(request,response,next)=>{
+  Museo.fetchList()
+    .then(([rowsMuseos,fieldData])=>{
+      Sala.fetchList()
+        .then(([rowsSalas,fieldData])=>{
+          Obra.fetchList()
+            .then(([rowsObras,fieldData])=>{
+                response.status(200).json({
+                  museos:rowsMuseos,
+                  salas:rowsSalas,
+                  obras:rowsObras
+                });
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     }).catch(err => console.log(err));
 }
 
