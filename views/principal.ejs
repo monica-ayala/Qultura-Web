@@ -60,31 +60,29 @@
         </div>   
         <div class="col s2">
             
-          <a href="/museo/nuevo_museo" style="margin-top: 40px; margin-bottom: 0px;" class="waves-effect waves-light btn primary-color"><i class="material-icons left">add_box</i>Nuevo</a>
+          <a href="/evento/nuevo_evento" style="margin-top: 40px; margin-bottom: 0px;" class="waves-effect waves-light btn primary-color"><i class="material-icons left">add_box</i>Nuevo</a>
         </div>   
     </div>
-      <ul class="cards">
-        <% for (let museo of museos){%>
-          <%if(museo.status == 1){%>
-            <li class="card-panel card-pers hoverable" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/uploads/<%=museo.imgP_museo%>') no-repeat; background-size: cover;">
+      <ul id="cardsevents"class="cards">
+        <% for (let evento of eventos){%>
+          
+            <li class="card-panel card-pers hoverable" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/uploads/<%=evento.multimedia_evento%>') no-repeat; background-size: cover;">
           
               <div>
-                <a class="btn-floating green card-link" style="float:right;margin:0px;margin-left:10px"> <i class="material-icons">edit</i> </a>
-                <a onclick="deleteMuseum(this)" id="<%=museo.id_museo%>" class="btn-floating red card-link" style="float:right;margin:0px"> <i class="material-icons">delete</i> </a>
-                <h3 class="card-title white-text"><%=museo.nom_museo%></h3>
+                <a onclick="deleteEvento(this)" id="<%=evento.id_evento%>" class="btn-floating red card-link" style="float:right;margin:0px"> <i class="material-icons">delete</i> </a>
+                <h3 class="card-title white-text"><%=evento.info_evento%></h3>
                 
                 <div class="card-content white-text">
-                  <p> Fecha: <%=museo.num_museo%> 
+                  <p> Fecha: <%=evento.fecha_hora_evento%> 
                   </p>
-                  <p><%=museo.desc_museo.substring(0, 100)%> . . .</p>
+                  
                 </div>
               </div>
-              
             </li>
-            <%}%>
         <%}%>
       </ul>
   </div>
 </main>
 <script src="/js/script_delete_museo.js"></script>
+<script src="/js/script_delete_evento.js"></script>
 <%- include('includes/footer.ejs') %>

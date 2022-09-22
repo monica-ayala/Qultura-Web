@@ -27,10 +27,10 @@
                 <tr>
                       <td><%= usuario.correo_user%></td>
                     <td><%= usuario.nom_rol%></td>  
-                    <td><%= usuario.nom_user%></td>
+                    <td><%= usuario.nom_museo%></td>
                     <td> <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser(this)" value="<%=usuario.id_user%>" id="<%=usuario.id_user%>">Modal</button></td>
                 </tr>
-                <input type="hidden" value="<%=usuario.id_user%>" id="id_user">
+                <!--input type="hidden" value="<%=usuario.id_user%>" id="id_user"-->
                 <%}%>
         </tbody>
     </table>
