@@ -35,36 +35,18 @@ app.use(express.static(path.join(__dirname, 'assets')));
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-      cb(null, 'public/uploads')
+    cb(null, 'public/uploads')
   },
   filename: function (req, file, cb) {
     cb(null, new Date().getTime() + '-' + file.originalname)
   }
 })
 var upload = multer({ storage: storage })
+
 app.use(upload.single('url_imagen'))
-//app.use(upload.single('url_imagen'))
+//app.use(upload.single('url_imagenB'))
 
 //MULTER
-
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
-app.use(bodyParser.json());
-
-
-
-
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'public/uploads')
-    },
-    filename: function (req, file, cb) {
-      cb(null, new Date().getTime() + '-' + file.originalname)
-    }
-})
-var upload = multer({ storage: storage })
-
-app.use(upload.single('url_imagen'))
 
 app.use('/museo',museo_routes)
 app.use('/guias', guia_routes);
@@ -73,7 +55,6 @@ app.use('/obra', obra_routes);
 app.use('/evento',evento_routes);
 app.use('/usuario', usuario_routes);
 app.use('/solicitud', solicitud_routes);
-app.use('/', museo_routes);
 
 app.use('/', museo_routes);
 
