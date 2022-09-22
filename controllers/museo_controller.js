@@ -112,7 +112,7 @@ exports.get_Onemuseo = (request, response, next) => {
 exports.museo_update = (request,response,next)=>{
   url_imagen = request.file;
   if((typeof(url_imagen) == "undefined")){
-      url_imagen = "";
+      url_imagen = request.body.museo_url;
   }else{
       url_imagen = request.file.filename;
   }
