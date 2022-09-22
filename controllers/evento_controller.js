@@ -5,10 +5,18 @@ const Evento = require("../models/evento");
 
 
 exports.get_nuevo=(request,response,next)=>{
-    response.render('nuevo_evento');
+  Evento.fetchTags()
+  .then(([rowsTags])=>{
+    console.log(rowsTags);
+    response.render('nuevo_evento',{
+      tags:rowsTags
+    });
+  })
+
 };
 
 exports.post_nuevo = (request, response, next) => {
+  console.log(request.body.seventos);
     url_imagen = request.file;
     if((typeof(url_imagen) == "undefined")){
         url_imagen = "";

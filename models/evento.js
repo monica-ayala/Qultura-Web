@@ -31,4 +31,8 @@ module.exports = class Evento{
             [id_evento]);
     }
 
+    static fetchTags(){
+        return db.execute('SELECT * FROM Tag');
+    }
+
 }
