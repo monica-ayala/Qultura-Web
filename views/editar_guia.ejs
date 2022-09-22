@@ -28,20 +28,20 @@
                 <div class="col s9">
                     <div class="row">
                         <div class="col s6">
-                            <h5>Nombre de la Limitación</h5>
+                            <h5>Nombre dela Limitacion </h5>
                             <!-- <label for="nombre_limitacion">Nombre de la Limitacion</label> -->
-                            <input id="nombre_limitacion" value="Limitación X" type="text">
+                            <input id="nombre_limitacion" value="<%= nombre %> " type="text">
                         </div>
                         <div class="col s6">
                             <h5>Icono</h5>
                             <!-- <label for="icono_limitacion">Icono de la Limitación</label> -->
-                            <input id="icono_limitacion" type="file" class="customFile" accept="image/png, image/jpg, image/jpeg">
+                            <input id="icono_limitacion" type="file" class="customFile" value="<%= icono %> " accept="image/png, image/jpg, image/jpeg">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s12">
                             <h5>Descripcion</h5>
-                            <textarea placeholder="Descripcion de Limitacion..." id="textarea2" class="materialize-textarea" data-length="120">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae reiciendis odio repellendus voluptates aut quos est.</textarea>
+                            <textarea placeholder="Descripcion de Limitacion..." id="textarea2" class="materialize-textarea" data-length="120"><%= descripcion %> </textarea>
                             <!-- <label for="textarea2">Descripcion</label> -->
                           </div>
                     </div>
@@ -51,7 +51,7 @@
                 <div class="col s1" style="margin-top: 0px;" ></div>
                 <div class="col s10" style="margin-top: 0px; margin-bottom: 1em;" >
                     <h5>TIPS</h5>
-                    <textarea placeholder="Escribe Tips..." id="textarea2" class="materialize-textarea" data-length="200">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae reiciendis odio repellendus voluptates aut quos est.</textarea>
+                    <textarea placeholder="Escribe Tips..." id="textarea2" class="materialize-textarea" data-length="200"><%= tip %> </textarea>
                     <!-- <label for="textarea2">Descripcion</label> -->
                 </div>
                 <div class="col s1" style="margin-top: 0px;" ></div>
@@ -64,7 +64,7 @@
                 <div class="col s7" style="margin: auto 0;" >
                     <div class="left">
                         <!-- <input id="icono_limitacion" type="file" accept="image/png, image/jpg, image/jpeg, Video/mp4" class="customFileVideo"> -->
-                        <input type="text" value="linkdeyoutube.com">
+                        <input type="text" value="<%= video %> ">
                     </div>
                 </div>
                 <div class="col s1" style="margin-top: 0px;" ></div>

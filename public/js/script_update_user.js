@@ -28,7 +28,7 @@ function getInfoUser(element){
     let selectrol=document.getElementById("sl_roles");
     let selectmuseos=document.getElementById("sl_museos");
     let name=document.getElementById("nom_user");
-    let user_id = element.id;
+    let user_id = element.id; 
     let correo=document.getElementById("correo");
 
     name.innerHTML=""
@@ -43,7 +43,8 @@ function getInfoUser(element){
     })
     .then(response => response.json())
     .then(response => {
-            
+            console.log(response);
+
             name.innerHTML+=response.usuario[0].nom_user
             name.innerHTML+="<input type='hidden' value="+response.usuario[0].id_user+" id='id_user'>"
             correo.innerHTML+='<label for="disabled">Correo Electronico:</label>'
