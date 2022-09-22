@@ -3,8 +3,7 @@ const db = require('../util/database');
 
 module.exports = class Guia{
 
-    constructor(id_guia, video_guia, desc_guia, icono_guia, nombre_guia, tip_guia, imagen_guia) {
-        this.id_guia = id_guia,
+    constructor(video_guia, desc_guia, icono_guia, nombre_guia, tip_guia, imagen_guia) {
         this.video_guia = video_guia,
         this.desc_guia = desc_guia,
         this.icono_guia = icono_guia,
@@ -14,9 +13,8 @@ module.exports = class Guia{
     }
 
     save() {
-        return db.execute('INSERT INTO Guia(id_guia, video_guia, desc_guia, icono_guia, nombre_guia, tip_guia, imagen_guia) VALUES (?,?,?,?,?,?,?)', 
+        return db.execute('INSERT INTO Guia(video_guia, desc_guia, icono_guia, nombre_guia, tip_guia, imagen_guia) VALUES (?,?,?,?,?,?)', 
             [
-                this.id_guia,
                 this.video_guia, 
                 this.desc_guia, 
                 this.icono_guia, 
@@ -25,5 +23,13 @@ module.exports = class Guia{
                 this.imagen_guia
             ]    
         );
+    }
+
+    static fetchAll(){
+        return db.execute('SELECT * FROM guia');
+    }
+
+    static fetchGuiaEditar(idGuia){
+        return db.execute("SELECT * FROM guia WHERE id_guia = ?", [idGuia]);
     }
 }
