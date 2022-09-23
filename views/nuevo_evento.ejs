@@ -54,8 +54,16 @@
                                 </div>
                                 <input placeholder="Ej:2022-10-12" id="fecha_hora" name="fecha_hora" type="text" class="validate">
                                 <label for="fecha_hora"> Fecha y Hora </label>
-
                                 <a class="btn waves-effect waves-light primary-color modal-trigger" href="#modal_hr"><i class="material-icons left">calendar_month</i>Agregar horarios </a>
+                                <div class="input-field col s12">
+                                    <select multiple id="sevento" name="sevento">
+                                      <option value="" disabled selected>Seleccionar categoria:</option>
+                                      <% for (let tag of tags){%>
+                                      <option value='<%=tag.id_tag%>'><%=tag.nom_tag%></option>
+                                      <%}%>
+                                    </select>
+                                    <label>Categorias del evento</label>
+                                  </div>
                             </div>  
                         </div>
                         
