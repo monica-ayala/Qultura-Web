@@ -5,7 +5,12 @@ const Evento = require("../models/evento");
 
 
 exports.get_nuevo=(request,response,next)=>{
-    response.render('nuevo_evento');
+  Evento.fetchTags()
+  .then(([rowsTags])=>{
+    response.render('nuevo_evento',{
+      tags:rowsTags
+    });
+  })
 };
 
 exports.post_nuevo = (request, response, next) => {
@@ -25,6 +30,9 @@ exports.post_nuevo = (request, response, next) => {
     )
     nuevo_evento.save()
     .then((result) => {
+      for(let tag of request.body.sevento){
+        Evento.AsignTags(tag,result[0].insertId);
+      };
       response.redirect ("/museo");
     }).catch(err => console.log(err));  
   };
