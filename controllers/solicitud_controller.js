@@ -18,7 +18,6 @@ exports.get_solicitudes=(request,response,next)=>{
 };
 
 exports.elimina_solicitud=(request,response,next)=>{
-    console.log(request.body)
     Solicitud.deleteOne(request.body.id_solicitud)
       .then(([rowsSolicitud,fieldData])=>{
         response.status(200).json({});
