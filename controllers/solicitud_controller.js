@@ -24,6 +24,7 @@ exports.elimina_solicitud=(request,response,next)=>{
   };
 
   exports.agrega_solicitud=(request,response,next)=>{
+    console.log(request.body);
     var date = new Date();
 	  var current_time = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
     const solicitud_nueva = new Solicitud(request.body.info_adicional, current_time, request.body.fecha_hora_sol, request.body.num_Visitantes, 0, request.body.usuario_necesidad);
