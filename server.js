@@ -14,6 +14,8 @@ const guia_routes = require('./routes/guia_routes')
 const solicitud_routes = require('./routes/solicitud_routes')
 const sala_routes = require('./routes/sala_routes')
 const obra_routes = require('./routes/obra_routes')
+const evento_routes = require('./routes/evento_routes')
+
 
 const app = express();
 
@@ -29,22 +31,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(express.static(path.join(__dirname, 'assets')));
 
-
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
-app.use(bodyParser.json());
-
-
 //MULTER 
 
 
 var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'public/uploads')
-    },
-    filename: function (req, file, cb) {
-      cb(null, new Date().getTime() + '-' + file.originalname)
-    }
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().getTime() + '-' + file.originalname)
+  }
 })
 var upload = multer({ storage: storage })
 
@@ -53,14 +49,14 @@ app.use(upload.single('url_imagen'))
 
 //MULTER
 
-
-
 app.use('/museo',museo_routes)
 app.use('/guias', guia_routes);
 app.use('/sala', sala_routes);
 app.use('/obra', obra_routes);
+app.use('/evento', evento_routes);
 app.use('/usuario', usuario_routes);
 app.use('/solicitud', solicitud_routes);
+
 app.use('/', museo_routes);
 
 app.use((request, response, next) => {
@@ -69,6 +65,7 @@ app.use((request, response, next) => {
 });
 
 const conn = require('./util/database');
+const { request } = require('express');
 
 
 async function main() {

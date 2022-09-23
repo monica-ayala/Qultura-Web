@@ -89,7 +89,7 @@ exports.soft_erase = (request, response, next) => {
 }
 
 exports.soft_unerase = (request, response, next) => {
-  Museo.softErase(request.body.id_museo,1)
+  Museo.softErase(request.params.id_museo,1)
   Museo.fetchList()
   .then(([rowsMuseos,fieldData])=>{
     response.status(200).json({museos:rowsMuseos});
@@ -98,8 +98,6 @@ exports.soft_unerase = (request, response, next) => {
 }
 
 exports.get_Onemuseo = (request, response, next) => {
-  console.log(request.params.id_usuario);
-
   Museo.fecthOne(request.params.id_museo)
   .then(([rowsMuseos,fieldData])=>{
     response.render('museo_registrar',{
