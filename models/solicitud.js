@@ -43,7 +43,7 @@ module.exports = class Solicitud{
     }
 
     static necesidades_save(id_solicitud, id_necesidad){
-        return db.execute('INSERT INTO Solicitud_Necesidad (id_solicitud_nececidad, id_necesidad_solicitud) VALUES (?, ?)', 
+        return db.execute('INSERT INTO Solicitud_Necesidad (id_solicitud_necesidad, id_necesidad_solicitud) VALUES (?, ?)', 
             [
                 id_solicitud,
                 id_necesidad
