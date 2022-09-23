@@ -11,11 +11,9 @@ exports.get_nuevo=(request,response,next)=>{
       tags:rowsTags
     });
   })
-
 };
 
 exports.post_nuevo = (request, response, next) => {
-  console.log(request.body.sevento);
     url_imagen = request.file;
     if((typeof(url_imagen) == "undefined")){
         url_imagen = "";
@@ -23,7 +21,6 @@ exports.post_nuevo = (request, response, next) => {
         url_imagen = request.file.filename;
     }
     url_imagenB = request.file;
-    
     link_ubi="placeholder";
     const nuevo_evento = new Evento(
       request.body.info_evento,
@@ -33,9 +30,9 @@ exports.post_nuevo = (request, response, next) => {
     )
     nuevo_evento.save()
     .then((result) => {
-        for(let tag of request.body.sevento){
-          Evento.AsignTags(tag,result[0].insertId);
-        };
+      for(let tag of request.body.sevento){
+        Evento.AsignTags(tag,result[0].insertId);
+      };
       response.redirect ("/museo");
     }).catch(err => console.log(err));  
   };
