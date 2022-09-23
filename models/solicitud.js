@@ -15,7 +15,7 @@ module.exports = class Solicitud{
     }
 
     static deleteOne(id_solicitud){
-        db.execute('DELETE FROM Solicitud_Necesidad WHERE id_solicitud_nececidad = ?', [id_solicitud])
+        db.execute('DELETE FROM Solicitud_Necesidad WHERE id_solicitud_necesidad = ?', [id_solicitud])
             .then(([rows, fieldData]) => {
                 return db.execute('DELETE FROM Solicitud WHERE id_solicitud = ?', [id_solicitud])
             })

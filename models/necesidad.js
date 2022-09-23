@@ -10,7 +10,7 @@ module.exports = class Necesidad{
     }
 
     static fetchAll(){
-        return db.execute('SELECT s.id_solicitud_nececidad, n.id_necesidad, n.necesidad FROM Necesidad n, Solicitud_Necesidad s WHERE n.id_necesidad = s.id_necesidad_solicitud');
+        return db.execute('SELECT s.id_solicitud_necesidad, n.id_necesidad, n.necesidad FROM Necesidad n, Solicitud_Necesidad s WHERE n.id_necesidad = s.id_necesidad_solicitud');
     }
 
 }
