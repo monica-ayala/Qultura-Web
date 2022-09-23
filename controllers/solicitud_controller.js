@@ -2,7 +2,6 @@ const path = require("path");
 const filesystem = require('fs');
 const Solicitud = require("../models/solicitud");
 const Necesidad = require("../models/necesidad");
-const request = require("express/lib/request");
 
 exports.get_solicitudes=(request,response,next)=>{
   Solicitud.fetchAll()
@@ -19,7 +18,4 @@ exports.get_solicitudes=(request,response,next)=>{
 
 exports.elimina_solicitud=(request,response,next)=>{
     Solicitud.deleteOne(request.body.id_solicitud)
-      .then(([rowsSolicitud,fieldData])=>{
-        response.status(200).json({});
-      }).catch(err => console.log(err));
-  };
+};
