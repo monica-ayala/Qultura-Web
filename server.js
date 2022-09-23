@@ -14,7 +14,7 @@ const guia_routes = require('./routes/guia_routes')
 const solicitud_routes = require('./routes/solicitud_routes')
 const sala_routes = require('./routes/sala_routes')
 const obra_routes = require('./routes/obra_routes')
-const evento_routes = require('./routes/evento_routes')
+const evento_routes = require('./routes/evento_routes') 
 
 const app = express();
 

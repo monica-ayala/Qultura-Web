@@ -19,7 +19,4 @@ router.post('/borrar/evento/:id_evento',event_controller.erase)
 //router.get('/registro',museo_controller.register)
 //router.get('/:id_museo',museo_controller.get_Onemuseo)
 
-
-
-
 module.exports = router;
