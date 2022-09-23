@@ -20,4 +20,19 @@ module.exports = class Sala{
     static fetchList(){
         return db.execute('SELECT * FROM Sala');
     }
+
+    static fetchListMuseum(id_museo){
+        return db.execute('SELECT * FROM Sala WHERE id_museo_sala=?',[id_museo]);
+    }
+
+    static fetchOne(id_sala){
+        return db.execute('SELECT * FROM Sala WHERE id_sala=?',
+            [id_sala]);
+    }
+
+    static update(nom_sala,desc_sala,audio_sala,img_sala,id_sala) {
+        return db.execute('UPDATE Sala SET nom_sala=?, desc_sala=?, audio_sala=?, img_sala=? WHERE id_sala=?',
+                [ nom_sala,desc_sala,audio_sala,img_sala,id_sala ]
+        );
+    }
 }

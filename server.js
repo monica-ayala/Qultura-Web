@@ -15,6 +15,10 @@ const solicitud_routes = require('./routes/solicitud_routes')
 const sala_routes = require('./routes/sala_routes')
 const obra_routes = require('./routes/obra_routes')
 const evento_routes = require('./routes/evento_routes')
+<<<<<<< HEAD
+=======
+
+>>>>>>> module2
 
 const app = express();
 
@@ -52,7 +56,11 @@ app.use('/museo',museo_routes)
 app.use('/guias', guia_routes);
 app.use('/sala', sala_routes);
 app.use('/obra', obra_routes);
+<<<<<<< HEAD
 app.use('/evento',evento_routes);
+=======
+app.use('/evento', evento_routes);
+>>>>>>> module2
 app.use('/usuario', usuario_routes);
 app.use('/solicitud', solicitud_routes);
 

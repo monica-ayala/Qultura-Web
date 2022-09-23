@@ -16,7 +16,11 @@ exports.post_nuevo = (request, response, next) => {
         url_imagen = request.file.filename;
     }
     url_imagenB = request.file;
+<<<<<<< HEAD
     //console.log(request)
+=======
+
+>>>>>>> module2
     link_ubi="placeholder";
     const nuevo_evento = new Evento(
       request.body.info_evento,
