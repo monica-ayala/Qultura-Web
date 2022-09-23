@@ -44,4 +44,7 @@ module.exports = class Evento{
         return db.execute('INSERT INTO Evento_Tag (id_evento_tag, id_tag_evento) VALUES (?,?)',[ide_evento,tags])
     }
 
+    static fetchEventTags(){
+        return db.execute('SELECT * FROM Tag t, Evento_Tag et WHERE et.id_tag_evento = t.id_tag')
+    }
 }
