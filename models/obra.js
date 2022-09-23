@@ -34,4 +34,8 @@ module.exports = class Obra{
                 [ nom_obra,audio_obra,subtitulo_obra,img_obra,fecha_obra,autor_obra,desc_obra,id_obra ]
         );
     }
+
+    static delete(id_obra){
+        return db.execute('DELETE FROM Obra WHERE id_obra=?',[id_obra])        
+    }
 }

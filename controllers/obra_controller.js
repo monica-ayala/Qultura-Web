@@ -80,6 +80,15 @@ exports.obra_post = (request, response, next) => {
     .catch(err => console.log(err));
   }
 
+  exports.delete = (request, response, next) => {
+    Obra.delete(request.params.id_obra)
+    Obra.fetchList(request.params.id_sala)
+    .then(([rowsObra,fieldData])=>{
+      response.status(200).json({obras:rowsObra});
+    }).catch(err => console.log(err));
+  
+  }
+
   exports.api_get_obra=(request,response,next)=>{
     Obra.fetchList()
       .then(([rowsObras,fieldData])=>{

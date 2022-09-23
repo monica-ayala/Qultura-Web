@@ -21,6 +21,7 @@ router.post('/:id_museo/nueva_sala',sala_controller.sala_post);
 router.get('/:id_museo/nueva_sala',sala_controller.sala_get);
 router.get('/:id_museo/:id_sala',sala_controller.update_get);
 router.post('/:id_museo/:id_sala',sala_controller.update);
+router.post('/:id_museo/:id_sala/borrar',sala_controller.soft_erase);
 
 const obra_controller = require('../controllers/obra_controller');
 router.get('/:id_museo/:id_sala/obras',obra_controller.lista);
@@ -28,6 +29,7 @@ router.post('/:id_museo/:id_sala/nueva_obra',obra_controller.obra_post);
 router.get('/:id_museo/:id_sala/nueva_obra',obra_controller.obra_get);
 router.post('/:id_museo/:id_sala/:id_obra',obra_controller.update);
 router.get('/:id_museo/:id_sala/:id_obra',obra_controller.update_get);
+router.post('/:id_museo/:id_sala/:id_obra/borrar',obra_controller.delete);
 
 
 module.exports = router;
