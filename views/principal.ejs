@@ -75,6 +75,14 @@
                 <div class="card-content white-text">
                   <p> Fecha: <%=evento.fecha_hora_evento%> 
                   </p>
+                  <p>
+                    Tags: 
+                    <% for (let tag of tags){%>
+                      <% if (evento.id_evento == tag.id_evento_tag){ %>
+                        <%= tag.nom_tag %>
+                      <%}%>
+                    <%}%>
+                  </p>
                   
                 </div>
               </div>

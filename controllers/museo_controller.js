@@ -18,11 +18,16 @@ exports.lista=(request,response,next)=>{
     .then(([rowsMuseos, fieldData]) => {
       Evento.fetchList()
       .then(([rowsEventos,fieldData])=>{
-        response.render('principal',{
-          museos:rowsMuseos,
-          eventos: rowsEventos
-        })
-      }).catch(err=>console.log(err));
+        Evento.fetchEventTags()
+        .then(([rowsTags,fieldData])=>{
+          console.log(rowsTags)
+          response.render('principal',{
+            museos:rowsMuseos,
+            eventos: rowsEventos,
+            tags:rowsTags
+          })
+        }).catch(err => console.log(err));
+      }).catch(err => console.log(err));
     }).catch(err => console.log(err));
 }
 
