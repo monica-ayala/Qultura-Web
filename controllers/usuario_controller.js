@@ -84,6 +84,38 @@ exports.view = (request, response, next) => {
 
  }
 
+ exports.signup_post_movil = (request, response, next) => {
+  const nuevo_usuario = new Usuario(
+    request.body.us_nombre,
+    request.body.us_correo,
+    request.body.us_password
+  );
+
+  Usuario.findOne(request.body.us_correo)
+  .then(([rows,fieldData])=>{
+    if (rows.length==0){
+      nuevo_usuario.save()
+      .then((result)=>{
+        Usuario.AssignMuseo(result[0].insertId)
+        .then(()=>{
+          response.status(200).json({
+            paso:1
+          });
+        })
+        .catch(err=>console.log(err));
+      })
+      .catch(err=>console.log(err));
+    }else{
+      response.status(200).json({
+        paso:0
+      });
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+};
+
 
 // exports.logout = (request, response, next) => {
 // };

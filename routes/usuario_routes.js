@@ -15,6 +15,7 @@ router.post('/login',usuario_controller.login_post);
 
 router.get('/login_movil',usuario_controller.login_movil_get);
 router.post('/login_movil',usuario_controller.login_movil_post);
+router.post('/signup_movil',usuario_controller.signup_post_movil);
 
 router.get('/rol',usuario_controller.view);
 
