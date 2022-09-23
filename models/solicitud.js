@@ -27,7 +27,7 @@ module.exports = class Solicitud{
     }
 
     static solicitud_fetch_lastinsertion(){
-        return db.execute('SELECT MAX(id_solicitud) FROM Solicitud');
+        return db.execute('SELECT(SELECT MAX(id_solicitud) FROM Solicitud s) AS LastSolicitud');
     }
 
     static fetchAll(){

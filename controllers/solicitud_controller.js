@@ -34,7 +34,8 @@ exports.elimina_solicitud=(request,response,next)=>{
           Solicitud.solicitud_fetch_lastinsertion()
             .then(([rowLastSolicitud, fieldDatalastSolicitud]) => {
               for(var i = 0; i < request.body.necesidades.length; i++){
-                Solicitud.necesidades_save(rowLastSolicitud[0].id_solicitud, request.body.necesidades[i])
+                console.log(rowLastSolicitud)
+                Solicitud.necesidades_save(rowLastSolicitud[0].LastSolicitud, request.body.necesidades[i])
                 .then()
                 .catch(err => console.log(err));
               }
