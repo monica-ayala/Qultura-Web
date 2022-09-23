@@ -30,10 +30,10 @@ exports.elimina_solicitud=(request,response,next)=>{
     const solicitud_nueva = new Solicitud(request.body.info_adicional, current_time, request.body.fecha_hora_sol, request.body.num_Visitantes, 1, request.body.usuario_necesidad);
     solicitud_nueva.solicitud_save()
       .then(() => {
-        if(request.body.necesidades.size() != 0){
+        if(request.body.necesidades.length != 0){
           Solicitud.solicitud_fetch_lastinsertion()
             .then(([rowLastSolicitud, fieldDatalastSolicitud]) => {
-              for(var i = 0; i < request.body.necesidades.size(); i++){
+              for(var i = 0; i < request.body.necesidades.length; i++){
                 Solicitud.necesidades_save(rowLastSolicitud[0].id_solicitud, request.body.necesidades[i])
                 .then()
                 .catch(err => console.log(err));
