@@ -44,3 +44,16 @@ exports.erase=(request,response,next)=>{
       response.status(200).json({eventos:rowsEventos});
     }).catch(err => console.log(err));
 }
+
+exports.getAll=(request,response,next)=>{
+      Evento.fetchList()
+      .then(([rowsEventos,fieldData])=>{
+        Evento.fetchEventTags()
+        .then(([rowsTags,fieldData])=>{
+          response.status(200).json({
+            eventos: rowsEventos,
+            tags:rowsTags
+          })
+        }).catch(err => console.log(err));
+      }).catch(err => console.log(err));
+}
