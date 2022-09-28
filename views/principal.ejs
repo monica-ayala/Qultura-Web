@@ -73,9 +73,22 @@
                 <h3 class="card-title white-text"><%=evento.info_evento%></h3>
                 
                 <div class="card-content white-text">
-                  <p> Fecha: <%=evento.fecha_hora_evento%> 
+                  <p> Fecha Inicio: <%=evento.fecha_hora_evento.substring(0,10)%> 
                   </p>
-                  
+                  <p>Fecha Fin: <%=evento.fecha_hora_evento.substring(11,21)%>
+                  </p>
+                  <p>Hora Inicio: <%=evento.fecha_hora_evento.substring(22,30)%>
+                  </p>
+                  <p>Hora Fin: <%=evento.fecha_hora_evento.substring(30,39)%>
+                  </p>
+                  <p>
+                    Tags: 
+                    <% for (let tag of tags){%>
+                      <% if (evento.id_evento == tag.id_evento_tag){ %>
+                        <%= tag.nom_tag %>
+                      <%}%>
+                    <%}%>
+                  </p>                  
                 </div>
               </div>
             </li>

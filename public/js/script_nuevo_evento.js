@@ -1,4 +1,16 @@
 $(document).ready(function() {
+   
+    $('.timepicker').timepicker({
+        autoClose: true
+    });
+    $('.datepicker').datepicker({
+        min: -10,
+        format : 'yyyy-mm-dd',
+        autoClose: true
+    });
+
+
+
 
     $('select').formSelect();
     var readURL = function(input) {
@@ -21,3 +33,4 @@ $(document).ready(function() {
     
    
 });
+

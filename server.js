@@ -21,7 +21,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 app.use(session({
-     secret: 'hasuidhqiodjnadcouhanlivunlsauvnsounvauhvudvsnjsdnlviundvkljdnsfovuheovunslkvjndsluvhodafv', 
+     secret: 'qultura-user', 
      resave: false,
      saveUninitialized: false 
  }));
@@ -29,8 +29,12 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(express.static(path.join(__dirname, 'assets')));
+app.use(cookieParser());
 
 //MULTER 
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 
 var storage = multer.diskStorage({
@@ -68,7 +72,6 @@ const { request } = require('express');
 
 
 async function main() {
-     //Server On
      const port = 8080;
    
      await app.listen(port, async () => {
