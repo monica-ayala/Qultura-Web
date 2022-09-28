@@ -22,6 +22,10 @@ main {
     border-radius: 15px !important;
 }
 
+.blue-gradient-btn-edges{
+    background: linear-gradient(268.61deg, #0C1A30 4.48%, #254C8D 79.39%);
+}
+
 .grey-gradient-btn{
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.75) 100%), #676767 !important;
 }

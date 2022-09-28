@@ -11,6 +11,7 @@ const event_controller = require('../controllers/evento_controller');
 //router.get('/get',museo_controller.get_museo);
 
 router.get('/nuevo_evento',event_controller.get_nuevo)
+router.get('/getAll',event_controller.getAll)
 router.post('/nuevo_evento',event_controller.post_nuevo)
 router.post('/borrar/evento/:id_evento',event_controller.erase)
 

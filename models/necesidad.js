@@ -3,7 +3,8 @@ const db = require('../util/database');
 
 module.exports = class Necesidad{
 
-    constructor() {
+    constructor(necesidad) {
+        this.necesidad = necesidad
     }
 
     save() {
