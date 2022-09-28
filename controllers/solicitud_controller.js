@@ -3,6 +3,7 @@ const filesystem = require('fs');
 const Solicitud = require("../models/solicitud");
 const Necesidad = require("../models/necesidad");
 
+
 exports.get_solicitudes=(request,response,next)=>{
   Solicitud.fetchAll()
     .then(([rowsSolicitud,fieldData])=>{
@@ -42,8 +43,4 @@ exports.elimina_solicitud=(request,response,next)=>{
           }).catch(err => console.log(err));
         }
     }).catch(err => console.log(err));
-<<<<<<< HEAD
   }
-=======
-  };
->>>>>>> develop

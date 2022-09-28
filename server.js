@@ -70,7 +70,6 @@ const { request } = require('express');
 
 
 async function main() {
-     //Server On
      const port = 8080;
    
      await app.listen(port, async () => {
