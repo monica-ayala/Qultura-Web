@@ -2,7 +2,7 @@ const path = require("path");
 const Usuario = require("../models/usuario");
 const Museos = require("../models/museo");
 const filesystem = require('fs');
-//const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const { response } = require("express");
 const { redirect } = require("express/lib/response");
 //const { getUnpackedSettings } = require("http2");
@@ -52,21 +52,85 @@ exports.view = (request, response, next) => {
   });
 };
 
- exports.login_get = (request, response, next) => {
-  response.render('login');
- };
+//  exports.login_get = (request, response, next) => {
+//   response.render('login');
+//  };
 
- exports.login_post = (request, response, next) => {
+exports.login_get = (request, response, next) => {
+  response.render("login", {
+    //login_usuario??
+    correo: request.session.correo ? request.session.correo : "",
+    info: "",
+  });
+};
+
+//  exports.login_post = (request, response, next) => {
+//   Usuario.findOne(request.body.us_correo)
+//   .then(([rows,fieldData])=>{
+//     if(rows.length == 1){
+//       response.redirect("/")
+//     }
+//   }).catch((err)=>{
+//     console.log(err);
+//   })
+
+//  };
+
+exports.login_post = (request, response, next) => {
   Usuario.findOne(request.body.us_correo)
-  .then(([rows,fieldData])=>{
-    if(rows.length == 1){
-      response.redirect("/")
-    }
-  }).catch((err)=>{
-    console.log(err);
-  })
+    .then(([rows, fielData]) => {
+      if (rows.length < 1) {
+        response.status(200).json({ errores: 1 });
+      }
+      else{
+        console.log(rows)
+      const usuario = new Usuario(
+        rows[0].nom_user,
+        rows[0].correo_user,
+        rows[0].password_user,
+        rows[0].id_rol
+        //rows[0]["Contraseña"],
+      );
+      bcrypt.compare(request.body.us_password, usuario.password_user)
+        .then((doMatch) => {
+          let error = 1;
+          if (doMatch) {
+                  error = 0;
+                  request.session.isLoggedIn = true;
+                  request.session.usuario = usuario;
+                  request.session.correo = usuario.correo_user;
+                  Usuario.getId(request.session.correo)
+                    .then(([rowsid, fieldData]) => {
+                      request.session.id_usuario = rowsid[0].Id_Usuario;
 
- };
+                          // Aún no se implementa privilegios/RBAC Entonces no se requiere aún esto.
+                          // let privilegios = [];
+                          // for (let privilegio in rowsprivilegios) {
+                          //   privilegios.push(rowsprivilegios[privilegio].Id_Privilegio);
+                          // }
+                          // request.session.privilegios = privilegios;
+                          return request.session.save((err) => {
+                            //response.status(200).json({ errores: error });  // entender esto
+                            response.redirect("/")
+                          }); 
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+          } else {
+            response.status(200).json({ errores: error });
+          }
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
  exports.login_movil_get = (request,response,next)=>{
 
