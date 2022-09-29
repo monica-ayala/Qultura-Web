@@ -14,6 +14,8 @@ exports.get_nuevo=(request,response,next)=>{
 };
 
 exports.post_nuevo = (request, response, next) => {
+  let fecha_hora = request.body.fecha_start + " "+ request.body.fecha_end +" ";
+  fecha_hora += request.body.hora_inicio + " "+ request.body.hora_fin;
     url_imagen = request.file;
     if((typeof(url_imagen) == "undefined")){
         url_imagen = "";
@@ -24,7 +26,7 @@ exports.post_nuevo = (request, response, next) => {
     link_ubi="placeholder";
     const nuevo_evento = new Evento(
       request.body.info_evento,
-      request.body.fecha_hora,
+      fecha_hora,
       url_imagen,
       request.body.ubicacion_evento
     )

@@ -81,6 +81,15 @@ exports.sala_post = (request, response, next) => {
     .catch(err => console.log(err));
   }
 
+  exports.soft_erase = (request, response, next) => {
+    Sala.softErase(request.params.id_sala,0)
+    Sala.fetchList()
+    .then(([rowsSala,fieldData])=>{
+      response.status(200).json({salas:rowsSala});
+    }).catch(err => console.log(err));
+  
+  }
+
   exports.api_get_sala=(request,response,next)=>{
     Sala.fetchList()
       .then(([rowsSalas,fieldData])=>{

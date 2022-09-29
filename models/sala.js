@@ -30,6 +30,10 @@ module.exports = class Sala{
             [id_sala]);
     }
 
+    static softErase(id_sala,value){
+        return db.execute('UPDATE Sala SET status_sala=? WHERE id_sala = ?' , [value,id_sala])
+    }
+
     static update(nom_sala,desc_sala,audio_sala,img_sala,id_sala) {
         return db.execute('UPDATE Sala SET nom_sala=?, desc_sala=?, audio_sala=?, img_sala=? WHERE id_sala=?',
                 [ nom_sala,desc_sala,audio_sala,img_sala,id_sala ]
