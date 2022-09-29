@@ -6,7 +6,7 @@ const { callbackPromise } = require('nodemailer/lib/shared');
 const transporter= nodemailer.createTransport({
     service: "hotmail",
     auth : {
-        user:"Qultura_no_reply@outlook.com",
+        user:"qultura_no_reply@outlook.com",
         pass: "U4@4*s*7mqjF"
     }
 });
@@ -24,8 +24,10 @@ module.exports = class Solicitud{
     }
 
     solicitud_save(necesidades, correo_museo) {
+        console.log(necesidades)
+        console.log(correo_museo)
         const options= {
-            from: "ticketz_no_reply@outlook.com",
+            from: "qultura_no_reply@outlook.com",
             to: correo_museo,
             subject: "Solicitud especial de recorrido",
             text: "Caracteristicas de solicitud \n  Fecha y hora: " + this.fecha_hora_sol + "\n Numero de asistentes: " + this.num_asistentes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + this.info_adicional

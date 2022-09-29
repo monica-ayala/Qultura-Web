@@ -19,7 +19,11 @@ router.post('/signup_movil',usuario_controller.signup_post_movil);
 
 router.get('/rol',isAuth,usuario_controller.view);
 
+router.get('/logout',usuario_controller.logout);
+
 router.get('/rol/:id_usuario',isAuth,usuario_controller.updateUsuario);
+
+router.get('/loggedin',isAuth,usuario_controller.getUser);
 
 router.post('/rol/:id_usuario',isAuth,usuario_controller.sendUpdate);
 
