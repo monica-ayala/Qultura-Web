@@ -56,6 +56,11 @@ const bcrypt = require('bcryptjs');
         
     }
 
+    static fetchMuseoCorreo(id_user){
+        return db.execute('SELECT correo_user FROM User WHERE id_user=?', [id_user])
+
+    }
+    
     static getId(login)
     {
         return db.execute('SELECT id_user FROM User WHERE correo_user=?',
