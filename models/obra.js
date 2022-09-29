@@ -24,6 +24,10 @@ module.exports = class Obra{
         return db.execute('SELECT * FROM Obra WHERE id_sala=?',[id_sala]);
     }
 
+    static fetchAll(){
+        return db.execute('SELECT * FROM Obra');
+    }
+
     static fetchOne(id_obra){
         return db.execute('SELECT * FROM Obra WHERE id_obra=?',
             [id_obra]);

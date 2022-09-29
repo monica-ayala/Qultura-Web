@@ -90,7 +90,7 @@ exports.obra_post = (request, response, next) => {
   }
 
   exports.api_get_obra=(request,response,next)=>{
-    Obra.fetchList()
+    Obra.fetchAll()
       .then(([rowsObras,fieldData])=>{
         response.status(200).json({
           obras: rowsObras

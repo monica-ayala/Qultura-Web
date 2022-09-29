@@ -19,7 +19,7 @@ const DB_AWS = {
   port: 3306
 };
 
-const pool = mysql.createPool(DB_INTERLINK);
+const pool = mysql.createPool(DB_AWS);
 const DB_LOCAL = {
   host: 'localhost',
     user: 'root',
