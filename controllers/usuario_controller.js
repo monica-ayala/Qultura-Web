@@ -140,6 +140,7 @@ exports.login_post = (request, response, next) => {
   Usuario.findOne(request.body.us_correo)
   .then(([rows, fielData]) => {
     if (rows.length < 1) {
+      console.log("Esta vacio")
       response.status(200).json({ usuario: rows });
     }
     else{
@@ -149,12 +150,15 @@ exports.login_post = (request, response, next) => {
       rows[0].password_user,
       rows[0].id_rol
     );
+    console.log("Entro el else general")
     bcrypt.compare(request.body.us_password, usuario.password_user)
       .then((doMatch) => {
         if (doMatch) {
+          console.log("Entro el domatch si")
           response.status(200).json({ usuario: rows });
         } else {
-          response.status(200).json({ usuario: [] });
+          console.log("entra el domatch no")
+          response.status(200).json({ usuario: "hola" });
         }
 
       })
@@ -166,7 +170,7 @@ exports.login_post = (request, response, next) => {
   .catch((error) => {
     console.log(error);
   });
- }
+ };
 
  exports.signup_post_movil = (request, response, next) => {
   const nuevo_usuario = new Usuario(
