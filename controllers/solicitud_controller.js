@@ -2,6 +2,8 @@ const path = require("path");
 const filesystem = require('fs');
 const Solicitud = require("../models/solicitud");
 const Necesidad = require("../models/necesidad");
+const Museo = require("../models/museo");
+const User = require("../models/usuario")
 
 exports.get_solicitudes=(request,response,next)=>{
   Solicitud.fetchAll()
@@ -24,22 +26,27 @@ exports.elimina_solicitud=(request,response,next)=>{
   };
 
   exports.agrega_solicitud=(request,response,next)=>{
-    console.log(request.body);
     var date = new Date();
 	  var current_time = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
     const solicitud_nueva = new Solicitud(request.body.info_adicional, current_time, request.body.fecha_hora_sol, request.body.num_Visitantes, 2, request.body.usuario_necesidad);
-    solicitud_nueva.solicitud_save()
-      .then(() => {
-        if(request.body.necesidades.length != 0){
-          Solicitud.solicitud_fetch_lastinsertion()
-            .then(([rowLastSolicitud, fieldDatalastSolicitud]) => {
-              for(var i = 0; i < request.body.necesidades.length; i++){
-                console.log(rowLastSolicitud)
-                Solicitud.necesidades_save(rowLastSolicitud[0].LastSolicitud, request.body.necesidades[i])
-                .then()
-                .catch(err => console.log(err));
-              }
-          }).catch(err => console.log(err));
-        }
-    }).catch(err => console.log(err));
+    //Museo.fetchidUsuario(request.body.id_museo)
+      //.then(([rowsMuseoUsuario, fieldDataMuseoUsuario]) => {
+        //User.fetchMuseoCorreo(rowsMuseoUsuario[0].id_user_museo)
+          //.then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => { rowsUsuarioMuseo[0].correo_user
+            solicitud_nueva.solicitud_save(request.body.necesidades, 'A01707035@tec.mx')
+              .then(() => {
+                if(request.body.necesidades.length != 0){
+                  Solicitud.solicitud_fetch_lastinsertion()
+                    .then(([rowLastSolicitud, fieldDatalastSolicitud]) => {
+                      for(var i = 0; i < request.body.necesidades.length; i++){
+                        console.log(rowLastSolicitud)
+                        Solicitud.necesidades_save(rowLastSolicitud[0].LastSolicitud, request.body.necesidades[i])
+                        .then()
+                        .catch(err => console.log(err));
+                      }
+                    }).catch(err => console.log(err));
+                }
+            }).catch(err => console.log(err));
+        //}).catch(err => console.log(err));
+      //}).catch(err => console.log(err));
   }
