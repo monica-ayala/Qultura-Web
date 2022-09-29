@@ -236,11 +236,19 @@ exports.login_post = (request, response, next) => {
 
   
  }
-// exports.usuario_post = (request, response, next) => {
-// };
 
-// exports.verificar_get = (request, response, next) => {
-// };
+ exports.logout = (request, response, next) => {
+  if (request.session !== "undefined") {
+    request.session.destroy(() => {
+      response.redirect("/usuario/login");
+    });
+  } else {
+    response.redirect("/");
+  }
+};
 
-// exports.verificar = (request, response, next) => {
-// };
+exports.getUser = (request,response,next)=>{
+  response.status(200).json({
+    username: request.session.usuario.nom_user
+  })
+}
