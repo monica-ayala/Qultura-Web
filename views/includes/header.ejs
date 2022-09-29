@@ -24,12 +24,17 @@
       <div class="left" style="font-family:Georgia, 'Times New Roman', Times, serif; font-size: x-large;">
         Qultura
       </div>
-      <div class="right offset-10"> <i style="font-size: 30px;" class="material-icons">account_circle</i> </div>
       <ul class="right hide-on-med-and-down">
         <li><a href="/">Página principal</a></li>
         <li><a href="/usuario/rol">Usuarios y privilegios</a></li>
         <li><a href="/guias">Guías</a></li>
+        <a class="btn dropdown-trigger" id="username" href="#!" data-target="dropdown123"> <i class="material-icons left">account_circle</i></a>
         
       </ul> 
     </div>
   </nav>
+
+  <ul id="dropdown123" class="dropdown-content" tabindex="0">
+    <li tabindex="0"><a href="/usuario/logout">Cerrar Sesión</a></li>
+  </ul>
+
