@@ -3,7 +3,7 @@ const router = express.Router();
 
 const solicitud_controller = require('../controllers/solicitud_controller');
 
-router.get('/getAll', solicitud_controller.get_solicitudes);
+router.get('/getAll/:id_usuario', solicitud_controller.get_solicitudes);
 
 router.post('/cancelar', solicitud_controller.elimina_solicitud);
 

@@ -20,7 +20,6 @@ exports.lista=(request,response,next)=>{
       .then(([rowsEventos,fieldData])=>{
         Evento.fetchEventTags()
         .then(([rowsTags,fieldData])=>{
-          console.log(rowsTags)
           response.render('principal',{
             museos:rowsMuseos,
             eventos: rowsEventos,

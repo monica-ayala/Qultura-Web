@@ -5,8 +5,9 @@ const Necesidad = require("../models/necesidad");
 const Museo = require("../models/museo");
 const User = require("../models/usuario")
 
+
 exports.get_solicitudes=(request,response,next)=>{
-  Solicitud.fetchAll()
+  Solicitud.fetchAll(request.params.id_usuario)
     .then(([rowsSolicitud,fieldData])=>{
         Necesidad.fetchAll()
         .then(([rowsNecesidad,fieldData])=>{
