@@ -30,6 +30,10 @@ main {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.75) 100%), #676767 !important;
 }
 
+.offset-10{
+    margin-left:20px !important
+}
+
 .bottom-align{
     bottom:0 !important;
     margin-bottom:15px
