@@ -1,0 +1,49 @@
+<%- include('includes/header_image.ejs') %>
+
+<main>
+
+<div class="container">
+    <% for (let m of museo){%>
+    <% for (let s of sala){%>
+    <h1 class="white-text"><%=s.nom_sala%></h1>
+    
+    
+        <div class="white min-container">
+            
+                <!-- valign-wrapper -->
+                
+                    <% for (let obra of obras){%>
+                            <div class="row flex">
+                                <div class="col s4">
+                                    
+                                        <div class="card imgPicker">
+                                            <div class="card-image">
+                                            <img class="imgPicker imgP" src="/uploads/<%=obra.img_obra%>">
+                                            </div>
+                                        </div>
+                                    
+                                </div>
+                                <div class="col s7"> 
+                                    <div class="col s11">
+                                    <div class="row">
+                                        <h4> <%=obra.nom_obra%> </h4> 
+                                        <p> <%=obra.desc_obra%> </p>
+                                        <a href="/museo/<%=m.id_museo%>/<%=s.id_sala%>/<%=obra.id_obra%>" class="blue-gradient-btn-edges btn-large hoverable">
+                                            Editar Obra
+                                        </a>
+                                        <button class="btn-large red hoverable">Eliminar</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                    <%}%>
+                    
+            
+        </div>   
+        <%}%>
+        <%}%>
+</div>
+</form>
+</main>
+
+<%- include('includes/footer.ejs') %>

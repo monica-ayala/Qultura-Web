@@ -1,6 +1,6 @@
- const express = require('express');
+const express = require('express');
 const router = express.Router();
-// const isAuth= require ('../util/is-auth.js')
+const isAuth= require ('../util/is-auth.js')
 
 const usuario_controller = require('../controllers/usuario_controller');
 
@@ -13,7 +13,15 @@ router.get('/login',usuario_controller.login_get);
 
 router.post('/login',usuario_controller.login_post);
 
-router.get('/rol',usuario_controller.view);
+router.get('/login_movil',usuario_controller.login_movil_get);
+router.post('/login_movil',usuario_controller.login_movil_post);
+router.post('/signup_movil',usuario_controller.signup_post_movil);
+
+router.get('/rol',isAuth,usuario_controller.view);
+
+router.get('/rol/:id_usuario',isAuth,usuario_controller.updateUsuario);
+
+router.post('/rol/:id_usuario',isAuth,usuario_controller.sendUpdate);
 
 // router.get('/datos', isAuth,usuario_controller.datos);
 

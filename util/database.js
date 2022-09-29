@@ -13,9 +13,9 @@ const DB_INTERLINK = {
 
 const DB_AWS = {
   host: 'localhost',
-  user: 'root',
+  user: 'cris',
   database: 'qtra',
-  password: 'QuLtu22rA',
+  password: 'QuLtu22rA@',
   port: 3306
 };
 
@@ -26,6 +26,6 @@ const DB_LOCAL = {
     password: ''
 };
 
-const pool = mysql.createPool(DB_LOCAL);
+const pool = mysql.createPool(DB_INTERLINK);
 
 module.exports = pool.promise();

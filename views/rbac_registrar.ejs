@@ -10,7 +10,6 @@
     <div class="parallax"><img src="/img/queretaro-dark.jpg" alt="background querétaro"></div>
   </div>
 
-
   <div class="container">
     <br>
       <input type="text" placeholder=" Usuario, Correo, Museo">
@@ -23,55 +22,52 @@
         </tr>
         </thead>
         <tbody>
-                <tr >
-                    <td>jorgeguerrero909@gmail.com</td>
-                    <td>Administrador</td>  
-                    <td>Museo de Arte de Querétaro</td>
-                    <td> <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a></td>
-                </tr>
 
-               
+          <% for (let usuario of usuarios){%>
+                <tr>
+                      <td><%= usuario.correo_user%></td>
+                    <td><%= usuario.nom_rol%></td>  
+                    <td><%= usuario.nom_museo%></td>
+                    <td> <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser(this)" value="<%=usuario.id_user%>" id="<%=usuario.id_user%>">Modal</button></td>
+                </tr>
+                <!--input type="hidden" value="<%=usuario.id_user%>" id="id_user"-->
+                <%}%>
         </tbody>
     </table>
-
-
-
+                
+    
 
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" id="modal_user">
         <div class="row">
     <div class="col s12">
 
       <div class="col s4" style="text-align: center;">
         <img src="https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=2000" height="50%" width="50%"   alt="" class="circle responsive-img">
-        <h6>Jorge Guerrero Díaz</h6>
+        <h6 id="nom_user"></h6>
       </div>
+
       <div class="col s6">
-          <label for="disabled">Correo Electronico:</label>
-          <input disabled value="jorgeguerrero909@gmail.com" id="disabled" type="text" class="validate">
+        <div id="correo">
           
+        </div>
         <br>
         <br>
-        <div class="input-field">
-            <select>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="1">Admin</option>
-              <option value="2">Staff de Museo</option>
-              <option value="3">Bolas</option>
-            </select>
-            <label>Rol</label>
+        <div>
+          <div class="input-field">
+          <select id="sl_roles">
+          </select>
+          <label>Rol</label>
           </div>
-        <br>
-        <div class="input-field">
-            <select>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="1">Museo de Arte de Queretaro</option>
-              <option value="2">Galeria Libertad</option>
-              <option value="3">Bolas</option>
+
+          <div class="input-field">
+            <select id="sl_museos">
             </select>
             <label>Museos</label>
           </div>
+
+        </div>
       </div>
 
     </div>
@@ -80,7 +76,7 @@
 
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Salir</a>
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Guardar Cambios</a>
+      <a onclick="updateUser()" class="modal-close waves-effect waves-green btn-flat">Guardar Cambios</a>
     </div>
   </div>
           
@@ -88,5 +84,5 @@
   </div>
 
 
-
+  <script src="/js/script_update_user.js"></script>
   <%- include('includes/footer.ejs') %>

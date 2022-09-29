@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/monica-ayala/Qultura-Admin#readme",
   "devDependencies": {
+    "@types/google.maps": "^3.50.1",
     "nodemon": "^2.0.19"
   },
   "dependencies": {

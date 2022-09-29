@@ -26,11 +26,11 @@ module.exports = class Guia{
     }
 
     static fetchAll(){
-        return db.execute('SELECT * FROM guia');
+        return db.execute('SELECT * FROM Guia');
     }
 
     static fetchGuiaEditar(idGuia){
-        return db.execute("SELECT * FROM guia WHERE id_guia = ?", [idGuia]);
+        return db.execute("SELECT * FROM Guia WHERE id_guia = ?", [idGuia]);
     }
 
     
