@@ -5,7 +5,7 @@ const Necesidad = require("../models/necesidad");
 
 
 exports.get_solicitudes=(request,response,next)=>{
-  Solicitud.fetchAll()
+  Solicitud.fetchAll(request.params.id_usuario)
     .then(([rowsSolicitud,fieldData])=>{
         Necesidad.fetchAll()
         .then(([rowsNecesidad,fieldData])=>{
