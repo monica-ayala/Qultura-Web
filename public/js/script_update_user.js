@@ -98,9 +98,59 @@ function updateUser(){
     .catch(err=>{console.log(err)})
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+
+  var search_input = document.querySelector("#search_input");
+
+  search_input.addEventListener("keyup", function(e){
+    var span_items = document.querySelectorAll(".table_body ul li .item .name span");
+    var search_item = e.target.value.toLowerCase();
+   
+   span_items.forEach(function(item){
+     if(item.textContent.toLowerCase().indexOf(search_item) != -1){
+        item.closest("li").style.display = "block"
+     }
+     else{
+       item.closest("li").style.display = "none";
+     }
+   })
     
-    
-    var elems = document.querySelectorAll('.autocomplete');
-    var instances = M.Autocomplete.init(elems, options);
   });
+  
+
+  function myFunction() {
+    // Declare variables
+    var input, filter, table, tr, i,td, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+            td=tr[i].getElementsByTagName("td")[1];
+            if (td){
+                txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else{
+                        td=tr[i].getElementsByTagName("td")[2];
+                        if (td){
+                            txtValue = td.textContent || td.innerText;
+                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                    tr[i].style.display = "";
+                                }else{
+                                    tr[i].style.display = "none";
+                                }
+                    }
+            }
+        }
+      }
+    }
+  }
+}
