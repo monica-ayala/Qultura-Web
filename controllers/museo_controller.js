@@ -44,7 +44,7 @@ exports.get_all_api=(request,response,next)=>{
     .then(([rowsMuseos,fieldData])=>{
       Sala.fetchList()
         .then(([rowsSalas,fieldData])=>{
-          Obra.fetchList()
+          Obra.fetchAll()
             .then(([rowsObras,fieldData])=>{
                 response.status(200).json({
                   museos:rowsMuseos,

@@ -6,6 +6,11 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+
+.primary-color-text{
+    color: #0C1A30 !important;
+}
   
 
 .primary-color{

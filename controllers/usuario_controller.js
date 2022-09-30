@@ -79,7 +79,7 @@ exports.login_get = (request, response, next) => {
 exports.login_post = (request, response, next) => {
   Usuario.findOne(request.body.us_correo)
     .then(([rows, fielData]) => {
-      if (rows.length < 1) {
+      if (rows.length < 1 || rows[0].id_rol !== 4) {
         response.status(200).json({ errores: 1 });
       }
       else{
