@@ -28,7 +28,7 @@ const bcrypt = require('bcryptjs');
     }
     ///Unir con Museo
      static fetchList(){
-        return db.execute('SELECT * FROM User u, Rol r, User_Museo um, Museo m WHERE u.id_rol = r.id_rol AND u.id_user=um.id_user_museo AND um.id_museo_user = m.id_museo ');
+        return db.execute('SELECT * FROM User u, Rol r, User_Museo um, Museo m WHERE u.id_rol = r.id_rol AND u.id_user=um.id_user_museo AND um.id_museo_user = m.id_museo ORDER BY u.id_user ASC');
     }
 
     static findOne(correos_user) {

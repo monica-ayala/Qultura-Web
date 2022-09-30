@@ -1,3 +1,4 @@
+const { response } = require("express");
 const Usuario = require("../../models/usuario");
 
 
@@ -5,17 +6,12 @@ $(document).ready(function(){
     $('.formSelect').formSelect();
     $('select').formSelect();
     $('#modal1').modal({
-        onOpenStart: function(){
-            //str = $("#id_user").text();
-        },
         onCloseEnd: function(){
-            //$('.modal').empty();
            $('#modal1').empty();
            $('.formSelect').empty();
            $('select').empty();
         },
     });
-    
   });
 
   $('.formSelect').on('contentChanged', function() {
@@ -45,8 +41,6 @@ function getInfoUser(element){
     })
     .then(response => response.json())
     .then(response => {
-            console.log(response);
-
             name.innerHTML+=response.usuario[0].nom_user
             name.innerHTML+="<input type='hidden' value="+response.usuario[0].id_user+" id='id_user'>"
             correo.innerHTML+='<label for="disabled">Correo Electronico:</label>'
@@ -61,8 +55,6 @@ function getInfoUser(element){
 
             selectmuseos.innerHTML+='<option value='+response.usuario[0].id_museo+' disabled selected>'+response.usuario[0].nom_museo+'</option>'
             for (let museo of response.museos){
-                //var $newOpt = $("<option>").attr("value",rol.id_rol).text(rol.nom_rol)
-                //$("#mySelect").append($newOpt);
                 selectmuseos.innerHTML+='<option value='+museo.id_museo+'>'+museo.nom_museo+'</option>'
             }
             $('select').formSelect();
@@ -78,7 +70,6 @@ function closeUser(){
     jQuery('#modal1').modal('close');
 }
 
-
 function updateUser(){
     let user_id = document.getElementById("id_user").value;
     let ruta ="/usuario/rol/"+ user_id;
@@ -87,9 +78,6 @@ function updateUser(){
 
     let museo= document.getElementById("sl_museos");
     let value_museo = museo.options[museo.selectedIndex].value;
-
-    console.log(user_id); 
-
 
     data = {
         id_rol : value,
@@ -104,5 +92,65 @@ function updateUser(){
         },
         body:JSON.stringify(data)
     }) .then(response => response.json())
+    .then(response=>{
+        location. reload()
+    })
     .catch(err=>{console.log(err)})
+}
+
+
+  var search_input = document.querySelector("#search_input");
+
+  search_input.addEventListener("keyup", function(e){
+    var span_items = document.querySelectorAll(".table_body ul li .item .name span");
+    var search_item = e.target.value.toLowerCase();
+   
+   span_items.forEach(function(item){
+     if(item.textContent.toLowerCase().indexOf(search_item) != -1){
+        item.closest("li").style.display = "block"
+     }
+     else{
+       item.closest("li").style.display = "none";
+     }
+   })
+    
+  });
+  
+
+  function myFunction() {
+    // Declare variables
+    var input, filter, table, tr, i,td, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+            td=tr[i].getElementsByTagName("td")[1];
+            if (td){
+                txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else{
+                        td=tr[i].getElementsByTagName("td")[2];
+                        if (td){
+                            txtValue = td.textContent || td.innerText;
+                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                    tr[i].style.display = "";
+                                }else{
+                                    tr[i].style.display = "none";
+                                }
+                    }
+            }
+        }
+      }
+    }
+  }
 }

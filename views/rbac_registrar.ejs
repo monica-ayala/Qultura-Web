@@ -12,30 +12,52 @@
 
   <div class="container">
     <br>
-      <input type="text" placeholder=" Usuario, Correo, Museo">
-      <table class="table responsive-table table-hover" id="contenido">
-        <thead>
-        <tr id="title">
-            <th>Correo</th>
+    <div class="search_box">
+      <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Fliter Table Using Names">
+    </div>
+      <table id="myTable" >
+        
+        <tr  class="header" id="title">
+            <th>Nombre</th>
             <th>Rol</th>
             <th>Museo</th>
+            <th></th>
         </tr>
-        </thead>
-        <tbody>
-
           <% for (let usuario of usuarios){%>
                 <tr>
-                      <td><%= usuario.correo_user%></td>
+                      <td><%= usuario.nom_user%></td>
                     <td><%= usuario.nom_rol%></td>  
                     <td><%= usuario.nom_museo%></td>
-                    <td> <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser(this)" value="<%=usuario.id_user%>" id="<%=usuario.id_user%>">Modal</button></td>
+                    <td> <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser(this)" value="<%=usuario.id_user%>" id="<%=usuario.id_user%>">Modificar</button></td>
+                    
                 </tr>
-                <!--input type="hidden" value="<%=usuario.id_user%>" id="id_user"-->
                 <%}%>
-        </tbody>
     </table>
                 
-    
+    <!--input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+
+    <table id="myTable">
+      <tr class="header">
+        <th style="width:60%;">Name</th>
+        <th style="width:40%;">Country</th>
+      </tr>
+      <tr>
+        <td>Alfreds Futterkiste</td>
+        <td>Germany</td>
+      </tr>
+      <tr>
+        <td>Berglunds snabbkop</td>
+        <td>Sweden</td>
+      </tr>
+      <tr>
+        <td>Island Trading</td>
+        <td>UK</td>
+      </tr>
+      <tr>
+        <td>Koniglich Essen</td>
+        <td>Germany</td>
+      </tr>
+    </table--> 
 
   <!-- Modal Structure -->
   <div id="modal1" class="modal">

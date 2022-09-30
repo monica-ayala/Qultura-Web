@@ -3,6 +3,15 @@ const filesystem = require('fs');
 const Guia = require("../models/guia");
 //const { response } = require("express");
 
+exports.get_guias = (request, response, next) => {
+  Guia.fetchAll()
+    .then((rows, fieldData) => {
+      response.status(200).json({
+        guias: rows[0]
+      });
+    }).catch(err => console.log(err));
+};
+
 exports.view = (request, response, next) => {
   console.log("Consultando Guias...");
   //response.render('guias');
@@ -38,11 +47,22 @@ exports.get_editarGuia = (request, response, next) => {
 exports.post_editarGuia = (request, response, next) => {
   console.log("Guia Editada...");
    //response.render('guias');
-   Guia.fetchAll().then((rows, fieldData) => {
-    console.log(rows[0]);
-    response.render('guias',{
-      guias: rows[0]
-    });
+   const id_guia = request.body.id_guia;
+   const nombre = request.body.nombre;
+   const descripcion = request.body.descripcion;
+   const tip = request.body.tip;
+   const imagen = request.body.icono;
+   const video = request.body.video;
+   const icono = request.body.icono;
+   Guia.editar(video, descripcion, icono, nombre, tip, id_guia)
+   .then((atributos, fieldData) => {
+      console.log(atributos);
+      Guia.fetchAll().then((rows, fieldData) => {
+        console.log(rows[0]);
+        response.render('guias',{
+          guias: rows[0]
+        });
+      }).catch(err => console.log(err));
     }).catch(err => console.log(err));
 };
 
