@@ -24,6 +24,7 @@ module.exports = class Solicitud{
     }
 
     solicitud_save(necesidades, correo_museo) {
+        console.log('AAAAAasasasasasasasasasasasasasasasasasas')
         console.log(necesidades)
         console.log(correo_museo)
         const options= {
