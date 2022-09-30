@@ -9,4 +9,9 @@ router.post('/cancelar', solicitud_controller.elimina_solicitud);
 
 router.post('/nuevaSolicitud', solicitud_controller.agrega_solicitud);
 
+router.post('/aceptar/:id_status', solicitud_controller.updateAceptar_solicitud);
+
+router.post('/negar/:id_status', solicitud_controller.updateNegar_solicitud);
+
+
 module.exports = router;

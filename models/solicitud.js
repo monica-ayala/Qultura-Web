@@ -1,4 +1,5 @@
 const db = require('../util/database');
+const dotenv = require('dotenv');
 //const bcrypt = require('bcryptjs');
 
 const nodemailer= require('nodemailer');
@@ -6,8 +7,8 @@ const { callbackPromise } = require('nodemailer/lib/shared');
 const transporter= nodemailer.createTransport({
     service: "hotmail",
     auth : {
-        user:"qultura_no_reply@outlook.com",
-        pass: "U4@4*s*7mqjF"
+        user: process.env.MYSQL_ADDON_MAIL,
+        pass: process.env.MYSQL_ADDON_MAILPASS
     }
 });
 
@@ -23,17 +24,7 @@ module.exports = class Solicitud{
         this.id_user_solicitud = id_user_solicitud;
     }
 
-    solicitud_save(necesidades, correo_museo) {
-        console.log('AAAAAasasasasasasasasasasasasasasasasasas')
-        console.log(necesidades)
-        console.log(correo_museo)
-        const options= {
-            from: "qultura_no_reply@outlook.com",
-            to: correo_museo,
-            subject: "Solicitud especial de recorrido",
-            text: "Caracteristicas de solicitud \n  Fecha y hora: " + this.fecha_hora_sol + "\n Numero de asistentes: " + this.num_asistentes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + this.info_adicional
-        };
-        transporter.sendMail(options,callbackPromise());
+    solicitud_save() {
         return db.execute('INSERT INTO Solicitud (info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, status,id_museo_solicitud,id_user_solicitud) VALUES (?, ?, ?, ?, ?, ?, ?)', 
             [
                 this.info_adicional,
@@ -63,6 +54,17 @@ module.exports = class Solicitud{
             .catch(err => console.log(err));
     }
 
+    static correo_send(id_solicitud, necesidades, correo_museo){
+        console.log("SI LLEGO CORREO SEND")
+        const options= {
+            from: "qultura_no_reply@outlook.com",
+            to: correo_museo,
+            subject: "Solicitud especial de recorrido",
+            text: "Caracteristicas de solicitud \n  Fecha y hora: " + this.fecha_hora_sol + "\n Numero de asistentes: " + this.num_asistentes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + this.info_adicional + "\n Click aqui para confirmar solicitud : http://ec2-3-145-68-44.us-east-2.compute.amazonaws.com:8080/routes/solicitud_routes/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : http://ec2-3-145-68-44.us-east-2.compute.amazonaws.com:8080/routes/negar/"+id_solicitud
+        };
+        transporter.sendMail(options,callbackPromise());
+    }
+
     static necesidades_save(id_solicitud, id_necesidad){
         return db.execute('INSERT INTO Solicitud_Necesidad (id_solicitud_necesidad, id_necesidad_solicitud) VALUES (?, ?)', 
             [
@@ -70,7 +72,15 @@ module.exports = class Solicitud{
                 id_necesidad
             ]
         )
-    
+    }
+
+    static aceptar_status(id_solicitud){
+        console.log("SI LLEGO ACEPTAR")
+        return db.execute('UPDATE Solicitud SET status =? WHERE id_solicitud =?',[ 2 , id_solicitud])  
+    }
+    static negar_status(id_solicitud){
+        console.log("SI LLEGO NEGAR")
+        return db.execute('UPDATE Solicitud SET status =? WHERE id_solicitud =?',[ 3 , id_solicitud])  
     }
 
 }

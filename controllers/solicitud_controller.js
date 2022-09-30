@@ -34,11 +34,12 @@ exports.elimina_solicitud=(request,response,next)=>{
       //.then(([rowsMuseoUsuario, fieldDataMuseoUsuario]) => {
         //User.fetchMuseoCorreo(rowsMuseoUsuario[0].id_user_museo)
           //.then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => { rowsUsuarioMuseo[0].correo_user
-            solicitud_nueva.solicitud_save(request.body.necesidades, 'A01707035@tec.mx')
+            solicitud_nueva.solicitud_save()
               .then(() => {
                 if(request.body.necesidades.length != 0){
                   Solicitud.solicitud_fetch_lastinsertion()
                     .then(([rowLastSolicitud, fieldDatalastSolicitud]) => {
+                      solicitud_nueva.correo_send(rowLastSolicitud[0].LastSolicitud,request.body.necesidades_text, 'A01707035@tec.mx')
                       for(var i = 0; i < request.body.necesidades.length; i++){
                         console.log(rowLastSolicitud)
                         Solicitud.necesidades_save(rowLastSolicitud[0].LastSolicitud, request.body.necesidades[i])
@@ -50,4 +51,20 @@ exports.elimina_solicitud=(request,response,next)=>{
             }).catch(err => console.log(err));
         //}).catch(err => console.log(err));
       //}).catch(err => console.log(err));
+  }
+
+  exports.updateAceptar_solicitud=(request,response,next)=>{
+    const id_status = request.params.id_status
+    Solicitud.aceptar_status(id_status)
+    .then(([rowsUpdate,fieldData])=>{
+      response.status(200).json({});
+    }).catch(err => console.log(err));
+  }
+
+  exports.updateNegar_solicitud=(request,response,next)=>{
+    const id_status = request.params.id_status
+    Solicitud.negar_status(id_status)
+    .then(([rowsUpdate,fieldData])=>{
+      response.status(200).json({});
+    }).catch(err => console.log(err));
   }
