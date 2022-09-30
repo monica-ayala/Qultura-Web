@@ -35,6 +35,6 @@ module.exports = class Guia{
 
     
     static editar(video, descripcion, icono, nombre, tip, id_guia){
-        return db.execute('UPDATE guia SET video_guia = ?, desc_guia = ?, icono_guia = ?, nombre_guia = ?, tip_guia = ? WHERE id_guia = ?', [video, descripcion, icono, nombre, tip, id_guia]);
+        return db.execute('UPDATE Guia SET video_guia = ?, desc_guia = ?, icono_guia = ?, nombre_guia = ?, tip_guia = ? WHERE id_guia = ?', [video, descripcion, icono, nombre, tip, id_guia]);
     }
 }
