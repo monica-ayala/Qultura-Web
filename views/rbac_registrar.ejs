@@ -12,7 +12,13 @@
 
   <div class="container">
     <br>
-      <input type="text" placeholder=" Usuario, Correo, Museo">
+      <div class="input-field">
+        <i class="material-icons prefix">search</i>
+        <input type="text" id="buscar" class="autocomplete">
+          <label for="autocomplete-input"> Buscar(correo, nombre, museo)</label>
+      </div>
+      
+
       <table class="table responsive-table table-hover" id="contenido">
         <thead>
         <tr id="title">
@@ -28,9 +34,8 @@
                       <td><%= usuario.correo_user%></td>
                     <td><%= usuario.nom_rol%></td>  
                     <td><%= usuario.nom_museo%></td>
-                    <td> <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser(this)" value="<%=usuario.id_user%>" id="<%=usuario.id_user%>">Modal</button></td>
+                    <td> <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser(this)" value="<%=usuario.id_user%>" id="<%=usuario.id_user%>">Modificar</button></td>
                 </tr>
-                <!--input type="hidden" value="<%=usuario.id_user%>" id="id_user"-->
                 <%}%>
         </tbody>
     </table>
