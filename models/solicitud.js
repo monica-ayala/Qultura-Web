@@ -54,7 +54,7 @@ module.exports = class Solicitud{
             .catch(err => console.log(err));
     }
 
-    static correo_send(id_solicitud, necesidades, correo_museo){
+    correo_send(id_solicitud, necesidades, correo_museo){
         console.log("SI LLEGO CORREO SEND")
         const options= {
             from: "qultura_no_reply@outlook.com",
