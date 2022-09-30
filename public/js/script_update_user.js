@@ -1,29 +1,29 @@
 const Usuario = require("../../models/usuario");
 
+
 $(document).ready(function(){
     $('.formSelect').formSelect();
     $('select').formSelect();
-    $('.modal').modal({
+    $('#modal1').modal({
         onOpenStart: function(){
             //str = $("#id_user").text();
         },
         onCloseEnd: function(){
-            $('.formSelect').empty();
-            $('select').empty();
-            $('.modal').empty();
-           $('modal').empty();
-        }
+            //$('.modal').empty();
+           $('#modal1').empty();
+           $('.formSelect').empty();
+           $('select').empty();
+        },
     });
+    
   });
 
   $('.formSelect').on('contentChanged', function() {
     $(this).formSelect();
   });  
 
-
 function getInfoUser(element){
     jQuery('#modal1').modal('open');
-    
 
     let selectrol=document.getElementById("sl_roles");
     let selectmuseos=document.getElementById("sl_museos");
@@ -33,6 +33,8 @@ function getInfoUser(element){
 
     name.innerHTML=""
     correo.innerHTML=""
+    selectmuseos.innerHTML=""
+    selectrol.innerHTML=""
     let ruta ="/usuario/rol/"+ user_id;
 
     fetch(ruta,{
@@ -70,6 +72,10 @@ function getInfoUser(element){
         console.log(err);
     });
 
+}
+
+function closeUser(){
+    jQuery('#modal1').modal('close');
 }
 
 
