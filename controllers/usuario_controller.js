@@ -140,7 +140,6 @@ exports.login_post = (request, response, next) => {
   Usuario.findOne(request.body.us_correo)
   .then(([rows, fielData]) => {
     if (rows.length < 1) {
-      console.log("Esta vacio")
       response.status(200).json({ usuario: rows });
     }
     else{
@@ -154,11 +153,10 @@ exports.login_post = (request, response, next) => {
     bcrypt.compare(request.body.us_password, usuario.password_user)
       .then((doMatch) => {
         if (doMatch) {
-          console.log("Entro el domatch si")
           response.status(200).json({ usuario: rows });
         } else {
-          console.log("entra el domatch no")
-          response.status(200).json({ usuario: "hola" });
+          rows = []
+          response.status(200).json({ usuario: rows });
         }
 
       })
