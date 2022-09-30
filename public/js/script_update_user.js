@@ -100,11 +100,7 @@ function updateUser(){
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    var options={
-        data:{
-            user_id : element.id
-        }
-    }
+    
     var elems = document.querySelectorAll('.autocomplete');
     var instances = M.Autocomplete.init(elems, options);
   });
