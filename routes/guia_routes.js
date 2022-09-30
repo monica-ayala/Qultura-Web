@@ -12,5 +12,6 @@ router.post('/editar_guia',isAuth,guia_controller.post_editarGuia);
 router.get('/agregar_guia',isAuth,guia_controller.get_agregarGuia);
 router.post('/agregar_guia',isAuth,guia_controller.post_agregarGuia);
 
+router.get('/getAll', guia_controller.get_guias);
 
 module.exports = router;

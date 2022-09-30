@@ -3,6 +3,15 @@ const filesystem = require('fs');
 const Guia = require("../models/guia");
 //const { response } = require("express");
 
+exports.get_guias = (request, response, next) => {
+  Guia.fetchAll()
+    .then((rows, fieldData) => {
+      response.status(200).json({
+        guias: rows[0]
+      });
+    }).catch(err => console.log(err));
+};
+
 exports.view = (request, response, next) => {
   console.log("Consultando Guias...");
   //response.render('guias');
