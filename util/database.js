@@ -26,6 +26,10 @@ const DB_LOCAL = {
     password: ''
 };
 
+<<<<<<< HEAD
 const pool = mysql.createPool(DB_AWS);
+=======
+const pool = mysql.createPool(DB_LOCAL);
+>>>>>>> develop
 
 module.exports = pool.promise();
