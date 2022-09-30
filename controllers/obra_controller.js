@@ -89,6 +89,8 @@ exports.obra_post = (request, response, next) => {
   
   }
 
+  // métodos para la api
+
   exports.api_get_obra=(request,response,next)=>{
     Obra.fetchAll()
       .then(([rowsObras,fieldData])=>{
@@ -96,4 +98,23 @@ exports.obra_post = (request, response, next) => {
           obras: rowsObras
       });
       }).catch(err => console.log(err));
+  }
+
+  exports.api_get_all_obras=(request,response,next)=>{
+    Obra.fetchList(request.params.id_sala)
+      .then(([rowsObras,fieldData])=>{
+        response.status(200).json({
+          obras: rowsObras
+      });
+      }).catch(err => console.log(err));
+  }
+
+  exports.api_get_one=(request,response,next)=>{
+    Obra.fetchOne(request.params.id_obra)
+    .then(([rowsObra,fieldData])=>{
+      response.status(200).json({
+        obra: rowsObra
+      });
+    })
+    .catch(err=>console.log(err));
   }

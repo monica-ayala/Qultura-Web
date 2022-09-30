@@ -10,7 +10,7 @@ fetch(rutaUsuario, {
 .then(response => response.json())
 .then(response => {
     username.innerHTML = response.username + '<i class="material-icons left">account_circle</i>'
-    welcome.innerHTML = 'Buenos Días,' + response.username 
+    welcome.innerHTML = 'Buenos Días, ' + response.username 
 }).catch(err => {
     console.log(err);
 });
