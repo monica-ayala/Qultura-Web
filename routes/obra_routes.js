@@ -5,6 +5,6 @@ const path = require('path');
 // const isAuth= require ('../util/is-auth.js')
 const obra_controller = require('../controllers/obra_controller');
 router.get('/get',obra_controller.api_get_obra);
-router.get('/:id_museo/:id_sala/get',obra_controller.api_get_all_obras);
-router.get('/:id_museo/:id_sala/:id_obra/get',obra_controller.api_get_one);
+router.get('/:id_sala/get',obra_controller.api_get_all_obras);
+router.get('/:id_obra/get',obra_controller.api_get_one);
 module.exports = router;
