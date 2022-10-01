@@ -52,13 +52,13 @@ app.use(upload.single('url_imagen'))
 
 //MULTER
 
+app.use('/solicitud', solicitud_routes);
 app.use('/museo',museo_routes)
 app.use('/guias', guia_routes);
 app.use('/sala', sala_routes);
 app.use('/obra', obra_routes);
 app.use('/evento',evento_routes);
 app.use('/usuario', usuario_routes);
-app.use('/solicitud', solicitud_routes);
 
 app.use('/', museo_routes);
 
