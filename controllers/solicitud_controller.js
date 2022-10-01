@@ -54,6 +54,7 @@ exports.elimina_solicitud=(request,response,next)=>{
   }
 
   exports.updateAceptar_solicitud=(request,response,next)=>{
+    console.log("KAKKAKAKAKAKAKKAK")
     const id_status = request.params.id_status
     Solicitud.aceptar_status(id_status)
     .then(([rowsUpdate,fieldData])=>{
@@ -62,6 +63,7 @@ exports.elimina_solicitud=(request,response,next)=>{
   }
 
   exports.updateNegar_solicitud=(request,response,next)=>{
+    console.log("KAKKAKAKAKAKAKKAK")
     const id_status = request.params.id_status
     Solicitud.negar_status(id_status)
     .then(([rowsUpdate,fieldData])=>{

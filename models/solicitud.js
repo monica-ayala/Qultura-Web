@@ -55,7 +55,6 @@ module.exports = class Solicitud{
     }
 
     static correo_send(id_solicitud, necesidades, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
-
         const options= {
             from: "qultura_no_reply@outlook.com",
             to: correo_museo,
