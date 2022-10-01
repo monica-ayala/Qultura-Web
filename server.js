@@ -67,7 +67,7 @@ app.use('/', museo_routes);
 
 app.use((request, response, next) => {
      response.status(404);
-     response.send('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Not found</title></head><body><h1 id="principal">404, esta página no existe</h1></body>');
+     response.send('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Not found :(</title></head><body><h1 id="principal">404, esta página no existe</h1></body>');
 });
 
 const conn = require('./util/database');
