@@ -54,13 +54,14 @@ module.exports = class Solicitud{
             .catch(err => console.log(err));
     }
 
-    correo_send(id_solicitud, necesidades, correo_museo){
+    static correo_send(id_solicitud, necesidades, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
+
         console.log("SI LLEGO CORREO SEND")
         const options= {
             from: "qultura_no_reply@outlook.com",
             to: correo_museo,
             subject: "Solicitud especial de recorrido",
-            text: "Caracteristicas de solicitud \n  Fecha y hora: " + this.fecha_hora_sol + "\n Numero de asistentes: " + this.num_asistentes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + this.info_adicional + "\n Click aqui para confirmar solicitud : http://ec2-3-145-68-44.us-east-2.compute.amazonaws.com:8080/routes/solicitud_routes/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : http://ec2-3-145-68-44.us-east-2.compute.amazonaws.com:8080/routes/negar/"+id_solicitud
+            text: "Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + info_adicional + "\n Click aqui para confirmar solicitud : http://ec2-3-145-68-44.us-east-2.compute.amazonaws.com:8080/routes/solicitud_routes/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : http://ec2-3-145-68-44.us-east-2.compute.amazonaws.com:8080/routes/negar/"+id_solicitud
         };
         transporter.sendMail(options,callbackPromise());
     }

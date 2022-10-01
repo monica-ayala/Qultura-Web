@@ -39,10 +39,10 @@ exports.elimina_solicitud=(request,response,next)=>{
                 if(request.body.necesidades.length != 0){
                   Solicitud.solicitud_fetch_lastinsertion()
                     .then(([rowLastSolicitud, fieldDatalastSolicitud]) => {
-                      solicitud_nueva.correo_send(rowLastSolicitud[0].LastSolicitud,request.body.necesidades_text, 'A01707035@tec.mx')
+                      Solicitud.correo_send(rowLastSolicitud[0].LastSolicitud,request.body.necesidades_text, 'A01707035@tec.mx', )
                       for(var i = 0; i < request.body.necesidades.length; i++){
                         console.log(rowLastSolicitud)
-                        Solicitud.necesidades_save(rowLastSolicitud[0].LastSolicitud, request.body.necesidades[i])
+                        Solicitud.necesidades_save(rowLastSolicitud[0].LastSolicitud, request.body.necesidades[i],request.body.info_adicional,request.body.fecha_hora_sol, request.body.num_Visitantes,)
                         .then()
                         .catch(err => console.log(err));
                       }
