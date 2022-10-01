@@ -14,7 +14,8 @@ const guia_routes = require('./routes/guia_routes')
 const solicitud_routes = require('./routes/solicitud_routes')
 const sala_routes = require('./routes/sala_routes')
 const obra_routes = require('./routes/obra_routes')
-const evento_routes = require('./routes/evento_routes') 
+const evento_routes = require('./routes/evento_routes')
+const links_routes = require('./routes/links_routes')
 
 const app = express();
 
@@ -59,6 +60,8 @@ app.use('/sala', sala_routes);
 app.use('/obra', obra_routes);
 app.use('/evento',evento_routes);
 app.use('/usuario', usuario_routes);
+app.use('/solicitud', solicitud_routes);
+app.use('/links', links_routes);
 
 app.use('/', museo_routes);
 
@@ -69,6 +72,7 @@ app.use((request, response, next) => {
 
 const conn = require('./util/database');
 const { request } = require('express');
+const { links } = require('express/lib/response');
 
 
 async function main() {
