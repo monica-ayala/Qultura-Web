@@ -74,11 +74,9 @@ module.exports = class Solicitud{
     }
 
     static aceptar_status(id_solicitud){
-        console.log("SI LLEGO ACEPTAR")
         return db.execute('UPDATE Solicitud SET status =? WHERE id_solicitud =?',[ 2 , id_solicitud])  
     }
     static negar_status(id_solicitud){
-        console.log("SI LLEGO NEGAR")
         return db.execute('UPDATE Solicitud SET status =? WHERE id_solicitud =?',[ 3 , id_solicitud])  
     }
 
