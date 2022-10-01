@@ -102,15 +102,11 @@ exports.sala_post = (request, response, next) => {
   exports.api_get_all_salas=(request,response,next)=>{
     Sala.fetchListMuseum(request.params.id_museo)
     .then(([rowsSala, fieldData]) => {
-      Museo.fecthOne(request.params.id_museo)
-        .then(([rowsMuseo, fieldData]) => {
-        
           response.status(200).json({
-            museo: rowsMuseo,
             salas:rowsSala
           }
         );
-      }).catch(err => console.log(err));
+
     }).catch(err => console.log(err));
   }
 
