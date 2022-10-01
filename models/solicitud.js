@@ -7,8 +7,8 @@ const { callbackPromise } = require('nodemailer/lib/shared');
 const transporter= nodemailer.createTransport({
     service: "hotmail",
     auth : {
-        user: process.env.MYSQL_ADDON_MAIL,
-        pass: process.env.MYSQL_ADDON_MAILPASS
+        user: "qultura_no_reply@outlook.com",
+        pass: "U4@4*s*7mqjF"
     }
 });
 
