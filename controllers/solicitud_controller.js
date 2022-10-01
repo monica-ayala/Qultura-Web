@@ -51,7 +51,7 @@ exports.elimina_solicitud=(request,response,next)=>{
             }).catch(err => console.log(err));
         //}).catch(err => console.log(err));
       //}).catch(err => console.log(err));
-  }
+  };
 
   exports.updateAceptar_solicitud=(request,response,next)=>{
     console.log("KAKKAKAKAKAKAKKAK")
@@ -60,7 +60,7 @@ exports.elimina_solicitud=(request,response,next)=>{
     .then(([rowsUpdate,fieldData])=>{
       response.status(200).json({});
     }).catch(err => console.log(err));
-  }
+  };
 
   exports.updateNegar_solicitud=(request,response,next)=>{
     console.log("KAKKAKAKAKAKAKKAK")
@@ -69,4 +69,4 @@ exports.elimina_solicitud=(request,response,next)=>{
     .then(([rowsUpdate,fieldData])=>{
       response.status(200).json({});
     }).catch(err => console.log(err));
-  }
+  };
