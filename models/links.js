@@ -3,15 +3,16 @@ const db = require('../util/database');
 
 module.exports = class Link{
 
-    constructor(link, nombre_link) {
+    constructor(nombre_link, link) {
         this.link = link,
         this.nombre_link = nombre_link
     }
 
     save() {
-        return db.execute('INSERT INTO Link(nombre_link) VALUES (?)', 
+        return db.execute('INSERT INTO Link(nombre_link, link) VALUES (?,?)', 
             [
-                this.nombre_link
+                this.nombre_link,
+                this.link
             ]    
         );
     }

@@ -30,7 +30,7 @@ exports.get_agregarLink = (request, response, next) => {
 
 exports.post_agregarLink = (request, response, next) => {
     console.log("Link Agregado...")
-    const link = new Link(request.body.nombre);
+    const link = new Link(request.body.nombre, request.body.url);
     console.log(link);
     link.save()
       .then(() => {
