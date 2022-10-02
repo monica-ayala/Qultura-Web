@@ -1,0 +1,58 @@
+<%- include('includes/header.ejs') %>
+<style>
+    body {
+  background-image: url('/img/queretaro-dark.jpg');
+  background-size: cover;
+}
+</style>
+
+
+<div class="container" style="margin-bottom: 10%;">
+    <% if (links.length > 0) { %>
+        <h1 class="white-text">LINKS</h4>
+        <div class="white" style="padding-top: 2em; padding-bottom: 2em;">
+            <% for (link of links) { %> 
+            <div class="row center valign-wrapper ">
+                <div class="col s3">
+                    <img src=<%= guia.imagen_guia %> style="width: fit-content; height: 100px; border-radius: 9px;">
+                </div>
+                <div class="col s6">
+                    <div class="row">
+                        <h5 class="left" style="margin: 0 0 0 0 !important;"><%= link.nombre_link %> </h5>
+                    </div>
+                </div>
+                <div class="col s3">
+                </div>
+            </div>
+            <% } %>
+            <div class="row center valign-wrapper">
+                <div class="col s3">
+                        <a class="grey-gradient-btn btn-large hoverable" href="#" style="width: fit-content; border-radius: 9px; text-align: center;">
+                            <i class="material-icons">add</i>
+                            Agregar
+                        </a>
+                </div>
+                <div class="col s6">
+                    col4.2
+                </div>
+                <div class="col s3">
+                    col4.3
+                </div>
+            </div>
+            
+        </div>
+    <% } else { %>
+        <h1 class="white-text"> NO HAY LINKS AGREGADOS</h1> 
+        <div class="col s3">
+            <a class="grey-gradient-btn btn-large hoverable" href="/links/agregarLink" style="width: fit-content; border-radius: 9px; text-align: center;">
+                <i class="material-icons">add</i>
+                Agregar
+            </a>
+        </div>
+    <% } %> 
+        
+
+</div>
+
+
+<%- include('includes/footer.ejs') %>
