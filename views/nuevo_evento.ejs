@@ -4,7 +4,7 @@
   <div class="bg"></div>
   <div class="bg bg2"></div>
   <div class="bg bg3"></div>
-<form id="nuevo_imagen"method="POST" enctype="multipart/form-data">
+<form name="form1" id="nuevo_imagen" method="POST" enctype="multipart/form-data">
 <div class="container">
     <h1 class="white-text">Nuevo evento</h1>
     
@@ -41,9 +41,8 @@
                                   <input id="fecha_end" name="fecha_end" type="text" class="datepicker" required>
                                   <label for="fech_end"> Fecha Fin:</label>
                                   </div>
-
                                  <div class="input-field col s5 offset-s1">
-                                  <input id="hora_inicio" name="hora_inicio" type="text" class="timepicker" required>
+                                  <input id="hora_inicio" name="hora_inicio" type="text" class="timepicker"  required>
                                   <label for="hora_inicio"> Hora Inicio:</label>
                                   </div>
 
@@ -75,7 +74,7 @@
 
             </div>
             <div class="row center margin-10">  
-                <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
+                <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10" onclick="return checkform()">
                     <i class="material-icons left">check</i>
                     Registrar Evento
                 </button>
