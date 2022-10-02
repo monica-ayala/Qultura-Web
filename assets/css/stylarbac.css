@@ -9,7 +9,7 @@
     padding-top: 10vh;
 }
 
-.modal { width: 50% !important ; height: 50% !important ; }
+.modal { width: 50% !important ; height: 65% !important ; }
 
 #myInput {
     background-image: url('/css/searchicon.png'); /* Add a search icon to input */
@@ -122,4 +122,24 @@ body {
   color: black;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+#salir{
+  background-color: rgb(0, 128, 100);
+  border-radius: 4px;
+  color: white;
+
+}
+#salir:hover{
+  background-color: rgb(1, 180, 154);
+}
+
+#guardar{
+  background-color: rgb(0, 128, 100);
+  border-radius: 4px;
+  color: white;
+
+}
+#guardar:hover{
+  background-color: rgb(1, 180, 154);
 }

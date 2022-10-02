@@ -41,7 +41,9 @@ function getInfoUser(element){
     })
     .then(response => response.json())
     .then(response => {
-            name.innerHTML+=response.usuario[0].nom_user
+            name.innerHTML+='<label for="disabled">Nombre:</label>'
+            name.innerHTML+="<input disabled value="+response.usuario[0].nom_user+" id='disabled' type='text' class='validate'></input>"
+          
             name.innerHTML+="<input type='hidden' value="+response.usuario[0].id_user+" id='id_user'>"
             correo.innerHTML+='<label for="disabled">Correo Electronico:</label>'
             correo.innerHTML+="<input disabled value="+response.usuario[0].correo_user+" id='disabled' type='text' class='validate'></input>"
