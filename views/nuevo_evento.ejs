@@ -63,13 +63,12 @@
                 </div>
 
                 <div class="input-field col s5">
-                    <select multiple id="sevento" name="sevento">
-                      <!--option value="" disabled selected></option-->
+                    <select multiple id="sevento" name="sevento" required>
                       <% for (let tag of tags){%>
                       <option value='<%=tag.id_tag%>'><%=tag.nom_tag%></option>
                       <%}%>
                     </select>
-                    <label>Categorias del evento</label>
+                    <label> * Categorias del evento (requerido)</label>
                   </div>
 
             </div>

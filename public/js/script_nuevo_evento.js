@@ -37,7 +37,6 @@ $(document).ready(function() {
 
 function checkform(){
     var form1 = document.getElementById("nuevo_imagen")
-    console.log(form1)
     if (form1.fecha_start.value > form1.fecha_end.value){
         alert("Fecha fin invalida");
         form1.fecha_end.focus();
