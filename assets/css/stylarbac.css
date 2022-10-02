@@ -37,6 +37,7 @@
     width: 100%; /* Full-width */
     border: 1px solid #ddd; /* Add a grey border */
     font-size: 18px; /* Increase font-size */
+    background-color: white;
   }
   
   #myTable th, #myTable td {

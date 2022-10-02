@@ -1,7 +1,8 @@
 $(document).ready(function() {
    
     $('.timepicker').timepicker({
-        autoClose: true
+        autoClose: true,
+        twelveHour: false
     });
     $('.datepicker').datepicker({
         min: -10,
@@ -34,3 +35,19 @@ $(document).ready(function() {
    
 });
 
+function checkform(){
+    var form1 = document.getElementById("nuevo_imagen")
+    console.log(form1)
+    if (form1.fecha_start.value > form1.fecha_end.value){
+        alert("Fecha fin invalida");
+        form1.fecha_end.focus();
+        return false;
+    }else if(form1.hora_inicio.value > form1.hora_fin.value){
+        alert("Hora fin invalida");
+        form1.hora_fin.focus();
+        return false;
+    }
+    return true;
+
+
+}

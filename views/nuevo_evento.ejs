@@ -1,24 +1,10 @@
 <%- include('includes/header_image.ejs') %>
+<link rel="stylesheet" href="/css/style_evento.css">
 <main>
-<form id="nuevo_imagen"method="POST" enctype="multipart/form-data">
-
-
-
-
-  <!-- MODAL PARA SUBIR HORARIOS -->
-
-  <div id="modal_hr" class="modal">
-    <div class="modal-content">
-      <h4>Horarios del museo</h4>
-      <p>Elegir horario del museo</p>
-    </div>
-    <div class="modal-footer">
-      <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
-    </div>
-  </div>
-
-
-
+  <div class="bg"></div>
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
+<form name="form1" id="nuevo_imagen" method="POST" enctype="multipart/form-data">
 <div class="container">
     <h1 class="white-text">Nuevo evento</h1>
     
@@ -41,28 +27,27 @@
                 <div class="col s7"> 
                     <div class="row center">
                         <div class="input-field col s10 offset-s1">
-                            <input placeholder="Ej: Noche de Peliculas" id="info_evento" name="info_evento" type="text" class="validate">
+                            <input placeholder="Ej: Noche de Peliculas" id="info_evento" name="info_evento" type="text" class="validate" required>
                             <label for="info_evento"> Nombre del Evento </label>
                         </div>
 
                     </div>
                     <div class="row center">
                                 <div class="input-field col s5 offset-s1">
-                                <input id="fecha_start" name="fecha_start" type="text" class="datepicker">
+                                <input id="fecha_start" name="fecha_start" type="text" class="datepicker" required>
                                 <label for="fecha_start"> Fecha Inicio:</label>
                                 </div>
                                 <div class="input-field col s5 ">
-                                  <input id="fecha_end" name="fecha_end" type="text" class="datepicker">
+                                  <input id="fecha_end" name="fecha_end" type="text" class="datepicker" required>
                                   <label for="fech_end"> Fecha Fin:</label>
                                   </div>
-
                                  <div class="input-field col s5 offset-s1">
-                                  <input id="hora_inicio" name="hora_inicio" type="text" class="timepicker">
+                                  <input id="hora_inicio" name="hora_inicio" type="text" class="timepicker"  required>
                                   <label for="hora_inicio"> Hora Inicio:</label>
                                   </div>
 
                                 <div class="input-field col s5">
-                                  <input id="hora_fin" name="hora_fin" type="text" class="timepicker">
+                                  <input id="hora_fin" name="hora_fin" type="text" class="timepicker" required>
                                   <label for="hora_fin"> Hora Fin:</label>
                                   </div>
                     </div>
@@ -73,7 +58,7 @@
             <div class="row center margin-10">  
                 
                 <div class="input-field col s5">
-                        <input placeholder="Ej: C. Ignacio Allende Sur 14" name="ubicacion_evento" id="ubicacion_evento" type="text" class="validate">
+                        <input placeholder="Ej: C. Ignacio Allende Sur 14" name="ubicacion_evento" id="ubicacion_evento" type="text" class="validate" required>
                     <label for="ubicacion_evento"> Dirección </label> 
                 </div>
 
@@ -89,7 +74,7 @@
 
             </div>
             <div class="row center margin-10">  
-                <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
+                <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10" onclick="return checkform()">
                     <i class="material-icons left">check</i>
                     Registrar Evento
                 </button>
