@@ -18,7 +18,7 @@
                             <img src="https://1.bp.blogspot.com/-rgm8pHvQUps/V8R_6c75FUI/AAAAAAAACRo/O0TPA4bRsYcNtP5OacBWfNHdIgomtNkhQCLcB/s1600/lanzamiento%2Benanos.jpg" style="border-radius: 20px;">
                             <div class="file-field input-field">
                                 <a type="file" class="btn-floating halfway-fab waves-effect waves-light blue-gradient-btn">
-                                    <input type="file" accept="image/png, image/jpg, image/jpeg">
+                                    <input type="file" accept="image/png, image/jpg, image/jpeg" name="imagen">
                                     <i class="tiny material-icons">edit</i>
                                 </a>
                             </div>
@@ -30,18 +30,18 @@
                         <div class="col s6">
                             <h5>Nombre dela Limitacion </h5>
                             <!-- <label for="nombre_limitacion">Nombre de la Limitacion</label> -->
-                            <input id="nombre_limitacion" value="<%= nombre %> " type="text">
+                            <input id="nombre_limitacion" value="<%= nombre %> " type="text" name="nombre">
                         </div>
                         <div class="col s6">
                             <h5>Icono</h5>
                             <!-- <label for="icono_limitacion">Icono de la Limitación</label> -->
-                            <input id="icono_limitacion" type="file" class="customFile" value="<%= icono %> " accept="image/png, image/jpg, image/jpeg">
+                            <input id="icono_limitacion" type="file" class="customFile" value="<%= icono %> " accept="image/png, image/jpg, image/jpeg" name="icono">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s12">
                             <h5>Descripcion</h5>
-                            <textarea placeholder="Descripcion de Limitacion..." id="textarea2" class="materialize-textarea" data-length="120"><%= descripcion %> </textarea>
+                            <textarea placeholder="Descripcion de Limitacion..." id="textarea2" class="materialize-textarea" data-length="120" name="descripcion"><%= descripcion %> </textarea>
                             <!-- <label for="textarea2">Descripcion</label> -->
                           </div>
                     </div>
@@ -51,7 +51,7 @@
                 <div class="col s1" style="margin-top: 0px;" ></div>
                 <div class="col s10" style="margin-top: 0px; margin-bottom: 1em;" >
                     <h5>TIPS</h5>
-                    <textarea placeholder="Escribe Tips..." id="textarea2" class="materialize-textarea" data-length="200"><%= tip %> </textarea>
+                    <textarea placeholder="Escribe Tips..." id="textarea2" class="materialize-textarea" data-length="200" name="tip"><%= tip %></textarea>
                     <!-- <label for="textarea2">Descripcion</label> -->
                 </div>
                 <div class="col s1" style="margin-top: 0px;" ></div>
@@ -64,12 +64,13 @@
                 <div class="col s7" style="margin: auto 0;" >
                     <div class="left">
                         <!-- <input id="icono_limitacion" type="file" accept="image/png, image/jpg, image/jpeg, Video/mp4" class="customFileVideo"> -->
-                        <input type="text" value="<%= video %> ">
+                        <input type="text" name="video" value="<%= video %> ">
                     </div>
                 </div>
                 <div class="col s1" style="margin-top: 0px;" ></div>
             </div>
             <div class="row center" style="margin-top: 1.5em;">
+                <input value="<%= id_guia %>" name="id_guia" hidden>
                 <input type="submit" class="blue-gradient-btn btn-large hoverable" style="color: white; width: 70%;" value="Guardar">
             </div>
         </form>
