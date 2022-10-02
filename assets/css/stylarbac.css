@@ -1,13 +1,3 @@
-#contenido{
-    border: solid #ccc 1px;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    -webkit-box-shadow: 0 1px 1px #ccc;
-    -moz-box-shadow: 0 1px 1px #ccc;
-    box-shadow: 0 1px 1px #ccc;
-    padding-bottom: 10px;
-}
 
 #spacer{
     height: 100000000000px;
@@ -36,21 +26,100 @@
     border-collapse: collapse; /* Collapse borders */
     width: 100%; /* Full-width */
     border: 1px solid #ddd; /* Add a grey border */
+    border-radius: 6px;
     font-size: 18px; /* Increase font-size */
     background-color: white;
+    
   }
   
   #myTable th, #myTable td {
     text-align: left; /* Left-align text */
     padding: 12px; /* Add padding */
+    border-left:solid white 1px;
+    border-top:solid white 1px;
+    border-radius: 6px;
+    
   }
   
   #myTable tr {
     /* Add a bottom border to all table rows */
     border-bottom: 1px solid #ddd;
+    border-radius: 6px;
+   
   }
   
   #myTable tr.header, #myTable tr:hover {
     /* Add a grey background color to the table header and on hover */
     background-color: #f1f1f1;
+    border-radius: 6px;
+    
   }
+
+
+  
+html { 
+   
+  -webkit-background-size: 50%;
+  -moz-background-size: 50%;
+  -o-background-size: 50%;
+  background-size: 50%;
+  display:grid;
+  margin:auto;
+}
+body {
+  height: 100%;
+}
+
+body {
+  display:table-cell;
+  vertical-align: middle;
+  background: #0C1A30;
+}
+
+
+.bg {
+  animation:slide 10s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #106b8f 50%, #0C1A30 50%);
+  bottom:0;
+  left:-50%;
+  opacity:.5;
+  position:fixed;
+  right:-50%;
+  top:0;
+  z-index:-1;
+}
+
+.bg2 {
+  animation-direction:alternate-reverse;
+  animation-duration:12s;
+}
+
+.bg3 {
+  animation-duration:14s;
+}
+
+@keyframes slide {
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform:translateX(15%);
+  }
+}
+
+
+.min-container{
+  padding-top: 2em; 
+  padding-bottom: 2em;
+  margin-bottom:4em;
+  border-radius:10px
+}
+
+#myInput{
+  width: 100%;
+  background-color: whitesmoke;
+  border:solid white;
+  color: black;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
