@@ -36,16 +36,26 @@ $(document).ready(function() {
 });
 
 function checkform(){
-    var form1 = document.getElementById("nuevo_imagen")
+    var form1 = document.getElementById("nuevo_imagen");
+
     if (form1.fecha_start.value > form1.fecha_end.value){
-        alert("Fecha fin invalida");
+        //alert("Fecha fin invalida");
+        M.toast({html: 'Fecha fin invalida', displayLength: 1500})
         form1.fecha_end.focus();
+        if(form1.hora_inicio.value > form1.hora_fin.value){
+            M.toast({html: 'Hora fin invalida', displayLength: 1500})
+            form1.hora_fin.focus();
+            return false;
+        }
         return false;
-    }else if(form1.hora_inicio.value > form1.hora_fin.value){
-        alert("Hora fin invalida");
+    }
+
+    if(form1.hora_inicio.value > form1.hora_fin.value){
+        M.toast({html: 'Hora fin invalida', displayLength: 1500})
         form1.hora_fin.focus();
         return false;
     }
+   
     return true;
 
 
