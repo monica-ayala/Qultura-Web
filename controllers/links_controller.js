@@ -36,9 +36,20 @@ exports.post_agregarLink = (request, response, next) => {
       .then(() => {
         response.redirect("/links");
       })
-      .catch((error) => {
-          console.log(error);
-      });
-  
-  
-  }
+    .catch((error) => {
+        console.log(error);
+    });
+}
+
+exports.eliminarLink = (request, response, next) => {
+  const idLink = request.params.id_link;
+  console.log("ID del Link a Eliminar es: " + idLink);
+  console.log(idLink);
+  Link.eliminarLink(idLink).then(() => {
+    console.log("Link Eliminada")
+    response.redirect("/links");
+    })
+    .catch((error) => {
+      console.log(error);
+  });
+};

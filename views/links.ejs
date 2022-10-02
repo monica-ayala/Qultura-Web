@@ -17,21 +17,27 @@
             <% for (link of links) { %> 
             <div class="row center valign-wrapper ">
                 <div class="col s3">
-                    <img src=<%= guia.imagen_guia %> style="width: fit-content; height: 100px; border-radius: 9px;">
+                    <div class="row center">
+                        <h5 class="center" style="margin: 0 0 0 0 !important;"><%= link.nombre_link %> </h5>
+                    </div>
                 </div>
-                <div class="col s6">
-                    <div class="row">
-                        <h5 class="left" style="margin: 0 0 0 0 !important;"><%= link.nombre_link %> </h5>
+                <div class="col s9">
+                    <div class="row" style="border: 1px dashed black; border-radius: 10px;">
+                        <h6 class="center" style="margin: 5px 0 5px 0 !important;"><%= link.link %> </h6>
                     </div>
                 </div>
                 <div class="col s3">
+                    <div class="row">
+                        <a class="red-gradient-btn btn-small hoverable" href="/links/eliminar_link/<%=link.id_link%>">
+                            Eliminar Guía
+                        </a>
+                    </div>
                 </div>
             </div>
             <% } %>
             <div class="row center valign-wrapper">
                 <div class="col s3">
-                        <a class="grey-gradient-btn btn-large hoverable" href="#" style="width: fit-content; border-radius: 9px; text-align: center;">
-                            <i class="material-icons">add</i>
+                        <a class="blue-gradient-btn btn-large hoverable" href="/links/agregarLink" style="width: fit-content; border-radius: 9px; text-align: center;">
                             Agregar
                         </a>
                 </div>

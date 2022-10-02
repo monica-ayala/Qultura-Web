@@ -21,4 +21,8 @@ module.exports = class Link{
         return db.execute('SELECT * FROM Link');
     }
 
+    static eliminarLink(idLink){
+        return db.execute('DELETE FROM Link WHERE id_link = ?', [idLink]);
+    }
+
 }
