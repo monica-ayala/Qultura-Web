@@ -35,7 +35,10 @@
                       <td><%= usuario.nom_user%></td>
                     <td><%= usuario.nom_rol%></td>  
                     <td><%= usuario.nom_museo%></td>
-                    <td> <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser(this)" value="<%=usuario.id_user%>" id="<%=usuario.id_user%>">Modificar</button></td>
+                    <td> 
+                      <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser(this)" value="<%=usuario.id_user%>" id="<%=usuario.id_user%>">Modificar</button>
+                      <a onclick="deleteUsuario(this)" id="<%=usuario.id_user%>" class="btn-floating red card-link" style="float:right;margin:0px"> <i class="material-icons">delete</i> </a>
+                    </td>
                     
                 </tr>
                 <%}%>
@@ -82,4 +85,5 @@
 
 
   <script src="/js/script_update_user.js"></script>
+  <script src="/js/script_delete_user.js"></script>
   <%- include('includes/footer.ejs') %>

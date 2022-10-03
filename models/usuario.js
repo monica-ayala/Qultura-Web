@@ -41,7 +41,6 @@ const bcrypt = require('bcryptjs');
     }
 
     static fecthOne(ide_user){
-        //return db.execute('SELECT * FROM User u, Rol r WHERE u.id_user=? AND u.id_rol = r.id_rol ',[ide_user]);
         return db.execute('SELECT * FROM User u, Rol r, User_Museo um, Museo m WHERE u.id_user=? AND u.id_rol = r.id_rol AND u.id_user = um.id_user_museo AND um.id_museo_user = m.id_museo',[ide_user]);
 
     }
@@ -51,7 +50,6 @@ const bcrypt = require('bcryptjs');
     }
 
     static updateMuseum(ide_user,ide_museo){
-        //return db.execute('INSERT INTO User_Museo(id_user_museo, id_museo_user) VALUES (?,?)', [ide_user,ide_museo])
         return db.execute('UPDATE User_Museo SET id_museo_user=? WHERE id_user_museo=?', [ide_museo,ide_user])
         
     }
@@ -64,5 +62,18 @@ const bcrypt = require('bcryptjs');
         .catch((err) => {console.log(err);});
     }
 
-    
+    static softErase(ide_user){
+        console.log(ide_user);
+        db.execute('DELETE FROM User_Museo WHERE id_user_museo= ?',[ide_user])
+        .then(([rows,fieldData])=>{
+            db.execute('DELETE FROM Solicitud WHERE id_user_solicitud = ?',[ide_user])
+            .then(([rows,fieldData])=>{
+                return db.execute('DELETE FROM User WHERE id_user = ?' , [ide_user])
+            }).catch((err=>console.log(err)))
+           
+        })
+        .catch((err=>console.log(err)))
+        
+    }
+
  }
