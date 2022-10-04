@@ -1,0 +1,43 @@
+<%- include('includes/header_image.ejs') %>
+<!-- <style>
+    body {
+  background-image: url('/img/queretaro-dark.jpg');
+  background-size: cover;
+}
+</style> -->
+<link rel="stylesheet" href="/css/style_evento.css">
+
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+<div class="container" style="margin-bottom: 10%;">
+    <h1 class="white-text">Agregar Nuevo Link</h4>
+    <div class="white" style="padding-top: 2em; padding-bottom: 2em;">
+        <form action="/links/agregarLink" method="POST">
+            <div class="row valign-wrapper" style="margin-bottom: 0px;">
+                <div class="col s1" style="margin-top: 0px;" ></div>
+                <div class="col s12" style="margin-top: 0px; margin-bottom: 1em;">
+                    <div class="row">
+                        <div class="col s9">
+                            <h5>Nombre del Link</h5>
+                            <input id="nombre_link" placeholder="Ejemplo: Secretaria de Cultura" type="text" name="nombre">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s9">
+                            <h5>URL del Link</h5>
+                            <input id="url_link" placeholder="Ejemplo: google.com" type="text" name="url">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row center" style="margin-top: 1.5em;">
+                <input type="submit" class="blue-gradient-btn btn-large hoverable" style="color: white; width: 70%;" value="Agregar Link">
+            </div>
+        </form>
+    
+    </div>
+</div>
+
+<%- include('includes/footer.ejs') %>

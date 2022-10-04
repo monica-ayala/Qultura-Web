@@ -27,13 +27,6 @@ router.get('/loggedin',isAuth,usuario_controller.getUser);
 
 router.post('/rol/:id_usuario',isAuth,usuario_controller.sendUpdate);
 
-// router.get('/datos', isAuth,usuario_controller.datos);
-
-// router.get('/datos/:id_usuario', isAuth, usuario_controller.getDatosUsuario);
-
-// router.post('/:id_usuario', isAuth,usuario_controller.usuario_post);
-
-// router.get('/logout',usuario_controller.logout);
-
+router.post('/borrar/usuario/:id_user',isAuth,usuario_controller.erase);
 
 module.exports = router;

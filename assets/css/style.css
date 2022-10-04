@@ -27,6 +27,11 @@ main {
     border-radius: 15px !important;
 }
 
+.red-gradient-btn{
+    background: linear-gradient(268.61deg, #c13f3f 4.48%, #d90f0f 79.39%);
+    border-radius: 15px !important;
+}
+
 .blue-gradient-btn-edges{
     background: linear-gradient(268.61deg, #0C1A30 4.48%, #254C8D 79.39%);
 }

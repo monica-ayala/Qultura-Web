@@ -253,3 +253,13 @@ exports.getUser = (request,response,next)=>{
     username: request.session.usuario.nom_user
   })
 }
+
+exports.erase = (request,response,next)=>{
+  Usuario.softErase(request.params.id_user)
+  Usuario.fetchList()
+  .then(([rowsUsers,fieldData])=>{
+    response.status(200).json({
+      users: rowsUsers
+    })
+    }).catch(err=>console.log(err));
+};

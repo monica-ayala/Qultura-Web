@@ -85,6 +85,17 @@ exports.post_agregarGuia = (request, response, next) => {
     .catch((error) => {
         console.log(error);
     });
-
-
 }
+
+exports.eliminarGuia = (request, response, next) => {
+  const idGuia = request.params.id_guia;
+  console.log("ID de la Guia a Eliminar es: " + idGuia);
+  console.log(idGuia);
+  Guia.eliminarGuia(idGuia).then(() => {
+    console.log("Guia Eliminada")
+    response.redirect("/guias");
+    })
+    .catch((error) => {
+      console.log(error);
+  });
+};
