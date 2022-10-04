@@ -1,12 +1,13 @@
-function deleteEvento(element){
-    element.click()
-    let id_evento = element.id;
-    let cards = document.getElementById("cardsevents")
-    let ruta = 'evento/borrar/evento/' + id_evento;
+const { redirect } = require("express/lib/response");
 
+function deleteUsuario(element){
+    let id_user = element.id;
+    let ruta = 'borrar/usuario/' + id_user;
+    
     let data = {
-        id_evento : id_evento
+        id_user : id_user
     }
+
     fetch(ruta, {
         method: 'POST',
         headers: {
@@ -16,7 +17,7 @@ function deleteEvento(element){
     })
     .then(response => response.json())
     .then(response => {
-        location.reload()
+        location.reload();
         
     }).catch(err => {
         console.log(err);

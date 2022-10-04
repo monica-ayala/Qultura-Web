@@ -1,6 +1,7 @@
-<%- include('includes/header.ejs') %>
+<%- include('includes/header_image.ejs') %>
 <link rel="stylesheet" href="/css/stylarbac.css">
-  <div id="index-banner" class="parallax-container">
+
+  <!--div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
         <h1 class="header white-text text-lighten-2"> Roles y Usuarios </h1>
@@ -8,14 +9,20 @@
       </div>
     </div>
     <div class="parallax"><img src="/img/queretaro-dark.jpg" alt="background querétaro"></div>
-  </div>
+  </div-->
+  <div class="bg"></div>
+  <div class="bg bg2"></div>
+  <div class="bg bg3"></div>
 
   <div class="container">
+    
     <br>
     <div class="search_box">
-      <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Fliter Table Using Names">
+
+      <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar (Nombre, Rol, Museo)">
+      
     </div>
-      <table id="myTable" >
+      <table id="myTable" class="centered" >
         
         <tr  class="header" id="title">
             <th>Nombre</th>
@@ -28,83 +35,55 @@
                       <td><%= usuario.nom_user%></td>
                     <td><%= usuario.nom_rol%></td>  
                     <td><%= usuario.nom_museo%></td>
-                    <td> <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser(this)" value="<%=usuario.id_user%>" id="<%=usuario.id_user%>">Modificar</button></td>
+                    <td> 
+                      <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser(this)" value="<%=usuario.id_user%>" id="<%=usuario.id_user%>">Modificar</button>
+                      <a onclick="deleteUsuario(this)" id="<%=usuario.id_user%>" class="btn-floating red card-link" style="float:right;margin:0px"> <i class="material-icons">delete</i> </a>
+                    </td>
                     
                 </tr>
                 <%}%>
     </table>
-                
-    <!--input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-
-    <table id="myTable">
-      <tr class="header">
-        <th style="width:60%;">Name</th>
-        <th style="width:40%;">Country</th>
-      </tr>
-      <tr>
-        <td>Alfreds Futterkiste</td>
-        <td>Germany</td>
-      </tr>
-      <tr>
-        <td>Berglunds snabbkop</td>
-        <td>Sweden</td>
-      </tr>
-      <tr>
-        <td>Island Trading</td>
-        <td>UK</td>
-      </tr>
-      <tr>
-        <td>Koniglich Essen</td>
-        <td>Germany</td>
-      </tr>
-    </table--> 
 
   <!-- Modal Structure -->
-  <div id="modal1" class="modal">
+  <div id="modal1" class="modal modal-fixed-footer">
     <div class="modal-content" id="modal_user">
-        <div class="row">
+      <div>
     <div class="col s12">
-
-      <div class="col s4" style="text-align: center;">
-        <img src="https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=2000" height="50%" width="50%"   alt="" class="circle responsive-img">
-        <h6 id="nom_user"></h6>
+      <div class="col s6">
+        <div id="nom_user"></div>
+        <div id="correo"></div>
       </div>
 
-      <div class="col s6">
-        <div id="correo">
-          
-        </div>
-        <br>
-        <br>
+        <div class="col s6">
         <div>
           <div class="input-field">
           <select id="sl_roles">
           </select>
           <label>Rol</label>
           </div>
-
           <div class="input-field">
             <select id="sl_museos">
             </select>
             <label>Museos</label>
           </div>
-
         </div>
-      </div>
+        </div>
 
     </div>
-    </div>
+
     </div>
 
+    </div>
     <div class="modal-footer">
       <a onclick="closeUser()" class="modal-close waves-effect waves-green btn-flat" id="salir">Salir</a>
-      <a onclick="updateUser()" class="modal-close waves-effect waves-green btn-flat">Guardar Cambios</a>
+      
+      <a onclick="updateUser()" class=" modal-close waves-effect waves-green btn-flat" id="guardar">Guardar Cambios</a>
     </div>
   </div>
-          
-      <br>
   </div>
+
 
 
   <script src="/js/script_update_user.js"></script>
+  <script src="/js/script_delete_user.js"></script>
   <%- include('includes/footer.ejs') %>
