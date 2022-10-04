@@ -7,11 +7,18 @@ main {
     flex: 1 0 auto;
 }
 
-
+.margin-0{
+    margin: 0px !important;
+}
 .primary-color-text{
     color: #0C1A30 !important;
 }
-  
+
+.imgr{
+  width: 270px;
+  height: 180px;
+  object-fit: cover;
+}
 
 .primary-color{
     background-color: #0C1A30 !important;
@@ -53,7 +60,7 @@ main {
 
 .cards {
     display: flex;
-    padding: 0px 0px 25px 0px;
+    padding: 60px 0px 25px 0px;
     list-style: none;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
@@ -63,11 +70,9 @@ main {
     display: flex;
     flex-direction: column;
     flex: 0 0 100%;
-    padding: 20px;
-    margin-left:10px;
-    background: #000000 ;
-    border-radius: 20px !important;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
+    padding: 10px;
+    margin-left:5px;
+    margin-right:5px;
     scroll-snap-align: start;
     transition: all 0.2s;
 }
@@ -200,3 +205,26 @@ main {
     display: flex;
     flex-wrap: wrap;
   }
+
+.image-n-margin{
+    margin-top:-50px;
+    -webkit-transition:.3s;
+    -webkit-transition:.5s;
+    transition:.5s
+}
+
+.card-animation-1:hover .image-n-margin{
+    margin-top:-80px;
+    margin-bottom:30px;
+    -webkit-transition:.3s;
+    -webkit-transition:.5s;
+    transition:.5s
+}
+
+.border-radius-8{
+    border-radius: 8px;
+}
+
+.border-radius-6{
+    border-radius: 6px !important;
+}
