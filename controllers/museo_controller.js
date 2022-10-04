@@ -114,6 +114,24 @@ exports.get_Onemuseo = (request, response, next) => {
   .catch(err=>console.log(err));
  };
 
+exports.api_get_one = (request, response, next) => {
+
+  Museo.fecthOne(request.params.id_museo)
+
+  .then(([rowsMuseos,fieldData])=>{
+
+    response.status(200).json({
+
+      museos:rowsMuseos
+
+    });
+
+  })
+
+  .catch(err=>console.log(err));
+
+ };
+
 exports.museo_update = (request,response,next)=>{
   url_imagen = request.file;
   if((typeof(url_imagen) == "undefined")){
