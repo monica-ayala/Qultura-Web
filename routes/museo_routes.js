@@ -14,7 +14,7 @@ router.post('/regresar/:id_museo',isAuth,museo_controller.soft_unerase)
 router.get('/registro',isAuth,museo_controller.register)
 router.get('/:id_museo',isAuth,museo_controller.get_Onemuseo)
 router.post('/:id_museo',isAuth,museo_controller.museo_update)
-router.post('/:id_museo/get',museo_controller.api_get_one)
+router.get('/:id_museo/get',museo_controller.api_get_one)
 
 const sala_controller = require('../controllers/sala_controller');
 router.get('/:id_museo/sala',isAuth,sala_controller.lista);
