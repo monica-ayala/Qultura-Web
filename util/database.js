@@ -29,12 +29,7 @@ const DB_LOCAL = {
     password: ''
 };
 
-<<<<<<< HEAD
 const pool = mysql.createPool(DB_AWS);
 
 
-=======
-// Current database
-const pool = mysql.createPool(DB_INTERLINK);
->>>>>>> develop
 module.exports = pool.promise();
