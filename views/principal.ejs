@@ -2,18 +2,17 @@
   <main>
     
     <div class="section no-pad-bot">
-        <div class="container">
-          <br><br>
-          <h1 id="welcome" class="header white-text text-lighten-2"> </h1>
-          <div class="row">
-            <h5 class="header col s12 white-text"> Conoce el estado de Querétaro. Conoce su cultura. </h5>
-          </div>
-          <br><br>
+      <div class="container">
+        <br><br>
+        <h1 id="welcome" class="header white-text text-lighten-2"> </h1>
+        <div class="row">
+          <h5 class="header col s12 white-text"> Conoce el estado de Querétaro. Conoce su cultura. </h5>
         </div>
+        <br><br>
       </div>
-      <div class="parallax"><img src="/img/queretaro-dark.jpg" alt="background querétaro"></div>
     </div>
-  
+    <div class="parallax"><img src="/img/queretaro-dark.jpg" alt="background querétaro"></div>
+  </div>
   
     <div class="container">
         <div class="row flex">
@@ -32,20 +31,25 @@
         <ul id ="cards" class="cards">
           <% for (let museo of museos){%>
             <%if(museo.status == 1){%>
-          <li class="card-panel card-pers hoverable" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/uploads/<%=museo.imgP_museo%>') no-repeat; background-size: cover;">
-            
-            <div>
-              <a href="/museo/<%=museo.id_museo%>" class="btn-floating green card-link" style="float:right;margin:0px;margin-left:10px"> <i class="material-icons">edit</i> </a>
-              <a onclick="deleteMuseum(this)" id="<%=museo.id_museo%>" class="btn-floating red card-link" style="float:right;margin:0px"> <i class="material-icons">delete</i> </a>
-              <h3 class="card-title white-text"><%=museo.nom_museo%></h3>
-              
-              <div class="card-content white-text">
-                <p> Tel: <%=museo.num_museo%> 
-                </p>
-                <p><%=museo.desc_museo.substring(0, 100)%> . . .</p>
-              </div>
-            </div>
-            
+          <li class="card-pers card-panel z-depth-3 border-radius-6 mt-10 card-animation-1">
+                  <a class="margin-0 center-align">
+                    <img class="imgr border-radius-8 z-depth-4 image-n-margin" src="/uploads/<%=museo.imgP_museo%>">
+                  </a>
+                  <h6 class="primary-color-txt text-darken-3 mt-5"><b><%=museo.nom_museo%></b></h6>
+                  <span>
+                    <p> Tel: <%=museo.num_museo%> 
+                    </p>
+                    <p><%=museo.desc_museo.substring(0, 90)%> . . .</p>
+                  </span>
+                  <div class="display-flex justify-content-between flex-wrap  mt-4">
+                    
+                    <div class="display-flex mt-3 right-align social-icon">
+                      <a href="/museo/<%=museo.id_museo%>" class="primary-color-txt"> <i class="material-icons">edit </i>  </a>
+                      <a onclick="deleteMuseum(this)" id="<%=museo.id_museo%>" class="primary-color-txt"> <i class="material-icons">delete</i> </a>
+                    </div>
+                  </div>
+                
+  
           </li>
           <%}%>
           <%}%>
@@ -95,6 +99,12 @@
           <%}%>
         </ul>
     </div>
+
+    
+    ¿
+        
+      
+      
   </main>
   <script src="/js/script_delete_museo.js"></script>
   <script src="/js/script_delete_evento.js"></script>
