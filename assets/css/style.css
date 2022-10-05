@@ -47,12 +47,11 @@ main {
 }
 
 .blue-gradient-btn{
-    background: linear-gradient(268.61deg, #254C8D 79.39%, #0C1A30 4.48%, #254C8D 79.39%);
+    background: linear-gradient(268.61deg, #0C1A30 4.48%, #254C8D 79.39%);
     border-radius: 15px !important;
 }
 
 .blue-gradient{
-    background: rgb(12,26,48);
     background: linear-gradient(90deg, rgba(12,26,48,1) 6%, rgba(26,63,125,1) 46%, rgba(37,90,141,1) 100%);
 }
 
