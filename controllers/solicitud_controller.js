@@ -26,7 +26,7 @@ exports.elimina_solicitud=(request,response,next)=>{
         .then(([rowsMuseoUsuario, fieldDataMuseoUsuario]) => {
           User.fetchMuseoCorreo(rowsMuseoUsuario[0].id_user_museo)
             .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => { //rowsUsuarioMuseo[0].correo_user
-              Solicitud.correoElimina_send(rowsOneSolicitud[0].id_solicitud, 'A01707035@tec.mx', rowsOneSolicitud[0].info_adicional, rowsOneSolicitud[0].fecha_hora_sol, rowsOneSolicitud[0].num_asistentes)
+              Solicitud.correoElimina_send(rowsOneSolicitud[0].id_solicitud, 'A01706897@tec.mx', rowsOneSolicitud[0].info_adicional, rowsOneSolicitud[0].fecha_hora_sol, rowsOneSolicitud[0].num_asistentes)
                 .then(([rowsEliminaCorreo, fieldDataCorreo]) => {       
                   Solicitud.deleteOne(request.body.id_solicitud)
                     .then(([rowsSolicitud,fieldData])=>{
@@ -51,7 +51,7 @@ exports.elimina_solicitud=(request,response,next)=>{
                 if(request.body.necesidades.length != 0){
                   Solicitud.solicitud_fetch_lastinsertion()
                     .then(([rowLastSolicitud, fieldDatalastSolicitud]) => {
-                      Solicitud.correo_send(rowLastSolicitud[0].LastSolicitud, request.body.necesidades_text , 'A01707035@tec.mx', request.body.info_adicional, request.body.fecha_hora_sol, request.body.num_Visitantes)
+                      Solicitud.correo_send(rowLastSolicitud[0].LastSolicitud, request.body.necesidades_text , 'A01706897@tec.mx', request.body.info_adicional, request.body.fecha_hora_sol, request.body.num_Visitantes)
                       for(var i = 0; i < request.body.necesidades.length; i++){
                         console.log(rowLastSolicitud)
                         Solicitud.necesidades_save(rowLastSolicitud[0].LastSolicitud, request.body.necesidades[i],request.body.info_adicional,request.body.fecha_hora_sol, request.body.num_Visitantes,)
