@@ -60,7 +60,7 @@ const bcrypt = require('bcryptjs');
 
     static getId(login)
     {
-        return db.execute('SELECT id_user, FROM User WHERE correo_user=?',
+        return db.execute('SELECT id_user FROM User WHERE correo_user=?',
             [login])
         .then()
         .catch((err) => {console.log(err);});

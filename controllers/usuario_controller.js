@@ -83,7 +83,7 @@ exports.login_post = (request, response, next) => {
         response.status(200).json({ errores: 1 });
       }
       else{
-        console.log(rows)
+        
       const usuario = new Usuario(
         rows[0].nom_user,
         rows[0].correo_user,
@@ -101,18 +101,24 @@ exports.login_post = (request, response, next) => {
                   request.session.correo = usuario.correo_user;
                   Usuario.getId(request.session.correo)
                     .then(([rowsid, fieldData]) => {
-                      request.session.id_usuario = rowsid[0].Id_Usuario;
-
+                      request.session.id_usuario = rowsid[0].id_user;
+                        Usuario.getMuseum(rowsid[0].id_user)
+                          .then(([rowsMusuem,fielData])=>{
+                            request.session.id_museo = rowsMusuem[0].id_museo_user;
+                            return request.session.save((err) => {
+                              //response.status(200).json({ errores: error });  // entender esto
+                              response.redirect("/")
+                            }); 
+                          }).catch((err)=>{
+                            console.log(err)
+                          })
                           // Aún no se implementa privilegios/RBAC Entonces no se requiere aún esto.
                           // let privilegios = [];
                           // for (let privilegio in rowsprivilegios) {
                           //   privilegios.push(rowsprivilegios[privilegio].Id_Privilegio);
                           // }
                           // request.session.privilegios = privilegios;
-                          return request.session.save((err) => {
-                            //response.status(200).json({ errores: error });  // entender esto
-                            response.redirect("/")
-                          }); 
+                         
                     })
                     .catch((err) => {
                       console.log(err);
