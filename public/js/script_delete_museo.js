@@ -1,13 +1,16 @@
+// Delete museum from main page
 function deleteMuseum(element){
     element.click()
     let id_museo = element.id;
     let cards = document.getElementById("cards")
     let ruta = '/borrar/' + id_museo;
 
+    // Data to send as JSON
     let data = {
         id_museo : id_museo
     }
 
+    // Validation of delete with swal alert
     Swal.fire({
         title: '¿Estas seguro?',
         text: "Después de borrar un museo este no se podrá recuperar, sus salas y obras también se eliminarán.",
@@ -18,6 +21,7 @@ function deleteMuseum(element){
         confirmButtonText: 'Sí, elimínalo'
       }).then((result) => {
         if (result.isConfirmed) {
+            // Asynchronous POST
             fetch(ruta, {
                 method: 'POST',
                 headers: {
@@ -27,7 +31,7 @@ function deleteMuseum(element){
             })
             .then(response => response.json())
             .then(response => {
-                //render the museum list again
+                // Render museum list again
                 cards.innerHTML = ``;;
                 console.log(response.museos)
                 for(museo of response.museos){

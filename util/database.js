@@ -1,8 +1,9 @@
+// Configuración con la base de datos
 const dotenv = require('dotenv');
 const mysql = require('mysql2');
-
-// configraration with env. 
 dotenv.config();
+
+// Clevercloud database
 const DB_INTERLINK = {
   host: process.env.MYSQL_ADDON_HOST,
   user: process.env.MYSQL_ADDON_USER,
@@ -11,6 +12,7 @@ const DB_INTERLINK = {
   database: process.env.MYSQL_ADDON_DB,
 };
 
+// Database for deployment in AWS
 const DB_AWS = {
   host: 'localhost',
   user: 'cris',
@@ -19,6 +21,7 @@ const DB_AWS = {
   port: 3306
 };
 
+// Local database
 const DB_LOCAL = {
   host: 'localhost',
     user: 'root',
@@ -26,6 +29,6 @@ const DB_LOCAL = {
     password: ''
 };
 
+// Current database
 const pool = mysql.createPool(DB_INTERLINK);
-
 module.exports = pool.promise();

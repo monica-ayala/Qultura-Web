@@ -1,7 +1,7 @@
 const { response } = require("express");
 const Usuario = require("../../models/usuario");
 
-
+// Administration of user and privileges
 $(document).ready(function(){
     $('.formSelect').formSelect();
     $('select').formSelect();
@@ -18,6 +18,7 @@ $(document).ready(function(){
     $(this).formSelect();
   });  
 
+// Load modal with user information
 function getInfoUser(element){
     jQuery('#modal1').modal('open');
 
@@ -33,6 +34,7 @@ function getInfoUser(element){
     selectrol.innerHTML=""
     let ruta ="/usuario/rol/"+ user_id;
 
+    // Asynchronous GET
     fetch(ruta,{
         method: 'GET',
         headers:{
@@ -68,10 +70,12 @@ function getInfoUser(element){
 
 }
 
+// On modal close
 function closeUser(){
     jQuery('#modal1').modal('close');
 }
 
+// Update user information in database
 function updateUser(){
     let user_id = document.getElementById("id_user").value;
     let ruta ="/usuario/rol/"+ user_id;
@@ -81,12 +85,14 @@ function updateUser(){
     let museo= document.getElementById("sl_museos");
     let value_museo = museo.options[museo.selectedIndex].value;
 
+    // Data to send as JSON
     data = {
         id_rol : value,
         id_user : user_id,
         id_museo : value_museo
     }
 
+    // Asynchronous POST
     fetch(ruta,{
         method: 'POST',
         headers:{

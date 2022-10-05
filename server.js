@@ -1,13 +1,12 @@
+// Import modules
 const express= require('express');
 const bodyParser = require('body-parser');
 const cookieParser=require('cookie-parser');
 const session=require('express-session');
 const path = require('path');
 var multer = require('multer');
-//const csrf = require('csurf');
-//const csrfProtection = csrf();
 
-//declarar las rutas
+// Routes
 const usuario_routes = require('./routes/usuario_routes');
 const museo_routes = require('./routes/museo_routes')
 const guia_routes = require('./routes/guia_routes')
@@ -17,6 +16,7 @@ const obra_routes = require('./routes/obra_routes')
 const evento_routes = require('./routes/evento_routes')
 const links_routes = require('./routes/links_routes')
 
+// Initialize express app
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -32,11 +32,9 @@ app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(express.static(path.join(__dirname, 'assets')));
 app.use(cookieParser());
 
-//MULTER 
-
+// Multer
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -49,10 +47,8 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 app.use(upload.single('url_imagen'))
-//app.use(upload.single('url_imagenB'))
 
-//MULTER
-
+// Use routes
 app.use('/museo',museo_routes)
 app.use('/guias', guia_routes);
 app.use('/sala', sala_routes);
@@ -61,7 +57,6 @@ app.use('/evento',evento_routes);
 app.use('/usuario', usuario_routes);
 app.use('/solicitud', solicitud_routes);
 app.use('/links', links_routes);
-
 app.use('/', museo_routes);
 
 app.use((request, response, next) => {
@@ -69,10 +64,10 @@ app.use((request, response, next) => {
      response.send('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Not found</title></head><body><h1 id="principal">404, esta página no existe</h1></body>');
 });
 
+// Database and app port declaration
 const conn = require('./util/database');
 const { request } = require('express');
 const { links } = require('express/lib/response');
-
 
 async function main() {
      const port = 8080;

@@ -1,6 +1,8 @@
+// Display username
 let username = document.getElementById("username");
-let welcome = document.getElementById("welcome");
 let rutaUsuario = '/usuario/loggedin'
+
+// Asynchronous get for user account logged in
 fetch(rutaUsuario, {
     method: 'GET',
     headers: {
@@ -10,7 +12,6 @@ fetch(rutaUsuario, {
 .then(response => response.json())
 .then(response => {
     username.innerHTML = response.username + '<i class="material-icons left">account_circle</i>'
-    welcome.innerHTML = 'Buenos Días, ' + response.username 
 }).catch(err => {
     console.log(err);
 });
