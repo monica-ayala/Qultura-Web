@@ -9,13 +9,13 @@ function deleteMuseum(element){
     }
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: '¿Estas seguro?',
+        text: "Después de borrar un museo este no se podrá recuperar, sus salas y obras también se eliminarán.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Sí, elimínalo'
       }).then((result) => {
         if (result.isConfirmed) {
             fetch(ruta, {
@@ -41,8 +41,8 @@ function deleteMuseum(element){
             });
             
           Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
+            '¡Eliminado!',
+            'El museo se eliminó exitosamente',
             'success'
           )
         }
