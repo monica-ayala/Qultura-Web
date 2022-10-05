@@ -1,3 +1,4 @@
+// Delete evento 
 function deleteEvento(element){
     element.click()
     let id_evento = element.id;

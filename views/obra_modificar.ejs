@@ -1,83 +1,94 @@
 <%- include('includes/header_image.ejs') %>
-<main>
-<form method="POST" enctype="multipart/form-data">
+    <main>
+        <form method="POST" enctype="multipart/form-data">
 
-    <% for (let obra of obras){%>
-<div class="container">
-    <h1 class="white-text"><%=obra.nom_obra%></h1>
-    
-        <div class="white min-container">
-            <div class="row center margin-10">  
-                <!-- valign-wrapper -->
-                <div class="col s5">
-                    <div class="row valign-wrapper">
-                        <div class="col s10">
-                            <div class="card imgPicker">
-                                <div class="card-image">
-                                  <img class="imgPicker imgP" src="/uploads/<%=obra.img_obra%>">
-                                  <input style="display:none" name="url_obra" value="<%=obra.img_obra%>">
-                                  <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload" onclick="filebutton.click()"><i class="material-icons">edit</i></div>
-                                  <input class="file-upload" id="filebutton" type="file" name="url_imagen" style="display:none">
+            <% for (let obra of obras){%>
+                <div class="container">
+                    <h1 class="white-text">
+                        <%=obra.nom_obra%>
+                    </h1>
+
+                    <div class="white min-container">
+                        <div class="row center margin-10">
+                            <!-- valign-wrapper -->
+                            <div class="col s5">
+                                <div class="row valign-wrapper">
+                                    <div class="col s10">
+                                        <div class="card imgPicker">
+                                            <div class="card-image">
+                                                <img class="imgPicker imgP" src="/uploads/<%=obra.img_obra%>">
+                                                <input style="display:none" name="url_obra" value="<%=obra.img_obra%>">
+                                                <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
+                                                    onclick="filebutton.click()"><i class="material-icons">edit</i>
+                                                </div>
+                                                <input class="file-upload" id="filebutton" type="file" name="url_imagen"
+                                                    style="display:none">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
+                            </div>
+                            <div class="col s7">
+                                <div class="row center">
+                                    <div class="input-field col s10 offset-s1">
+                                        <input placeholder="Ej: Libertad" id="nom_obra" name="nom_obra" type="text"
+                                            value="<%=obra.nom_obra%>" class="validate">
+                                        <label for="nom_obra"> Nombre de la obra </label>
+                                    </div>
+
+                                    <div class="input-field col s10 offset-s1">
+                                        <div class="file-field input-field">
+                                            <div class="btn">
+                                                <span> Mp3</span>
+                                                <input type="file">
+                                            </div>
+                                            <div class="file-path-wrapper">
+                                                <input placeholder="audioguía (archivo mp3)" class="file-path validate"
+                                                    value="<%=obra.audio_obra%>" name="file" type="text">
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col offset-s1">
+                                        <div class="input-field">
+                                            <input placeholder="Ej: Libertad" id="autor_obra" name="autor_obra"
+                                                type="text" value="<%=obra.autor_obra%>" class="validate">
+                                            <label for="autor_obra"> Nombre del autor(a) </label>
+                                        </div>
+                                        <div class="input-field">
+                                            <input placeholder="Ej: Libertad" id="fecha_obra" name="fecha_obra"
+                                                type="text" value="<%=obra.fecha_obra%>" class="validate">
+                                            <label for="fecha_obra"> Fecha de creación </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row center margin-10">
+                            <div class="input-field col s10 offset-s1">
+                                <textarea id="desc_obra" name="desc_obra"
+                                    class="materialize-textarea validate"> <%=obra.desc_obra%> </textarea>
+                                <label for="desc_obra"> Descripción </label>
+                            </div>
+                            <div class="input-field col s10 offset-s1">
+                                <textarea id="subtitulo_obra" name="subtitulo_obra"
+                                    class="materialize-textarea validate"> <%=obra.subtitulo_obra%> </textarea>
+                                <label for="subtitulo_obra"> Subtítulos </label>
+                            </div>
+
+                            <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
+                                <i class="material-icons left">check</i>
+                                Guardar cambios
+                            </button>
                         </div>
                     </div>
-                </div>
-                <div class="col s7"> 
-                    <div class="row center">
-                        <div class="input-field col s10 offset-s1">
-                            <input placeholder="Ej: Libertad" id="nom_obra" name="nom_obra" type="text" value="<%=obra.nom_obra%>" class="validate">
-                            <label for="nom_obra"> Nombre de la obra </label>
-                        </div>
 
-                        <div class="input-field col s10 offset-s1">
-                            <div class="file-field input-field">
-                                <div class="btn">
-                                <span> Mp3</span>
-                                <input type="file">
-                                </div>
-                                <div class="file-path-wrapper">
-                                <input placeholder="audioguía (archivo mp3)" class="file-path validate" value="<%=obra.audio_obra%>" name="file" type="text">
-                                </div>
-                                
-                            </div>
-                        </div>
-                    
-                        <div class="col offset-s1">
-                            <div class="input-field">
-                                <input placeholder="Ej: Libertad" id="autor_obra" name="autor_obra" type="text" value="<%=obra.autor_obra%>" class="validate">
-                                <label for="autor_obra"> Nombre del autor(a) </label>
-                            </div>
-                            <div class="input-field">
-                                <input placeholder="Ej: Libertad" id="fecha_obra" name="fecha_obra" type="text" value="<%=obra.fecha_obra%>" class="validate">
-                                <label for="fecha_obra"> Fecha de creación </label>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                <%}%>
+        </form>
+    </main>
 
-            </div>
-        
-            <div class="row center margin-10">  
-                <div class="input-field col s10 offset-s1">
-                    <textarea id="desc_obra" name="desc_obra"  class="materialize-textarea validate"> <%=obra.desc_obra%> </textarea>
-                    <label for="desc_obra"> Descripción </label>
-                </div>
-                <div class="input-field col s10 offset-s1">
-                    <textarea id="subtitulo_obra" name="subtitulo_obra"  class="materialize-textarea validate"> <%=obra.subtitulo_obra%> </textarea>
-                    <label for="subtitulo_obra"> Subtítulos </label>
-                </div>
-                
-                <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
-                    <i class="material-icons left">check</i>
-                    Guardar cambios
-                </button>
-            </div>
-        </div>   
-    
-</div>
-<%}%>  
-</form>
-</main>
-
-<%- include('includes/footer.ejs') %>
+    <%- include('includes/footer.ejs') %>

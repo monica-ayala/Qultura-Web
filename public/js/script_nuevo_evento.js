@@ -1,3 +1,4 @@
+// Timepicker and Datepicker functionality for registering events
 $(document).ready(function() {
    
     $('.timepicker').timepicker({
@@ -9,9 +10,6 @@ $(document).ready(function() {
         format : 'yyyy-mm-dd',
         autoClose: true
     });
-
-
-
 
     $('select').formSelect();
     var readURL = function(input) {
@@ -26,7 +24,6 @@ $(document).ready(function() {
         }
     }
     
-
     $(".file-upload").on('change', function(){
     
      readURL(this);
@@ -35,11 +32,12 @@ $(document).ready(function() {
    
 });
 
+// Datepciker validation functionality
 function checkform(){
     var form1 = document.getElementById("nuevo_imagen");
 
     if (form1.fecha_start.value > form1.fecha_end.value){
-        //alert("Fecha fin invalida");
+
         M.toast({html: 'Fecha fin invalida', displayLength: 1500})
         form1.fecha_end.focus();
         if(form1.hora_inicio.value > form1.hora_fin.value){

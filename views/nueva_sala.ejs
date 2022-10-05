@@ -1,73 +1,78 @@
 <%- include('includes/header_image.ejs') %>
-<main>
-<form method="POST" enctype="multipart/form-data">
+    <main>
+        <form method="POST" enctype="multipart/form-data">
 
-<div class="container">
-    <h1 class="white-text">Nuevo museo</h1>
-    
-        <div class="white min-container">
-            <div class="row center margin-10">  
-                <!-- valign-wrapper -->
-                <div class="col s5">
-                    <div class="row valign-wrapper">
-                        <div class="col s10">
-                            <div class="card imgPicker">
-                                <div class="card-image">
-                                  <img class="imgPicker imgP" src="../img/no-img.jpg">
-                                  <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload" onclick="filebutton.click()"><i class="material-icons">edit</i></div>
-                                  <input class="file-upload" id="filebutton" type="file" name="url_imagen" style="display:none">
+            <div class="container">
+                <h1 class="white-text">Nuevo museo</h1>
+
+                <div class="white min-container">
+                    <div class="row center margin-10">
+                        <!-- valign-wrapper -->
+                        <div class="col s5">
+                            <div class="row valign-wrapper">
+                                <div class="col s10">
+                                    <div class="card imgPicker">
+                                        <div class="card-image">
+                                            <img class="imgPicker imgP" src="../img/no-img.jpg">
+                                            <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
+                                                onclick="filebutton.click()"><i class="material-icons">edit</i></div>
+                                            <input class="file-upload" id="filebutton" type="file" name="url_imagen"
+                                                style="display:none">
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col s7"> 
-                    <div class="row center">
-                        <div class="input-field col s10 offset-s1">
-                            <input placeholder="Ej: Libertad" id="nom_sala" name="nom_sala" type="text" class="validate">
-                            <label for="nom_sala"> Nombre de la sala </label>
+                        <div class="col s7">
+                            <div class="row center">
+                                <div class="input-field col s10 offset-s1">
+                                    <input placeholder="Ej: Libertad" id="nom_sala" name="nom_sala" type="text"
+                                        class="validate">
+                                    <label for="nom_sala"> Nombre de la sala </label>
+                                </div>
+
+
+                                <div class="input-field col s10 offset-s1">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span> Mp3</span>
+                                            <input type="file">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input placeholder="audioguía (archivo mp3)" class="file-path validate"
+                                                name="file" type="text">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col offset-s1">
+                                    <div class="col">
+                                        <a class="btn waves-effect waves-light primary-color"><i
+                                                class="material-icons left">add_box</i>Agregar salas </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        
+                    </div>
+
+                    <div class="row center margin-10">
                         <div class="input-field col s10 offset-s1">
-                        <div class="file-field input-field">
-                            <div class="btn">
-                              <span> Mp3</span>
-                              <input type="file">
-                            </div>
-                            <div class="file-path-wrapper">
-                              <input placeholder="audioguía (archivo mp3)" class="file-path validate" name="file" type="text">
-                            </div>
-                            
+                            <textarea id="desc_sala" name="desc_sala" class="materialize-textarea validate"></textarea>
+                            <label for="desc_sala"> Descripción </label>
                         </div>
-                        
-                        </div>
-                    
-                        <div class="col offset-s1">
-                            <div class="col">
-                                <a class="btn waves-effect waves-light primary-color"><i class="material-icons left">add_box</i>Agregar salas </a>
-                            </div>
-                        </div>
+
+                        <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
+                            <i class="material-icons left">check</i>
+                            Registrar sala
+                        </button>
                     </div>
                 </div>
 
             </div>
-        
-            <div class="row center margin-10">  
-                <div class="input-field col s10 offset-s1">
-                    <textarea id="desc_sala" name="desc_sala" class="materialize-textarea validate"></textarea>
-                    <label for="desc_sala"> Descripción </label>
-                </div>
-                
-                <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
-                    <i class="material-icons left">check</i>
-                    Registrar sala
-                </button>
-            </div>
-        </div>   
-    
-</div>
-</form>
-</main>
+        </form>
+    </main>
 
-<%- include('includes/footer.ejs') %>
+    <%- include('includes/footer.ejs') %>
