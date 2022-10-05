@@ -13,7 +13,7 @@ const transporter= nodemailer.createTransport({
 
 var cron = require('node-cron');
 
-cron.schedule('00 * * * *', () => {
+cron.schedule('* */1 * * *', () => {
   console.log('FUNCIONA NODECRON');
 });
 
@@ -48,7 +48,7 @@ module.exports = class Solicitud{
     }
 
     static fetchOne(id_solicitud){
-        return db.execute('SELECT id_solicitud, info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, id_museo_solicitud, id_user_solicitud, necesidades FROM Solicitud WHERE id_solicitud = ?', [id_solicitud]);
+        return db.execute('SELECT id_solicitud, info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, id_museo_solicitud, id_user_solicitud FROM Solicitud WHERE id_solicitud = ?', [id_solicitud]);
     }
 
     static fetchAll(id_usuario){
