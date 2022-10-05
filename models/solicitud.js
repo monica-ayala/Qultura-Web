@@ -1,7 +1,6 @@
 const db = require('../util/database');
 const dotenv = require('dotenv');
 //const bcrypt = require('bcryptjs');
-
 const nodemailer= require('nodemailer');
 const { callbackPromise } = require('nodemailer/lib/shared');
 const transporter= nodemailer.createTransport({
@@ -10,6 +9,12 @@ const transporter= nodemailer.createTransport({
         user: "qultura_no_reply@outlook.com",
         pass: "U4@4*s*7mqjF"
     }
+});
+
+var cron = require('node-cron');
+
+cron.schedule('00 * * * *', () => {
+  console.log('FUNCIONA NODECRON');
 });
 
 
@@ -42,6 +47,10 @@ module.exports = class Solicitud{
         return db.execute('SELECT(SELECT MAX(id_solicitud) FROM Solicitud s) AS LastSolicitud');
     }
 
+    static fetchOne(id_solicitud){
+        return db.execute('SELECT id_solicitud, info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, id_museo_solicitud, id_user_solicitud, necesidades FROM Solicitud WHERE id_solicitud = ?', [id_solicitud]);
+    }
+
     static fetchAll(id_usuario){
         return db.execute('SELECT id_solicitud, info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, s.status, m.nom_museo, m.imgP_museo, id_user_solicitud FROM Solicitud s, Museo m WHERE s.id_museo_solicitud = m.id_museo AND s.id_user_solicitud = ?', [id_usuario]);
     }
@@ -59,7 +68,18 @@ module.exports = class Solicitud{
             from: "qultura_no_reply@outlook.com",
             to: correo_museo,
             subject: "Solicitud especial de recorrido",
-            text: "Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + info_adicional + "\n Click aqui para confirmar solicitud : http://ec2-3-145-68-44.us-east-2.compute.amazonaws.com:8080/solicitud/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : http://ec2-3-145-68-44.us-east-2.compute.amazonaws.com:8080/solicitud/negar/"+id_solicitud
+            text: "Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + info_adicional + "\n Click aqui para confirmar solicitud : https://qulturaqro.live/solicitud/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : https://qulturaqro.live/solicitud/negar/"+id_solicitud
+        };
+        transporter.sendMail(options,callbackPromise());
+    }
+
+
+    static correoElimina_send(id_solicitud, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
+        const options= {
+            from: "qultura_no_reply@outlook.com",
+            to: correo_museo,
+            subject: "Cancelacion de solicitud de recorrido",
+            text: "Se realizo una cancelación para la solicitud de recorrido con id: " + id_solicitud + ".\n Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes
         };
         transporter.sendMail(options,callbackPromise());
     }
