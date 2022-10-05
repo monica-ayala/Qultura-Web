@@ -20,11 +20,23 @@ exports.get_solicitudes=(request,response,next)=>{
 };
 
 exports.elimina_solicitud=(request,response,next)=>{
-    Solicitud.deleteOne(request.body.id_solicitud)
-      .then(([rowsSolicitud,fieldData])=>{
-        response.status(200).json({});
+  Solicitud.fetchOne(request.body.id_solicitud)
+    .then(([rowsOneSolicitud, fieldDataOne]) => {
+      Museo.fetchidUsuario(rowsOneSolicitud[0].id_museo_solicitud)
+        .then(([rowsMuseoUsuario, fieldDataMuseoUsuario]) => {
+          User.fetchMuseoCorreo(rowsMuseoUsuario[0].id_user_museo)
+            .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => { //rowsUsuarioMuseo[0].correo_user
+              Solicitud.correoElimina_send(rowsOneSolicitud[0].id_solicitud, 'A01707035@tec.mx', rowsOneSolicitud[0].info_adicional, rowsOneSolicitud[0].fecha_hora_sol, rowsOneSolicitud[0].num_asistentes)
+                .then(([rowsEliminaCorreo, fieldDataCorreo]) => {       
+                  Solicitud.deleteOne(request.body.id_solicitud)
+                    .then(([rowsSolicitud,fieldData])=>{
+                      response.status(200).json({});
+                  }).catch(err => console.log(err));
+              }).catch(err => console.log(err));
+          }).catch(err => console.log(err));
       }).catch(err => console.log(err));
-  };
+  }).catch(err => console.log(err));
+};
 
   exports.agrega_solicitud=(request,response,next)=>{
     var date = new Date();
@@ -57,7 +69,7 @@ exports.elimina_solicitud=(request,response,next)=>{
     const id_status = request.params.id_status
     Solicitud.aceptar_status(id_status)
     .then(([rowsUpdate,fieldData])=>{
-      response.status(200).json({});
+      response.render('update_solicitud');
     }).catch(err => console.log(err));
   };
 
@@ -65,6 +77,6 @@ exports.elimina_solicitud=(request,response,next)=>{
     const id_status = request.params.id_status
     Solicitud.negar_status(id_status)
     .then(([rowsUpdate,fieldData])=>{
-      response.status(200).json({});
+      response.render('update_solicitud');
     }).catch(err => console.log(err));
   };
