@@ -13,7 +13,7 @@ const transporter= nodemailer.createTransport({
 
 var cron = require('node-cron');
 
-cron.schedule('00 * * * *', () => {
+cron.schedule('* */1 * * *', () => {
   console.log('FUNCIONA NODECRON');
 });
 

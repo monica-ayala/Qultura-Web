@@ -24,8 +24,11 @@ exports.elimina_solicitud=(request,response,next)=>{
     .then(([rowsOneSolicitud, fieldDataOne]) => {
       Museo.fetchidUsuario(rowsOneSolicitud[0].id_museo_solicitud)
         .then(([rowsMuseoUsuario, fieldDataMuseoUsuario]) => {
+          console.log("CONSOLELOG 1111")
           User.fetchMuseoCorreo(rowsMuseoUsuario[0].id_user_museo)
             .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => { //rowsUsuarioMuseo[0].correo_user
+              console.log(rowsUsuarioMuseo[0].correo_user)
+              console.log("CONSOLELOG 22222")
               Solicitud.correoElimina_send(rowsOneSolicitud[0].id_solicitud, 'A01706897@tec.mx', rowsOneSolicitud[0].info_adicional, rowsOneSolicitud[0].fecha_hora_sol, rowsOneSolicitud[0].num_asistentes) 
               Solicitud.deleteOne(request.body.id_solicitud)
                 .then(([rowsSolicitud,fieldData])=>{
