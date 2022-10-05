@@ -1,101 +1,93 @@
-<%- include('includes/header.ejs') %><div id="index-banner" class="parallax-container">
+<%- include('includes/header.ejs') %>
   <main>
-    
-    <div class="section no-pad-bot">
-        <div class="container">
-          <br><br>
-          <h1 id="welcome" class="header white-text text-lighten-2"> </h1>
-          <div class="row">
-            <h5 class="header col s12 white-text"> Conoce el estado de Querétaro. Conoce su cultura. </h5>
+    <div class="row">
+      <div class="content-wrapper-before blue-gradient" style="height:250px"">
+        <img class="parallax-img" style="object-fit: cover; height:250px;width: 100%;opacity: 0.2;" src="/img/login.jpg"/>
+      </div>
+      <div class="breadcrumbs-dark pb-0 pt-4">
+        <div class="container-pers">
+          <div class="row margin-0">
+            <h3 class="white-text"> Administración de la aplicación móvil de Qultura </h3>     
           </div>
-          <br><br>
         </div>
       </div>
-      <div class="parallax"><img src="/img/queretaro-dark.jpg" alt="background querétaro"></div>
-    </div>
-  
-  
-    <div class="container">
-        <div class="row flex">
+
+      <!-- Main Page -->
+      <div class="col s12">
+        <div class="container-pers">
+              <!-- <a href="/museo/nuevo_museo" style="margin-top: 40px; margin-bottom: 0px;" class="waves-effect waves-light btn primary-color"><i class="material-icons left">add_box</i>Nuevo</a> -->
+            
+          <div class="row">  
+            <ul id ="cards" class="cards">
+              <% for (let museo of museos){%>
+                <%if(museo.status == 1){%>
+                  <li class="card-pers card-panel z-depth-3 border-radius-6 mt-10 card-animation-1">
+                    <a class="margin-0 center-align">
+                      <img class="imgr border-radius-8 z-depth-4 image-n-margin" src="/uploads/<%=museo.imgP_museo%>">
+                    </a>
+                    <h6 class="primary-color-txt text-darken-3 mt-5"><b><%=museo.nom_museo%></b></h6><br>
+                    <span>
+                      <div class="valign-wrapper"> <i class="material-icons space-icon"> call </i>  <p class="no-spacing"> Tel: <%=museo.num_museo%> </p> </div>
+                      <p><%=museo.desc_museo.substring(0, 90)%> . . .</p>
+                    </span>
+                    <div class="display-flex justify-content-between flex-wrap  mt-4">
+                      <div class="display-flex mt-3 right-align social-icon">
+                        <a href="/museo/<%=museo.id_museo%>" class="primary-color-txt"> <i class="material-icons">edit </i>  </a>
+                        <a onclick="deleteMuseum(this)" id="<%=museo.id_museo%>" class="primary-color-txt"> <i class="material-icons">delete</i> </a>
+                      </div>
+                    </div>
+                  </li>
+                <%}%>
+              <%}%>
+            </ul>
+          </div>
+
+          <div class="row flex">
             <div class="col s10">
-              <h4 class="text-bold"> Lista de museos </h4>
-            </div>
+              <h4 class="text-bold"> Lista de eventos </h4>
+            </div>   
             <div class="col s2">
-              
-              <a href="/museo/nuevo_museo" style="margin-top: 40px; margin-bottom: 0px;" class="waves-effect waves-light btn primary-color"><i class="material-icons left">add_box</i>Nuevo</a>
-            </div>
-          
-            
-         
-        </div>
-          
-        <ul id ="cards" class="cards">
-          <% for (let museo of museos){%>
-            <%if(museo.status == 1){%>
-          <li class="card-panel card-pers hoverable" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/uploads/<%=museo.imgP_museo%>') no-repeat; background-size: cover;">
-            
-            <div>
-              <a href="/museo/<%=museo.id_museo%>" class="btn-floating green card-link" style="float:right;margin:0px;margin-left:10px"> <i class="material-icons">edit</i> </a>
-              <a onclick="deleteMuseum(this)" id="<%=museo.id_museo%>" class="btn-floating red card-link" style="float:right;margin:0px"> <i class="material-icons">delete</i> </a>
-              <h3 class="card-title white-text"><%=museo.nom_museo%></h3>
-              
-              <div class="card-content white-text">
-                <p> Tel: <%=museo.num_museo%> 
-                </p>
-                <p><%=museo.desc_museo.substring(0, 100)%> . . .</p>
-              </div>
-            </div>
-            
-          </li>
-          <%}%>
-          <%}%>
-        </ul>
-  
-  
-  
-  
-        <div class="row flex">
-          <div class="col s10">
-            <h4 class="text-bold"> Lista de eventos </h4>
-          </div>   
-          <div class="col s2">
-              
-            <a href="/evento/nuevo_evento" style="margin-top: 40px; margin-bottom: 0px;" class="waves-effect waves-light btn primary-color"><i class="material-icons left">add_box</i>Nuevo</a>
-          </div>   
-      </div>
-        <ul id="cardsevents"class="cards">
-          <% for (let evento of eventos){%>
-            
-              <li class="card-panel card-pers hoverable" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/uploads/<%=evento.multimedia_evento%>') no-repeat; background-size: cover;">
-            
-                <div>
-                  <a onclick="deleteEvento(this)" id="<%=evento.id_evento%>" class="btn-floating red card-link" style="float:right;margin:0px"> <i class="material-icons">delete</i> </a>
-                  <h3 class="card-title white-text"><%=evento.info_evento%></h3>
-                  
-                  <div class="card-content white-text">
-                    <p> Fecha Inicio: <%=evento.fecha_hora_evento.substring(0,10)%> 
-                    </p>
-                    <p>Fecha Fin: <%=evento.fecha_hora_evento.substring(11,21)%>
-                    </p>
-                    <p>Hora Inicio: <%=evento.fecha_hora_evento.substring(22,27)%>
-                    </p>
-                    <p>Hora Fin: <%=evento.fecha_hora_evento.substring(27,39)%>
-                    </p>
-                    <p>
-                      Tags: 
-                      <% for (let tag of tags){%>
-                        <% if (evento.id_evento == tag.id_evento_tag){ %>
-                          <%= tag.nom_tag %>
-                        <%}%>
+              <a href="/evento/nuevo_evento" style="margin-top: 40px; margin-bottom: 0px;" class="waves-effect waves-light btn primary-color"><i class="material-icons left">add_box</i>Nuevo</a>
+            </div>   
+          </div>
+          <div class="row">
+            <ul id="cardsevents" class="cards">
+              <% for (let evento of eventos){%>
+                  <li class="card-pers card-panel z-depth-3 border-radius-6 mt-10 card-animation-1">
+                    <a class="margin-0 center-align">
+                      <img class="imgr border-radius-8 z-depth-4 image-n-margin" src="/uploads/<%=evento.multimedia_evento%>">
+                    </a>
+                    <h6 class="primary-color-txt text-darken-3 mt-5"><b><%=evento.info_evento%></b></h6>
+                    <span>
+                      <%if( evento.fecha_hora_evento.substring(0,10) === evento.fecha_hora_evento.substring(11,21) ){%>
+                        <div class="valign-wrapper"> <i class="material-icons space-icon"> calendar_month </i> <p> Fecha: <%=evento.fecha_hora_evento.substring(0,10)%> </p></div>
+                      <%}else{%>
+                        <div class="valign-wrapper"> <i class="material-icons space-icon"> calendar_month </i><p> Fecha: <%=evento.fecha_hora_evento.substring(0,10)%> - <%=evento.fecha_hora_evento.substring(11,21)%></p></div>
                       <%}%>
-                    </p>                  
-                  </div>
-                </div>
-              </li>
-          <%}%>
-        </ul>
-    </div>
+                      <div class="valign-wrapper">  <i class="material-icons space-icon"> schedule </i> <p>Horario: <%=evento.fecha_hora_evento.substring(22,27)%> - <%=evento.fecha_hora_evento.substring(27,39)%> </p></div>
+                          <% for (let tag of tags){%>
+                            <% if (evento.id_evento == tag.id_evento_tag){ %>
+                              <div class="chip">
+                                <%= tag.nom_tag %>
+                              </div>
+                            <%}%>
+                          <%}%>
+                      </p> 
+                    </span>
+                    <div class="display-flex justify-content-between flex-wrap  mt-4">
+                      <div class="display-flex mt-3 right-align social-icon">
+                        <a onclick="deleteEvento(this)" id="<%=evento.id_evento%>" class="primary-color-txt"> <i class="material-icons">delete</i> </a>
+                      </div>
+                    </div>
+                  </li>
+              <%}%>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>     
   </main>
+
   <script src="/js/script_delete_museo.js"></script>
   <script src="/js/script_delete_evento.js"></script>
   <%- include('includes/footer.ejs') %>
