@@ -131,9 +131,19 @@ exports.get_Onemuseo = (request, response, next) => {
   
 };
 
-exports.museo_update = (request, response, next) => {
-  if (request.session.id_museo == request.body.id_museo){
     
+exports.api_get_one = (request, response, next) => {
+  Museo.fecthOne(request.params.id_museo)
+  .then(([rowsMuseos,fieldData])=>{
+    response.status(200).json({
+      museos:rowsMuseos
+    });
+  })
+  .catch(err=>console.log(err));
+ };
+
+exports.museo_update = (request,response,next)=>{
+  if (request.session.id_museo == request.body.id_museo || request.session.id_museo == 1){
   url_imagen = request.file;
   if (typeof url_imagen == "undefined") {
     url_imagen = request.body.museo_url;

@@ -43,4 +43,8 @@ module.exports = class Museo{
         );
     }
 
+    static fetchidUsuario(id_museo){
+        return db.execute('SELECT id_user_museo FROM User_Museo WHERE id_museo_user = ?',[id_museo])
+    }
+
 }
