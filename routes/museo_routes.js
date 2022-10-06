@@ -5,6 +5,10 @@ const path = require('path');
 const isAuth= require ('../util/is-auth.js')
 const museo_controller = require('../controllers/museo_controller');
 
+// API REST
+router.get('/get',museo_controller.get_museo_api);
+router.get('/getAll',museo_controller.get_all_api);
+
 // Museo controller calls
 router.get('/',isAuth,museo_controller.lista);
 router.get('/nuevo_museo',isAuth,museo_controller.get_nuevo)
@@ -34,8 +38,6 @@ router.post('/:id_museo/:id_sala/:id_obra',isAuth,obra_controller.update);
 router.get('/:id_museo/:id_sala/:id_obra',isAuth,obra_controller.update_get);
 router.post('/:id_museo/:id_sala/:id_obra/borrar',isAuth,obra_controller.delete);
 
-// API REST
-router.get('/get',museo_controller.get_museo_api);
-router.get('/getAll',museo_controller.get_all_api);
+
 
 module.exports = router;
