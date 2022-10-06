@@ -80,10 +80,17 @@ exports.login_post = (request, response, next) => {
               request.session.correo = usuario.correo_user;
               Usuario.getId(request.session.correo)
                 .then(([rowsid, fieldData]) => {
-                  request.session.id_usuario = rowsid[0].Id_Usuario;
-                  return request.session.save((err) => {
-                    response.redirect("/");
-                  });
+                  request.session.id_usuario = rowsid[0].id_user;
+                  Usuario.getMuseum(rowsid[0].id_user)
+                  .then(([rowsMuseum])=>{
+                    request.session.id_museo = rowsMuseum[0].id_museo_user
+                    return request.session.save((err) => {
+                      response.redirect("/");
+                    });
+                  }).catch((err)=>{
+                    console.log(err);
+                  })
+                  
                 })
                 .catch((err) => {
                   console.log(err);
