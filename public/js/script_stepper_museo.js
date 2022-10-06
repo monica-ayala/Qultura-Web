@@ -5,9 +5,11 @@ var stepperInstace = new MStepper(stepper, {
 })
 
 function addSalas(){
-    var elements = '<li class="step active"> <div class="step-title waves-effect"> SECOND </div> <div class="step-content"><input><div>2</div><div class="step-actions"><button class="waves-effect waves-dark btn next-step">CONTINUE</button></div></div></li>'
-    var addedSteps = stepperInstace.activateStep(elements, 2);
+    var elements = '<li class="step"><div class="step-title waves-effect"> Sala </div><div class="step-content"><div class="input-field col s10 offset-s1"><textarea id="desc_museo" name="desc_museo" class="materialize-textarea validate"></textarea><label for="desc_museo"> Descripción </label></div><div> QUILL TEXT EDITOR? </div><div class="step-actions"><div class="row"><div class="col"> <button class="red btn btn-reset" type="reset"> Resetear <i class="material-icons left"> clear </i>  </button> </div><div class="col"> <button class="btn light-blue-secondary previous-step"> Anterior  <i class="material-icons left"> arrow_back </i> </button> </div><div class="col"> <button class="waves-effect waves dark btn light-blue-secondary next-step" type="reset"> Siguiente <i class="material-icons right"> arrow_forward </i> </button> </div></div></div></div></li>'
+    var addedSteps = stepperInstace.activateStep(elements, 3);
 }
+
+
 
 // var elements;
 // // The element can be a string:
