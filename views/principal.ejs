@@ -15,10 +15,9 @@
 
     <!-- Main Page -->
     <div class="col s12">
-      <div class="container-pers">
-        <!-- <a href="/museo/nuevo_museo" style="margin-top: 40px; margin-bottom: 0px;" class="waves-effect waves-light btn primary-color"><i class="material-icons left">add_box</i>Nuevo</a> -->
-
+      <div class="container-pers" style="position:relative">
         <div class="row">
+          <a href="/museo/nuevo_museo" style="position:absolute;top:20%;left:100%" class="waves-effect waves-light btn-floating primary-color"><i class="material-icons left">add</i></a>
           <ul id="cards" class="cards">
             <% for (let museo of museos){%>
               <%if(museo.status==1){%>
