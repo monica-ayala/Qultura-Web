@@ -24,6 +24,7 @@ exports.lista = (request, response, next) => {
                 museos: rowsMuseos,
                 eventos: rowsEventos,
                 tags: rowsTags,
+                session: request.session.id_museo
               });
             })
             .catch((err) => console.log(err));
@@ -111,13 +112,18 @@ exports.soft_unerase = (request, response, next) => {
 };
 
 exports.get_Onemuseo = (request, response, next) => {
-  Museo.fecthOne(request.params.id_museo)
+  if(request.params.id_museo == request.session.id_museo){
+    Museo.fecthOne(request.params.id_museo)
     .then(([rowsMuseos, fieldData]) => {
       response.render("museo_registrar", {
         museos: rowsMuseos,
       });
     })
     .catch((err) => console.log(err));
+  }else{
+    response.redirect('/')
+  }
+  
 };
 
 exports.api_get_one = (request, response, next) => {
