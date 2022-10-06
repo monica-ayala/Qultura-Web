@@ -217,6 +217,7 @@ exports.login_post = (request, response, next) => {
     .then(([rows,fieldData])=>{ 
       Usuario.updateMuseum(request.body.id_user,request.body.id_museo)
       .then(([rowsMuseo,fieldData])=>{
+        request.session.id_museo = request.body.id_museo;
         response.status(200).json({})
       }).catch(err=>console.log(err));
     }).catch(err=>console.log(err));

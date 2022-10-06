@@ -40,12 +40,13 @@
                   </span>
                   <div class="display-flex justify-content-between flex-wrap  mt-4">
                     <div class="display-flex mt-3 right-align social-icon">
-                      <% if (session == museo.id_museo){%>
+                      <% if (session == museo.id_museo || session == 1){%>
                         <a href="/museo/<%=museo.id_museo%>" class="primary-color-txt"> <i class="material-icons">edit
                         </i> </a>
-                      <%}%>
-                      <a onclick="deleteMuseum(this)" id="<%=museo.id_museo%>" class="primary-color-txt"> <i
+                        <a onclick="deleteMuseum(this)" id="<%=museo.id_museo%>" class="primary-color-txt"> <i
                           class="material-icons">delete</i> </a>
+                      <%}%>
+                      
                     </div>
                   </div>
                 </li>

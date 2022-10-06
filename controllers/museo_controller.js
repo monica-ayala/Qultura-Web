@@ -94,12 +94,17 @@ exports.museo_post = (request, response, next) => {
 };
 
 exports.soft_erase = (request, response, next) => {
-  Museo.softErase(request.params.id_museo, 0);
+  if (request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
+    Museo.softErase(request.params.id_museo, 0);
   Museo.fetchList()
     .then(([rowsMuseos, fieldData]) => {
       response.status(200).json({ museos: rowsMuseos });
     })
     .catch((err) => console.log(err));
+  }else{
+    response.redirect('/')
+  }
+  
 };
 
 exports.soft_unerase = (request, response, next) => {
@@ -112,7 +117,7 @@ exports.soft_unerase = (request, response, next) => {
 };
 
 exports.get_Onemuseo = (request, response, next) => {
-  if(request.params.id_museo == request.session.id_museo){
+  if(request.params.id_museo == request.session.id_museo || request.session.id_museo == 1){
     Museo.fecthOne(request.params.id_museo)
     .then(([rowsMuseos, fieldData]) => {
       response.render("museo_registrar", {
@@ -127,6 +132,8 @@ exports.get_Onemuseo = (request, response, next) => {
 };
 
 exports.museo_update = (request, response, next) => {
+  if (request.session.id_museo == request.body.id_museo){
+    
   url_imagen = request.file;
   if (typeof url_imagen == "undefined") {
     url_imagen = request.body.museo_url;
@@ -145,4 +152,8 @@ exports.museo_update = (request, response, next) => {
       response.redirect("/");
     })
     .catch((err) => console.log(err));
+
+  }else{
+    response.redirect('/')
+  }
 };
