@@ -9,6 +9,51 @@ function addSalas(){
     var addedSteps = stepperInstace.activateStep(elements, 3);
 }
 
+$(document).ready(function() {
+    $("#uploadForm").submit(function() {
+        var img = new FormData($('#uploadForm')[0]);
+        let filetype = document.getElementById("event").value
+        let route = '/uploads'+filetype
+        $.ajax({
+            url: routes,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: img
+        })
+    });
+});
+
+function submitMuseum(){
+    let nom_museo = document.getElementById("nom_museo")
+    let num_museo = document.getElementById("num_museo")
+    let ubicacion_museo = document.getElementById("ubicacion_museo")
+    let desc_museo = document.getElementById("desc_museo")
+    let ruta = '/museo/nuevo_museo'
+
+    let data = {
+        "nom_museo": nom_museo.value,
+        "num_museo": num_museo.value,
+        "ubicacion_museo": ubicacion_museo.value,
+        "desc_museo": desc_museo.value
+    }
+    // Asynchronous post
+    fetch(ruta, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+        
+    }).catch(err => {
+        console.log(err);
+    });
+
+}
 
 
 // var elements;

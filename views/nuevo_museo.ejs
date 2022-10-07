@@ -22,6 +22,12 @@
                                      <div class="col s5">
                                          <div class="row valign-wrapper">
                                              <div class="col s10">
+                                                <form id="uploadForm"  enctype="multipart/form-data">
+                                                    <input type="file" name="uploadFile" id="uploadFile">
+                                                    <input type="text" name="event" id="event" value="museo" style="display:none">
+                                                    <input type="submit" value="upload">
+                                                </form>
+
                                                  <div class="card imgPicker">
                                                      <div class="card-image">
                                                          <img class="imgPicker imgP" src="/img/no-img.jpg">
@@ -101,6 +107,7 @@
                                             <div class="col"> <button class="red btn btn-reset" type="reset"> Resetear <i class="material-icons left"> clear </i>  </button> </div>
                                             <div class="col"> <button class="btn light-blue-secondary previous-step"> Anterior  <i class="material-icons left"> arrow_back </i> </button> </div>
                                             <div class="col"> <button class="waves-effect waves dark btn light-blue-secondary next-step" type="reset"> Siguiente <i class="material-icons right"> arrow_forward </i> </button> </div>
+                                            <div class="col"> <button onclick="submitMuseum()" class="waves-effect waves dark btn light-blue-secondary"> Submit <i class="material-icons right"> arrow_forward </i> </button> </div>
                                         </div>
                                     </div>
                                  </div>

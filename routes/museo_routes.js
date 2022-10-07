@@ -4,6 +4,7 @@ const filesystem = require('fs');
 const path = require('path');
 const isAuth= require ('../util/is-auth.js')
 const museo_controller = require('../controllers/museo_controller');
+const uploads_controller = require('../controllers/archivos_controller');
 
 // Museo controller calls
 router.get('/',isAuth,museo_controller.lista);

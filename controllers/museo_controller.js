@@ -69,13 +69,14 @@ exports.register = (request, response, next) => {
 };
 
 exports.museo_post = (request, response, next) => {
-  url_imagen = request.file;
-  if (typeof url_imagen == "undefined") {
-    url_imagen = "";
-  } else {
-    url_imagen = request.file.filename;
-  }
+  // url_imagen = request.file;
+  // if (typeof url_imagen == "undefined") {
+  //   url_imagen = "";
+  // } else {
+  //   url_imagen = request.file.filename;
+  // }
   link_ubi = "placeholder";
+  url_imagen = "placeholder";
   const nuevo_museo = new Museo(
     request.body.nom_museo,
     request.body.desc_museo,
@@ -85,6 +86,7 @@ exports.museo_post = (request, response, next) => {
     url_imagen,
     url_imagen
   );
+  console.log(nuevo_museo)
   nuevo_museo
     .save()
     .then((result) => {
