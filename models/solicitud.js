@@ -6,7 +6,7 @@ const { callbackPromise } = require('nodemailer/lib/shared');
 const transporter= nodemailer.createTransport({
     service: "hotmail",
     auth : {
-        user: "qultura_no_reply@outlook.com",
+        user: "No_reply_Qulturapp@outlook.com",
         pass: "U4@4*s*7mqjF"
     }
 });
@@ -14,7 +14,7 @@ const transporter= nodemailer.createTransport({
 var cron = require('node-cron');
 
 cron.schedule('* */1 * * *', () => {
-  console.log('FUNCIONA NODECRON');
+    console.log("AAAAAAAAAAAAAA")
 });
 
 
