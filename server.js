@@ -56,6 +56,7 @@ app.use('/obra', obra_routes);
 app.use('/evento',evento_routes);
 app.use('/usuario', usuario_routes);
 app.use('/links', links_routes);
+app.use('/solicitud', solicitud_routes);
 app.use('/', museo_routes);
 
 app.use((request, response, next) => {
