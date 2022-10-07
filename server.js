@@ -15,7 +15,6 @@ const sala_routes = require('./routes/sala_routes')
 const obra_routes = require('./routes/obra_routes')
 const evento_routes = require('./routes/evento_routes')
 const links_routes = require('./routes/links_routes')
-const uploads_routes = require('./routes/upload_routes')
 
 // Initialize express app
 const app = express();
@@ -58,7 +57,6 @@ app.use('/evento',evento_routes);
 app.use('/usuario', usuario_routes);
 app.use('/solicitud', solicitud_routes);
 app.use('/links', links_routes);
-app.use('/uploads',uploads_routes)
 app.use('/', museo_routes);
 
 app.use((request, response, next) => {
