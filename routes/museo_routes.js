@@ -4,7 +4,6 @@ const filesystem = require('fs');
 const path = require('path');
 const isAuth= require ('../util/is-auth.js')
 const museo_controller = require('../controllers/museo_controller');
-const uploads_controller = require('../controllers/archivos_controller');
 
 // API REST
 router.get('/get',museo_controller.get_museo_api);
