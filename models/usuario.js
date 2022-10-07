@@ -2,6 +2,8 @@ const db = require('../util/database');
 const bcrypt = require('bcryptjs');
 
  module.exports = class Usuario{
+
+    // Constructor for class user
      constructor(nombre, correo, contrasena) {
          this.nom_user = nombre,
          this.correo_user = correo,
@@ -9,6 +11,7 @@ const bcrypt = require('bcryptjs');
          this.id_rol = 4
      }
 
+    // New user
      save() {
 
         return bcrypt.hash(this.password_user, 12)
@@ -23,6 +26,7 @@ const bcrypt = require('bcryptjs');
         });
     }
 
+    // Methods for new user
     static AssignMuseo(ide_user){
         return db.execute('INSERT INTO User_Museo(id_user_museo, id_museo_user) VALUES (?,?)', [ide_user,1])
     }
@@ -54,12 +58,21 @@ const bcrypt = require('bcryptjs');
         
     }
 
+    static fetchMuseoCorreo(id_user){
+        return db.execute('SELECT correo_user FROM User WHERE id_user=?', [id_user])
+
+    }
+    
     static getId(login)
     {
         return db.execute('SELECT id_user FROM User WHERE correo_user=?',
             [login])
         .then()
         .catch((err) => {console.log(err);});
+    }
+
+    static getMuseum(id_usuario){
+        return db.execute('SELECT id_museo_user FROM User_Museo WHERE id_user_museo=?',[id_usuario])
     }
 
     static softErase(ide_user){
