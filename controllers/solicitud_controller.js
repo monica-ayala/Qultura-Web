@@ -36,11 +36,12 @@ exports.elimina_solicitud=(request,response,next)=>{
   exports.agrega_solicitud=(request,response,next)=>{
     var date = new Date();
 	  var current_time = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
-    const solicitud_nueva = new Solicitud(request.body.info_adicional, current_time, request.body.fecha_hora_sol, request.body.num_Visitantes, 2, request.body.usuario_necesidad);
-    //Museo.fetchidUsuario(request.body.id_museo)
-      //.then(([rowsMuseoUsuario, fieldDataMuseoUsuario]) => {
-        //User.fetchMuseoCorreo(rowsMuseoUsuario[0].id_user_museo)
-          //.then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => { rowsUsuarioMuseo[0].correo_user
+    const solicitud_nueva = new Solicitud(request.body.info_adicional, current_time, request.body.fecha_hora_sol, request.body.num_Visitantes, request.body.id_museo, request.body.usuario_necesidad);
+    Museo.fetchidUsuario(request.body.id_museo)
+      .then(([rowsMuseoUsuario, fieldDataMuseoUsuario]) => {
+        User.fetchMuseoCorreo(rowsMuseoUsuario[0].id_user_museo)
+          .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => { //rowsUsuarioMuseo[0].correo_user
+            console.log(rowsUsuarioMuseo[0].correo_user)
             solicitud_nueva.solicitud_save()
               .then(() => {
                 if(request.body.necesidades.length != 0){
@@ -48,16 +49,15 @@ exports.elimina_solicitud=(request,response,next)=>{
                     .then(([rowLastSolicitud, fieldDatalastSolicitud]) => {
                       Solicitud.correo_send(rowLastSolicitud[0].LastSolicitud, request.body.necesidades_text , 'A01706897@tec.mx', request.body.info_adicional, request.body.fecha_hora_sol, request.body.num_Visitantes)
                       for(var i = 0; i < request.body.necesidades.length; i++){
-                        console.log(rowLastSolicitud)
                         Solicitud.necesidades_save(rowLastSolicitud[0].LastSolicitud, request.body.necesidades[i],request.body.info_adicional,request.body.fecha_hora_sol, request.body.num_Visitantes,)
-                        .then()
+                        .then(response.status(200).json({}))
                         .catch(err => console.log(err));
                       }
                     }).catch(err => console.log(err));
                 }
             }).catch(err => console.log(err));
-        //}).catch(err => console.log(err));
-      //}).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+      }).catch(err => console.log(err));
   };
 
   exports.updateAceptar_solicitud=(request,response,next)=>{
