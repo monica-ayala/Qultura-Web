@@ -12,13 +12,14 @@ function deleteMuseum(element){
 
     // Validation of delete with swal alert
     Swal.fire({
-        title: '¿Estas seguro?',
+        title: '¿Estás seguro?',
         text: "Después de borrar un museo este no se podrá recuperar, sus salas y obras también se eliminarán.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, elimínalo'
+        confirmButtonText: 'Sí, elimínalo',
+        cancelButtonText: 'Cancelar'
       }).then((result) => {
         if (result.isConfirmed) {
             // Asynchronous POST

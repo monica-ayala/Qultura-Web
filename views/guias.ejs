@@ -34,7 +34,7 @@
                         <a class="blue-gradient-btn btn-large hoverable" href="/guias/editar_guia/<%=guia.id_guia%>">
                             Editar Guía
                         </a>
-                        <a class="red-gradient-btn btn-small hoverable" href="/guias/eliminar_guia/<%=guia.id_guia%>" style="margin-top: 10px;">
+                        <a class="red-gradient-btn btn-small hoverable" onclick="deleteGuia(this)" id="<%=guia.id_guia%>" style="margin-top: 10px;">
                             Eliminar Guía
                         </a>
                 </div>
@@ -67,6 +67,6 @@
     <% } %>         
 
 </div>
-
+<script src="/js/script_delete_user.js"></script>
 
 <%- include('includes/footer.ejs') %>
