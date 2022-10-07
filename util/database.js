@@ -29,7 +29,6 @@ const DB_LOCAL = {
     password: ''
 };
 
-const pool = mysql.createPool(DB_INTERLINK);
-
-
+// Current database
+const pool = mysql.createPool(DB_LOCAL);
 module.exports = pool.promise();

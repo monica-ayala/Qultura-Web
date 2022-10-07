@@ -14,11 +14,10 @@
     </div>
 
     <!-- Main Page -->
-    <div class="col s12">
-      <div class="container-pers">
-        <!-- <a href="/museo/nuevo_museo" style="margin-top: 40px; margin-bottom: 0px;" class="waves-effect waves-light btn primary-color"><i class="material-icons left">add_box</i>Nuevo</a> -->
-
+    <div class="col s12 margin-0" style="padding:0px">
+      <div class="container-pers" style="position:relative">
         <div class="row">
+          <a href="/museo/nuevo_museo" style="position:absolute;top:40%;left:100%" class="waves-effect waves-light btn-floating primary-color"><i class="material-icons left">add</i></a>
           <ul id="cards" class="cards">
             <% for (let museo of museos){%>
               <%if(museo.status==1){%>
@@ -54,17 +53,19 @@
                   <%}%>
           </ul>
         </div>
-
+      </div>
+        <div class="col s10 blue-gradient eventos-card">
+          <h3> Eventos de la secretaría de cultura</h3>
+        </div>
+      
+      <div class="container-pers">
         <div class="row flex">
-          <div class="col s10">
-            <h4 class="text-bold"> Lista de eventos </h4>
-          </div>
           <div class="col s2">
             <a href="/evento/nuevo_evento" style="margin-top: 40px; margin-bottom: 0px;"
               class="waves-effect waves-light btn primary-color"><i class="material-icons left">add_box</i>Nuevo</a>
           </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-top:0px !important">
           <ul id="cardsevents" class="cards">
             <% for (let evento of eventos){%>
               <li class="card-pers card-panel z-depth-3 border-radius-6 mt-10 card-animation-1">
