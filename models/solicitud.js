@@ -65,7 +65,7 @@ module.exports = class Solicitud{
 
     static correo_send(id_solicitud, necesidades, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
         const options= {
-            from: "qultura_no_reply@outlook.com",
+            from: "No_reply_Qulturapp@outlook.com",
             to: correo_museo,
             subject: "Solicitud especial de recorrido",
             text: "Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + info_adicional + "\n Click aqui para confirmar solicitud : https://qulturaqro.live/solicitud/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : https://qulturaqro.live/solicitud/negar/"+id_solicitud
@@ -76,7 +76,7 @@ module.exports = class Solicitud{
 
     static correoElimina_send(id_solicitud, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
         const options= {
-            from: "qultura_no_reply@outlook.com",
+            from: "No_reply_Qulturapp@outlook.com",
             to: correo_museo,
             subject: "Cancelacion de solicitud de recorrido",
             text: "Se realizo una cancelación para la solicitud de recorrido con id: " + id_solicitud + ".\n Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes
