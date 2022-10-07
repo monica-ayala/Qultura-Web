@@ -47,7 +47,7 @@ function deleteUsuario(element){
 // Delete guía from list
 function deleteGuia(element){
     let id_guia = element.id;
-    let ruta = 'eliminar_guia/' + id_guia;
+    let ruta = '/guias/eliminar_guia/' + id_guia;
     
     Swal.fire({
         title: '¿Estás seguro?',
@@ -62,12 +62,11 @@ function deleteGuia(element){
         if (result.isConfirmed) {
             // Asynchronous call to POST
             fetch(ruta, {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 }
             })
-            .then(response => response.json())
             .then(response => {
                 location.reload();
                 
@@ -82,3 +81,8 @@ function deleteGuia(element){
         }
       })
 }
+
+$(document).ready(function() {
+  $('input#input_text, textarea#textarea2').characterCounter();
+});
+     
