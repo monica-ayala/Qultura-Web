@@ -10,4 +10,7 @@ router.get('/agregarLink', links_controller.get_agregarLink)
 router.post('/agregarLink', links_controller.post_agregarLink)
 router.get('/eliminar_link/:id_link', links_controller.eliminarLink)
 
+// REST API
+router.get('/getAll', links_controller.get_links);
+
 module.exports = router;
