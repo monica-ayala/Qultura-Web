@@ -37,17 +37,17 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-// var storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, 'public/uploads')
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, new Date().getTime() + '-' + file.originalname)
-//   }
-// })
-// var upload = multer({ storage: storage })
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().getTime() + '-' + file.originalname)
+  }
+})
+var upload = multer({ storage: storage })
 
-// app.use(upload.single('url_imagen'))
+app.use(upload.single('url_imagen'))
 
 // Use routes
 app.use('/museo',museo_routes)
