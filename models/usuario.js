@@ -71,6 +71,10 @@ const bcrypt = require('bcryptjs');
         .catch((err) => {console.log(err);});
     }
 
+    static getMuseum(id_usuario){
+        return db.execute('SELECT id_museo_user FROM User_Museo WHERE id_user_museo=?',[id_usuario])
+    }
+
     static softErase(ide_user){
         console.log(ide_user);
         db.execute('DELETE FROM User_Museo WHERE id_user_museo= ?',[ide_user])
