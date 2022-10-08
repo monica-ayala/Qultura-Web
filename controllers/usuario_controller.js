@@ -165,17 +165,36 @@ exports.login_post = (request, response, next) => {
 
  exports.login_movil_post =(request,response,next)=>{
   Usuario.findOne(request.body.us_correo)
-  .then(([rows,fieldData])=>{
-    if(rows.length == 1){
-      response.status(200).json({
-        usuario:rows
-      })
+  .then(([rows, fielData]) => {
+    if (rows.length < 1) {
+      response.status(200).json({ usuario: rows });
     }
-  }).catch((err)=>{
-    console.log(err);
-  })
+    else{
+    const usuario = new Usuario(
+      rows[0].nom_user,
+      rows[0].correo_user,
+      rows[0].password_user,
+      rows[0].id_rol
+    );
+    bcrypt.compare(request.body.us_password, usuario.password_user)
+      .then((doMatch) => {
+        if (doMatch) {
+          response.status(200).json({ usuario: rows });
+        } else {
+          rows = []
+          response.status(200).json({ usuario: rows });
+        }
 
- }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+ };
 
  exports.signup_post_movil = (request, response, next) => {
   const nuevo_usuario = new Usuario(
