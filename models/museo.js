@@ -20,7 +20,7 @@ module.exports = class Museo{
     }
 
     static fetchList(){
-        return db.execute('SELECT * FROM Museo');
+        return db.execute('SELECT * FROM Museo WHERE status = 1');
     }
 
     static fetchOne(id_museo){
