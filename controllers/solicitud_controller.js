@@ -40,13 +40,13 @@ exports.elimina_solicitud=(request,response,next)=>{
     Museo.fetchidUsuario(request.body.id_museo)
       .then(([rowsMuseoUsuario, fieldDataMuseoUsuario]) => {
         User.fetchMuseoCorreo(rowsMuseoUsuario[0].id_user_museo)
-          .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => { //rowsUsuarioMuseo[0].correo_user
+          .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
             solicitud_nueva.solicitud_save()
               .then(() => {
                 if(request.body.necesidades.length != 0){
                   Solicitud.solicitud_fetch_lastinsertion()
                     .then(([rowLastSolicitud, fieldDatalastSolicitud]) => {
-                      Solicitud.correo_send(rowLastSolicitud[0].LastSolicitud, request.body.necesidades_text , 'A01706897@tec.mx', request.body.info_adicional, request.body.fecha_hora_sol, request.body.num_Visitantes)
+                      Solicitud.correo_send(rowLastSolicitud[0].LastSolicitud, request.body.necesidades_text , rowsUsuarioMuseo[0].correo_user, request.body.info_adicional, request.body.fecha_hora_sol, request.body.num_Visitantes)
                       for(var i = 0; i < request.body.necesidades.length; i++){
                         Solicitud.necesidades_save(rowLastSolicitud[0].LastSolicitud, request.body.necesidades[i],request.body.info_adicional,request.body.fecha_hora_sol, request.body.num_Visitantes,)
                         .then(()=>{response.status(200).json({})})
