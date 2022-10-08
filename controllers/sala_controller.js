@@ -51,8 +51,8 @@ exports.sala_post = (request, response, next) => {
         request.params.id_museo
       )
       console.log(nueva_sala)
-      nueva_sala.save()
       ruta = "/museo/"+request.params.id_museo+"/sala"
+      nueva_sala.save()
       .then((result) => {
         response.redirect (ruta);
       }).catch(err => console.log(err));  
