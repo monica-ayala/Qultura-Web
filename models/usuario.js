@@ -45,7 +45,7 @@ const bcrypt = require('bcryptjs');
     }
 
     static fecthOne(ide_user){
-        return db.execute('SELECT * FROM User u, Rol r, User_Museo um, Museo m WHERE u.id_user=? AND u.id_rol = r.id_rol AND u.id_user = um.id_user_museo AND um.id_museo_user = m.id_museo',[ide_user]);
+        return db.execute('SELECT * FROM User u, Rol r, User_Museo um, Museo m WHERE u.id_user=? AND u.id_rol = r.id_rol AND u.id_user = um.id_user_museo AND um.id_museo_user = m.id_museo ',[ide_user]);
 
     }
 
@@ -58,6 +58,11 @@ const bcrypt = require('bcryptjs');
         
     }
 
+    static fetchMuseoCorreo(id_user){
+        return db.execute('SELECT correo_user FROM User WHERE id_user=?', [id_user])
+
+    }
+    
     static getId(login)
     {
         return db.execute('SELECT id_user FROM User WHERE correo_user=?',

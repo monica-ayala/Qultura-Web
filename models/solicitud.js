@@ -1,5 +1,22 @@
 const db = require('../util/database');
+const dotenv = require('dotenv');
 //const bcrypt = require('bcryptjs');
+const nodemailer= require('nodemailer');
+const { callbackPromise } = require('nodemailer/lib/shared');
+const transporter= nodemailer.createTransport({
+    service: "hotmail",
+    auth : {
+        user: "No_reply_Qulturapp@outlook.com",
+        pass: "U4@4*s*7mqjF"
+    }
+});
+
+var cron = require('node-cron');
+
+cron.schedule('* */1 * * *', () => {
+    console.log("AAAAAAAAAAAAAA")
+});
+
 
 module.exports = class Solicitud{
 
@@ -27,29 +44,60 @@ module.exports = class Solicitud{
     }
 
     static solicitud_fetch_lastinsertion(){
-        return db.execute('SELECT MAX(id_solicitud) FROM Solicitud');
+        return db.execute('SELECT(SELECT MAX(id_solicitud) FROM Solicitud s) AS LastSolicitud');
     }
 
-    static fetchAll(){
-        return db.execute('SELECT id_solicitud, info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, s.status, m.nom_museo, id_user_solicitud FROM Solicitud s, Museo m WHERE s.id_museo_solicitud = m.id_museo');
+    static fetchOne(id_solicitud){
+        return db.execute('SELECT id_solicitud, info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, id_museo_solicitud, id_user_solicitud FROM Solicitud WHERE id_solicitud = ?', [id_solicitud]);
+    }
+
+    static fetchAll(id_usuario){
+        return db.execute('SELECT id_solicitud, info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, s.status, m.nom_museo, m.imgP_museo, id_user_solicitud FROM Solicitud s, Museo m WHERE s.id_museo_solicitud = m.id_museo AND s.id_user_solicitud = ?', [id_usuario]);
     }
 
     static deleteOne(id_solicitud){
-        db.execute('DELETE FROM Solicitud_Necesidad WHERE id_solicitud_nececidad = ?', [id_solicitud])
+        db.execute('DELETE FROM Solicitud_Necesidad WHERE id_solicitud_necesidad = ?', [id_solicitud])
             .then(([rows, fieldData]) => {
                 return db.execute('DELETE FROM Solicitud WHERE id_solicitud = ?', [id_solicitud])
             })
             .catch(err => console.log(err));
     }
 
+    static correo_send(id_solicitud, necesidades, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
+        const options= {
+            from: "No_reply_Qulturapp@outlook.com",
+            to: correo_museo,
+            subject: "Solicitud especial de recorrido",
+            text: "Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + info_adicional + "\n Click aqui para confirmar solicitud : https://qulturaqro.live/solicitud/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : https://qulturaqro.live/solicitud/negar/"+id_solicitud
+        };
+        transporter.sendMail(options,callbackPromise());
+    }
+
+
+    static correoElimina_send(id_solicitud, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
+        const options= {
+            from: "No_reply_Qulturapp@outlook.com",
+            to: correo_museo,
+            subject: "Cancelacion de solicitud de recorrido",
+            text: "Se realizo una cancelación para la solicitud de recorrido con id: " + id_solicitud + ".\n Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes
+        };
+        transporter.sendMail(options,callbackPromise());
+    }
+
     static necesidades_save(id_solicitud, id_necesidad){
-        return db.execute('INSERT INTO Solicitud_Necesidad (id_solicitud_nececidad, id_necesidad_solicitud) VALUES (?, ?)', 
+        return db.execute('INSERT INTO Solicitud_Necesidad (id_solicitud_necesidad, id_necesidad_solicitud) VALUES (?, ?)', 
             [
                 id_solicitud,
                 id_necesidad
             ]
         )
-    
+    }
+
+    static aceptar_status(id_solicitud){
+        return db.execute('UPDATE Solicitud SET status =? WHERE id_solicitud =?',[ 2 , id_solicitud])  
+    }
+    static negar_status(id_solicitud){
+        return db.execute('UPDATE Solicitud SET status =? WHERE id_solicitud =?',[ 3 , id_solicitud])  
     }
 
 }

@@ -5,8 +5,6 @@ const filesystem = require('fs');
 const bcrypt = require("bcryptjs");
 const { response } = require("express");
 const { redirect } = require("express/lib/response");
-//const { getUnpackedSettings } = require("http2");
-// const { Usuario_Verificar } = require("../models/usuario");
 
  
 exports.view = (request, response, next) => {
@@ -52,86 +50,109 @@ exports.view = (request, response, next) => {
   });
 };
 
-//  exports.login_get = (request, response, next) => {
-//   response.render('login');
-//  };
-
 exports.login_get = (request, response, next) => {
   response.render("login", {
-    //login_usuario??
     correo: request.session.correo ? request.session.correo : "",
     info: "",
   });
 };
-
-//  exports.login_post = (request, response, next) => {
-//   Usuario.findOne(request.body.us_correo)
-//   .then(([rows,fieldData])=>{
-//     if(rows.length == 1){
-//       response.redirect("/")
-//     }
-//   }).catch((err)=>{
-//     console.log(err);
-//   })
-
-//  };
 
 exports.login_post = (request, response, next) => {
   Usuario.findOne(request.body.us_correo)
     .then(([rows, fielData]) => {
       if (rows.length < 1 || rows[0].id_rol !== 4) {
         response.status(200).json({ errores: 1 });
-      }
-      else{
-        
-      const usuario = new Usuario(
-        rows[0].nom_user,
-        rows[0].correo_user,
-        rows[0].password_user,
-        rows[0].id_rol
-        //rows[0]["Contraseña"],
-      );
-      bcrypt.compare(request.body.us_password, usuario.password_user)
-        .then((doMatch) => {
-          let error = 1;
-          if (doMatch) {
-                  error = 0;
-                  request.session.isLoggedIn = true;
-                  request.session.usuario = usuario;
-                  request.session.correo = usuario.correo_user;
-                  Usuario.getId(request.session.correo)
-                    .then(([rowsid, fieldData]) => {
-                      request.session.id_usuario = rowsid[0].id_user;
-                        Usuario.getMuseum(rowsid[0].id_user)
-                          .then(([rowsMusuem,fielData])=>{
-                            request.session.id_museo = rowsMusuem[0].id_museo_user;
-                            return request.session.save((err) => {
-                              //response.status(200).json({ errores: error });  // entender esto
-                              response.redirect("/")
-                            }); 
-                          }).catch((err)=>{
-                            console.log(err)
-                          })
-                          // Aún no se implementa privilegios/RBAC Entonces no se requiere aún esto.
-                          // let privilegios = [];
-                          // for (let privilegio in rowsprivilegios) {
-                          //   privilegios.push(rowsprivilegios[privilegio].Id_Privilegio);
-                          // }
-                          // request.session.privilegios = privilegios;
-                         
-                    })
-                    .catch((err) => {
-                      console.log(err);
+      } else {
+        const usuario = new Usuario(
+          rows[0].nom_user,
+          rows[0].correo_user,
+          rows[0].password_user,
+          rows[0].id_rol
+        );
+        bcrypt
+          .compare(request.body.us_password, usuario.password_user)
+          .then((doMatch) => {
+            let error = 1;
+            if (doMatch) {
+              error = 0;
+              request.session.isLoggedIn = true;
+              request.session.usuario = usuario;
+              request.session.correo = usuario.correo_user;
+              Usuario.getId(request.session.correo)
+                .then(([rowsid, fieldData]) => {
+                  request.session.id_usuario = rowsid[0].id_user;
+                  Usuario.getMuseum(rowsid[0].id_user)
+                  .then(([rowsMuseum])=>{
+                    request.session.id_museo = rowsMuseum[0].id_museo_user
+                    return request.session.save((err) => {
+                      response.redirect("/");
                     });
-          } else {
-            response.status(200).json({ errores: error });
-          }
+                  }).catch((err)=>{
+                    console.log(err);
+                  })
+                  
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            } else {
+              response.status(200).json({ errores: error });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    //   else{
+        
+    //   const usuario = new Usuario(
+    //     rows[0].nom_user,
+    //     rows[0].correo_user,
+    //     rows[0].password_user,
+    //     rows[0].id_rol
+    //     //rows[0]["Contraseña"],
+    //   );
+    //   bcrypt.compare(request.body.us_password, usuario.password_user)
+    //     .then((doMatch) => {
+    //       let error = 1;
+    //       if (doMatch) {
+    //               error = 0;
+    //               request.session.isLoggedIn = true;
+    //               request.session.usuario = usuario;
+    //               request.session.correo = usuario.correo_user;
+    //               Usuario.getId(request.session.correo)
+    //                 .then(([rowsid, fieldData]) => {
+    //                   request.session.id_usuario = rowsid[0].id_user;
+    //                     Usuario.getMuseum(rowsid[0].id_user)
+    //                       .then(([rowsMusuem,fielData])=>{
+    //                         request.session.id_museo = rowsMusuem[0].id_museo_user;
+    //                         return request.session.save((err) => {
+    //                           //response.status(200).json({ errores: error });  // entender esto
+    //                           response.redirect("/")
+    //                         }); 
+    //                       }).catch((err)=>{
+    //                         console.log(err)
+    //                       })
+    //                       // Aún no se implementa privilegios/RBAC Entonces no se requiere aún esto.
+    //                       // let privilegios = [];
+    //                       // for (let privilegio in rowsprivilegios) {
+    //                       //   privilegios.push(rowsprivilegios[privilegio].Id_Privilegio);
+    //                       // }
+    //                       // request.session.privilegios = privilegios;
+                         
+    //                 })
+    //                 .catch((err) => {
+    //                   console.log(err);
+    //                 });
+    //       } else {
+    //         response.status(200).json({ errores: error });
+    //       }
 
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }
     })
     .catch((error) => {
       console.log(error);
@@ -144,17 +165,36 @@ exports.login_post = (request, response, next) => {
 
  exports.login_movil_post =(request,response,next)=>{
   Usuario.findOne(request.body.us_correo)
-  .then(([rows,fieldData])=>{
-    if(rows.length == 1){
-      response.status(200).json({
-        usuario:rows
-      })
+  .then(([rows, fielData]) => {
+    if (rows.length < 1) {
+      response.status(200).json({ usuario: rows });
     }
-  }).catch((err)=>{
-    console.log(err);
-  })
+    else{
+    const usuario = new Usuario(
+      rows[0].nom_user,
+      rows[0].correo_user,
+      rows[0].password_user,
+      rows[0].id_rol
+    );
+    bcrypt.compare(request.body.us_password, usuario.password_user)
+      .then((doMatch) => {
+        if (doMatch) {
+          response.status(200).json({ usuario: rows });
+        } else {
+          rows = []
+          response.status(200).json({ usuario: rows });
+        }
 
- }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+ };
 
  exports.signup_post_movil = (request, response, next) => {
   const nuevo_usuario = new Usuario(
@@ -217,6 +257,7 @@ exports.login_post = (request, response, next) => {
     .then(([rows,fieldData])=>{ 
       Usuario.updateMuseum(request.body.id_user,request.body.id_museo)
       .then(([rowsMuseo,fieldData])=>{
+        request.session.id_museo = request.body.id_museo;
         response.status(200).json({})
       }).catch(err=>console.log(err));
     }).catch(err=>console.log(err));
