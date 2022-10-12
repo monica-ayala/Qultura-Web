@@ -55,6 +55,14 @@ main {
     background: linear-gradient(90deg, rgba(12,26,48,1) 6%, rgba(26,63,125,1) 46%, rgba(37,90,141,1) 100%);
 }
 
+.eventos-card{
+    position: absolute !important;
+    width: 100vw !important;
+    height: 240px !important;
+    z-index:-1;
+    margin: 0 auto !important;
+}
+
 .red-gradient-btn{
     background: linear-gradient(268.61deg, #c13f3f 4.48%, #d90f0f 79.39%);
     border-radius: 15px !important;
