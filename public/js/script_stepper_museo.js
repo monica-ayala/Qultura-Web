@@ -14,7 +14,8 @@ $(document).ready(function() {
         var img = new FormData($('#uploadForm')[0]);
         let filetype = document.getElementById("event").value
         let filename = document.getElementById("filename").value
-        filename = Date.now()+'-imgMuseo'
+        console.log(img)
+        filename = Date.now()+'-imgMuseo.jpg'
         let route = '/uploads/'+filetype+'/'+filename
         $.ajax({
             url: route,
@@ -24,6 +25,32 @@ $(document).ready(function() {
             cache: false,
             data: img
         })
+
+        let ruta = '/museo/nuevo_museo'
+
+        let data = {
+            "nom_museo": nom_museo.value,
+            "num_museo": num_museo.value,
+            "ubicacion_museo": ubicacion_museo.value,
+            "desc_museo": desc_museo.value,
+            "imgP_museo": filename,
+            "imgB_museo": filename
+        }
+        // Asynchronous post
+        fetch(ruta, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(response => {
+            
+        }).catch(err => {
+            console.log(err);
+        });
+
     });
 
     $("#uploadForm2").submit(function() {
@@ -40,6 +67,32 @@ $(document).ready(function() {
             cache: false,
             data: img
         })
+
+        let ruta = '/museo/nuevo_museo'
+
+    let data = {
+        "nom_museo": nom_museo.value,
+        "num_museo": num_museo.value,
+        "ubicacion_museo": ubicacion_museo.value,
+        "desc_museo": desc_museo.value,
+        "imgP_museo": filename,
+        "imgB_museo": filename
+    }
+    // Asynchronous post
+    fetch(ruta, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+        
+    }).catch(err => {
+        console.log(err);
+    });
+
     });
 });
 
@@ -48,13 +101,17 @@ function submitMuseum(){
     let num_museo = document.getElementById("num_museo")
     let ubicacion_museo = document.getElementById("ubicacion_museo")
     let desc_museo = document.getElementById("desc_museo")
+    let filename = document.getElementById("filename").value
+    let filename2 = document.getElementById("filename2").value
     let ruta = '/museo/nuevo_museo'
 
     let data = {
         "nom_museo": nom_museo.value,
         "num_museo": num_museo.value,
         "ubicacion_museo": ubicacion_museo.value,
-        "desc_museo": desc_museo.value
+        "desc_museo": desc_museo.value,
+        "imgP_museo": filename,
+        "imgB_museo": filename2
     }
     // Asynchronous post
     fetch(ruta, {

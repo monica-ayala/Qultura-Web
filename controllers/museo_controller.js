@@ -83,8 +83,8 @@ exports.museo_post = (request, response, next) => {
     request.body.ubicacion_museo,
     link_ubi,
     request.body.num_museo,
-    url_imagen,
-    url_imagen
+    request.body.imgP_museo,
+    request.body.imgB_museo
   );
   console.log(nuevo_museo)
   nuevo_museo
