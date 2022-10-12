@@ -5,42 +5,53 @@
   background-size: cover;
 }
 </style> -->
-<link rel="stylesheet" href="/css/style_evento.css">
- 
-<div class="bg"></div>
-<div class="bg bg2"></div>
-<div class="bg bg3"></div>
-<div class="container" style="margin-bottom: 10%;">
-    <h1 class="white-text">Agregar Nueva Guía</h4>
-    <div class="white" style="padding-top: 2em; padding-bottom: 2em;">
-        <form id="nuevo_imagen" method="POST" enctype="multipart/form-data">
-            <div class="row  valign-wrapper" style="margin-bottom: 0px;">
-                <div class="col s3 center">
-                    <div class="card imgPicker">
-                        <div class="card-image">
-                          <img class="imgPicker imgP" src="/img/no-img.jpg">
-                          <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload" onclick="filebutton.click()"><i class="material-icons">edit</i></div>
-                          <input class="file-upload" id="filebutton" type="file" name="url_imagen" style="display:none">
+    <link rel="stylesheet" href="/css/style_evento.css">
+
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <div class="container" style="margin-bottom: 10%;">
+        <h1 class="white-text">Agregar Nueva Guía</h4>
+            <div class="white" style="padding-top: 2em; padding-bottom: 2em;">
+                <form action="/guias/agregar_guia" method="POST">
+                    <div class="row  valign-wrapper" style="margin-bottom: 0px;">
+                        <div class="col s3 center">
+                            <div class="card" style="border-radius: 20px;">
+                                <div class="card-image">
+                                    <img src="/img/no-img.jpg" style="border-radius: 20px;">
+                                    <div class="file-field input-field">
+                                        <a type="file"
+                                            class="btn-floating halfway-fab waves-effect waves-light blue-gradient-btn">
+                                            <input type="file" accept="image/png, image/jpg, image/jpeg" name="imagen">
+                                            <i class="tiny material-icons">edit</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col s9">
-                    <div class="row">
-                        <div class="col s6">
-                            <h5>Nombre de la Limitación</h5>
-                            <!-- <label for="nombre_limitacion">Nombre de la Limitacion</label> -->
-                            <input id="nombre_limitacion" placeholder="Ejemplo: Limitaciones Visuales" type="text" name="nombre">
-                        </div>
-                        <div class="col s6">
-                            <h5>Icono</h5>
-                            <!-- <label for="icono_limitacion">Icono de la Limitación</label> -->
-                            <!-- <input id="icono_limitacion" type="file" class="customFile" accept="image/png, image/jpg, image/jpeg" name="icono"> -->
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <h5>Descripción</h5>
-                            <textarea placeholder="Descripcion de Limitacion..." id="textarea2" class="materialize-textarea" data-length="120" name="descripcion" style="height: 46px;"></textarea>
+                        <div class="col s9">
+                            <div class="row">
+                                <div class="col s6">
+                                    <h5>Nombre de la Limitación</h5>
+                                    <!-- <label for="nombre_limitacion">Nombre de la Limitacion</label> -->
+                                    <input id="nombre_limitacion" placeholder="Ejemplo: Limitaciones Visuales"
+                                        type="text" name="nombre">
+                                </div>
+                                <div class="col s6">
+                                    <h5>Icono</h5>
+                                    <!-- <label for="icono_limitacion">Icono de la Limitación</label> -->
+                                    <input id="icono_limitacion" type="file" class="customFile"
+                                        accept="image/png, image/jpg, image/jpeg" name="icono">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <h5>Descripcion</h5>
+                                    <textarea placeholder="Descripcion de Limitacion..." id="textarea2"
+                                        class="materialize-textarea" data-length="120" name="descripcion"></textarea>
+                                    <!-- <label for="textarea2">Descripcion</label> -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row valign-wrapper" style="margin-bottom: 0px;">
@@ -70,11 +81,10 @@
                         <input type="submit" class="blue-gradient-btn btn-large hoverable"
                             style="color: white; width: 70%;" value="Agregar Guía">
                     </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+                </form>
 
-<script src="/js/script_nuevo_museo.js"></script>
-<%- include('includes/footer.ejs') %>
+
+            </div>
+    </div>
+
+    <%- include('includes/footer.ejs') %>
