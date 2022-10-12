@@ -7,7 +7,6 @@ const mkdirp = require("mkdirp");
 //set Storage Engine
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      console.log(req.body)
       console.log(req.params)
         if (req.params.evento == 'museo') {
           cb(null, "public/uploads/museos"); // it will upload inside test under images
@@ -16,7 +15,7 @@ const storage = multer.diskStorage({
         }
       },
       filename: (req, file, cb) => {
-        cb(null, file.originalname);
+        cb(null, req.params.id);
       }
 })
 
@@ -31,7 +30,6 @@ const upload = multer({
 }).single('uploadFile');
 
 exports.uploadFile = (req, res) => {
-  console.log("ENTROOO")
     upload(req, res, (err) =>{
         if(err){console.log(err);}
     });

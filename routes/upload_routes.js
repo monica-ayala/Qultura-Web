@@ -5,5 +5,5 @@ const path = require('path');
 const isAuth= require ('../util/is-auth.js')
 const uploads_controller = require('../controllers/archivos_controller');
 
-router.post('/:evento', uploads_controller.uploadFile);
+router.post('/:evento/:id', uploads_controller.uploadFile);
 module.exports = router

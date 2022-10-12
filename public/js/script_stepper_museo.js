@@ -11,10 +11,27 @@ function addSalas(){
 
 $(document).ready(function() {
     $("#uploadForm").submit(function() {
-        console.log("aaaaaaaaaaaaaaa")
         var img = new FormData($('#uploadForm')[0]);
         let filetype = document.getElementById("event").value
-        let route = '/uploads/'+filetype
+        let filename = document.getElementById("filename").value
+        filename = Date.now()+'-imgMuseo'
+        let route = '/uploads/'+filetype+'/'+filename
+        $.ajax({
+            url: route,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: img
+        })
+    });
+
+    $("#uploadForm2").submit(function() {
+        var img = new FormData($('#uploadForm2')[0]);
+        let filetype = document.getElementById("event2").value
+        let filename = document.getElementById("filename2").value
+        filename = Date.now()+'-imgMuseo'
+        let route = '/uploads/'+filetype+'/'+filename
         $.ajax({
             url: route,
             type: 'POST',
