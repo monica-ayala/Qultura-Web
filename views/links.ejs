@@ -5,7 +5,7 @@
     <div class="bg bg2"></div>
     <div class="bg bg3"></div>
     <div class="container" style="margin-bottom: 10%;">
-        <% if (links.length> 0) { %>
+        <% if (links.length > 0) { %>
             <h1 class="white-text">LINKS</h4>
                 <div class="white" style="padding-top: 2em; padding-bottom: 2em;">
                     <% for (link of links) { %>
@@ -26,9 +26,8 @@
                             </div>
                             <div class="col s3">
                                 <div class="row">
-                                    <a class="red-gradient-btn btn-small hoverable"
-                                        href="/links/eliminar_link/<%=link.id_link%>">
-                                        Eliminar Guía
+                                    <a class="red-gradient-btn btn-small hoverable" onclick="deleteLink(this)" id="<%=link.id_link%>" style="margin-top: 10px;">
+                                        Eliminar Link
                                     </a>
                                 </div>
                             </div>
@@ -60,4 +59,6 @@
                     </div>
                 <% } %>
     </div>
+
+    <script src="/js/script_delete_user.js"></script>
 <%- include('includes/footer.ejs') %>

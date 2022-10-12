@@ -82,6 +82,48 @@ function deleteGuia(element){
       })
 }
 
+
+// Delete Link from list
+function deleteLink(element){
+  let id_link = element.id;
+  let ruta = '/links/eliminar_link/' + id_link;
+  
+  Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Después de borrar un Link no se podrá recuperar y se perderá su contenido",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, elimínalo',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+          // Asynchronous call to POST
+          fetch(ruta, {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json',
+              }
+          })
+          .then(response => {
+              location.reload();
+              
+          }).catch(err => {
+              console.log(err);
+          });
+        Swal.fire(
+          '¡Eliminado!',
+          'El Link se eliminó exitosamente',
+          'success'
+        )
+      }
+    })
+}
+
+
+
+
 $(document).ready(function() {
   $('input#input_text, textarea#textarea2').characterCounter();
 });
