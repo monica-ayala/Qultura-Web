@@ -27,7 +27,6 @@ $(document).ready(function() {
         })
 
         let ruta = '/museo/nuevo_museo'
-
         let data = {
             "nom_museo": nom_museo.value,
             "num_museo": num_museo.value,
@@ -50,100 +49,5 @@ $(document).ready(function() {
         }).catch(err => {
             console.log(err);
         });
-
-    });
-
-    $("#uploadForm2").submit(function() {
-        var img = new FormData($('#uploadForm2')[0]);
-        let filetype = document.getElementById("event2").value
-        let filename = document.getElementById("filename2").value
-        filename = Date.now()+'-imgMuseo'
-        let route = '/uploads/'+filetype+'/'+filename
-        $.ajax({
-            url: route,
-            type: 'POST',
-            contentType: false,
-            processData: false,
-            cache: false,
-            data: img
-        })
-
-        let ruta = '/museo/nuevo_museo'
-
-    let data = {
-        "nom_museo": nom_museo.value,
-        "num_museo": num_museo.value,
-        "ubicacion_museo": ubicacion_museo.value,
-        "desc_museo": desc_museo.value,
-        "imgP_museo": filename,
-        "imgB_museo": filename
-    }
-    // Asynchronous post
-    fetch(ruta, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body:JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(response => {
-        
-    }).catch(err => {
-        console.log(err);
-    });
-
     });
 });
-
-function submitMuseum(){
-    let nom_museo = document.getElementById("nom_museo")
-    let num_museo = document.getElementById("num_museo")
-    let ubicacion_museo = document.getElementById("ubicacion_museo")
-    let desc_museo = document.getElementById("desc_museo")
-    let filename = document.getElementById("filename").value
-    let filename2 = document.getElementById("filename2").value
-    let ruta = '/museo/nuevo_museo'
-
-    let data = {
-        "nom_museo": nom_museo.value,
-        "num_museo": num_museo.value,
-        "ubicacion_museo": ubicacion_museo.value,
-        "desc_museo": desc_museo.value,
-        "imgP_museo": filename,
-        "imgB_museo": filename2
-    }
-    // Asynchronous post
-    fetch(ruta, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body:JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(response => {
-        
-    }).catch(err => {
-        console.log(err);
-    });
-
-}
-
-
-// var elements;
-// // The element can be a string:
-// elements = '<div class="step">(...your step goes here...)</div>';
-// // An array of strings:
-// elements = ['<div class="step">(...your step goes here...)</div>', '<div class="step">(...your step goes here...)</div>'];
-// // An HTMLCollection:
-// elements = document.querySelectorAll('.steps-to-add');
-// // Or an HTMLElement:
-// elements = document.querySelector('.step-to-add');
-
-// // Then you just need to run
-// var addedSteps = instance.activateStep(elements, newStepsIndex);
-// // And if you want, you can remove them afterwards:
-// var removedSteps = instance.deactivateStep(addedSteps);
-// // Or add them again :P
-// var readdedSteps = instance.activateStep(removedSteps);
