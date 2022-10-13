@@ -6,14 +6,14 @@ const { callbackPromise } = require('nodemailer/lib/shared');
 const transporter= nodemailer.createTransport({
     service: "hotmail",
     auth : {
-        user: "no_reply_appQultura@outlook.com",
+        user: "no_reply_quapp@outlook.com",
         pass: "U4@4*s*7mqjF"
     }
 });
 
 var cron = require('node-cron');
 
-cron.schedule('25 14 * * *', () => {
+cron.schedule('38 * * * *', () => {
     var date = new Date()
     var today = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
     db.execute('SELECT * FROM Solicitud')
