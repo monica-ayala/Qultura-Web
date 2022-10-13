@@ -6,15 +6,30 @@ const { callbackPromise } = require('nodemailer/lib/shared');
 const transporter= nodemailer.createTransport({
     service: "hotmail",
     auth : {
-        user: "No_reply_Qulturapp@outlook.com",
+        user: "no_reply_appQultura@outlook.com",
         pass: "U4@4*s*7mqjF"
     }
 });
 
 var cron = require('node-cron');
 
-cron.schedule('* */1 * * *', () => {
-    console.log("AAAAAAAAAAAAAA")
+cron.schedule('0 6 * * *', () => {
+    var date = new Date()
+    var today = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+    db.execute('SELECT * FROM Solicitud')
+        .then(([rows, fieldData]) => {
+            for(var i = 0; i < rows.size(); i++){
+                if((rows[i].fecha_hora_sol).substring(0,10) == today){
+                    User.fetchMuseoCorreo(rows[i].id_user_solicitud)
+                        .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
+                            this.correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes)
+                    }).catch(err => console.log(err));
+                }else{
+                    console.log((rows[i].fecha_hora_sol).substring(0,10))
+                    console.log(today);
+                }
+            }
+    }) .catch(err => console.log(err));   
 });
 
 
@@ -65,7 +80,7 @@ module.exports = class Solicitud{
 
     static correo_send(id_solicitud, necesidades, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
         const options= {
-            from: "No_reply_Qulturapp@outlook.com",
+            from: "no_reply_appQultura@outlook.com",
             to: correo_museo,
             subject: "Solicitud especial de recorrido",
             text: "Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + info_adicional + "\n Click aqui para confirmar solicitud : https://qulturaqro.live/solicitud/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : https://qulturaqro.live/solicitud/negar/"+id_solicitud
@@ -76,9 +91,19 @@ module.exports = class Solicitud{
 
     static correoElimina_send(id_solicitud, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
         const options= {
-            from: "No_reply_Qulturapp@outlook.com",
+            from: "no_reply_appQultura@outlook.com",
             to: correo_museo,
             subject: "Cancelacion de solicitud de recorrido",
+            text: "Se realizo una cancelación para la solicitud de recorrido con id: " + id_solicitud + ".\n Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes
+        };
+        transporter.sendMail(options,callbackPromise());
+    }
+
+    static correoRecordatorio_send(id_solicitud, correo_usuario, info_adicional, fecha_hora_sol, num_Visitantes){
+        const options= {
+            from: "no_reply_appQultura@outlook.com",
+            to: correo_usuario,
+            subject: "Hoy es tu recorrido de museo",
             text: "Se realizo una cancelación para la solicitud de recorrido con id: " + id_solicitud + ".\n Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes
         };
         transporter.sendMail(options,callbackPromise());
