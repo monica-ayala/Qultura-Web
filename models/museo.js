@@ -2,7 +2,7 @@ const db = require('../util/database');
 //const bcrypt = require('bcryptjs');
 
 module.exports = class Museo{
-    // Constructor for class museo
+
     constructor(nom_museo,desc_museo,ubicacion_museo,link_ubi,num_museo,imgP_museo,imgB_museo,status) {
         this.nom_museo = nom_museo,
         this.desc_museo = desc_museo,
@@ -14,13 +14,11 @@ module.exports = class Museo{
         this.status = 1
     }
 
-    // New museo
     save() {
         return db.execute('INSERT INTO Museo(nom_museo,desc_museo,ubicacion_museo,link_ubi,num_museo,imgP_museo,imgB_museo,status) VALUES (?,?,?,?,?,?,?,?)', 
         [this.nom_museo,this.desc_museo,this.ubicacion_museo,this.link_ubi,this.telefono_museo,this.imagen_principal,this.imagen_background,1] );
     }
 
-    // Methods for museo
     static fetchList(){
         return db.execute('SELECT * FROM Museo');
     }
@@ -44,4 +42,5 @@ module.exports = class Museo{
                 ]
         );
     }
+
 }

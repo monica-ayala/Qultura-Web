@@ -78,7 +78,7 @@ exports.museo_post = (request, response, next) => {
       link_ubi,
       request.body.num_museo,
       request.body.imgP_museo,
-      request.body.imgP_museo
+      request.body.imgB_museo
     );
     nuevo_museo
       .save()
