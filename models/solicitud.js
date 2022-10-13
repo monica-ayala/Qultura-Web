@@ -13,7 +13,7 @@ const transporter= nodemailer.createTransport({
 
 var cron = require('node-cron');
 
-cron.schedule('0 6 * * *', () => {
+cron.schedule('25 14 * * *', () => {
     var date = new Date()
     var today = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
     db.execute('SELECT * FROM Solicitud')
