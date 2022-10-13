@@ -13,12 +13,12 @@ const transporter= nodemailer.createTransport({
 
 var cron = require('node-cron');
 
-cron.schedule('10 * * * *', () => {
+cron.schedule('16 * * * *', () => {
     var date = new Date()
     var today = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
     db.execute('SELECT * FROM Solicitud')
         .then(([rows, fieldData]) => {
-            for(var i = 0; i < rows.length(); i++){
+            for(var i = 0; i < rows.length; i++){
                 if((rows[i].fecha_hora_sol).substring(0,10) == today){
                     User.fetchMuseoCorreo(rows[i].id_user_solicitud)
                         .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
