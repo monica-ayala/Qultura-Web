@@ -14,37 +14,8 @@ const transporter= nodemailer.createTransport({
     }
 });
 
-var cron = require('node-cron');
-var current;
 var user = "no_reply_quapp@outlook.com"
 var pass = "U4@4*s*7mqjF"
-const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
-
-
-cron.schedule('3 * * * *', () => {
-    var date = new Date()
-    var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
-    db.execute('SELECT * FROM Solicitud')
-        .then(([rows, fieldData]) => {
-            for(var i = 0; i < rows.length; i++){
-                if((rows[i].fecha_hora_sol.toString()).substring(4,15) == today){
-                    current = rows[i]
-                    User.fetchMuseoCorreo(rows[i].id_user_solicitud)
-                        .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
-                            Museo.fetchMuseoName(current.id_museo_solicitud)
-                                .then(([rowsMuseoName, fieldDataMuseoName]) => {
-                                    console.log(rowsMuseoName[0].nom_museo)
-                                    console.log(current)
-                                    Solicitud.correoRecordatorio_send(current.id_solicitud, rowsUsuarioMuseo[0].correo_user, current.info_adicional, current.fecha_hora_sol, current.num_Visitantes, rowsMuseoName[0].nom_museo)
-                                    console.log("El correo ya llego")
-                                }).catch(err => console.log(err));
-                    }).catch(err => console.log(err));
-                }
-            }  
-    }).catch(err => console.log(err));
-})
 
 
 module.exports = class Solicitud {
@@ -82,6 +53,10 @@ module.exports = class Solicitud {
 
     static fetchAll(id_usuario){
         return db.execute('SELECT id_solicitud, info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, s.status, m.nom_museo, m.imgP_museo, id_user_solicitud FROM Solicitud s, Museo m WHERE s.id_museo_solicitud = m.id_museo AND s.id_user_solicitud = ?', [id_usuario]);
+    }
+
+    static fetchEverything(){
+        return db.execute('SELECT * FROM Solicitud');
     }
 
     static deleteOne(id_solicitud){
