@@ -1,6 +1,7 @@
 const db = require('../util/database');
 const dotenv = require('dotenv');
 const User = require("../models/usuario")
+const Solicitud = require("../models/solicitud")
 
 //const bcrypt = require('bcryptjs');
 const nodemailer= require('nodemailer');
@@ -22,7 +23,7 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 ];
 
 
-cron.schedule('52 * * * *', () => {
+cron.schedule('21 * * * *', () => {
     var date = new Date()
     var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
     db.execute('SELECT * FROM Solicitud')
@@ -31,12 +32,11 @@ cron.schedule('52 * * * *', () => {
                 if((rows[i].fecha_hora_sol.toString()).substring(4,15) == today){
                     User.fetchMuseoCorreo(rows[i].id_user_solicitud)
                         .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
-                            console.log(rowsUsuarioMuseo[0].correo_user)
-                            correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes)
+                            Museo.fetchMuseoName(rows[i].id_museo_solicitud)
+                                .then(([rowsMuseoName, fieldDataMuseoName]) => {
+                                    Solicitud.correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes, rowsMuseoName[0].nom_museo)
+                                }).catch(err => console.log(err));
                     }).catch(err => console.log(err));
-                }else{
-                    console.log((rows[i].fecha_hora_sol.toString()).substring(4,15))
-                    console.log(today)
                 }
             }  
     }).catch(err => console.log(err));
@@ -109,12 +109,12 @@ module.exports = class Solicitud {
         transporter.sendMail(options,callbackPromise());
     }
 
-    static correoRecordatorio_send(id_solicitud, correo_usuario, info_adicional, fecha_hora_sol, num_Visitantes){
+    static correoRecordatorio_send(id_solicitud, correo_usuario, info_adicional, fecha_hora_sol, num_Visitantes, nombreMuseo){
         const options= {
             from: "no_reply_quapp@outlook.com",
             to: correo_usuario,
             subject: "Hoy es tu recorrido de museo",
-            text: "Se realizo una cancelación para la solicitud de recorrido con id: " + id_solicitud + ".\n Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes
+            text: "Tienes una cita hoy en el museo: " + nombreMuseo + ". \n" + "Informacion de la cita \n" + "id_solicitud: " + id_solicitud + "\n fecha: " + fecha_hora_sol + "\n numero de visitantes: " + num_Visitantes  
         };
         transporter.sendMail(options,callbackPromise());
     }
