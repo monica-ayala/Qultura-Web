@@ -1,17 +1,22 @@
 const db = require('../util/database');
 const dotenv = require('dotenv');
+const User = require("../models/usuario")
+
 //const bcrypt = require('bcryptjs');
 const nodemailer= require('nodemailer');
 const { callbackPromise } = require('nodemailer/lib/shared');
-const transporter= nodemailer.createTransport({
-    service: "hotmail",
+const transporter= nodemailer.createTransport("SMTP",{
+    service: "Gmail",
     auth : {
-        user: "no_reply_quapp@outlook.com",
-        pass: "U4@4*s*7mqjF"
+        user: user,
+        pass: pass
     }
 });
 
 var cron = require('node-cron');
+
+var user = "noreplyqulturapp@gmail.com"
+var pass = "U4@4*s*7mqjF"
 
 cron.schedule('16 * * * *', () => {
     var date = new Date()
@@ -80,7 +85,7 @@ module.exports = class Solicitud{
 
     static correo_send(id_solicitud, necesidades, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
         const options= {
-            from: "no_reply_quapp@outlook.com",
+            from: user,
             to: correo_museo,
             subject: "Solicitud especial de recorrido",
             text: "Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + info_adicional + "\n Click aqui para confirmar solicitud : https://qulturaqro.live/solicitud/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : https://qulturaqro.live/solicitud/negar/"+id_solicitud
@@ -91,7 +96,7 @@ module.exports = class Solicitud{
 
     static correoElimina_send(id_solicitud, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
         const options= {
-            from: "no_reply_quapp@outlook.com",
+            from: user,
             to: correo_museo,
             subject: "Cancelacion de solicitud de recorrido",
             text: "Se realizo una cancelación para la solicitud de recorrido con id: " + id_solicitud + ".\n Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes
@@ -101,7 +106,7 @@ module.exports = class Solicitud{
 
     static correoRecordatorio_send(id_solicitud, correo_usuario, info_adicional, fecha_hora_sol, num_Visitantes){
         const options= {
-            from: "no_reply_quapp@outlook.com",
+            from: user,
             to: correo_usuario,
             subject: "Hoy es tu recorrido de museo",
             text: "Se realizo una cancelación para la solicitud de recorrido con id: " + id_solicitud + ".\n Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes
