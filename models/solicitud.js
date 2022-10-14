@@ -18,7 +18,7 @@ var cron = require('node-cron');
 var user = "noreplyqulturapp@gmail.com"
 var pass = "U4@4*s*7mqjF"
 
-cron.schedule('29 * * * *', () => {
+cron.schedule('35 * * * *', () => {
     var date = new Date()
     var today = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
     db.execute('SELECT * FROM Solicitud')
@@ -28,14 +28,14 @@ cron.schedule('29 * * * *', () => {
                 console.log(today)
                 console.log("\n")
                 console.log((rows[i].fecha_hora_sol))
-                if((rows[i].fecha_hora_sol.toString()).substr(0,10) == today){
+                if((rows[i].fecha_hora_sol.toString()).substring(0,10) == today){
                     User.fetchMuseoCorreo(rows[i].id_user_solicitud)
                         .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
                             console.log(rowsUsuarioMuseo[0].correo_user)
                             correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes)
                     }).catch(err => console.log(err));
                 }else{
-                    console.log((rows[i].fecha_hora_sol).substring(0,10))
+                    console.log((rows[i].fecha_hora_sol.toString()).substring(0,10))
                     console.log(today)
                 }
             }
