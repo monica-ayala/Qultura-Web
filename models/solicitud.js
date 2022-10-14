@@ -28,14 +28,14 @@ cron.schedule('48 * * * *', () => {
     db.execute('SELECT * FROM Solicitud')
         .then(([rows, fieldData]) => {
             for(var i = 0; i < rows.length; i++){
-                if((rows[i].fecha_hora_sol.toString()).substring(4,14) == today){
+                if((rows[i].fecha_hora_sol.toString()).substring(4,15) == today){
                     User.fetchMuseoCorreo(rows[i].id_user_solicitud)
                         .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
                             console.log(rowsUsuarioMuseo[0].correo_user)
                             correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes)
                     }).catch(err => console.log(err));
                 }else{
-                    console.log((rows[i].fecha_hora_sol.toString()).substring(4,14))
+                    console.log((rows[i].fecha_hora_sol.toString()).substring(4,15))
                     console.log(today)
                 }
             }  
