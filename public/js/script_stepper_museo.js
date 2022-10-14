@@ -1,13 +1,47 @@
 var stepper = document.querySelector('.stepper');
 var stepperInstace = new MStepper(stepper, {
-    firstActive: 0 ,
-    
+    firstActive: 0,
+    validationFunction: validationThrowError
+
 })
 
 function addSalas(){
     var elements = '<li class="step"><div class="step-title waves-effect"> Sala </div><div class="step-content"><div class="input-field col s10 offset-s1"><textarea id="desc_museo" name="desc_museo" class="materialize-textarea validate"></textarea><label for="desc_museo"> Descripción </label></div><div> QUILL TEXT EDITOR? </div><div class="step-actions"><div class="row"><div class="col"> <button class="red btn btn-reset" type="reset"> Resetear <i class="material-icons left"> clear </i>  </button> </div><div class="col"> <button class="btn light-blue-secondary previous-step"> Anterior  <i class="material-icons left"> arrow_back </i> </button> </div><div class="col"> <button class="waves-effect waves dark btn light-blue-secondary next-step" type="reset"> Siguiente <i class="material-icons right"> arrow_forward </i> </button> </div></div></div></div></li>'
     var addedSteps = stepperInstace.activateStep(elements, 3);
 }
+
+function validationThrowError(stepperForm, activeStepContent) {
+    var inputs = activeStepContent.querySelectorAll('input, textarea, select');
+    for (let i = 0; i < inputs.length; i++){
+        if (!inputs[i].checkValidity()){
+            $('.validate').addClass("invalid");
+            return false;
+        } 
+    } 
+    return true;
+ }
+
+$(document).ready(function() {
+
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.imgP').attr('src', e.target.result);
+            }
+    
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".file-upload").on('change', function(){
+    
+     readURL(this);
+    });
+    
+   
+});
 
 $(document).ready(function() {
     $("#uploadForm").submit(function() {
@@ -51,3 +85,4 @@ $(document).ready(function() {
         });
     });
 });
+

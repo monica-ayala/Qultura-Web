@@ -1,64 +1,64 @@
 <%- include('includes/header_image.ejs') %>
     <main>
             <div class="row">
-                <div class="col s12">
+                <div class="col s10 offset-s1">
+                    <h4 class="card-title"> Regístra un nuevo museo      
+                        <button onclick="addSalas()" id="addSalas" class="waves-effect waves-dark btn"> <i class="material-icons"> remove </i> </button> 
+                                            <span id="num_salas"> 0 </span>
+                                        <button onclick="addSalas()" id="addSalas" class="waves-effect waves-dark btn"> <i class="material-icons"> add </i> </button>  
+                    </h4> 
                     <div class="card">
                         <div class="card-content pb-0">
                             <div class="card-header mb2"> 
-                                <h4 class="card-title"> Regístra un nuevo museo        
-                                    Número de salas: 
-                                    <button onclick="addSalas()" id="addSalas" class="waves-effect waves-dark btn"> <i class="material-icons"> remove </i> </button> 
-                                        <span id="num_salas"> 0 </span>
-                                    <button onclick="addSalas()" id="addSalas" class="waves-effect waves-dark btn"> <i class="material-icons"> add </i> </button>
-                                </h4> 
-                                <br>
                             </div>
                             <form id="uploadForm"  enctype="multipart/form-data">
-                            <ul class="stepper horizontal">
+                            <ul class="stepper linear horizontal">
                             <li class="step active"> 
-                                <div class="step-title waves-effect"> <p>Información</p> <p>general del museo</p> </div>
+                                <div class="step-title waves-effect"> <p>Información</p> </div>
                                 <div class="step-content">
                                  <div class="row">
-                                     <div class="col s5">
-                                         <div class="row valign-wrapper">
-                                             <div class="col s10">
-                                                    <input type="file" name="uploadFile" id="uploadFile">
-                                                    <input type="text" name="event" id="event" value="museo" style="display:none">
-                                                    <input type="text" name="filename" id="filename" style="display:none">
-                                                 <div class="card imgPicker">
-                                                     <div class="card-image">
-                                                         <img class="imgPicker imgP" src="/img/no-img.jpg">
-                                                         <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
-                                                             onclick="filebutton.click()"><i class="material-icons">edit</i></div>
-                                                         <input class="file-upload" id="filebutton" type="file" name="url_imagen"
-                                                             style="display:none">
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
                                      <div class="col s7">
+                            
                                          <!-- NOMBRE -->
                                          <div class="row center">
                                              <div class="input-field col s10 offset-s1">
-                                                 <input placeholder="Ej: MAQRO" id="nom_museo" name="nom_museo" type="text"
-                                                     class="validate">
-                                                 <label for="nom_museo"> Nombre del Museo </label>
+                                                 <input id="nom_museo" name="nom_museo" type="text"
+                                                     class="validate" required>
+                                                 <label for="nom_museo"> Nombre del Museo <span class="required">*</span></label>
+                                                 <span class="helper-text" data-error="Este input es requerido"></span>
                                              </div>
                                              <!-- TELÉFONO -->
                                              <div class="input-field col s10 offset-s1">
-                                                 <input placeholder="Ej: 442-212-2357" id="num_museo" name="num_museo" type="text"
-                                                     class="validate">
-                                                 <label for="num_museo"> Teléfono de contacto </label>
+                                                 <input id="num_museo" name="num_museo" type="text"
+                                                     class="validate" required>
+                                                 <label for="num_museo"> Teléfono de contacto <span class="required">*</span></label>
+                                                 <span class="helper-text" data-error="Este input es requerido"></span>
                                              </div>
                                              <!-- HORARIOS -->
                                              <div class="input-field col s10 offset-s1">
-                                                 <input placeholder="17HRS - 20HRS" id="horario_museo" name="horario_museo" type="text"
-                                                     class="validate">
-                                                 <label for="horario_museo"> Horario </label>
+                                                 <input id="horario_museo" name="horario_museo" type="text"
+                                                     class="validate" required>
+                                                 <label for="horario_museo"> Horario <span class="required">*</span></label>
+                                                 <span class="helper-text" data-error="Este input es requerido"></span>
                                              </div>
                                          </div>
                                      </div>
+                                     <div class="col s5">
+                                        
+                                            <div class="col s9 offset-s2">
+                                                   <input type="text" name="event" id="event" value="museo" style="display:none">
+                                                   <input type="text" name="filename" id="filename" style="display:none">
+                                                <div class="card imgPicker">
+                                                    <div class="card-image">
+                                                       <img class="imgPicker imgP" src="/img/no-img.jpg">
+                                                       <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
+                                                           onclick="uploadFile.click()"><i class="material-icons">edit</i></div>
+                                                       <input class="file-upload" type="file" name="uploadFile" id="uploadFile" style="display:none">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
                                  </div>
                                    <div class="step-actions">
                                       <div class="row">
@@ -70,13 +70,14 @@
                                 </div>
                              </li>
                              <li class="step">
-                                 <div class="step-title waves-effect"> Ubicación del museo </div>
+                                 <div class="step-title waves-effect"> Dirección </div>
                                  <div class="step-content">
                                      <!-- DIRECCIÓN -->
                                      <div class="input-field col s5">
-                                         <input placeholder="Ej: C. Ignacio Allende Sur 14" name="ubicacion_museo"
-                                             id="ubicacion_museo" type="text" class="validate">
-                                         <label for="ubicacion_museo"> Dirección </label>
+                                         <input name="ubicacion_museo"
+                                             id="ubicacion_museo" type="text" class="validate" required>
+                                         <label for="ubicacion_museo"> Dirección <span class="required">*</span></label>
+                                         <span class="helper-text" data-error="Este input es requerido"></span>
                                          <div> Google Maps API integration goes here </div>
                                      </div>
                                     <div class="step-actions">
@@ -89,13 +90,14 @@
                                  </div>
                               </li>
                               <li class="step">
-                                 <div class="step-title waves-effect"> Descripción del museo </div>
+                                 <div class="step-title waves-effect"> Descripción </div>
                                  <div class="step-content">
                                      <!-- DESCRIPCION -->
                                      <div class="input-field col s10 offset-s1">
                                          <textarea id="desc_museo" name="desc_museo"
-                                             class="materialize-textarea validate"></textarea>
-                                         <label for="desc_museo"> Descripción </label>
+                                             class="materialize-textarea validate" required></textarea>
+                                         <label for="desc_museo"> Descripción <span class="required">*</span></label>
+                                         <span class="helper-text" data-error="Este input es requerido"></span>
                                      </div>
                                      <div> QUILL TEXT EDITOR? </div>
                                     

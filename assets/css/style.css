@@ -181,7 +181,7 @@ main {
 }
 
 .imgPicker{
-    border-radius:10px !important
+    border-radius:10px !important;
 }
 .margin-10{
     margin:30px
@@ -251,3 +251,6 @@ main {
 #blog-list .card.horizontal{overflow:hidden;max-height:200px}
 #blog-list .social-icon{width:7.5rem}
 .social-icon .material-icons:hover{cursor:pointer!important}
+.required {
+    color: red;
+  }

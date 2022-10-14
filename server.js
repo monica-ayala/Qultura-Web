@@ -50,6 +50,9 @@ app.use('/uploads',uploads_routes)
 app.use('/', museo_routes);
 
 app.use((request, response, next) => {
+     res.header("Access-Control-Allow-Origin", "*");
+     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
      response.status(404);
      response.send('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Not found :(</title></head><body><h1 id="principal">404, esta página no existe</h1></body>');
 });
@@ -68,3 +71,4 @@ async function main() {
    }
    
    main();
+
