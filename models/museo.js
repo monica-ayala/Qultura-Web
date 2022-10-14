@@ -44,7 +44,6 @@ module.exports = class Museo{
                 ]
         );
     }
-<<<<<<< HEAD
 
     static fetchidUsuario(id_museo){
         return db.execute('SELECT id_user_museo FROM User_Museo WHERE id_museo_user = ?',[id_museo])
@@ -54,6 +53,4 @@ module.exports = class Museo{
         return db.execute('SELECT nom_museo FROM Museo WHERE id_museo = ?',[id_museo])
     }
 
-=======
->>>>>>> develop
 }
