@@ -1,7 +1,6 @@
 const db = require('../util/database');
 const dotenv = require('dotenv');
 const User = require("../models/usuario")
-const Solicitud = require("../models/solicitud")
 const Museo = require("../models/museo")
 
 //const bcrypt = require('bcryptjs');
@@ -24,7 +23,7 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 ];
 
 
-cron.schedule('45 * * * *', () => {
+cron.schedule('3 * * * *', () => {
     var date = new Date()
     var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
     db.execute('SELECT * FROM Solicitud')
