@@ -10,7 +10,7 @@ var current;
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
-cron.schedule('10 * * * *', () => {
+cron.schedule('16 * * * *', () => {
   console.log("aAAAAaAA")
   var date = new Date()
   var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
