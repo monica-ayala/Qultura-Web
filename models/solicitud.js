@@ -22,7 +22,7 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 ];
 
 
-cron.schedule('36 * * * *', () => {
+cron.schedule('42 * * * *', () => {
     var date = new Date()
     var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
     db.execute('SELECT * FROM Solicitud')
@@ -34,6 +34,9 @@ cron.schedule('36 * * * *', () => {
                             console.log(rowsUsuarioMuseo[0].correo_user)
                             correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes)
                     }).catch(err => console.log(err));
+                }else{
+                    console.log((rows[i].fecha_hora_sol.toString()).substring(4,14))
+                    console.log(today)
                 }
             }  
     }).catch(err => console.log(err));
