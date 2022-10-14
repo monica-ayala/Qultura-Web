@@ -22,22 +22,22 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 ];
 
 
-//cron.schedule('55 * * * *', () => {
-//    var date = new Date()
-//    var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
-//    db.execute('SELECT * FROM Solicitud')
-//        .then(([rows, fieldData]) => {
-//            for(var i = 0; i < rows.length; i++){
-//                if((rows[i].fecha_hora_sol.toString()).substring(4,14) == today){
-//                    User.fetchMuseoCorreo(rows[i].id_user_solicitud)
-//                        .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
-//                            console.log(rowsUsuarioMuseo[0].correo_user)
-//                            correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes)
-//                    }).catch(err => console.log(err));
-//                }
-//            }  
-//    }).catch(err => console.log(err));
-//})
+cron.schedule('36 * * * *', () => {
+    var date = new Date()
+    var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
+    db.execute('SELECT * FROM Solicitud')
+        .then(([rows, fieldData]) => {
+            for(var i = 0; i < rows.length; i++){
+                if((rows[i].fecha_hora_sol.toString()).substring(4,14) == today){
+                    User.fetchMuseoCorreo(rows[i].id_user_solicitud)
+                        .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
+                            console.log(rowsUsuarioMuseo[0].correo_user)
+                            correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes)
+                    }).catch(err => console.log(err));
+                }
+            }  
+    }).catch(err => console.log(err));
+})
 
 
 module.exports = class Solicitud {
