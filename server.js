@@ -5,6 +5,12 @@ const cookieParser=require('cookie-parser');
 const session=require('express-session');
 const path = require('path');
 var multer = require('multer');
+const jwt = require("jsonwebtoken")
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const accessTokenSecret = 'youraccesstokensecret';
 
 // Routes
 const usuario_routes = require('./routes/usuario_routes');
@@ -21,6 +27,7 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
 app.use(session({
      secret: 'qultura-user', 
      resave: false,
