@@ -18,7 +18,7 @@ var cron = require('node-cron');
 var user = "noreplyqulturapp@gmail.com"
 var pass = "U4@4*s*7mqjF"
 
-cron.schedule('20 * * * *', () => {
+cron.schedule('29 * * * *', () => {
     var date = new Date()
     var today = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
     db.execute('SELECT * FROM Solicitud')
@@ -27,7 +27,9 @@ cron.schedule('20 * * * *', () => {
                 console.log(rows[i].fecha_hora_sol)
                 console.log(today)
                 console.log("\n")
-                if((rows[i].fecha_hora_sol).substr(0,10) == today){
+                console.log((rows[i].fecha_hora_sol))
+                console.log((rows[i].fecha_hora_sol).toString())
+                if((rows[i].fecha_hora_sol.toString()).substr(0,10) == today){
                     User.fetchMuseoCorreo(rows[i].id_user_solicitud)
                         .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
                             console.log(rowsUsuarioMuseo[0].correo_user)
