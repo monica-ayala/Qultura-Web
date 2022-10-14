@@ -24,7 +24,7 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 ];
 
 
-cron.schedule('34 * * * *', () => {
+cron.schedule('0 * * * *', () => {
     var date = new Date()
     var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
     db.execute('SELECT * FROM Solicitud')
