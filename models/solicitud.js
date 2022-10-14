@@ -24,7 +24,7 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 ];
 
 
-cron.schedule('24 * * * *', () => {
+cron.schedule('32 * * * *', () => {
     var date = new Date()
     var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
     db.execute('SELECT * FROM Solicitud')
@@ -33,6 +33,7 @@ cron.schedule('24 * * * *', () => {
                 if((rows[i].fecha_hora_sol.toString()).substring(4,15) == today){
                     User.fetchMuseoCorreo(rows[i].id_user_solicitud)
                         .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
+                            console.log(rows[i])
                             Museo.fetchMuseoName(rows[i].id_museo_solicitud)
                                 .then(([rowsMuseoName, fieldDataMuseoName]) => {
                                     Solicitud.correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes, rowsMuseoName[0].nom_museo)
