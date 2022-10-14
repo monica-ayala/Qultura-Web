@@ -16,7 +16,7 @@ const transporter= nodemailer.createTransport({
 });
 
 var cron = require('node-cron');
-var current_musseum;
+var current;
 var user = "no_reply_quapp@outlook.com"
 var pass = "U4@4*s*7mqjF"
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -24,19 +24,19 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 ];
 
 
-cron.schedule('31 * * * *', () => {
+cron.schedule('40 * * * *', () => {
     var date = new Date()
     var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
     db.execute('SELECT * FROM Solicitud')
         .then(([rows, fieldData]) => {
             for(var i = 0; i < rows.length; i++){
                 if((rows[i].fecha_hora_sol.toString()).substring(4,15) == today){
-                    current_musseum = rows[i].id_museo_solicitud
+                    current = rows[i]
                     User.fetchMuseoCorreo(rows[i].id_user_solicitud)
                         .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
-                            Museo.fetchMuseoName(current_musseum)
+                            Museo.fetchMuseoName(current.id_museo_solicitud)
                                 .then(([rowsMuseoName, fieldDataMuseoName]) => {
-                                    Solicitud.correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes, rowsMuseoName[0].nom_museo)
+                                    Solicitud.correoRecordatorio_send(current.id_solicitud, rowsUsuarioMuseo[0].correo_user, current.info_adicional, current.fecha_hora_sol, current.num_Visitantes, rowsMuseoName[0].nom_museo)
                                     console.log("El correo ya llego")
                                 }).catch(err => console.log(err));
                     }).catch(err => console.log(err));
