@@ -47,7 +47,7 @@ exports.lista = (request, response, next) => {
 };
 
 exports.get_museo_api = (request, response, next) => {
-  Museo.fetchList()
+  Museo.fetchListApi()
     .then(([rowsMuseos, fieldData]) => {
       response.status(200).json({
         museos: rowsMuseos,
@@ -57,7 +57,7 @@ exports.get_museo_api = (request, response, next) => {
 };
 
 exports.get_all_api = (request, response, next) => {
-  Museo.fetchList()
+  Museo.fetchListApi()
     .then(([rowsMuseos, fieldData]) => {
       Sala.fetchList()
         .then(([rowsSalas, fieldData]) => {

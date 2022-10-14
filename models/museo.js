@@ -25,6 +25,10 @@ module.exports = class Museo{
         return db.execute('SELECT * FROM Museo');
     }
 
+    static fetchListApi(){
+        return db.execute('SELECT * FROM Museo WHERE status = 1');
+    }
+
     static fetchOne(id_museo){
         return db.execute('SELECT * FROM Museo WHERE id_museo = ?',[id_museo])
     }
