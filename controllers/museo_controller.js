@@ -4,6 +4,18 @@ const Museo = require("../models/museo");
 const Sala = require("../models/sala");
 const Obra = require("../models/obra");
 const Evento = require("../models/evento");
+const jwt = require("jsonwebtoken")
+
+
+// get api
+exports.token = (request,response,next)=>{
+  const accessToken = jwt.sign({ token: "kotlin api" }, process.env.TOKEN_SECRET);
+  return request.session.save((err) => {
+  response.status(200).json({
+    accessToken
+  });
+  });
+};
 
 exports.view = (request, response, next) => {
   response.render("principal");

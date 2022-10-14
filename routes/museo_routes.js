@@ -3,15 +3,18 @@ const router = express.Router();
 const filesystem = require('fs');
 const path = require('path');
 const isAuth= require ('../util/is-auth.js')
+const isValid= require ('../util/is-valid.js')
+const api= require ('../util/is-valid-api.js')
 const museo_controller = require('../controllers/museo_controller');
 
 // API REST
-router.get('/get',museo_controller.get_museo_api);
-router.get('/getAll',museo_controller.get_all_api);
+router.get('/getAll',api,museo_controller.get_all_api);
+router.get('/get',api,museo_controller.get_museo_api);
+router.get('/getToken',museo_controller.token);
 
 // Museo controller calls
-router.get('/',isAuth,museo_controller.lista);
-router.get('/nuevo_museo',isAuth,museo_controller.get_nuevo)
+router.get('/',isAuth, isValid, museo_controller.lista);
+router.get('/nuevo_museo',isAuth, isValid,museo_controller.get_nuevo)
 router.post('/nuevo_museo',isAuth,museo_controller.museo_post)
 router.post('/borrar/:id_museo',isAuth,museo_controller.soft_erase)
 router.post('/regresar/:id_museo',isAuth,museo_controller.soft_unerase)
