@@ -28,7 +28,6 @@ cron.schedule('29 * * * *', () => {
                 console.log(today)
                 console.log("\n")
                 console.log((rows[i].fecha_hora_sol))
-                console.log((rows[i].fecha_hora_sol).toString())
                 if((rows[i].fecha_hora_sol.toString()).substr(0,10) == today){
                     User.fetchMuseoCorreo(rows[i].id_user_solicitud)
                         .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
