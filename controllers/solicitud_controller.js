@@ -4,16 +4,17 @@ const Solicitud = require("../models/solicitud");
 const Necesidad = require("../models/necesidad");
 const Museo = require("../models/museo");
 const User = require("../models/usuario")
-
 var cron = require('node-cron');
+
 var current;
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 cron.schedule('15 * * * *', () => {
+  console.log("aAAAAaAA")
   var date = new Date()
   var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
-  Solicitud.fetchEverything
+  Solicitud.fetchEverything()
       .then(([rows, fieldData]) => {
           for(var i = 0; i < rows.length; i++){
               if((rows[i].fecha_hora_sol.toString()).substring(4,15) == today){

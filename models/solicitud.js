@@ -1,7 +1,5 @@
 const db = require('../util/database');
 const dotenv = require('dotenv');
-const User = require("../models/usuario")
-const Museo = require("../models/museo")
 
 //const bcrypt = require('bcryptjs');
 const nodemailer= require('nodemailer');
