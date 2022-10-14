@@ -16,7 +16,7 @@ const transporter= nodemailer.createTransport({
 });
 
 var cron = require('node-cron');
-
+var current_musseum;
 var user = "no_reply_quapp@outlook.com"
 var pass = "U4@4*s*7mqjF"
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -31,13 +31,13 @@ cron.schedule('34 * * * *', () => {
         .then(([rows, fieldData]) => {
             for(var i = 0; i < rows.length; i++){
                 if((rows[i].fecha_hora_sol.toString()).substring(4,15) == today){
-                    console.log(rows[i])
+                    current_musseum = rows[i].id_museo_solicitud
                     User.fetchMuseoCorreo(rows[i].id_user_solicitud)
                         .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
-                            console.log(rows[i])
-                            Museo.fetchMuseoName(rows[i].id_museo_solicitud)
+                            Museo.fetchMuseoName(current_musseum)
                                 .then(([rowsMuseoName, fieldDataMuseoName]) => {
                                     Solicitud.correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes, rowsMuseoName[0].nom_museo)
+                                    console.log("El correo ya llego")
                                 }).catch(err => console.log(err));
                     }).catch(err => console.log(err));
                 }
