@@ -24,13 +24,14 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 ];
 
 
-cron.schedule('32 * * * *', () => {
+cron.schedule('34 * * * *', () => {
     var date = new Date()
     var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
     db.execute('SELECT * FROM Solicitud')
         .then(([rows, fieldData]) => {
             for(var i = 0; i < rows.length; i++){
                 if((rows[i].fecha_hora_sol.toString()).substring(4,15) == today){
+                    console.log(rows[i])
                     User.fetchMuseoCorreo(rows[i].id_user_solicitud)
                         .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
                             console.log(rows[i])
