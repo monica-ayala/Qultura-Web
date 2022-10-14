@@ -5,7 +5,7 @@ const User = require("../models/usuario")
 //const bcrypt = require('bcryptjs');
 const nodemailer= require('nodemailer');
 const { callbackPromise } = require('nodemailer/lib/shared');
-const transporter= nodemailer.createTransport("SMTP",{
+const transporter= nodemailer.createTransport({
     service: "Gmail",
     auth : {
         user: user,
