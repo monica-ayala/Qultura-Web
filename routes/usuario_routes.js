@@ -5,6 +5,7 @@ const usuario_controller = require('../controllers/usuario_controller');
 
 // User controller calls
 router.get('/signup',usuario_controller.signup_get);
+router.post('/crear',isAuth,usuario_controller.create);
 router.post('/signup',usuario_controller.signup_post);
 router.get('/login',usuario_controller.login_get);
 router.post('/login',usuario_controller.login_post);
