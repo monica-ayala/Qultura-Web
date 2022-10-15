@@ -1,9 +1,21 @@
+$(document).ready(function(){
+    $('#modal2').modal({
+        onCloseEnd: function(){
+        },
+    });
+  });
+
+
+
 
 function createUser(){
     jQuery('#modal2').modal('open');
-
-    
-
+    let nombre = document.getElementById("us_nombre");
+    let correo = document.getElementById("us_correo");
+    let password = document.getElementById("us_password");
+    nombre.value=""
+    correo.value=""
+    password.value=""
     
 }
  function createNew(){
@@ -34,3 +46,7 @@ function createUser(){
  }
 
 
+// On modal close
+function closeUser2(){
+    jQuery('#modal2').modal('close');
+}

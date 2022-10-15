@@ -91,20 +91,23 @@
       <div class="col s12">
         <div class="input-field col s6">
           <i class="material-icons prefix">account_circle</i>
-          <input class="validate" type="text" placeholder="Emiliano Olea" name="us_nombre" id="us_nombre">
+          <input class="validate" type="text" name="us_nombre" id="us_nombre" required>
           <label for="us_nombre" data-error="wrong" data-success="right">Nombre</label>
+          <span class="helper-text" data-error="Campo Requerido" data-success=""></span>
       </div>
     <br><br>
     <div class="input-field col s6">
       <i class="material-icons prefix">mail_outline</i>
-      <input class="validate" type="email" placeholder="example@gmail.com" name="us_correo" id="us_correo">
+      <input class="validate" type="email" name="us_correo" id="us_correo" autocomplete="off" required>
       <label for="us_correo" data-error="wrong" data-success="right">Email</label>
+      <span class="helper-text" data-error="Correo incorrecto" data-success="">Terminacion con @</span>
     </div>
     <br><br>
     <div class="input-field col s6">
       <i class="material-icons prefix">lock_outline</i>
-      <input name="us_password" id="us_password" type="password">
+      <input class="validate" name="us_password" id="us_password" type="password" minlength="8" autocomplete="off" required>
       <label for="us_password">Contraseña</label>
+      <span class="helper-text" data-error="Contraseña Formato no valido (minimo 8 caracteres)" data-success=""></span>
     </div>
   
       </div>
@@ -112,7 +115,7 @@
 
   </div>
   <div class="modal-footer">
-    <a class="modal-close waves-effect waves-green btn-flat" id="salir">Salir</a>
+    <a class="modal-close waves-effect waves-green btn-flat" id="salir" onclick="closeUser2()">Salir</a>
     <a class=" modal-close waves-effect waves-green btn-flat" id="guardar" onclick="createNew()">Crear Nuevo Usuario</a>
   </div>
 </div>

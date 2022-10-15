@@ -40,15 +40,17 @@
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">mail_outline</i>
-                <input class="validate" type="email" placeholder="example@gmail.com" name="us_correo" id="us_correo">
+                <input class="validate" type="email" name="us_correo" id="us_correo" autocomplete="off" required>
                 <label for="us_correo" data-error="wrong" data-success="right">Email</label>
+                <span class="helper-text" data-error="Correo incorrecto" data-success="">Terminacion con @</span>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">lock_outline</i>
-                <input name="us_password" id="us_password" type="password">
+                <input name="us_password" id="us_password" type="password" class="validate" minlength="6" autocomplete="off" required>
                 <label for="us_password">Contraseña</label>
+
               </div>
             </div>
             <div class="row center">

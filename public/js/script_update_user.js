@@ -12,11 +12,7 @@ $(document).ready(function(){
            $('select').empty();
         },
     });
-    $('#modal2').modal({
-        onCloseEnd: function(){
-           $('#modal2').empty();
-        },
-    });
+    
   });
 
   $('.formSelect').on('contentChanged', function() {
