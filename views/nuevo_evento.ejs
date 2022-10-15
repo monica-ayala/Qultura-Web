@@ -58,23 +58,27 @@
 
                     </div>
 
-                    <div class="row center margin-10">
-
-                        <div class="input-field col s5">
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                        <div class="input-field col s6">
                             <input placeholder="Ej: C. Ignacio Allende Sur 14" name="ubicacion_evento"
                                 id="ubicacion_evento" type="text" class="validate" required>
                             <label for="ubicacion_evento"> Dirección </label>
                         </div>
 
-                        <div class="input-field col s5">
+
+                        <div class="input-field col s6">
                             <select multiple id="sevento" name="sevento" required>
-                                <% for (let tag of tags){%>
-                                    <option value='<%=tag.id_tag%>'>
-                                        <%=tag.nom_tag%>
-                                    </option>
-                                    <%}%>
+                              <option value="1"><%=tags[0].nom_tag%></option>
+                              <option value="2"><%=tags[1].nom_tag%></option>
+                              <option value="3"><%=tags[2].nom_tag%></option>
+                              <option value="4"><%=tags[3].nom_tag%></option>
+                              <option value="5"><%=tags[4].nom_tag%></option>
+                              <option value="6"><%=tags[5].nom_tag%></option>
+                              <option value="7"><%=tags[6].nom_tag%></option>
                             </select>
-                            <label> * Categorias del evento (requerido)</label>
+                            <label>Materialize Multiple Select</label>
+                        </div>
                         </div>
 
                     </div>
