@@ -1,24 +1,52 @@
 const db = require('../util/database');
 const dotenv = require('dotenv');
+const User = require("../models/usuario")
+const Solicitud = require("../models/solicitud")
+const Museo = require("../models/museo")
+
 //const bcrypt = require('bcryptjs');
 const nodemailer= require('nodemailer');
 const { callbackPromise } = require('nodemailer/lib/shared');
 const transporter= nodemailer.createTransport({
     service: "hotmail",
     auth : {
-        user: "No_reply_Qulturapp@outlook.com",
+        user: "no_reply_quapp@outlook.com",
         pass: "U4@4*s*7mqjF"
     }
 });
 
 var cron = require('node-cron');
+var current_musseum;
+var user = "no_reply_quapp@outlook.com"
+var pass = "U4@4*s*7mqjF"
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
 
-cron.schedule('* */1 * * *', () => {
-    console.log("AAAAAAAAAAAAAA")
-});
+
+cron.schedule('0 * * * *', () => {
+    var date = new Date()
+    var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
+    db.execute('SELECT * FROM Solicitud')
+        .then(([rows, fieldData]) => {
+            for(var i = 0; i < rows.length; i++){
+                if((rows[i].fecha_hora_sol.toString()).substring(4,15) == today){
+                    current_musseum = rows[i].id_museo_solicitud
+                    User.fetchMuseoCorreo(rows[i].id_user_solicitud)
+                        .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
+                            Museo.fetchMuseoName(current_musseum)
+                                .then(([rowsMuseoName, fieldDataMuseoName]) => {
+                                    Solicitud.correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes, rowsMuseoName[0].nom_museo)
+                                    console.log("El correo ya llego")
+                                }).catch(err => console.log(err));
+                    }).catch(err => console.log(err));
+                }
+            }  
+    }).catch(err => console.log(err));
+})
 
 
-module.exports = class Solicitud{
+module.exports = class Solicitud {
 
     constructor(info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, id_museo_solicitud, id_user_solicitud) {
         this.info_adicional = info_adicional;
@@ -65,7 +93,7 @@ module.exports = class Solicitud{
 
     static correo_send(id_solicitud, necesidades, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
         const options= {
-            from: "No_reply_Qulturapp@outlook.com",
+            from: "no_reply_quapp@outlook.com",
             to: correo_museo,
             subject: "Solicitud especial de recorrido",
             text: "Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + info_adicional + "\n Click aqui para confirmar solicitud : https://qulturaqro.live/solicitud/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : https://qulturaqro.live/solicitud/negar/"+id_solicitud
@@ -76,10 +104,20 @@ module.exports = class Solicitud{
 
     static correoElimina_send(id_solicitud, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
         const options= {
-            from: "No_reply_Qulturapp@outlook.com",
+            from: "no_reply_quapp@outlook.com",
             to: correo_museo,
             subject: "Cancelacion de solicitud de recorrido",
             text: "Se realizo una cancelación para la solicitud de recorrido con id: " + id_solicitud + ".\n Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes
+        };
+        transporter.sendMail(options,callbackPromise());
+    }
+
+    static correoRecordatorio_send(id_solicitud, correo_usuario, info_adicional, fecha_hora_sol, num_Visitantes, nombreMuseo){
+        const options= {
+            from: "no_reply_quapp@outlook.com",
+            to: correo_usuario,
+            subject: "Hoy es tu recorrido de museo",
+            text: "Tienes una cita hoy en el museo: " + nombreMuseo + ". \n" + "Informacion de la cita \n" + "id_solicitud: " + id_solicitud + "\n fecha: " + fecha_hora_sol + "\n numero de visitantes: " + num_Visitantes  
         };
         transporter.sendMail(options,callbackPromise());
     }
@@ -96,6 +134,7 @@ module.exports = class Solicitud{
     static aceptar_status(id_solicitud){
         return db.execute('UPDATE Solicitud SET status =? WHERE id_solicitud =?',[ 2 , id_solicitud])  
     }
+
     static negar_status(id_solicitud){
         return db.execute('UPDATE Solicitud SET status =? WHERE id_solicitud =?',[ 3 , id_solicitud])  
     }

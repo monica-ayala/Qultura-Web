@@ -3,8 +3,12 @@ const Usuario = require("../models/usuario");
 const Museos = require("../models/museo");
 const filesystem = require('fs');
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 const { response } = require("express");
 const { redirect } = require("express/lib/response");
+const dotenv = require('dotenv');
+
+dotenv.config();
 
  
 exports.view = (request, response, next) => {
@@ -89,6 +93,9 @@ exports.login_post = (request, response, next) => {
                   Usuario.getMuseum(rowsid[0].id_user)
                   .then(([rowsMuseum])=>{
                     request.session.id_museo = rowsMuseum[0].id_museo_user
+                    const accessToken = jwt.sign({ usuario: usuario }, process.env.TOKEN_SECRET);
+                    console.log(accessToken)
+                    request.session.auth = accessToken
                     return request.session.save((err) => {
                       response.redirect("/");
                     });

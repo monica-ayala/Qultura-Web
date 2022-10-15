@@ -5,6 +5,12 @@ const cookieParser=require('cookie-parser');
 const session=require('express-session');
 const path = require('path');
 var multer = require('multer');
+const jwt = require("jsonwebtoken")
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const accessTokenSecret = 'youraccesstokensecret';
 
 // Routes
 const usuario_routes = require('./routes/usuario_routes');
@@ -21,6 +27,7 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
 app.use(session({
      secret: 'qultura-user', 
      resave: false,
@@ -60,9 +67,13 @@ app.use('/solicitud', solicitud_routes);
 app.use('/', museo_routes);
 
 app.use((request, response, next) => {
+     response.header("Access-Control-Allow-Origin", "*");
+     response.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+     response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
      response.status(404);
      response.send('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Not found :(</title></head><body><h1 id="principal">404, esta página no existe</h1></body>');
 });
+
 
 // Database and app port declaration
 const conn = require('./util/database');
