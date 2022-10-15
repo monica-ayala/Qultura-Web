@@ -1,8 +1,5 @@
 const db = require('../util/database');
 const dotenv = require('dotenv');
-const User = require("../models/usuario")
-const Solicitud = require("../models/solicitud")
-const Museo = require("../models/museo")
 
 //const bcrypt = require('bcryptjs');
 const nodemailer= require('nodemailer');
@@ -15,35 +12,8 @@ const transporter= nodemailer.createTransport({
     }
 });
 
-var cron = require('node-cron');
-var current_musseum;
 var user = "no_reply_quapp@outlook.com"
 var pass = "U4@4*s*7mqjF"
-const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
-
-
-cron.schedule('0 * * * *', () => {
-    var date = new Date()
-    var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
-    db.execute('SELECT * FROM Solicitud')
-        .then(([rows, fieldData]) => {
-            for(var i = 0; i < rows.length; i++){
-                if((rows[i].fecha_hora_sol.toString()).substring(4,15) == today){
-                    current_musseum = rows[i].id_museo_solicitud
-                    User.fetchMuseoCorreo(rows[i].id_user_solicitud)
-                        .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
-                            Museo.fetchMuseoName(current_musseum)
-                                .then(([rowsMuseoName, fieldDataMuseoName]) => {
-                                    Solicitud.correoRecordatorio_send(rows[i].id_solicitud, rowsUsuarioMuseo[0].correo_user, rows[i].info_adicional, rows[i].fecha_hora_sol, rows[i].num_Visitantes, rowsMuseoName[0].nom_museo)
-                                    console.log("El correo ya llego")
-                                }).catch(err => console.log(err));
-                    }).catch(err => console.log(err));
-                }
-            }  
-    }).catch(err => console.log(err));
-})
 
 
 module.exports = class Solicitud {
@@ -81,6 +51,10 @@ module.exports = class Solicitud {
 
     static fetchAll(id_usuario){
         return db.execute('SELECT id_solicitud, info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, s.status, m.nom_museo, m.imgP_museo, id_user_solicitud FROM Solicitud s, Museo m WHERE s.id_museo_solicitud = m.id_museo AND s.id_user_solicitud = ?', [id_usuario]);
+    }
+
+    static fetchEverything(){
+        return db.execute('SELECT * FROM Solicitud');
     }
 
     static deleteOne(id_solicitud){
