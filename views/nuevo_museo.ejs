@@ -32,10 +32,26 @@
                                              <!-- TELÉFONO -->
                                              <div class="input-field">
                                                  <input id="num_museo" name="num_museo" type="text"
-                                                     class="validate" required class>
+                                                     class="validate" required/>
                                                  <label for="num_museo"> Teléfono de contacto <span class="required">*</span></label>
                                                  <span class="helper-text" data-error="Este input es requerido"></span>
                                              </div>
+
+                                             
+                                             <script>
+                                                $('#demo1').formatter({
+                                                  'pattern': '{{9999}}-{{9999}}-{{9999}}-{{9999}}'
+                                                });
+                                                $('#demo2').formatter({
+                                                  'pattern': '({{999}}) {{999}}-{{9999}}',
+                                                  'persistent': true // always displays the formatted character.
+                                                });
+                                                $('#demo3').formatter({
+                                                  'pattern': '$ {{99999}}',
+                                                  'persistent': true // always displays the formatted character.
+                                                });
+                                                </script>
+                                            
                                              <!-- HORARIOS -->
                                              <div class="input-field">
                                                  <input id="horario_museo" name="horario_museo" type="text"
