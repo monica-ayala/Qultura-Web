@@ -11,9 +11,8 @@ const bcrypt = require('bcryptjs');
          this.id_rol = 4
      }
 
-    // New user
+    // Nuevo usuario de tipo staff
      save() {
-
         return bcrypt.hash(this.password_user, 12)
         .then((hashed_password)=>{
             return db.execute('INSERT INTO User(nom_user,correo_user,password_user,id_rol) VALUES (?,?,?,?)', 
@@ -26,11 +25,11 @@ const bcrypt = require('bcryptjs');
         });
     }
 
-    // Methods for new user
+    // 
     static AssignMuseo(ide_user){
         return db.execute('INSERT INTO User_Museo(id_user_museo, id_museo_user) VALUES (?,?)', [ide_user,1])
     }
-    ///Unir con Museo
+    
      static fetchList(){
         return db.execute('SELECT * FROM User u, Rol r, User_Museo um, Museo m WHERE u.id_rol = r.id_rol AND u.id_user=um.id_user_museo AND um.id_museo_user = m.id_museo ORDER BY u.id_user ASC');
     }

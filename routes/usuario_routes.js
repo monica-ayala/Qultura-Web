@@ -6,6 +6,7 @@ const api= require ('../util/is-valid-api.js')
 
 // User controller calls
 router.get('/signup',usuario_controller.signup_get);
+router.post('/crear',isAuth,usuario_controller.create);
 router.post('/signup',usuario_controller.signup_post);
 router.get('/login',usuario_controller.login_get);
 router.post('/login',usuario_controller.login_post);

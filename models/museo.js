@@ -22,7 +22,7 @@ module.exports = class Museo{
 
     // Methods for museo
     static fetchList(){
-        return db.execute('SELECT * FROM Museo');
+        return db.execute('SELECT * FROM Museo WHERE status = 1');
     }
 
     static fetchListApi(){

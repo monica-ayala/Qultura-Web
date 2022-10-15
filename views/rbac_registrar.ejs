@@ -9,10 +9,10 @@
 
     <br>
     <div class="search_box">
-
       <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar (Nombre, Rol, Museo)">
-
     </div>
+    <button class="waves-effect waves-light btn" href="#modal2" onclick="createUser()">Nuevo Usuario</button>
+ 
     <table id="myTable" class="centered">
 
       <tr class="header" id="title">
@@ -33,11 +33,13 @@
             <%= usuario.nom_museo%>
           </td>
           <td>
-            <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser(this)"
-              value="<%=usuario.id_user%>" id="<%=usuario.id_user%>">Modificar</button>
-            <a onclick="deleteUsuario(this)" id="<%=usuario.id_user%>" class="btn-floating red card-link"
-              style="float:right;margin:0px"> <i class="material-icons">delete</i> </a>
-          </td>
+              <% if (rol == 4){%>
+                <button class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick="getInfoUser(this)"
+                value="<%=usuario.id_user%>" id="<%=usuario.id_user%>">Modificar</button>
+                <a onclick="deleteUsuario(this)" id="<%=usuario.id_user%>" class="btn-floating red card-link"
+                  style="float:right;margin:0px"> <i class="material-icons">delete</i> </a>    
+              <%}%>
+             </td>
 
         </tr>
         <%}%>
@@ -80,6 +82,45 @@
           Cambios</a>
       </div>
     </div>
+
+
+<!-- Modal Structure -->
+<div id="modal2" class="modal modal-fixed-footer">
+  <div class="modal-content" id="modal_new_user">
+    <div>
+      <div class="col s12">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input class="validate" type="text" name="us_nombre" id="us_nombre" required>
+          <label for="us_nombre" data-error="wrong" data-success="right">Nombre</label>
+          <span class="helper-text" data-error="Campo Requerido" data-success=""></span>
+      </div>
+    <br><br>
+    <div class="input-field col s6">
+      <i class="material-icons prefix">mail_outline</i>
+      <input class="validate" type="email" name="us_correo" id="us_correo" autocomplete="off" required>
+      <label for="us_correo" data-error="wrong" data-success="right">Email</label>
+      <span class="helper-text" data-error="Correo incorrecto" data-success="">Terminacion con @</span>
+    </div>
+    <br><br>
+    <div class="input-field col s6">
+      <i class="material-icons prefix">lock_outline</i>
+      <input class="validate" name="us_password" id="us_password" type="password" minlength="8" autocomplete="off" required>
+      <label for="us_password">Contraseña</label>
+      <span class="helper-text" data-error="Contraseña Formato no valido (minimo 8 caracteres)" data-success=""></span>
+    </div>
+  
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a class="modal-close waves-effect waves-green btn-flat" id="salir" onclick="closeUser2()">Salir</a>
+    <a class=" modal-close waves-effect waves-green btn-flat" id="guardar" onclick="createNew()">Crear Nuevo Usuario</a>
+  </div>
+</div>
+
+
   </div>
 
   <br>
@@ -88,4 +129,5 @@
 
   <script src="/js/script_update_user.js"></script>
   <script src="/js/script_delete_user.js"></script>
+  <script src="/js/script_create_user.js"></script>
   <%- include('includes/footer.ejs') %>
