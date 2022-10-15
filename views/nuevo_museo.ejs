@@ -21,26 +21,29 @@
                             
                                          <!-- NOMBRE -->
                                          <div class="row center">
-                                             <div class="input-field col s10 offset-s1">
+                                           <div class="col s10 offset-s1">
+                                             <div class="input-field">
                                                  <input id="nom_museo" name="nom_museo" type="text"
-                                                     class="validate" required>
+                                                     class="validate" required data-length="10" maxlength="10">
                                                  <label for="nom_museo"> Nombre del Museo <span class="required">*</span></label>
                                                  <span class="helper-text" data-error="Este input es requerido"></span>
-                                             </div>
+                                             </div> 
+                                            
                                              <!-- TELÉFONO -->
-                                             <div class="input-field col s10 offset-s1">
+                                             <div class="input-field">
                                                  <input id="num_museo" name="num_museo" type="text"
-                                                     class="validate" required>
+                                                     class="validate" required class>
                                                  <label for="num_museo"> Teléfono de contacto <span class="required">*</span></label>
                                                  <span class="helper-text" data-error="Este input es requerido"></span>
                                              </div>
                                              <!-- HORARIOS -->
-                                             <div class="input-field col s10 offset-s1">
+                                             <div class="input-field">
                                                  <input id="horario_museo" name="horario_museo" type="text"
-                                                     class="validate" required>
+                                                     class="validate" required data-length="10" maxlength="10">
                                                  <label for="horario_museo"> Horario <span class="required">*</span></label>
                                                  <span class="helper-text" data-error="Este input es requerido"></span>
                                              </div>
+                                            </div>
                                          </div>
                                      </div>
                                      <div class="col s5">
@@ -53,7 +56,7 @@
                                                        <img class="imgPicker imgP" src="/img/no-img.jpg">
                                                        <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
                                                            onclick="uploadFile.click()"><i class="material-icons">edit</i></div>
-                                                       <input class="file-upload" type="file" name="uploadFile" id="uploadFile" style="display:none">
+                                                       <input class="file-upload" type="file" name="uploadFile" id="uploadFile" style="display:none" accept="image/*">
                                                     </div>
                                                 </div>
                                             </div>

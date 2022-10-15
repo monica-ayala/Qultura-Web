@@ -89,3 +89,7 @@ $(document).ready(function() {
     });
 });
 
+$('#num_museo').formatter({
+    'pattern': '+52 {{999}}-{{999}}-{{999}}-{{9999}}',
+    'persistent': true
+  });
