@@ -12,13 +12,18 @@ dotenv.config();
 
  
 exports.view = (request, response, next) => {
-  Usuario.fetchList()
-  .then(([rowsUsers,fieldData])=>{
-    response.render('rbac_registrar',{
-      usuarios:rowsUsers,
-      rol:request.session.id_rol
-    });
-    }).catch(err=>console.log(err));
+  if(request.session.id_rol == 4 || request.session.id_rol == 3){
+    Usuario.fetchList()
+    .then(([rowsUsers,fieldData])=>{
+      response.render('rbac_registrar',{
+        usuarios:rowsUsers,
+        rol:request.session.id_rol
+      });
+      }).catch(err=>console.log(err));
+  }else{
+    response.redirect('/')
+  }
+
 }
    
 
@@ -274,8 +279,10 @@ if(request.session.id_rol==4){
   .then(([rows,fieldData])=>{ 
     Usuario.updateMuseum(request.body.id_user,request.body.id_museo)
     .then(([rowsMuseo,fieldData])=>{
+      if (request.body.id_user == request.session.id_usuario){
       request.session.id_museo = request.body.id_museo;
       request.session.id_rol=request.body.id_rol;
+      }
       response.status(200).json({})
     }).catch(err=>console.log(err));
   }).catch(err=>console.log(err));
