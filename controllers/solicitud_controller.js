@@ -10,8 +10,7 @@ var current;
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
-cron.schedule('16 * * * *', () => {
-  console.log("aAAAAaAA")
+cron.schedule('21 * * * *', () => {
   var date = new Date()
   var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
   Solicitud.fetchEverything()
@@ -23,10 +22,7 @@ cron.schedule('16 * * * *', () => {
                       .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
                           Museo.fetchMuseoName(current.id_museo_solicitud)
                               .then(([rowsMuseoName, fieldDataMuseoName]) => {
-                                  console.log(rowsMuseoName[0].nom_museo)
-                                  console.log(current)
                                   Solicitud.correoRecordatorio_send(current.id_solicitud, rowsUsuarioMuseo[0].correo_user, current.info_adicional, current.fecha_hora_sol, current.num_Visitantes, rowsMuseoName[0].nom_museo)
-                                  console.log("El correo ya llego")
                               }).catch(err => console.log(err));
                   }).catch(err => console.log(err));
               }
