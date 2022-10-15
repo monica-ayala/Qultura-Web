@@ -15,22 +15,36 @@ const storage = multer.diskStorage({
         }
       },
       filename: (req, file, cb) => {
-        cb(null, req.params.id);
+        if (file.fieldname === "uploadAudio") {
+          cb(null, req.params.id_audio);
+        }
+        else if (file.fieldname === "uploadFile") {
+          cb(null, req.params.id_file);
+        }
       }
 })
 
 const upload = multer({
     storage: storage,
     limits: {
-        fileSize: 1000000 //give no. of bytes
+        fileSize: 1000000000000000 //give no. of bytes
     },
     // fileFilter: function(req, file, cb){
     //     checkFileType(file, cb);
     // }
-}).single('uploadFile');
+}).fields(
+  [
+      {
+          name:'uploadAudio',
+          maxCount:1
+      },
+      {
+          name: 'uploadFile', maxCount:1
+      }
+  ])
 
 exports.uploadFile = (req, res) => {
-    upload(req, res, (err) =>{
+      upload(req, res, (err) =>{
         if(err){console.log(err);}
     });
 }

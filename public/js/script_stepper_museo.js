@@ -43,14 +43,17 @@ $(document).ready(function() {
    
 });
 
+
 $(document).ready(function() {
     $("#uploadForm").submit(function() {
         var img = new FormData($('#uploadForm')[0]);
         let filetype = document.getElementById("event").value
         let filename = document.getElementById("filename").value
+        let audioname = document.getElementById("audioname").value
         console.log(img)
         filename = Date.now()+'-imgMuseo.jpg'
-        let route = '/uploads/'+filetype+'/'+filename
+        audioname = Date.now()+'-audioMuseo.mp3'
+        let route = '/uploads/'+filetype+'/'+filename+'/'+audioname
         $.ajax({
             url: route,
             type: 'POST',

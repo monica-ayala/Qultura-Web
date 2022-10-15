@@ -5,6 +5,12 @@ const cookieParser=require('cookie-parser');
 const session=require('express-session');
 const path = require('path');
 var multer = require('multer');
+const jwt = require("jsonwebtoken")
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const accessTokenSecret = 'youraccesstokensecret';
 
 // Routes
 const usuario_routes = require('./routes/usuario_routes');
@@ -17,11 +23,13 @@ const obra_routes = require('./routes/obra_routes')
 const links_routes = require('./routes/links_routes')
 const uploads_routes = require('./routes/upload_routes')
 
+
 // Initialize express app
 const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
 app.use(session({
      secret: 'qultura-user', 
      resave: false,
@@ -46,7 +54,7 @@ app.use('/evento',evento_routes);
 app.use('/usuario', usuario_routes);
 app.use('/links', links_routes);
 app.use('/solicitud', solicitud_routes);
-app.use('/uploads',uploads_routes)
+app.use('/uploads', uploads_routes)
 app.use('/', museo_routes);
 
 app.use((request, response, next) => {
