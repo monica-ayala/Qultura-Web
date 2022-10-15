@@ -4,7 +4,31 @@ const Solicitud = require("../models/solicitud");
 const Necesidad = require("../models/necesidad");
 const Museo = require("../models/museo");
 const User = require("../models/usuario")
+var cron = require('node-cron');
 
+var current;
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+cron.schedule('21 * * * *', () => {
+  var date = new Date()
+  var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
+  Solicitud.fetchEverything()
+      .then(([rows, fieldData]) => {
+          for(var i = 0; i < rows.length; i++){
+              if((rows[i].fecha_hora_sol.toString()).substring(4,15) == today){
+                  current = rows[i]
+                  User.fetchMuseoCorreo(rows[i].id_user_solicitud)
+                      .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
+                          Museo.fetchMuseoName(current.id_museo_solicitud)
+                              .then(([rowsMuseoName, fieldDataMuseoName]) => {
+                                  Solicitud.correoRecordatorio_send(current.id_solicitud, rowsUsuarioMuseo[0].correo_user, current.info_adicional, current.fecha_hora_sol, current.num_Visitantes, rowsMuseoName[0].nom_museo)
+                              }).catch(err => console.log(err));
+                  }).catch(err => console.log(err));
+              }
+          }  
+  }).catch(err => console.log(err));
+})
 
 exports.get_solicitudes=(request,response,next)=>{
   Solicitud.fetchAll(request.params.id_usuario)
