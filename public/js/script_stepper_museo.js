@@ -23,6 +23,11 @@ function validationThrowError(stepperForm, activeStepContent) {
 
 $(document).ready(function() {
 
+    $('#num_museo').formatter({
+        'pattern': '+52 {{999}}-{{999}}-{{999}}-{{9999}}',
+        'persistent': true
+      });
+      
     var readURL = function(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -88,4 +93,5 @@ $(document).ready(function() {
         });
     });
 });
+
 
