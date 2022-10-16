@@ -18,7 +18,12 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://unpkg.com/materialize-stepper@3.1.0/dist/css/mstepper.min.css">
   <script src="https://unpkg.com/materialize-stepper@3.1.0/dist/js/mstepper.min.js"></script>
-    
+  <script>
+    $(document).ready(function() {
+      M.CharacterCounter.init($('input'));
+    });
+  </script>
+  
 </head>
 <body>
   <nav class="primary-color" role="navigation">
@@ -40,12 +45,6 @@
     </div>
   </nav>
 
-  <script>
-    $(document).ready(function() {
-    $('input#input_text, textarea#textarea2,input').characterCounter();
-    });
-  </script>
-  
   <ul id="dropdown123" class="dropdown-content" tabindex="0">
     <li tabindex="0"><a href="/usuario/logout">Cerrar Sesión</a></li>
   </ul>
