@@ -99,7 +99,6 @@ exports.login_post = (request, response, next) => {
                   .then(([rowsMuseum])=>{
                     request.session.id_museo = rowsMuseum[0].id_museo_user
                     const accessToken = jwt.sign({ usuario: usuario }, process.env.TOKEN_SECRET);
-                    console.log(accessToken)
                     request.session.auth = accessToken
                     return request.session.save((err) => {
                       response.redirect("/");
