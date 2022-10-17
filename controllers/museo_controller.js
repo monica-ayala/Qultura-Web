@@ -174,19 +174,14 @@ exports.api_get_one = (request, response, next) => {
 exports.museo_update = (request,response,next)=>{
   if(request.session.id_rol == 4 || request.session.id_rol == 3){
     if (request.session.id_museo == request.body.id_museo || request.session.id_museo == 1){
-      url_imagen = request.file;
-      if (typeof url_imagen == "undefined") {
-        url_imagen = request.body.museo_url;
-      } else {
-        url_imagen = request.file.filename;
-      }
+      console.log(request.body)
       Museo.update_museo(
         request.body.nom_museo,
         request.body.desc_museo,
-        request.body.direccion_museo,
+        request.body.ubicacion_museo,
         request.body.num_museo,
-        url_imagen,
-        request.body.id_museo
+        request.body.imgP_museo,
+        request.params.id_museo
       )
         .then(() => {
           response.redirect("/");

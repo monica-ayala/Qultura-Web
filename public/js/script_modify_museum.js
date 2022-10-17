@@ -21,12 +21,6 @@ function validationThrowError(stepperForm, activeStepContent) {
         } 
     } 
 
-    if (file_input.value === ''){
-        var x = document.getElementById("imgMuseoValidate");
-        x.className = "show";
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000)
-        invalid++
-    }
     if (invalid > 0){
         return false
     } else return true;
@@ -63,6 +57,7 @@ $(document).ready(function() {
         var img = new FormData($('#uploadForm')[0]);
         let filetype = document.getElementById("event").value
         let filename = document.getElementById("filename").value
+        let id_museo = document.getElementById("id_museo").value
         let horarios = [
             {"dia":"Lunes","fin":__("hr_fin_lun").value,"inicio":__("hr_inicio_lun").value},
             {"dia":"Martes","fin":__("hr_fin_mar").value,"inicio":__("hr_inicio_mar").value},
@@ -84,7 +79,8 @@ $(document).ready(function() {
             data: img
         })
 
-        let ruta = '/museo/nuevo_museo'
+        let ruta = '/museo/'+id_museo
+        
         let data = {
             "nom_museo": nom_museo.value,
             "num_museo": num_museo.value,
@@ -94,6 +90,7 @@ $(document).ready(function() {
             "imgB_museo": filename,
             "horarios" : horarios
         }
+        
         // Asynchronous post
         fetch(ruta, {
             method: 'POST',
@@ -111,17 +108,16 @@ $(document).ready(function() {
     });
 });
 
-const form = document.querySelector('form');
-form.addEventListener('submit', (e) => {
+const modifyForm = document.querySelector('.modifyForm');
+modifyForm.addEventListener('submit', (e) => {
     e.preventDefault();
     Swal.fire(
         '¡Creación Exitosa!',
-        'Se ha registrado un nuevo museo',
+        'Se ha modificado el museo',
         'success'
       )
-    setTimeout(() => form.submit(), 1200);
+    setTimeout(() =>  modifyForm.submit(), 1200);
   });
-
 //HORARIOS
 
 // Horario lunes

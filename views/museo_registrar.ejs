@@ -4,6 +4,7 @@
     <div class="row">
       <div class="col s10 offset-s1">
         <h4 class="card-title"> <%= museo.nom_museo %>
+          <input id="id_museo" value="<%= museo.id_museo %>" style="display:none">
           <button onclick="addSalas()" id="addSalas" class="waves-effect waves-dark btn"> <i class="material-icons">
               remove </i> </button>
           <span id="num_salas"> 0 </span>
@@ -14,7 +15,7 @@
           <div class="card-content pb-0">
             <div class="card-header mb2">
             </div>
-            <form id="uploadForm" action="/" enctype="multipart/form-data">
+            <form id="uploadForm" class="modifyForm" action="/" enctype="multipart/form-data">
               <ul class="stepper linear">
                 <li class="step active">
                   <div class="step-title waves-effect">
@@ -29,7 +30,7 @@
                           <div class="col s10 offset-s1">
                             <div class="input-field">
                               <input id="nom_museo" name="nom_museo" type="text" class="validate" required
-                                data-length="70" maxlength="70">
+                                data-length="70" maxlength="70" value="<%= museo.nom_museo %>">
                               <label for="nom_museo"> Nombre del Museo <span class="required">*</span></label>
                               <span class="helper-text" data-error="Este input es requerido"></span>
                             </div>
@@ -37,7 +38,7 @@
                             <!-- TELÉFONO -->
                             <div class="input-field">
                               <input id="num_museo" name="num_museo" type="number" class="validate" required
-                                maxlength="10" />
+                                maxlength="10" value="<%= museo.num_museo %>" />
                               <label for="num_museo"> Teléfono de contacto <span class="required">*</span></label>
                               <span class="helper-text" data-error="Este input es requerido"></span>
                             </div>
@@ -45,7 +46,7 @@
                             <!-- DIRECCIÓN -->
                             <div class="input-field">
                               <input name="ubicacion_museo" id="ubicacion_museo" type="text" class="validate" required
-                                data-length="50" maxlength="50">
+                                data-length="50" maxlength="50" value="<%= museo.ubicacion_museo %>">
                               <label for="ubicacion_museo"> Dirección <span class="required">*</span></label>
                               <span class="helper-text" data-error="Este input es requerido"></span>
                             </div>
@@ -60,7 +61,7 @@
                           <div id="imgMuseoValidate"> Selecciona una imagen para el museo </div>
                           <div class="card imgPicker">
                             <div class="card-image">
-                              <img class="imgPicker imgP" src="/img/no-img.jpg">
+                              <img class="imgPicker imgP" src="/uploads/museos/<%=museo.imgP_museo%>">
                               <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
                                 onclick="uploadFile.click()"><i class="material-icons">edit</i></div>
                               <input class="file-upload" type="file" name="uploadFile" id="uploadFile"
@@ -305,7 +306,7 @@
                     <div class="row">
                       <div class="input-field col s10 offset-s1">
                         <textarea id="desc_museo" name="desc_museo" class="materialize-textarea validate"
-                          required></textarea>
+                          required><%= museo.desc_museo %></textarea>
                         <label for="desc_museo"> Descripción <span class="required">*</span></label>
                         <span class="helper-text" data-error="Este input es requerido"></span>
                       </div>
@@ -332,5 +333,5 @@
     </div>
     <%}%>
   </main>
-  <script src="/js/script_stepper_museo.js"></script>
+  <script src="/js/script_modify_museum.js"></script>
   <%- include('includes/footer.ejs') %>
