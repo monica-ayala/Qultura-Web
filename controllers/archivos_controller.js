@@ -32,16 +32,7 @@ const upload = multer({
     // fileFilter: function(req, file, cb){
     //     checkFileType(file, cb);
     // }
-}).fields(
-  [
-      {
-          name:'uploadAudio',
-          maxCount:1
-      },
-      {
-          name: 'uploadFile', maxCount:1
-      }
-  ])
+}).single('uploadFile')
 
 exports.uploadFile = (req, res) => {
       upload(req, res, (err) =>{

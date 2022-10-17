@@ -80,12 +80,14 @@ exports.museo_post = (request, response, next) => {
       request.body.imgP_museo,
       request.body.imgB_museo
     );
-    nuevo_museo
-      .save()
+    nuevo_museo.save()
       .then((result) => {
-        response.redirect("/museo");
-      })
-      .catch((err) => console.log(err));
+        for(let horario of request.body.horarios){
+          console.log(horario)
+          Museo.AsignarHorario(result[0].insertId,horario.dia,horario.fin,horario.inicio);
+        };
+        response.redirect ("/museo");
+      }).catch(err => console.log(err));  
   }else{
     response.redirect('/')
   }

@@ -43,4 +43,9 @@ module.exports = class Museo{
         );
     }
 
+    static AsignarHorario(id_museo,dia,fin,inicio){
+        return db.execute('INSERT INTO Horario (id_museo, dia_horario, hora_fin, hora_inicio) VALUES (?,?,?,?)',[id_museo,dia,fin,inicio])
+        
+    }
+
 }
