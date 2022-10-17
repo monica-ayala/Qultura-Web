@@ -12,7 +12,7 @@ function addSalas(){
 
 function validationThrowError(stepperForm, activeStepContent) {
     var inputs = activeStepContent.querySelectorAll('.validate');
-    var file_input = activeStepContent.querySelector('#uploadFile')
+    var file_input = document.querySelector('#uploadFile')
     var invalid = 0;
     for (let i = 0; i < inputs.length; i++){
         if (!inputs[i].checkValidity()){
@@ -111,6 +111,16 @@ $(document).ready(function() {
     });
 });
 
+const form = document.querySelector('form');
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    Swal.fire(
+        '¡Creación Exitosa!',
+        'Se ha registrado un nuevo museo',
+        'success'
+      )
+    setTimeout(() => form.submit(), 1200);
+  });
 //HORARIOS
 
 // Horario lunes

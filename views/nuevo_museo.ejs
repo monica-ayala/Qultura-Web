@@ -11,7 +11,7 @@
                         <div class="card-content pb-0">
                             <div class="card-header mb2"> 
                             </div>
-                            <form id="uploadForm"  enctype="multipart/form-data">
+                            <form id="uploadForm" action="/" enctype="multipart/form-data">
                             <ul class="stepper linear">
                             <li class="step active"> 
                                 <div class="step-title waves-effect"> <p>Información</p> </div>
@@ -276,19 +276,22 @@
                                  <div class="step-title waves-effect"> Descripción </div>
                                  <div class="step-content">
                                      <!-- DESCRIPCIÓN -->
+                                     <div class="row">
                                      <div class="input-field col s10 offset-s1">
                                          <textarea id="desc_museo" name="desc_museo"
                                              class="materialize-textarea validate" required></textarea>
                                          <label for="desc_museo"> Descripción <span class="required">*</span></label>
                                          <span class="helper-text" data-error="Este input es requerido"></span>
                                      </div>
-                                     
+                                    </div>
                                     
                                     <div class="step-actions">
                                         <div class="row">
                                             <div class="col"> <button class="red btn btn-reset" type="reset"> Resetear <i class="material-icons left"> clear </i>  </button> </div>
                                             <div class="col"> <button class="btn light-blue-secondary previous-step"> Anterior  <i class="material-icons left"> arrow_back </i> </button> </div>
-                                            <input type="submit" value="upload"> 
+                                            <button type="submit" value="upload" class="btn waves-effect waves-light green"><i class="material-icons left">check</i>
+                                            Registrar Museo
+                                            </button>
                                         </div>
                                     </div>
                                  </div>

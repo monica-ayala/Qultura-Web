@@ -86,7 +86,7 @@ exports.museo_post = (request, response, next) => {
           console.log(horario)
           Museo.AsignarHorario(result[0].insertId,horario.dia,horario.fin,horario.inicio);
         };
-        response.redirect ("/museo");
+        response.status(200).json({})
       }).catch(err => console.log(err));  
   }else{
     response.redirect('/')
