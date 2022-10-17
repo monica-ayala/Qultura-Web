@@ -1,24 +1,22 @@
 const db = require('../util/database');
 const dotenv = require('dotenv');
+
 //const bcrypt = require('bcryptjs');
 const nodemailer= require('nodemailer');
 const { callbackPromise } = require('nodemailer/lib/shared');
 const transporter= nodemailer.createTransport({
     service: "hotmail",
     auth : {
-        user: "No_reply_Qulturapp@outlook.com",
+        user: "no_reply_quapp@outlook.com",
         pass: "U4@4*s*7mqjF"
     }
 });
 
-var cron = require('node-cron');
-
-cron.schedule('* */1 * * *', () => {
-    console.log("AAAAAAAAAAAAAA")
-});
+var user = "no_reply_quapp@outlook.com"
+var pass = "U4@4*s*7mqjF"
 
 
-module.exports = class Solicitud{
+module.exports = class Solicitud {
 
     constructor(info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, id_museo_solicitud, id_user_solicitud) {
         this.info_adicional = info_adicional;
@@ -55,6 +53,10 @@ module.exports = class Solicitud{
         return db.execute('SELECT id_solicitud, info_adicional, fecha_hora, fecha_hora_sol, num_asistentes, s.status, m.nom_museo, m.imgP_museo, id_user_solicitud FROM Solicitud s, Museo m WHERE s.id_museo_solicitud = m.id_museo AND s.id_user_solicitud = ?', [id_usuario]);
     }
 
+    static fetchEverything(){
+        return db.execute('SELECT * FROM Solicitud');
+    }
+
     static deleteOne(id_solicitud){
         db.execute('DELETE FROM Solicitud_Necesidad WHERE id_solicitud_necesidad = ?', [id_solicitud])
             .then(([rows, fieldData]) => {
@@ -65,7 +67,7 @@ module.exports = class Solicitud{
 
     static correo_send(id_solicitud, necesidades, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
         const options= {
-            from: "No_reply_Qulturapp@outlook.com",
+            from: "no_reply_quapp@outlook.com",
             to: correo_museo,
             subject: "Solicitud especial de recorrido",
             text: "Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + info_adicional + "\n Click aqui para confirmar solicitud : https://qulturaqro.live/solicitud/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : https://qulturaqro.live/solicitud/negar/"+id_solicitud
@@ -76,10 +78,20 @@ module.exports = class Solicitud{
 
     static correoElimina_send(id_solicitud, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
         const options= {
-            from: "No_reply_Qulturapp@outlook.com",
+            from: "no_reply_quapp@outlook.com",
             to: correo_museo,
             subject: "Cancelacion de solicitud de recorrido",
             text: "Se realizo una cancelación para la solicitud de recorrido con id: " + id_solicitud + ".\n Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes
+        };
+        transporter.sendMail(options,callbackPromise());
+    }
+
+    static correoRecordatorio_send(id_solicitud, correo_usuario, info_adicional, fecha_hora_sol, num_Visitantes, nombreMuseo){
+        const options= {
+            from: "no_reply_quapp@outlook.com",
+            to: correo_usuario,
+            subject: "Hoy es tu recorrido de museo",
+            text: "Tienes una cita hoy en el museo: " + nombreMuseo + ". \n" + "Informacion de la cita \n" + "id_solicitud: " + id_solicitud + "\n fecha: " + fecha_hora_sol + "\n numero de visitantes: " + num_Visitantes  
         };
         transporter.sendMail(options,callbackPromise());
     }
@@ -96,6 +108,7 @@ module.exports = class Solicitud{
     static aceptar_status(id_solicitud){
         return db.execute('UPDATE Solicitud SET status =? WHERE id_solicitud =?',[ 2 , id_solicitud])  
     }
+
     static negar_status(id_solicitud){
         return db.execute('UPDATE Solicitud SET status =? WHERE id_solicitud =?',[ 3 , id_solicitud])  
     }

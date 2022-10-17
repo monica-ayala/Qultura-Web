@@ -3,17 +3,28 @@ const Usuario = require("../models/usuario");
 const Museos = require("../models/museo");
 const filesystem = require('fs');
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 const { response } = require("express");
 const { redirect } = require("express/lib/response");
+const dotenv = require('dotenv');
+
+dotenv.config();
 
  
 exports.view = (request, response, next) => {
-  Usuario.fetchList()
-  .then(([rowsUsers,fieldData])=>{
-    response.render('rbac_registrar',{
-      usuarios:rowsUsers});
-    }).catch(err=>console.log(err));
-  };
+  if(request.session.id_rol == 4 || request.session.id_rol == 3){
+    Usuario.fetchList()
+    .then(([rowsUsers,fieldData])=>{
+      response.render('rbac_registrar',{
+        usuarios:rowsUsers,
+        rol:request.session.id_rol
+      });
+      }).catch(err=>console.log(err));
+  }else{
+    response.redirect('/')
+  }
+
+}
    
 
 
@@ -44,6 +55,7 @@ exports.view = (request, response, next) => {
     }else{
       response.redirect("/usuario/signup");
     }
+  
   })
   .catch((err) => {
     console.log(err);
@@ -60,7 +72,7 @@ exports.login_get = (request, response, next) => {
 exports.login_post = (request, response, next) => {
   Usuario.findOne(request.body.us_correo)
     .then(([rows, fielData]) => {
-      if (rows.length < 1 || rows[0].id_rol !== 4) {
+      if (rows.length < 1 ) {
         response.status(200).json({ errores: 1 });
       } else {
         const usuario = new Usuario(
@@ -81,9 +93,14 @@ exports.login_post = (request, response, next) => {
               Usuario.getId(request.session.correo)
                 .then(([rowsid, fieldData]) => {
                   request.session.id_usuario = rowsid[0].id_user;
+                  request.session.id_rol =rows[0].id_rol;
+                  console.log(request.session)
                   Usuario.getMuseum(rowsid[0].id_user)
                   .then(([rowsMuseum])=>{
                     request.session.id_museo = rowsMuseum[0].id_museo_user
+                    const accessToken = jwt.sign({ usuario: usuario }, process.env.TOKEN_SECRET);
+                    console.log(accessToken)
+                    request.session.auth = accessToken
                     return request.session.save((err) => {
                       response.redirect("/");
                     });
@@ -233,7 +250,7 @@ exports.login_post = (request, response, next) => {
 // };
 
  exports.updateUsuario = (request, response, next) => {
-
+if(request.session.id_rol==4){
   Usuario.fecthOne(request.params.id_usuario)
   .then(([rowUser,fieldData])=>{
     Usuario.roles()
@@ -249,20 +266,29 @@ exports.login_post = (request, response, next) => {
     }).catch(err=>console.log(err));
     
   }).catch(err=>console.log(err));
- 
+}else{
+  response.redirect('/')
+}
+  
  };
 
  exports.sendUpdate=(request,response,next)=>{
+  if(request.session.id_rol==4){
+    
   Usuario.update(request.body.id_rol,request.body.id_user)
-    .then(([rows,fieldData])=>{ 
-      Usuario.updateMuseum(request.body.id_user,request.body.id_museo)
-      .then(([rowsMuseo,fieldData])=>{
-        request.session.id_museo = request.body.id_museo;
-        response.status(200).json({})
-      }).catch(err=>console.log(err));
+  .then(([rows,fieldData])=>{ 
+    Usuario.updateMuseum(request.body.id_user,request.body.id_museo)
+    .then(([rowsMuseo,fieldData])=>{
+      if (request.body.id_user == request.session.id_usuario){
+      request.session.id_museo = request.body.id_museo;
+      request.session.id_rol=request.body.id_rol;
+      }
+      response.status(200).json({})
     }).catch(err=>console.log(err));
-
-  
+  }).catch(err=>console.log(err));
+  }else{
+    response.redirect('/')
+  }
  }
 
  exports.logout = (request, response, next) => {
@@ -282,11 +308,47 @@ exports.getUser = (request,response,next)=>{
 }
 
 exports.erase = (request,response,next)=>{
-  Usuario.softErase(request.params.id_user)
-  Usuario.fetchList()
-  .then(([rowsUsers,fieldData])=>{
-    response.status(200).json({
-      users: rowsUsers
+  if(request.session.id_rol ==4){
+    Usuario.softErase(request.params.id_user)
+    Usuario.fetchList()
+    .then(([rowsUsers,fieldData])=>{
+      response.status(200).json({
+        users: rowsUsers
+      })
+      }).catch(err=>console.log(err)); 
+  }
+ };
+
+exports.create = (request,response,next)=>{
+  if(request.session.id_rol==4){
+    const nuevo_usuario = new Usuario(
+      request.body.nombre,
+      request.body.correo,
+      request.body.password
+    );
+  
+    Usuario.findOne(request.body.correo)
+    .then(([rows,fieldData])=>{
+      if (rows.length==0){
+        nuevo_usuario.save()
+        .then((result)=>{
+          Usuario.AssignMuseo(result[0].insertId)
+          .then(()=>{
+            response.status(200).json({});
+          })
+          .catch(err=>console.log(err));
+        })
+        .catch(err=>console.log(err));
+      }else{
+        response.redirect("/");
+      }
     })
-    }).catch(err=>console.log(err));
-};
+    .catch((err) => {
+      console.log(err);
+    });
+  }else{
+    response.redirect('/')
+  }
+
+  
+}

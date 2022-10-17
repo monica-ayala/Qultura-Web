@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const isAuth= require ('../util/is-auth.js')
 const usuario_controller = require('../controllers/usuario_controller');
+const api= require ('../util/is-valid-api.js')
 
 // User controller calls
 router.get('/signup',usuario_controller.signup_get);
+router.post('/crear',isAuth,usuario_controller.create);
 router.post('/signup',usuario_controller.signup_post);
 router.get('/login',usuario_controller.login_get);
 router.post('/login',usuario_controller.login_post);
@@ -17,7 +19,7 @@ router.post('/borrar/usuario/:id_user',isAuth,usuario_controller.erase);
 
 // REST API
 router.get('/login_movil',usuario_controller.login_movil_get);
-router.post('/login_movil',usuario_controller.login_movil_post);
+router.post('/login_movil',api,usuario_controller.login_movil_post);
 router.post('/signup_movil',usuario_controller.signup_post_movil);
 
 module.exports = router;

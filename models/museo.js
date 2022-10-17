@@ -20,7 +20,11 @@ module.exports = class Museo{
     }
 
     static fetchList(){
-        return db.execute('SELECT * FROM Museo');
+        return db.execute('SELECT * FROM Museo WHERE status = 1');
+    }
+
+    static fetchListApi(){
+        return db.execute('SELECT * FROM Museo WHERE status = 1');
     }
 
     static fetchOne(id_museo){
@@ -45,7 +49,14 @@ module.exports = class Museo{
 
     static AsignarHorario(id_museo,dia,fin,inicio){
         return db.execute('INSERT INTO Horario (id_museo, dia_horario, hora_fin, hora_inicio) VALUES (?,?,?,?)',[id_museo,dia,fin,inicio])
-        
+    }
+    
+    static fetchidUsuario(id_museo){
+        return db.execute('SELECT id_user_museo FROM User_Museo WHERE id_museo_user = ?',[id_museo])
+    }
+
+    static fetchMuseoName(id_museo){
+        return db.execute('SELECT nom_museo FROM Museo WHERE id_museo = ?',[id_museo])
     }
 
 }
