@@ -120,9 +120,9 @@ exports.soft_unerase = (request, response, next) => {
 exports.get_Onemuseo = (request, response, next) => {
   if(request.params.id_museo == request.session.id_museo || request.session.id_museo == 1){
     Museo.fecthOne(request.params.id_museo)
-    .then(([rowsMuseos, fieldData]) => {
+    .then(([rowsMuseo, fieldData]) => {
       response.render("museo_registrar", {
-        museos: rowsMuseos,
+        museos: rowsMuseo
       });
     })
     .catch((err) => console.log(err));

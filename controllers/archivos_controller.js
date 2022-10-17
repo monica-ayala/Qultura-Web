@@ -4,14 +4,14 @@ const multer = require("multer");
 const fs = require('fs');
 const mkdirp = require("mkdirp");
 
-//set Storage Engine
+// Storage for museums and events
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       console.log(req.params)
         if (req.params.evento == 'museo') {
-          cb(null, "public/uploads/museos"); // it will upload inside test under images
+          cb(null, "public/uploads/museos"); // it will upload inside museum
         } else {
-          cb(null, "public/uploads/eventos"); // it will upload inside try under images
+          cb(null, "public/uploads/eventos"); // it will upload inside events
         }
       },
       filename: (req, file, cb) => {
@@ -29,9 +29,7 @@ const upload = multer({
     limits: {
         fileSize: 1000000000000000 //give no. of bytes
     },
-    // fileFilter: function(req, file, cb){
-    //     checkFileType(file, cb);
-    // }
+    // missing filter for files uploaded
 }).single('uploadFile')
 
 exports.uploadFile = (req, res) => {
