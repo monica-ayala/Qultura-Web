@@ -6,7 +6,7 @@
 <div class="bg bg3"></div>
 <div class="container" style="margin-bottom: 10%;">
     <% if (links.length > 0) { %>
-        <h1 class="white-text">LINKS</h4>
+        <h1 class="white-text">Links</h4>
         <div class="white" style="padding-top: 2em; padding-bottom: 2em;">
             <% for (link of links) { %>
                 <div class="row center valign-wrapper ">
@@ -20,7 +20,7 @@
                     <div class="col s9">
                         <div class="row" style="border: 1px dashed black; border-radius: 10px;">
                             <h6 class="center" style="margin: 5px 0 5px 0 !important;">
-                                <%= link.link %>
+                                <a class="clickable-link" href="<%=link.link%>"><%= link.link %></a>
                             </h6>
                         </div>
                     </div>
@@ -56,4 +56,5 @@
 </div>
 
 <script src="/js/script_delete_user.js"></script>
+
 <%- include('includes/footer.ejs') %>
