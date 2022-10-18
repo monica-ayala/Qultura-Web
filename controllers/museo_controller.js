@@ -147,13 +147,19 @@ exports.soft_unerase = (request, response, next) => {
 
 exports.get_Onemuseo = (request, response, next) => {
   if(request.params.id_museo == request.session.id_museo || request.session.id_museo == 1){
-    Museo.fecthOne(request.params.id_museo)
-    .then(([rowsMuseo, fieldData]) => {
-      response.render("museo_registrar", {
-        museos: rowsMuseo
-      });
-    })
-    .catch((err) => console.log(err));
+    
+    Sala.fetchListMuseum(80)
+    .then(([rowsSalas, fieldData]) => {
+      Museo.fecthOne(request.params.id_museo)
+      .then(([rowsMuseo, fieldData]) => {
+        console.log(rowsSalas)
+        response.render("museo_registrar", {
+          museos: rowsMuseo,
+          salas: rowsSalas
+        });
+      })
+      .catch((err) => console.log(err));
+    }).catch(err => console.log(err));
   }else{
     response.redirect('/')
   }

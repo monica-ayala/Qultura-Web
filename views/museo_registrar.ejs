@@ -3,20 +3,13 @@
     <% for (let museo of museos){%>
     <div class="row">
       <div class="col s10 offset-s1">
-        <h4 class="card-title"> <%= museo.nom_museo %>
-          <input id="id_museo" value="<%= museo.id_museo %>" style="display:none">
-          <button onclick="addSalas()" id="addSalas" class="waves-effect waves-dark btn"> <i class="material-icons">
-              remove </i> </button>
-          <span id="num_salas"> 0 </span>
-          <button onclick="addSalas()" id="addSalas" class="waves-effect waves-dark btn"> <i class="material-icons"> add
-            </i> </button>
-        </h4>
+        <h4 class="card-title"> <%= museo.nom_museo %></h4>
         <div class="card">
           <div class="card-content pb-0">
             <div class="card-header mb2">
             </div>
-            <form id="uploadForm" class="modifyForm" action="/" enctype="multipart/form-data">
-              <ul class="stepper linear">
+            <form id="uploadForm" class="modifyForm" enctype="multipart/form-data">
+              <ul class="stepper horizontal">
                 <li class="step active">
                   <div class="step-title waves-effect">
                     <p>Información</p>
@@ -74,10 +67,6 @@
                     </div>
                     <div class="step-actions">
                       <div class="row">
-                        <div class="col"> <button class="red btn btn-reset" type="reset"> Resetear <i
-                              class="material-icons left"> clear </i> </button> </div>
-                        <div class="col"> <button class="btn light-blue-secondary previous-step"> Anterior <i
-                              class="material-icons left"> arrow_back </i> </button> </div>
                         <div class="col"> <button class="waves-effect waves dark btn light-blue-secondary next-step"
                             type="reset"> Siguiente <i class="material-icons right"> arrow_forward </i> </button> </div>
                       </div>
@@ -289,10 +278,6 @@
                     </div>
                     <div class="step-actions">
                       <div class="row">
-                        <div class="col"> <button class="red btn btn-reset" type="reset"> Resetear <i
-                              class="material-icons left"> clear </i> </button> </div>
-                        <div class="col"> <button class="btn light-blue-secondary previous-step"> Anterior <i
-                              class="material-icons left"> arrow_back </i> </button> </div>
                         <div class="col"> <button class="waves-effect waves dark btn light-blue-secondary next-step"
                             type="reset"> Siguiente <i class="material-icons right"> arrow_forward </i> </button> </div>
                       </div>
@@ -314,14 +299,31 @@
 
                     <div class="step-actions">
                       <div class="row">
-                        <div class="col"> <button class="red btn btn-reset" type="reset"> Resetear <i
-                              class="material-icons left"> clear </i> </button> </div>
+                        <div class="col"><button type="submit" value="upload" class="btn waves-effect waves-light green"><i class="material-icons left">check</i>
+                          Guardar Cambios </button></div>
                         <div class="col"> <button class="btn light-blue-secondary previous-step"> Anterior <i
                               class="material-icons left"> arrow_back </i> </button> </div>
-                        <button type="submit" value="upload" class="btn waves-effect waves-light green"><i
-                            class="material-icons left">check</i>
-                          Registrar Museo
-                        </button>
+                        
+                        <div class="col"> <button class="waves-effect waves dark btn light-blue-secondary next-step" type="reset"> Siguiente <i class="material-icons right"> arrow_forward </i> </button> </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <%}%>
+                <li class="step">
+                  <div class="step-title waves-effect"> Salas </div>
+                  <div class="step-content">
+                    <!-- DESCRIPCIÓN -->
+                    <div class="row">
+                      <% for (let sala of salas){%>
+                        <div> <%= sala.nom_sala %> </div>
+                        <%}%>
+                    </div>
+
+                    <div class="step-actions">
+                      <div class="row">
+                        <div class="col"> <button class="btn light-blue-secondary previous-step"> Anterior <i
+                              class="material-icons left"> arrow_back </i> </button> </div>
                       </div>
                     </div>
                   </div>
@@ -331,7 +333,7 @@
         </div>
       </div>
     </div>
-    <%}%>
+    
   </main>
   <script src="/js/script_modify_museum.js"></script>
   <%- include('includes/footer.ejs') %>
