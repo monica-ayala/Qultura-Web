@@ -12,6 +12,17 @@ body {
     height: 100%;
 }
 
+.clickable-link{
+  color: #0C1A30;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.clickable-link:hover{
+  color: rgb(0, 140, 255);
+  text-decoration: underline;
+}
+
 body {
     display:table-cell;
     vertical-align: middle;

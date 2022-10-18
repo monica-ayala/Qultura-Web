@@ -26,7 +26,9 @@ exports.lista=(request,response,next)=>{
 
 exports.sala_get=(request,response,next)=>{
   if (request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
-    response.render('nueva_sala');
+    response.render('nueva_sala',{
+      museo: request.params.id_museo
+    });
   }else{
     response.redirect('/')
   }
@@ -34,21 +36,13 @@ exports.sala_get=(request,response,next)=>{
 
 exports.sala_post = (request, response, next) => {
     if (request.session.id_museo == request.params.id_museo || request.session.id_museo ==1){
-      url_imagen = request.file;
-      if((typeof(url_imagen) == "undefined")){
-          url_imagen = "";
-      }else{
-          url_imagen = request.file.filename;
-      }
-      audio_sala = "placeholder"
-      
       
       const nueva_sala = new Sala(
         request.body.nom_sala,
         request.body.desc_sala,
-        audio_sala,
-        url_imagen,
-        request.params.id_museo
+        request.body.audio_sala,
+        request.body.img_sala,
+        request.body.id_museo
       )
       console.log(nueva_sala)
       ruta = "/museo/"+request.params.id_museo+"/sala"
