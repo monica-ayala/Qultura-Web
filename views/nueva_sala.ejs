@@ -1,10 +1,10 @@
 <%- include('includes/header_image.ejs') %>
     <main>
-        <form method="POST" enctype="multipart/form-data">
+        <form id="uploadSala" enctype="multipart/form-data">
 
             <div class="container">
                 <h1 class="white-text">Nuevo museo</h1>
-
+                <input id="id_museo" value="<%=museo%>" style="display:none">
                 <div class="white min-container">
                     <div class="row center margin-10">
                         <!-- valign-wrapper -->
@@ -13,10 +13,12 @@
                                 <div class="col s10">
                                     <div class="card imgPicker">
                                         <div class="card-image">
+                                            <input id="filename" style="display:none">
+                                            <input id="event" value="museo" style="display:none">
                                             <img class="imgPicker imgP" src="../img/no-img.jpg">
                                             <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
                                                 onclick="filebutton.click()"><i class="material-icons">edit</i></div>
-                                            <input class="file-upload" id="filebutton" type="file" name="url_imagen"
+                                            <input class="file-upload" id="filebutton" type="file" name="uploadFile"
                                                 style="display:none">
                                         </div>
                                     </div>
@@ -34,9 +36,10 @@
 
                                 <div class="input-field col s10 offset-s1">
                                     <div class="file-field input-field">
+                                        <input id="audioname" style="display:none">
                                         <div class="btn">
                                             <span> Mp3</span>
-                                            <input type="file">
+                                            <input id="uploadAudio" name="uploadAudio" type="file">
                                         </div>
                                         <div class="file-path-wrapper">
                                             <input placeholder="audioguía (archivo mp3)" class="file-path validate"
@@ -74,5 +77,5 @@
             </div>
         </form>
     </main>
-
+    <script src="/js/script_create_sala.js"></script>
     <%- include('includes/footer.ejs') %>

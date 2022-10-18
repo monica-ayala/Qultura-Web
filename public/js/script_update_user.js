@@ -12,6 +12,7 @@ $(document).ready(function(){
            $('select').empty();
         },
     });
+    
   });
 
   $('.formSelect').on('contentChanged', function() {

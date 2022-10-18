@@ -4,7 +4,31 @@ const Solicitud = require("../models/solicitud");
 const Necesidad = require("../models/necesidad");
 const Museo = require("../models/museo");
 const User = require("../models/usuario")
+var cron = require('node-cron');
 
+var current;
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+cron.schedule('21 * * * *', () => {
+  var date = new Date()
+  var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
+  Solicitud.fetchEverything()
+      .then(([rows, fieldData]) => {
+          for(var i = 0; i < rows.length; i++){
+              if((rows[i].fecha_hora_sol.toString()).substring(4,15) == today){
+                  current = rows[i]
+                  User.fetchMuseoCorreo(rows[i].id_user_solicitud)
+                      .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
+                          Museo.fetchMuseoName(current.id_museo_solicitud)
+                              .then(([rowsMuseoName, fieldDataMuseoName]) => {
+                                  Solicitud.correoRecordatorio_send(current.id_solicitud, rowsUsuarioMuseo[0].correo_user, current.info_adicional, current.fecha_hora_sol, current.num_Visitantes, rowsMuseoName[0].nom_museo)
+                              }).catch(err => console.log(err));
+                  }).catch(err => console.log(err));
+              }
+          }  
+  }).catch(err => console.log(err));
+})
 
 exports.get_solicitudes=(request,response,next)=>{
   Solicitud.fetchAll(request.params.id_usuario)
@@ -26,7 +50,7 @@ exports.elimina_solicitud=(request,response,next)=>{
         .then(([rowsMuseoUsuario, fieldDataMuseoUsuario]) => {
           User.fetchMuseoCorreo(rowsMuseoUsuario[0].id_user_museo)
             .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => { //rowsUsuarioMuseo[0].correo_user
-              Solicitud.correoElimina_send(rowsOneSolicitud[0].id_solicitud, 'A01706897@tec.mx', rowsOneSolicitud[0].info_adicional, rowsOneSolicitud[0].fecha_hora_sol, rowsOneSolicitud[0].num_asistentes) 
+              Solicitud.correoElimina_send(rowsOneSolicitud[0].id_solicitud, rowsUsuarioMuseo[0].correo_user, rowsOneSolicitud[0].info_adicional, rowsOneSolicitud[0].fecha_hora_sol, rowsOneSolicitud[0].num_asistentes) 
               Solicitud.deleteOne(request.body.id_solicitud)
       }).catch(err => console.log(err));
     }).catch(err => console.log(err));
@@ -49,9 +73,9 @@ exports.elimina_solicitud=(request,response,next)=>{
                       Solicitud.correo_send(rowLastSolicitud[0].LastSolicitud, request.body.necesidades_text , rowsUsuarioMuseo[0].correo_user, request.body.info_adicional, request.body.fecha_hora_sol, request.body.num_Visitantes)
                       for(var i = 0; i < request.body.necesidades.length; i++){
                         Solicitud.necesidades_save(rowLastSolicitud[0].LastSolicitud, request.body.necesidades[i],request.body.info_adicional,request.body.fecha_hora_sol, request.body.num_Visitantes,)
-                        .then(()=>{response.status(200).json({})})
                         .catch(err => console.log(err));
                       }
+                      response.status(200).json({})
                     }).catch(err => console.log(err));
                 }
             }).catch(err => console.log(err));

@@ -1,7 +1,8 @@
 <%- include('includes/header_image.ejs') %>
     <main>
-        <form method="POST" enctype="multipart/form-data">
-
+        <form id="uploadObra" enctype="multipart/form-data">
+            <input style="display:none" id="id_museo" value="<%= museo %>">
+            <input style="display:none" id="id_sala" value="<%= sala %>">
             <div class="container">
                 <h1 class="white-text">Nueva obra</h1>
 
@@ -13,10 +14,12 @@
                                 <div class="col s10">
                                     <div class="card imgPicker">
                                         <div class="card-image">
+                                            <input id="filename" style="display:none">
+                                            <input id="event" value="museo" style="display:none">
                                             <img class="imgPicker imgP" src="/img/no-img.jpg">
                                             <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
                                                 onclick="filebutton.click()"><i class="material-icons">edit</i></div>
-                                            <input class="file-upload" id="filebutton" type="file" name="url_imagen"
+                                            <input class="file-upload" id="filebutton" type="file" name="uploadFile" id="uploadFile"
                                                 style="display:none">
                                         </div>
                                     </div>
@@ -33,9 +36,10 @@
 
                                 <div class="input-field col s10 offset-s1">
                                     <div class="file-field input-field">
+                                        <input id="audioname" style="display:none">
                                         <div class="btn">
                                             <span> Mp3</span>
-                                            <input type="file">
+                                            <input type="file" id="uploadAudio" name="uploadAudio">
                                         </div>
                                         <div class="file-path-wrapper">
                                             <input placeholder="audioguía (archivo mp3)" class="file-path validate"
@@ -68,11 +72,7 @@
                                 class="materialize-textarea validate">  </textarea>
                             <label for="desc_obra"> Descripción </label>
                         </div>
-                        <div class="input-field col s10 offset-s1">
-                            <textarea id="subtitulo_obra" name="subtitulo_obra"
-                                class="materialize-textarea validate">  </textarea>
-                            <label for="subtitulo_obra"> Subtítulos </label>
-                        </div>
+                        
 
                         <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
                             <i class="material-icons left">check</i>
@@ -85,5 +85,5 @@
 
         </form>
     </main>
-
+    <script src="/js/script_create_obra.js"></script>
     <%- include('includes/footer.ejs') %>
