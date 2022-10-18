@@ -45,6 +45,7 @@ var storage = multer.diskStorage({
   }
 })
 var upload = multer({ storage: storage })
+// var uploadMultiple = upload.fields([{name: 'imagen_limitacion', maxCount: 1}, {name: 'icono_limitacion', maxCount: 1}])
 
 app.use(upload.single('url_imagen'))
 
