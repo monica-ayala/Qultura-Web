@@ -76,23 +76,23 @@ exports.get_agregarGuia = (request, response, next) => {
 };
 
 exports.post_agregarGuia = (request, response, next) => {
-  url_imagen = request.file;
-  if((typeof(url_imagen) == "undefined")){
-    url_imagen = "";
-  }else{
-      url_imagen = request.file.filename;
-  }
-  console.log("Guia Agregada...")
-  const guia = new Guia(request.body.video, request.body.descripcion, "kddkdkd", request.body.nombre, request.body.tip, url_imagen);
-  console.log(guia);
-  guia
-    .save()
-    .then(() => {
-      response.redirect("/guias");
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    url_imagen = request.file;
+    if((typeof(url_imagen) == "undefined")){
+      url_imagen = "";
+    }else{
+        url_imagen = request.file.filename;
+    }
+    console.log("Guia Agregada...")
+    const guia = new Guia(request.body.video, request.body.descripcion, "kddkdkd", request.body.nombre, request.body.tip, url_imagen);
+    console.log(guia);
+    guia
+      .save()
+      .then(() => {
+        response.redirect("/guias");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 };
 
 exports.eliminarGuia = (request, response, next) => {
