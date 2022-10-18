@@ -11,7 +11,7 @@ function addSalas(){
 
 $(document).ready(function() {
     $("#uploadForm").submit(function() {
-        console.log("aaaaaaaaaaaaaaa")
+        
         var img = new FormData($('#uploadForm')[0]);
         let filetype = document.getElementById("event").value
         let route = '/uploads/'+filetype

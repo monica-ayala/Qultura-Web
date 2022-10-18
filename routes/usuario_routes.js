@@ -20,6 +20,6 @@ router.post('/borrar/usuario/:id_user',isAuth,usuario_controller.erase);
 // REST API
 router.get('/login_movil',usuario_controller.login_movil_get);
 router.post('/login_movil',api,usuario_controller.login_movil_post);
-router.post('/signup_movil',usuario_controller.signup_post_movil);
+router.post('/signup_movil',api,usuario_controller.signup_post_movil);
 
 module.exports = router;
