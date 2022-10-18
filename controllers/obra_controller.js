@@ -32,7 +32,10 @@ exports.lista = (request, response, next) => {
 
 exports.obra_get = (request, response, next) => {
   if(request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
-    response.render("nueva_obra");
+    response.render("nueva_obra",{
+      museo: request.params.id_museo,
+      sala: request.params.id_sala
+    });
   }else{
     response.redirect('/')
   }
@@ -40,13 +43,7 @@ exports.obra_get = (request, response, next) => {
 
 exports.obra_post = (request, response, next) => {
   if(request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
-    url_imagen = request.file;
-    if (typeof url_imagen == "undefined") {
-      url_imagen = "";
-    } else {
-      url_imagen = request.file.filename;
-    }
-    audio_obra = "";
+    console.log(request.body)
     ruta =
       "/museo/" +
       request.params.id_museo +
@@ -55,9 +52,9 @@ exports.obra_post = (request, response, next) => {
       "/obras";
     const nueva_obra = new Obra(
       request.body.nom_obra,
-      audio_obra,
+      request.body.audio_obra,
       request.body.subtitulo_obra,
-      url_imagen,
+      request.body.img_obra,
       request.body.fecha_obra,
       request.body.autor_obra,
       request.body.desc_obra,
