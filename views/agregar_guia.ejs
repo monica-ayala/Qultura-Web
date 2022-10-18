@@ -13,10 +13,10 @@
     <div class="container" style="margin-bottom: 10%;">
         <h1 class="white-text">Agregar Nueva Guía</h4>
             <div class="white" style="padding-top: 2em; padding-bottom: 2em;">
-                <form action="/guias/agregar_guia" method="POST">
+                <form id="nuevo_imagen" method="POST" enctype="multipart/form-data">
                     <div class="row  valign-wrapper" style="margin-bottom: 0px;">
                         <div class="col s3 center">
-                            <div class="card" style="border-radius: 20px;">
+                            <!-- <div class="card" style="border-radius: 20px;">
                                 <div class="card-image">
                                     <img src="/img/no-img.jpg" style="border-radius: 20px;">
                                     <div class="file-field input-field">
@@ -26,6 +26,15 @@
                                             <i class="tiny material-icons">edit</i>
                                         </a>
                                     </div>
+                                </div>
+                            </div> -->
+                            <div class="card imgPicker">
+                                <div class="card-image">
+                                    <img class="imgPicker imgP" src="/img/no-img.jpg">
+                                    <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
+                                        onclick="filebutton.click()"><i class="material-icons">edit</i></div>
+                                    <input class="file-upload" id="filebutton" type="file" name="url_imagen"
+                                        style="display:none">
                                 </div>
                             </div>
                         </div>
@@ -86,5 +95,5 @@
 
             </div>
     </div>
-
+    <script src="/js/script_nuevo_museo.js"></script>
     <%- include('includes/footer.ejs') %>

@@ -60,6 +60,10 @@ function __(elem){
 
 $(document).ready(function() {
     $("#uploadForm").submit(function() {
+<<<<<<< HEAD
+=======
+        
+>>>>>>> f62e619db8e1cf30aa4b9550f4fe04e410e7bb3c
         var img = new FormData($('#uploadForm')[0]);
         let filetype = document.getElementById("event").value
         let filename = document.getElementById("filename").value

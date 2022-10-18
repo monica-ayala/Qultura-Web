@@ -48,14 +48,20 @@ exports.get_editarGuia = (request, response, next) => {
 
 exports.post_editarGuia = (request, response, next) => {
   console.log("Guia Editada...");
+  url_imagen = request.file;
+  if((typeof(url_imagen) == "undefined")){
+    url_imagen = request.body.imagen_url;
+  }else{
+      url_imagen = request.file.filename;
+  }
   const id_guia = request.body.id_guia;
   const nombre = request.body.nombre;
   const descripcion = request.body.descripcion;
   const tip = request.body.tip;
-  const imagen = request.body.icono;
+  // const imagen = url_imagen;
   const video = request.body.video;
   const icono = request.body.icono;
-  Guia.editar(video, descripcion, icono, nombre, tip, id_guia)
+  Guia.editar(video, descripcion, "iconoo", nombre, tip, url_imagen, id_guia)
     .then((atributos, fieldData) => {
       console.log(atributos);
       Guia.fetchAll()
@@ -76,23 +82,23 @@ exports.get_agregarGuia = (request, response, next) => {
 };
 
 exports.post_agregarGuia = (request, response, next) => {
-  url_imagen = request.file;
-  if((typeof(url_imagen) == "undefined")){
-    url_imagen = "";
-  }else{
-      url_imagen = request.file.filename;
-  }
-  console.log("Guia Agregada...")
-  const guia = new Guia(request.body.video, request.body.descripcion, "kddkdkd", request.body.nombre, request.body.tip, url_imagen);
-  console.log(guia);
-  guia
-    .save()
-    .then(() => {
-      response.redirect("/guias");
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    url_imagen = request.file;
+    if((typeof(url_imagen) == "undefined")){
+      url_imagen = "";
+    }else{
+        url_imagen = request.file.filename;
+    }
+    console.log("Guia Agregada...")
+    const guia = new Guia(request.body.video, request.body.descripcion, "kddkdkd", request.body.nombre, request.body.tip, url_imagen);
+    console.log(guia);
+    guia
+      .save()
+      .then(() => {
+        response.redirect("/guias");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 };
 
 exports.eliminarGuia = (request, response, next) => {
