@@ -309,7 +309,7 @@
                     </div>
                   </div>
                 </li>
-                <%}%>
+                
                 <li class="step">
                   <div class="step-title waves-effect"> Salas </div>
                   <div class="step-content">
@@ -317,9 +317,12 @@
                     <div class="row">
                       <% for (let sala of salas){%>
                         <div> <%= sala.nom_sala %> </div>
+                        <a href="/museo/<%=museo.id_museo%>/<%=sala.id_sala%>"> link </a>
                         <%}%>
                     </div>
-
+                    
+                    <a href="/museo/<%=museo.id_museo%>/nueva_sala"> link </a>
+                    <%}%>
                     <div class="step-actions">
                       <div class="row">
                         <div class="col"> <button class="btn light-blue-secondary previous-step"> Anterior <i

@@ -79,6 +79,14 @@ $(document).ready(function() {
             data: img
         })
 
+        nom_museo = 
+        num_museo = 
+        ubicacion_museo =
+            "desc_museo": desc_museo.value,
+            "imgP_museo": filename,
+            "imgB_museo": filename,
+            "horarios" : horarios
+
         let ruta = '/museo/'+id_museo
         
         let data = {

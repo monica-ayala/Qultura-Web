@@ -152,7 +152,6 @@ exports.get_Onemuseo = (request, response, next) => {
     .then(([rowsSalas, fieldData]) => {
       Museo.fecthOne(request.params.id_museo)
       .then(([rowsMuseo, fieldData]) => {
-        console.log(rowsSalas)
         response.render("museo_registrar", {
           museos: rowsMuseo,
           salas: rowsSalas
