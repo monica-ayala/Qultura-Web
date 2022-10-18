@@ -43,7 +43,7 @@ exports.obra_get = (request, response, next) => {
 
 exports.obra_post = (request, response, next) => {
   if(request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
-    
+    console.log(request.body)
     ruta =
       "/museo/" +
       request.params.id_museo +
@@ -54,7 +54,7 @@ exports.obra_post = (request, response, next) => {
       request.body.nom_obra,
       request.body.audio_obra,
       request.body.subtitulo_obra,
-      request.body.img_museo,
+      request.body.img_obra,
       request.body.fecha_obra,
       request.body.autor_obra,
       request.body.desc_obra,

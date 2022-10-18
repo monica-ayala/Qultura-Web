@@ -21,11 +21,17 @@ $(document).ready(function() {
 
         let ruta = '/museo/'+ id_museo +'/' + id_sala+ '/nueva_obra'
 
+        let nom_obra = document.getElementById("nom_obra").value;
+        let autor_obra = document.getElementById("autor_obra").value;
+        let desc_obra = document.getElementById("desc_obra").value;
+        let fecha_obra = document.getElementById("fecha_obra").value;
+
         let data = {
             "nom_obra": nom_obra,
             "subtitulo_obra": desc_obra,
             "audio_obra": audioname,
-            "fecha_obra": filename,
+            "img_obra": filename,
+            "fecha_obra": fecha_obra,
             "autor_obra" : autor_obra,
             "desc_obra" : desc_obra,
             "id_sala": id_sala
