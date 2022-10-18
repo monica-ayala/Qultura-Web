@@ -1,13 +1,15 @@
 <%- include('includes/header_image.ejs') %>
     <main>
-        <form method="POST" enctype="multipart/form-data">
+        <form id="modifyObra" enctype="multipart/form-data">
 
             <% for (let obra of obras){%>
                 <div class="container">
                     <h1 class="white-text">
                         <%=obra.nom_obra%>
                     </h1>
-
+                    <input style="display:none" id="id_museo" value="<%= museo %>">
+                    <input style="display:none" id="id_sala" value="<%= sala %>">
+                    <input style="display:none" id="id_obra" value="<%= obra.id_obra %>">
                     <div class="white min-container">
                         <div class="row center margin-10">
                             <!-- valign-wrapper -->
@@ -16,12 +18,14 @@
                                     <div class="col s10">
                                         <div class="card imgPicker">
                                             <div class="card-image">
+                                                <input id="filename" value="<%obra.img_obra%>" style="display:none">
+                                                <input id="event" value="museo" style="display:none">
                                                 <img class="imgPicker imgP" src="/uploads/<%=obra.img_obra%>">
                                                 <input style="display:none" name="url_obra" value="<%=obra.img_obra%>">
                                                 <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
                                                     onclick="filebutton.click()"><i class="material-icons">edit</i>
                                                 </div>
-                                                <input class="file-upload" id="filebutton" type="file" name="url_imagen"
+                                                <input class="file-upload" id="filebutton" type="file" name="uploadFile"
                                                     style="display:none">
                                             </div>
                                         </div>
@@ -39,8 +43,9 @@
                                     <div class="input-field col s10 offset-s1">
                                         <div class="file-field input-field">
                                             <div class="btn">
+                                                <input id="audioname" value="<%=obra.audio_obra%>" style="display:none">
                                                 <span> Mp3</span>
-                                                <input type="file">
+                                                <input type="file" id="uploadAudio">
                                             </div>
                                             <div class="file-path-wrapper">
                                                 <input placeholder="audioguía (archivo mp3)" class="file-path validate"
@@ -90,5 +95,6 @@
                 <%}%>
         </form>
     </main>
+    <script src="/js/script_create_obra.js"></script>
 
-    <%- include('includes/footer.ejs') %>
+<%- include('includes/footer.ejs') %>
