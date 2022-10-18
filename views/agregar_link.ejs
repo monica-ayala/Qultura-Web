@@ -16,19 +16,25 @@
             <div class="white" style="padding-top: 2em; padding-bottom: 2em;">
                 <form action="/links/agregarLink" method="POST">
                     <div class="row valign-wrapper" style="margin-bottom: 0px;">
-                        <div class="col s1" style="margin-top: 0px;"></div>
-                        <div class="col s12" style="margin-top: 0px; margin-bottom: 1em;">
+                        <div class="col s3 center" style="margin-top: 0px; margin-right: 2em; margin-left: 2em;">
+                            <div class="card" style="border-radius: 20px;">
+                                <div class="card-image">
+                                    <img src="/img/linkIcon.png" style="border-radius: 20px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s9" style="margin-top: 0px; margin-bottom: 1em;">
                             <div class="row">
                                 <div class="col s9">
                                     <h5>Nombre del Link</h5>
                                     <input id="nombre_link" placeholder="Ejemplo: Secretaria de Cultura" type="text"
-                                        name="nombre">
+                                        name="nombre" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s9">
                                     <h5>URL del Link</h5>
-                                    <input id="url_link" placeholder="Ejemplo: google.com" type="text" name="url">
+                                    <input id="url_link" placeholder="Ejemplo: google.com" type="text" name="url" required>
                                 </div>
                             </div>
                         </div>
