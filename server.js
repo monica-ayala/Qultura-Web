@@ -68,6 +68,7 @@ app.use(upload_guiaImage.single('url_imagen'))
 
 // app.use(upload.single('url_imagen'))
 
+
 // Use routes
 app.use('/museo',museo_routes)
 app.use('/guias', guia_routes);
