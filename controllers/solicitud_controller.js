@@ -65,12 +65,14 @@ exports.elimina_solicitud=(request,response,next)=>{
       .then(([rowsMuseoUsuario, fieldDataMuseoUsuario]) => {
         User.fetchMuseoCorreo(rowsMuseoUsuario[0].id_user_museo)
           .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
+            User.fetchMuseoCorreo(request.body.usuario_necesidad)
+          .then(([rowsUsuariosolicitud, fieldDataUsuarioMuseo]) => {
             solicitud_nueva.solicitud_save()
               .then(() => {
                 if(request.body.necesidades.length != 0){
                   Solicitud.solicitud_fetch_lastinsertion()
                     .then(([rowLastSolicitud, fieldDatalastSolicitud]) => {
-                      Solicitud.correo_send(rowLastSolicitud[0].LastSolicitud, request.body.necesidades_text , rowsUsuarioMuseo[0].correo_user, request.body.info_adicional, request.body.fecha_hora_sol, request.body.num_Visitantes, request.body.usuario_necesidad)
+                      Solicitud.correo_send(rowLastSolicitud[0].LastSolicitud, request.body.necesidades_text , rowsUsuarioMuseo[0].correo_user, request.body.info_adicional, request.body.fecha_hora_sol, request.body.num_Visitantes, rowsUsuariosolicitud[0].correo_user)
                       for(var i = 0; i < request.body.necesidades.length; i++){
                         Solicitud.necesidades_save(rowLastSolicitud[0].LastSolicitud, request.body.necesidades[i],request.body.info_adicional,request.body.fecha_hora_sol, request.body.num_Visitantes,)
                         .catch(err => console.log(err));
@@ -80,6 +82,7 @@ exports.elimina_solicitud=(request,response,next)=>{
                 }
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
+      }).catch(err => console.log(err));
       }).catch(err => console.log(err));
   };
 
