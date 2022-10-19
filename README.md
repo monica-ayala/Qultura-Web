@@ -1,3 +1,3 @@
 # Qultura-Web
 
-Repositorio para la parte web de Qultura
+Repositorio para la parte web administrativa de Qultura

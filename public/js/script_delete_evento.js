@@ -1,28 +1,49 @@
+// deleteEvento
+// Funcion que se ejecuta al querer borrar un evento
+// Se pregunta al usuario si desea continuar con la accion
+
 function deleteEvento(element){
     element.click()
     let id_evento = element.id;
     let cards = document.getElementById("cardsevents")
     let ruta = 'evento/borrar/evento/' + id_evento;
 
+    // Data to send as json
     let data = {
         id_evento : id_evento
     }
-    fetch(ruta, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body:JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(response => {
-        //render the museum list again
-        cards.innerHTML = ``;;
-        for(evento of response.eventos){
-                cards.innerHTML += `<li class="card-panel card-pers hoverable" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/uploads/${evento.multimedia_evento}') no-repeat; background-size: cover;"> <div><a onclick="deleteEvento(this)" id="${evento.id_evento}" class="btn-floating red card-link" style="float:right;margin:0px"> <i class="material-icons">delete</i> </a> <h3 class="card-title white-text">${evento.info_evento}</h3> <div class="card-content white-text"> <p> Fecha: ${evento.fecha_hora_evento}</p> </div></div></li>`;          
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Después de borrar un evento este no se podrá recuperar, su información se perderá igualmente",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, elimínalo',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            // Asynchronous post
+            fetch(ruta, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(response => {
+                location.reload()
+                
+            }).catch(err => {
+                console.log(err);
+            });
+          Swal.fire(
+            '¡Eliminado!',
+            'El evento se eliminó exitosamente',
+            'success'
+          )
         }
-        
-    }).catch(err => {
-        console.log(err);
-    });
+      })
 }

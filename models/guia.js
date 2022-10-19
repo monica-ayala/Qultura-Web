@@ -26,10 +26,19 @@ module.exports = class Guia{
     }
 
     static fetchAll(){
-        return db.execute('SELECT * FROM guia');
+        return db.execute('SELECT * FROM Guia');
     }
 
     static fetchGuiaEditar(idGuia){
-        return db.execute("SELECT * FROM guia WHERE id_guia = ?", [idGuia]);
+        return db.execute("SELECT * FROM Guia WHERE id_guia = ?", [idGuia]);
+    }
+
+    
+    static editar(video, descripcion, icono, nombre, tip, imagen_guia, id_guia){
+        return db.execute('UPDATE Guia SET video_guia = ?, desc_guia = ?, icono_guia = ?, nombre_guia = ?, tip_guia = ?, imagen_guia = ? WHERE id_guia = ?', [video, descripcion, icono, nombre, tip, imagen_guia, id_guia]);
+    }
+
+    static eliminarGuia(idGuia){
+        return db.execute('DELETE FROM Guia WHERE id_guia = ?', [idGuia]);
     }
 }

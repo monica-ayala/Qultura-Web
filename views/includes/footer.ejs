@@ -7,11 +7,11 @@
         <div class="col l3 s12">
           <h5 class="white-text">Información Importante</h5>
           <ul>
-            <li><a class="white-text" href="#!">Documentation de la Aplicación</a></li>
-            <li><a class="white-text" href="#!">FAQ</a></li>
-            <li><a class="white-text" href="#!">Tutoriales</a></li>
-            <br>
-            <li><button class="btn-large waves-effect waves-light primary-color-btn lighten-1">Soporte Técnico</button></li>
+            <li><a href="/">Página principal</a></li>
+
+            <li><a href="/usuario/rol">Usuarios y privilegios</a></li>
+
+            <li><a href="/guias">Guías</a></li>
           </ul>
         </div>
         
@@ -24,6 +24,8 @@
   
 
   <script src="js/init.js"></script>
+  
+  <script src="/js/profile.js"></script>
   <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOonz9xYahAmBqfXi0Vy6zdrHAlj9Pdw8&callback=initMap&v=weekly"
       defer
@@ -31,6 +33,8 @@
 
   <script>
     M.AutoInit();
+    var images = document.querySelectorAll('.parallax-img');
+    new simpleParallax(images);
 
     //Para que cuente palabras en editar guia
     $(document).ready(function() {

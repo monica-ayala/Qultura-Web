@@ -1,97 +1,99 @@
 <%- include('includes/header_image.ejs') %>
-<main>
-<form id="nuevo_imagen"method="POST" enctype="multipart/form-data">
+    <link rel="stylesheet" href="/css/style_evento.css">
+    <main>
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+        <form name="form1" id="nuevo_imagen" method="POST" enctype="multipart/form-data">
+            <div class="container">
+                <h1 class="white-text">Nuevo evento</h1>
 
-
-
-
-  <!-- MODAL PARA SUBIR HORARIOS -->
-
-  <div id="modal_hr" class="modal">
-    <div class="modal-content">
-      <h4>Horarios del museo</h4>
-      <p>Elegir horario del museo</p>
-    </div>
-    <div class="modal-footer">
-      <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
-    </div>
-  </div>
-
-
-
-<div class="container">
-    <h1 class="white-text">Nuevo evento</h1>
-    
-        <div class="white min-container">
-            <div class="row center margin-10">  
-                <!-- valign-wrapper -->
-                <div class="col s5">
-                    <div class="row valign-wrapper">
-                        <div class="col s10">
-                            <div class="card imgPicker">
-                                <div class="card-image">
-                                  <img class="imgPicker imgP" src="../img/no-img.jpg">
-                                  <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload" onclick="filebutton.click()"><i class="material-icons">edit</i></div>
-                                  <input class="file-upload" id="filebutton" type="file" name='url_imagen' style="display:none">
+                <div class="white min-container">
+                    <div class="row center margin-10">
+                        <!-- valign-wrapper -->
+                        <div class="col s5">
+                            <div class="row valign-wrapper">
+                                <div class="col s10">
+                                    <div class="card imgPicker">
+                                        <div class="card-image">
+                                            <img class="imgPicker imgP" src="../img/no-img.jpg">
+                                            <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
+                                                onclick="filebutton.click()"><i class="material-icons">edit</i></div>
+                                            <input class="file-upload" id="filebutton" type="file" name='url_imagen'
+                                                style="display:none">
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col s7"> 
-                    <div class="row center">
-                        <div class="input-field col s10 offset-s1">
-                            <input placeholder="Ej: Noche de Peliculas" id="info_evento" name="info_evento" type="text" class="validate">
-                            <label for="info_evento"> Nombre del Evento </label>
-                        </div>
-
-                    </div>
-                    <div class="row center">
-                        <div class="col offset-s1">
-                            <div class="col">
-                                <div>
-                                    Calendario
+                        <div class="col s7">
+                            <div class="row center">
+                                <div class="input-field col s10 offset-s1">
+                                    <input placeholder="Ej: Noche de Peliculas" id="info_evento" name="info_evento"
+                                        type="text" class="validate" required>
+                                    <label for="info_evento"> Nombre del Evento </label>
                                 </div>
-                                <input placeholder="Ej:2022-10-12" id="fecha_hora" name="fecha_hora" type="text" class="validate">
-                                <label for="fecha_hora"> Fecha y Hora </label>
-                                <a class="btn waves-effect waves-light primary-color modal-trigger" href="#modal_hr"><i class="material-icons left">calendar_month</i>Agregar horarios </a>
-                                <div class="input-field col s12">
-                                    <select multiple id="sevento" name="sevento">
-                                      <option value="" disabled selected>Seleccionar categoria</option>
-                                      <% for (let tag of tags){%>
-                                      <option value='<%=tag.id_tag%>'><%=tag.nom_tag%></option>
-                                      <%}%>
-                                    </select>
-                                    <label>Categorias del evento</label>
-                                  </div>
-                            </div>  
+
+                            </div>
+                            <div class="row center">
+                                <div class="input-field col s5 offset-s1">
+                                    <input id="fecha_start" name="fecha_start" type="text" class="datepicker" required>
+                                    <label for="fecha_start"> Fecha Inicio:</label>
+                                </div>
+                                <div class="input-field col s5 ">
+                                    <input id="fecha_end" name="fecha_end" type="text" class="datepicker" required>
+                                    <label for="fech_end"> Fecha Fin:</label>
+                                </div>
+                                <div class="input-field col s5 offset-s1">
+                                    <input id="hora_inicio" name="hora_inicio" type="text" class="timepicker" required>
+                                    <label for="hora_inicio"> Hora Inicio:</label>
+                                </div>
+
+                                <div class="input-field col s5">
+                                    <input id="hora_fin" name="hora_fin" type="text" class="timepicker" required>
+                                    <label for="hora_fin"> Hora Fin:</label>
+                                </div>
+                            </div>
                         </div>
-                        
-                        
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                        <div class="input-field col s6">
+                            <input placeholder="Ej: C. Ignacio Allende Sur 14" name="ubicacion_evento"
+                                id="ubicacion_evento" type="text" class="validate" required>
+                            <label for="ubicacion_evento"> Dirección </label>
+                        </div>
+
+
+                        <div class="input-field col s6">
+                            <select multiple id="sevento" name="sevento" required>
+                              <option value="1"><%=tags[0].nom_tag%></option>
+                              <option value="2"><%=tags[1].nom_tag%></option>
+                              <option value="3"><%=tags[2].nom_tag%></option>
+                              <option value="4"><%=tags[3].nom_tag%></option>
+                              <option value="5"><%=tags[4].nom_tag%></option>
+                              <option value="6"><%=tags[5].nom_tag%></option>
+                              <option value="7"><%=tags[6].nom_tag%></option>
+                            </select>
+                            <label>Materialize Multiple Select</label>
+                        </div>
+                        </div>
+
+                    </div>
+                    <div class="row center margin-10">
+                        <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10"
+                            onclick="return checkform()">
+                            <i class="material-icons left">check</i>
+                            Registrar Evento
+                        </button>
                     </div>
                 </div>
 
             </div>
-            
-            <div class="row center margin-10">  
-                
-                <div class="input-field col s5">
-                        <input placeholder="Ej: C. Ignacio Allende Sur 14" name="ubicacion_evento" id="ubicacion_evento" type="text" class="validate">
-                    <label for="ubicacion_evento"> Dirección </label> 
-                </div>
-              
-            </div>
-            <div class="row center margin-10">  
-                <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
-                    <i class="material-icons left">check</i>
-                    Registrar Evento
-                </button>
-            </div>
-        </div>   
-    
-</div>
-</form>
-</main>
+        </form>
+    </main>
 
-<script src="/js/script_nuevo_evento.js"></script>
-<%- include('includes/footer.ejs') %>
+    <script src="/js/script_nuevo_evento.js"></script>
+    <%- include('includes/footer.ejs') %>

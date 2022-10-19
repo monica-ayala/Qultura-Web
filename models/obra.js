@@ -20,7 +20,26 @@ module.exports = class Obra{
         [this.nom_obra,this.audio_obra,this.subtitulo_obra,this.img_obra,this.fecha_obra,this.autor_obra,this.desc_obra,this.id_sala] );
     }
 
-    static fetchList(){
+    static fetchList(id_sala){
+        return db.execute('SELECT * FROM Obra WHERE id_sala=?',[id_sala]);
+    }
+
+    static fetchAll(){
         return db.execute('SELECT * FROM Obra');
+    }
+
+    static fetchOne(id_obra){
+        return db.execute('SELECT * FROM Obra WHERE id_obra=?',
+            [id_obra]);
+    }
+
+    static update(nom_obra,audio_obra,subtitulo_obra,img_obra,fecha_obra,autor_obra,desc_obra,id_obra) {
+        return db.execute('UPDATE Obra SET nom_obra=?,audio_obra=?,subtitulo_obra=?,img_obra=?,fecha_obra=?,autor_obra=?,desc_obra=? WHERE id_obra=?',
+                [ nom_obra,audio_obra,subtitulo_obra,img_obra,fecha_obra,autor_obra,desc_obra,id_obra ]
+        );
+    }
+
+    static delete(id_obra){
+        return db.execute('DELETE FROM Obra WHERE id_obra=?',[id_obra])        
     }
 }

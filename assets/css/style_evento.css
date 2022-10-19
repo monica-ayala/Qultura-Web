@@ -1,0 +1,69 @@
+
+html { 
+   
+    -webkit-background-size: 50%;
+    -moz-background-size: 50%;
+    -o-background-size: 50%;
+    background-size: 50%;
+    display:grid;
+    margin:auto;
+  }
+body {
+    height: 100%;
+}
+
+.clickable-link{
+  color: #0C1A30;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.clickable-link:hover{
+  color: rgb(0, 140, 255);
+  text-decoration: underline;
+}
+
+body {
+    display:table-cell;
+    vertical-align: middle;
+    background: #0C1A30;
+}
+
+  
+  .bg {
+    animation:slide 10s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, #106b8f 50%, #0C1A30 50%);
+    bottom:0;
+    left:-50%;
+    opacity:.5;
+    position:fixed;
+    right:-50%;
+    top:0;
+    z-index:-1;
+  }
+  
+  .bg2 {
+    animation-direction:alternate-reverse;
+    animation-duration:12s;
+  }
+  
+  .bg3 {
+    animation-duration:14s;
+  }
+  
+  @keyframes slide {
+    0% {
+      transform:translateX(-25%);
+    }
+    100% {
+      transform:translateX(15%);
+    }
+  }
+
+  
+.min-container{
+    padding-top: 2em; 
+    padding-bottom: 2em;
+    margin-bottom:4em;
+    border-radius:10px
+}

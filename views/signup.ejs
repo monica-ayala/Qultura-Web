@@ -4,57 +4,72 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Qultura Admin</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/stylarbac.css">
 
-  <link rel="stylesheet" href="/materialize-css/dist/css/materialize.css" media="screen,projection" />
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/stylarbac.css">
+    <link rel="stylesheet" href="/css/login_style.css">
+    <link rel="stylesheet" href="/materialize-css/dist/css/materialize.css" media="screen,projection" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
-    <div class="container">
-
-        <div class="row">
-            <div class="col s12">
-                <div class="col s6"></div>
-                <div class="col s6">
-                    <div class="card large" id="tarjeta">
-                        <div class="row">
-                            <div class="col s12 center-align">
-                                <h3>Sign up</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 center-align">
-                                <div class="col s3"></div>
-                                <div class="col s6">
-                                    <form method="POST" action="" id="signup">
-                                        <input type="text" placeholder="Nombre" name="us_nombre" id="us_nombre">
-                                        <br>
-                                        <br>
-                                        <input type="text" placeholder="Correo" name="us_correo" id="us_correo">
-                                        <br>
-                                        <br>
-                                        <input type="password" placeholder="Contraseña" name="us_password" id="us_password">
-                                        <br>
-                                        <br>
-                                        <input type="password" placeholder="Repetir Contraseña">
-                                        <br>
-                                        <br>
-                                        <button type="submit" class="waves-effect primary-color btn"> Registrar</button>
-                                    </form>
-                                </div>
-                                <div class="col s3"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-
-                </div>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <div class="content">
+        <div id="login-page" class="white row flex">
+            <div class="red col s6 card-panel login-card">
+                <img src="/img/login.jpg" class="responsive-img">
             </div>
-        </div>
+            <div class="col s6 z-depth-6 card-panel login-card">
+                <div class="col s10 offset-s1"> 
+                    <div class="center" style="margin-top:20px">
+                        <div> Bienvenido a </div>
+                        <div style="font-family:Georgia, 'Times New Roman', Times, serif; font-size: xx-large;">
+                            Qultura Admin
+                        </div>
+                        
+                    </div>
+                    
+                <form method="POST" action="" id="signup">
+                <div class="row">
+                </div>
+                <div class="row">
+                    
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input class="validate" type="text" placeholder="Emiliano Olea" name="us_nombre" id="us_nombre">
+                        <label for="us_nombre" data-error="wrong" data-success="right">Nombre</label>
+                    </div>
+                  
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">mail_outline</i>
+                    <input class="validate" type="email" placeholder="example@gmail.com" name="us_correo" id="us_correo">
+                    <label for="us_correo" data-error="wrong" data-success="right">Email</label>
+                  </div>
+                
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">lock_outline</i>
+                    <input name="us_password" id="us_password" type="password">
+                    <label for="us_password">Contraseña</label>
+                  </div>
+                
+                </div>
+                <div class="row center">
+                    <button type="submit" class="waves-effect blue-gradient-btn btn-large hoverable"> Sign Up </button>
+                </div>
+                <div class="row">
+                  <div class="center">
+                    <p class="margin medium-small"><a class="primary-color-text" href="/usuario/login"> ¿Ya tienes cuenta? Inicia sesión  </a></p>
+                  </div>        
+                </div>
         
+              </form>
+              </div>
+            </div>
+          </div>
     </div>
-
-
-  <%- include('includes/footer.ejs') %>
+</body>
+</html>

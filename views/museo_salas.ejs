@@ -1,48 +1,55 @@
 <%- include('includes/header_image.ejs') %>
 
-<main>
+    <main>
 
-<div class="container">
-    <h1 class="white-text">Nuevo museo</h1>
-    
-        <div class="white min-container">
-            
-                <!-- valign-wrapper -->
-                
+        <div class="container">
+            <% for (let m of museo){%>
+                <h1 class="white-text">
+                    <%=m.nom_museo%>
+                </h1>
+                <div class="white min-container">
+
+                    <!-- valign-wrapper -->
                     <% for (let sala of salas){%>
-                        <%if(sala.status_sala == 1){%>
+                        <%if(sala.status_sala==1){%>
                             <div class="row flex">
                                 <div class="col s4">
-                                    
-                                        <div class="card imgPicker">
-                                            <div class="card-image">
-                                            <img class="imgPicker imgP" src="../img/no-img.jpg">
-                                            </div>
+
+                                    <div class="card imgPicker">
+                                        <div class="card-image">
+                                            <img class="imgPicker imgP" src="/uploads/museos/<%=sala.img_sala%>">
                                         </div>
-                                    
-                                </div>
-                                <div class="col s7"> 
-                                    <div class="col s11">
-                                    <div class="row">
-                                        <h4> Sala - <%=sala.nom_sala%> </h4>
-                                        <p> <%=sala.desc_sala%> </p>
-                                        <a class="blue-gradient-btn btn-large hoverable">
-                                            Editar Sala
-                                        </a>
                                     </div>
+
                                 </div>
+                                <div class="col s7">
+                                    <div class="col s11">
+                                        <div class="row">
+                                            <h4>
+                                                <%=sala.nom_sala%>
+                                            </h4>
+                                            <p>
+                                                <%=sala.desc_sala%>
+                                            </p>
+                                            <a href="/museo/<%=m.id_museo%>/<%=sala.id_sala%>"
+                                                class="blue-gradient-btn btn-large hoverable">
+                                                Editar Sala
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- <div class="col s2 valign-wrapper">
                                     
                                 </div> -->
                             </div>
-                        <%}%>
-                    <%}%>
-                    
-            
-        </div>   
-</div>
-</form>
-</main>
+                            <%}%>
+                                <%}%>
 
-<%- include('includes/footer.ejs') %>
+
+                </div>
+                <%}%>
+        </div>
+        </form>
+    </main>
+
+    <%- include('includes/footer.ejs') %>

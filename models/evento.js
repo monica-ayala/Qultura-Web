@@ -1,6 +1,10 @@
 const db = require('../util/database');
 //const bcrypt = require('bcryptjs');
 
+// Modelo de Eventos 
+// Se realizan las llamadas hacia la base de datos
+// Tanto inserciones como seleccionar informacion en especifico
+
 module.exports = class Evento{
 
     constructor(info_evento,fecha_hora_evento,multimedia_evento,ubicacion_evento) {
@@ -44,4 +48,7 @@ module.exports = class Evento{
         return db.execute('INSERT INTO Evento_Tag (id_evento_tag, id_tag_evento) VALUES (?,?)',[ide_evento,tags])
     }
 
+    static fetchEventTags(){
+        return db.execute('SELECT * FROM Tag t, Evento_Tag et WHERE et.id_tag_evento = t.id_tag')
+    }
 }
