@@ -1,4 +1,7 @@
-// Delete event in main page
+// deleteEvento
+// Funcion que se ejecuta al querer borrar un evento
+// Se pregunta al usuario si desea continuar con la accion
+
 function deleteEvento(element){
     element.click()
     let id_evento = element.id;

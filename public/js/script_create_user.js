@@ -6,7 +6,9 @@ $(document).ready(function(){
   });
 
 
-
+// createUser
+// funcion al inicalizar el modal para registrar un nuevo usuario
+// en donde se vacian los campos
 
 function createUser(){
     jQuery('#modal2').modal('open');
@@ -16,8 +18,11 @@ function createUser(){
     nombre.value=""
     correo.value=""
     password.value=""
-    
 }
+// createNew
+// Funcion que se ejecuta una vez dado clic al registrar usuario
+// obtiene los diferentes valores de los inputs y los manda al controller
+
  function createNew(){
     let nombre = document.getElementById("us_nombre").value;
     let correo = document.getElementById("us_correo").value;

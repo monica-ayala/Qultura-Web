@@ -1,6 +1,9 @@
 const { request } = require("express");
 const { redirect } = require("express/lib/response");
-// Delete user from list
+// deleteUsuario
+// Funcion que se ejecuta al borrar un usuario
+// en donde se pregunta al usuario si desea continuar con la accion
+
 function deleteUsuario(element){
     let id_user = element.id;
     let ruta = 'borrar/usuario/' + id_user;
@@ -44,7 +47,10 @@ function deleteUsuario(element){
       })
 }
 
-// Delete guía from list
+// deleteGuia
+// Funcion que se ejecuta al borrar un guia
+// en donde se pregunta al usuario si desea continuar con la accion
+
 function deleteGuia(element){
     let id_guia = element.id;
     let ruta = '/guias/eliminar_guia/' + id_guia;
@@ -83,7 +89,10 @@ function deleteGuia(element){
 }
 
 
-// Delete Link from list
+// deleteLink
+// Funcion que se ejecuta al borrar un link
+// en donde se pregunta al usuario si desea continuar con la accion
+
 function deleteLink(element){
   let id_link = element.id;
   let ruta = '/links/eliminar_link/' + id_link;
