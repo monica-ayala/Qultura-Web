@@ -50,6 +50,13 @@ const upload = multer({
     },
     // missing filter for files uploaded
 }).single('uploadFile')
+exports.uploadFile = (req, res) => {
+  upload(req, res, (err) =>{
+    if(err){console.log(err);}
+});
+}
+
+// MULTIPLE UPLOAD 
 
 
 const upload_salas = multer({
@@ -76,8 +83,4 @@ exports.uploadSalas = (req, res) => {
     });
 }
 
-exports.uploadFile = (req, res) => {
-  upload(req, res, (err) =>{
-    if(err){console.log(err);}
-});
-}
+

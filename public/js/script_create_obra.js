@@ -22,12 +22,14 @@ $(document).ready(function() {
 
     $(".file-upload").on('change', function(){
      changedFile=true
+     console.log(changedFile)
+     console.log(changedAudio)
      readURL(this);
     });
 
     $("#uploadAudio").on('change', function(){
         changedAudio=true
-        
+        console.log(changedAudio)
        });
     
    
@@ -92,8 +94,8 @@ $(document).ready(function() {
     $("#modifyObra").submit(function() {
         var img = new FormData($('#modifyObra')[0]);
         let filetype = document.getElementById("event").value
-        let filename = document.getElementById("filename").value
-        let audioname = document.getElementById("audioname").value
+        let filename = document.getElementById("filename2").value
+        let audioname = document.getElementById("audioname2").value
         
         if(changedAudio && changedFile){
             // uploads both
@@ -111,10 +113,10 @@ $(document).ready(function() {
             })
            
         }
-        else if (changedFile){
+        else if (changedFile && !changedAudio){
             // uploads img, changes img name, doesnt change audio
             filename = Date.now()+'-imgMuseo.jpg'
-            let route = '/uploads/museo/'+filename
+            let route = '/uploads/museo/multiple/'+filename+'/none'
 
 
             $.ajax({
@@ -127,11 +129,10 @@ $(document).ready(function() {
             })
 
         }
-        else if (changedAudio){
+        else if (changedAudio && !changedFile){
             // uploads audio, changes audio, doesnt change img
             audioname = Date.now()+'-audioMuseo.mp3'
-            let route = '/uploads/audio/museo/'+ audioname
-
+            let route = '/uploads/museo/multiple/none'+audioname
 
             $.ajax({
                 url: route,
