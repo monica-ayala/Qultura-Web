@@ -10,7 +10,10 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
- 
+//view
+//Permite renderizar la vista de Usuarios y Privilegios 
+// teninendo en cuenta el rol
+
 exports.view = (request, response, next) => {
   if(request.session.id_rol == 4 || request.session.id_rol == 3){
     Usuario.fetchList()
@@ -27,11 +30,16 @@ exports.view = (request, response, next) => {
 }
    
 
+// signup_get
+// Renderiza la vista de registro
 
  exports.signup_get = (request, response, next) => {
   response.render('signup');
  };
 
+// signup_post
+// Al intentar registrar un usuario primero se verifica que no exista previamente
+// en el caso de que no sea asi se registrara dentro del sistema
 
  exports.signup_post = (request, response, next) => {
   const nuevo_usuario = new Usuario(
@@ -62,12 +70,19 @@ exports.view = (request, response, next) => {
   });
 };
 
+//login_get
+// Carga la página de Inicio de sesion
+
 exports.login_get = (request, response, next) => {
   response.render("login", {
     correo: request.session.correo ? request.session.correo : "",
     info: "",
   });
 };
+
+// login_post
+// Al exitosamente realizar el login, se crea una sesion con diversos 
+// atributos
 
 exports.login_post = (request, response, next) => {
   Usuario.findOne(request.body.us_correo)
@@ -119,56 +134,6 @@ exports.login_post = (request, response, next) => {
             console.log(err);
           });
       }
-    //   else{
-        
-    //   const usuario = new Usuario(
-    //     rows[0].nom_user,
-    //     rows[0].correo_user,
-    //     rows[0].password_user,
-    //     rows[0].id_rol
-    //     //rows[0]["Contraseña"],
-    //   );
-    //   bcrypt.compare(request.body.us_password, usuario.password_user)
-    //     .then((doMatch) => {
-    //       let error = 1;
-    //       if (doMatch) {
-    //               error = 0;
-    //               request.session.isLoggedIn = true;
-    //               request.session.usuario = usuario;
-    //               request.session.correo = usuario.correo_user;
-    //               Usuario.getId(request.session.correo)
-    //                 .then(([rowsid, fieldData]) => {
-    //                   request.session.id_usuario = rowsid[0].id_user;
-    //                     Usuario.getMuseum(rowsid[0].id_user)
-    //                       .then(([rowsMusuem,fielData])=>{
-    //                         request.session.id_museo = rowsMusuem[0].id_museo_user;
-    //                         return request.session.save((err) => {
-    //                           //response.status(200).json({ errores: error });  // entender esto
-    //                           response.redirect("/")
-    //                         }); 
-    //                       }).catch((err)=>{
-    //                         console.log(err)
-    //                       })
-    //                       // Aún no se implementa privilegios/RBAC Entonces no se requiere aún esto.
-    //                       // let privilegios = [];
-    //                       // for (let privilegio in rowsprivilegios) {
-    //                       //   privilegios.push(rowsprivilegios[privilegio].Id_Privilegio);
-    //                       // }
-    //                       // request.session.privilegios = privilegios;
-                         
-    //                 })
-    //                 .catch((err) => {
-    //                   console.log(err);
-    //                 });
-    //       } else {
-    //         response.status(200).json({ errores: error });
-    //       }
-
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // }
     })
     .catch((error) => {
       console.log(error);
@@ -178,6 +143,10 @@ exports.login_post = (request, response, next) => {
  exports.login_movil_get = (request,response,next)=>{
 
  }
+
+// login_movil_post
+// Controlador utilizado por la aplicacion movil para 
+// lograr verificar el inicio de sesion
 
  exports.login_movil_post =(request,response,next)=>{
   Usuario.findOne(request.body.us_correo)
@@ -212,6 +181,10 @@ exports.login_post = (request, response, next) => {
   });
  };
 
+ // signup_post_movil
+ // Controlador para lograr el registro de usuarios
+ // desde la aplicacion movil
+
  exports.signup_post_movil = (request, response, next) => {
   const nuevo_usuario = new Usuario(
     request.body.us_nombre,
@@ -245,8 +218,9 @@ exports.login_post = (request, response, next) => {
 };
 
 
-// exports.logout = (request, response, next) => {
-// };
+// updateUsuario
+// permite ver las posibles opciones para modificar a un
+// usuario, tanto su rol como asignacion de museo
 
  exports.updateUsuario = (request, response, next) => {
 if(request.session.id_rol==4){
@@ -271,6 +245,11 @@ if(request.session.id_rol==4){
   
  };
 
+ // sendUpdate
+ // Se ejecuta al guardar los cambios de los usuarios
+ // tanto rol como administrador y se realiza la nueva 
+ // asignacion
+
  exports.sendUpdate=(request,response,next)=>{
   if(request.session.id_rol==4){
     
@@ -290,6 +269,9 @@ if(request.session.id_rol==4){
   }
  }
 
+ // logout
+ // Destruye la sesion por lo que ya no se puede hacer
+ // uso de la aplicacion web
  exports.logout = (request, response, next) => {
   if (request.session !== "undefined") {
     request.session.destroy(() => {
@@ -300,12 +282,17 @@ if(request.session.id_rol==4){
   }
 };
 
+// getUser
+// Obtener usuario apartir de la sesion para mensaje 
+// personalizado
 exports.getUser = (request,response,next)=>{
   response.status(200).json({
     username: request.session.usuario.nom_user
   })
 }
 
+// erase
+// Borrar usuarios del sistema
 exports.erase = (request,response,next)=>{
   if(request.session.id_rol ==4){
     Usuario.softErase(request.params.id_user)
@@ -318,6 +305,10 @@ exports.erase = (request,response,next)=>{
   }
  };
 
+ // create
+ // Desde la pagina de Usuarios y Privilegios
+ // Crear nuevos usuarios 
+ 
 exports.create = (request,response,next)=>{
   if(request.session.id_rol==4){
     const nuevo_usuario = new Usuario(

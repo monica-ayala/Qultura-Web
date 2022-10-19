@@ -1,6 +1,10 @@
 const db = require('../util/database');
 //const bcrypt = require('bcryptjs');
 
+// Modelo de Eventos 
+// Se realizan las llamadas hacia la base de datos
+// Tanto inserciones como seleccionar informacion en especifico
+
 module.exports = class Evento{
 
     constructor(info_evento,fecha_hora_evento,multimedia_evento,ubicacion_evento) {

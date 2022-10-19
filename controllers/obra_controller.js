@@ -43,7 +43,7 @@ exports.obra_get = (request, response, next) => {
 
 exports.obra_post = (request, response, next) => {
   if(request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
-    console.log(request.body)
+    
     ruta =
       "/museo/" +
       request.params.id_museo +
@@ -78,6 +78,9 @@ exports.update_get = (request, response, next) => {
     .then(([rowsObra, fieldData]) => {
       response.render("obra_modificar", {
         obras: rowsObra,
+        museo: request.params.id_museo,
+        sala: request.params.id_sala,
+        obra: request.params.id_obra
       });
     })
     .catch((err) => console.log(err));
@@ -89,29 +92,23 @@ exports.update_get = (request, response, next) => {
 
 exports.update = (request, response, next) => {
   if(request.session.id_museo ==request.params.id_museo || request.session.id_museo == 1){
-    url_imagen = request.file;
-  if (typeof url_imagen == "undefined") {
-    url_imagen = request.body.url_obra;
-  } else {
-    url_imagen = request.file.filename;
-  }
-  audio_obra = "";
-
+ 
   ruta =
     "/museo/" +
     request.params.id_museo +
     "/" +
     request.params.id_sala +
     "/obras";
+    console.log(request.body)
   Obra.update(
-    request.body.nom_obra,
-    audio_obra,
-    request.body.subtitulo_obra,
-    url_imagen,
-    request.body.fecha_obra,
-    request.body.autor_obra,
-    request.body.desc_obra,
-    request.params.id_obra
+      request.body.nom_obra,
+      request.body.audio_obra,
+      request.body.subtitulo_obra,
+      request.body.img_obra,
+      request.body.fecha_obra,
+      request.body.autor_obra,
+      request.body.desc_obra,
+      request.params.id_obra
   )
     .then(() => {
       response.redirect(ruta);
