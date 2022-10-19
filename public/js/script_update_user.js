@@ -1,7 +1,7 @@
 const { response } = require("express");
 const Usuario = require("../../models/usuario");
 
-// Administration of user and privileges
+
 $(document).ready(function(){
     $('.formSelect').formSelect();
     $('select').formSelect();
@@ -19,7 +19,10 @@ $(document).ready(function(){
     $(this).formSelect();
   });  
 
-// Load modal with user information
+// getInfoUser
+// Funcion para cargar los datos del usuario en el modal
+// para su visualizacion y modificacion
+
 function getInfoUser(element){
     jQuery('#modal1').modal('open');
 
@@ -76,7 +79,9 @@ function closeUser(){
     jQuery('#modal1').modal('close');
 }
 
-// Update user information in database
+// updateUser
+// Funcion que se ejecuta al guardar los cambios realizados 
+// donde se manda a llamar a una ruta para ejecutar los cambios en la bd
 function updateUser(){
     let user_id = document.getElementById("id_user").value;
     let ruta ="/usuario/rol/"+ user_id;
@@ -125,6 +130,8 @@ function updateUser(){
     
   });
   
+// myFunction
+// Funcion para la busqueda de usuarios 
 
   function myFunction() {
     // Declare variables

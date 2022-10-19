@@ -1,6 +1,11 @@
 const db = require('../util/database');
 const bcrypt = require('bcryptjs');
 
+// Modelo de Usuarios
+// Se realizan las llamadas a la base de datos
+// tanto nuevas inserciones como seleccionar cierta informacion
+// Se usa la libreria bcrypt para el manejo de las contraseñas
+
  module.exports = class Usuario{
 
     // Constructor for class user

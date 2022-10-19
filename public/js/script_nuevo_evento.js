@@ -1,4 +1,4 @@
-// Timepicker and Datepicker functionality for registering events
+// Timepicker y Datepicker funcionalidad para registrar eventos
 $(document).ready(function() {
    
     $('.timepicker').timepicker({
@@ -32,7 +32,9 @@ $(document).ready(function() {
    
 });
 
-// Datepciker validation functionality
+// checkform
+// Validacion de las fechas y horas 
+// que una no sea mayor o menor que otra
 function checkform(){
     var form1 = document.getElementById("nuevo_imagen");
 
