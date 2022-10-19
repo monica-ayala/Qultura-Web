@@ -120,7 +120,7 @@ $(document).ready(function() {
     });
 });
 
-const modifyForm = document.querySelector('#modifySala');
+const modifyForm = document.querySelector('form');
 modifyForm.addEventListener('submit', (e) => {
     e.preventDefault();
     Swal.fire(

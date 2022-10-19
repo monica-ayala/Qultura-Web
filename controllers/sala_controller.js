@@ -36,7 +36,7 @@ exports.sala_get=(request,response,next)=>{
 
 exports.sala_post = (request, response, next) => {
     if (request.session.id_museo == request.params.id_museo || request.session.id_museo ==1){
-      
+      console.log("nueva")
       const nueva_sala = new Sala(
         request.body.nom_sala,
         request.body.desc_sala,
@@ -48,7 +48,7 @@ exports.sala_post = (request, response, next) => {
       ruta = "/museo/"+request.params.id_museo+"/sala"
       nueva_sala.save()
       .then((result) => {
-        response.redirect (ruta);
+        response.status(200).json({})
       }).catch(err => console.log(err));  
     }else{
       response.redirect('/')

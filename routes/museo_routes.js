@@ -14,7 +14,7 @@ router.get('/get',museo_controller.get_museo_api);
 router.get('/getToken',museo_controller.token);
 
 // Museo controller calls
-router.post('/:id_museo/:id_sala', isAuth, isValid,sala_controller.update);  //Listo, protegido
+
 router.get('/',isAuth, isValid, museo_controller.lista);
 router.get('/nuevo_museo',isAuth, isValid, museo_controller.get_nuevo)
 router.post('/nuevo_museo',isAuth, isValid, museo_controller.museo_post)
@@ -31,6 +31,7 @@ router.get('/:id_museo/sala',isAuth,  isValid, sala_controller.lista); //Listo, 
 router.post('/:id_museo/nueva_sala',isAuth, isValid, sala_controller.sala_post); //Listo,protegido
 router.get('/:id_museo/nueva_sala',isAuth, isValid, sala_controller.sala_get); //Listo,protegido
 router.get('/:id_museo/:id_sala',isAuth, isValid,sala_controller.update_get); //Listo,protegido
+router.post('/:id_museo/:id_sala', isAuth, isValid,sala_controller.update);  //Listo, protegido
 
 router.post('/:id_museo/:id_sala/borrar',isAuth, isValid, sala_controller.soft_erase);//Listo,protegido
 
