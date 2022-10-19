@@ -1,3 +1,8 @@
+var stepper = document.querySelector('.stepper');
+var stepperInstace = new MStepper(stepper, {
+    firstActive: 0
+})
+
 $(document).ready(function() {
     $("#uploadObra").submit(function() {
         var img = new FormData($('#uploadObra')[0]);
@@ -6,7 +11,7 @@ $(document).ready(function() {
         let audioname = document.getElementById("audioname").value
         filename = Date.now()+'-imgMuseo.jpg'
         audioname = Date.now()+'-audioMuseo.mp3'
-        let route = '/uploads/'+filetype+'/'+filename+'/'+audioname
+        let route = '/uploads/museo/multiple/'+filename+'/'+audioname
         id_museo = document.getElementById("id_museo").value
         id_sala = document.getElementById("id_sala").value
         
