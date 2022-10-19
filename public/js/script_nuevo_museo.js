@@ -17,5 +17,6 @@ $(document).ready(function() {
      readURL(this);
     });
     
-   
+    $('input#input_text, textarea#textarea2').characterCounter();
+
 });
