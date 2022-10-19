@@ -1,4 +1,8 @@
-console.log("imhre")
+
+var stepper = document.querySelector('.stepper');
+var stepperInstace = new MStepper(stepper, {
+    firstActive: 0
+})
 $(document).ready(function() {
     $("#uploadSala").submit(function() {
         var img = new FormData($('#uploadSala')[0]);

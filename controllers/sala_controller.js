@@ -2,6 +2,7 @@ const path = require("path");
 const filesystem = require('fs');
 const Sala = require("../models/sala"); 
 const Museo = require("../models/museo"); 
+const Obra = require("../models/obra"); 
 const request = require("express/lib/request");
 
 
@@ -58,6 +59,8 @@ exports.sala_post = (request, response, next) => {
 
   exports.update_get=(request,response,next)=>{
     if (request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
+      Obra.fetchList(request.params.id_sala)
+      .then(([rowsObra,fieldData])=>{
       Sala.fetchOne(request.params.id_sala)
       .then(([rowsSala,fieldData])=>{
         Museo.fetchOne(request.params.id_museo)
@@ -65,12 +68,15 @@ exports.sala_post = (request, response, next) => {
           response.render('sala_modificar',{
             museos: rowsMuseo,
             salas:rowsSala,
-            museo: request.params.id_museo
+            museo: request.params.id_museo,
+            obras: rowsObra
           });
         })
         .catch(err=>console.log(err));
       })
       .catch(err=>console.log(err));
+    })
+    .catch(err=>console.log(err));
     }else{
       response.redirect('/')
     }
