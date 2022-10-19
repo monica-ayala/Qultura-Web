@@ -177,9 +177,10 @@ exports.api_get_one = (request, response, next) => {
  };
 
 exports.museo_update = (request,response,next)=>{
+  
   if(request.session.id_rol == 4 || request.session.id_rol == 3){
     if (request.session.id_museo == request.body.id_museo || request.session.id_museo == 1){
-      console.log(request.body)
+      
       Museo.update_museo(
         request.body.nom_museo,
         request.body.desc_museo,

@@ -7,6 +7,9 @@ main {
     flex: 1 0 auto;
 }
 
+.img-background{
+    background-image: url("../img/queretaro-background.webp"), linear-gradient(90deg, rgba(12,26,48,1) 6%, rgba(26,63,125,1) 46%, rgba(37,90,141,1) 100%); /* W3C */
+}
 .margin-0{
     margin: 0px !important;
 }

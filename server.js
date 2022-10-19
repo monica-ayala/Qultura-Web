@@ -43,18 +43,18 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-var storage_guias = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads')
-  },
-  filename: function (req, file, cb) {
-    cb(null, new Date().getTime() + '-' + file.originalname)
-  }
-})
-var upload_guiaImage = multer({ storage: storage_guias })
-// var uploadMultiple = upload.fields([{name: 'imagen_limitacion', maxCount: 1}, {name: 'icono_limitacion', maxCount: 1}])
+// var storage_guias = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'public/uploads')
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, new Date().getTime() + '-' + file.originalname)
+//   }
+// })
+// var upload_guiaImage = multer({ storage: storage_guias })
+// // var uploadMultiple = upload.fields([{name: 'imagen_limitacion', maxCount: 1}, {name: 'icono_limitacion', maxCount: 1}])
 
-app.use(upload_guiaImage.single('url_imagen'))
+// app.use(upload_guiaImage.single('url_imagen'))
 // var storage = multer.diskStorage({
 //   destination: function (req, file, cb) {
 //     cb(null, 'public/uploads')

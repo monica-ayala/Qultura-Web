@@ -63,8 +63,9 @@ exports.sala_post = (request, response, next) => {
         Museo.fetchOne(request.params.id_museo)
         .then(([rowsMuseo,fieldData])=>{
           response.render('sala_modificar',{
-            museo: rowsMuseo,
-            salas:rowsSala
+            museos: rowsMuseo,
+            salas:rowsSala,
+            museo: request.params.id_museo
           });
         })
         .catch(err=>console.log(err));
@@ -77,17 +78,16 @@ exports.sala_post = (request, response, next) => {
   }
 
   exports.update=(request,response,next)=>{
+    console.log("hiii")
     if(request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
       
-      url_imagen = request.file;
-    if((typeof(url_imagen) == "undefined")){
-        url_imagen = request.body.url_sala;
-    }else{
-        url_imagen = request.file.filename;
-    }
-    audio_sala = ""
     ruta = "/museo/"+request.params.id_museo+"/sala"
-    Sala.update(request.body.nom_sala,request.body.desc_sala,audio_sala,url_imagen,request.params.id_sala)
+    Sala.update(
+      request.body.nom_sala,
+      request.body.desc_sala,
+      request.body.audio_sala,
+      request.body.img_sala,
+      request.params.id_sala)
     .then(() => {
       response.redirect(ruta);
     })
