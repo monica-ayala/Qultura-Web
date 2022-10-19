@@ -74,7 +74,7 @@ $(document).ready(function() {
         ]
         console.log(horarios)
         filename = Date.now()+'-imgMuseo.jpg'
-        let route = '/museo/uploads/'+filetype+'/'+filename
+        let route = '/uploads/museo/'+filetype+'/'+filename
         $.ajax({
             url: route,
             type: 'POST',

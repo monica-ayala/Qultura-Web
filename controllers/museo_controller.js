@@ -89,6 +89,7 @@ exports.museo_post = (request, response, next) => {
   if(request.session.id_rol == 4){
     if(request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
       link_ubi = "placeholder";
+      
       const nuevo_museo = new Museo(
         request.body.nom_museo,
         request.body.desc_museo,
@@ -98,6 +99,7 @@ exports.museo_post = (request, response, next) => {
         request.body.imgP_museo,
         request.body.imgB_museo
       );
+      
       nuevo_museo
         .save()
         .then((result) => {
@@ -148,7 +150,7 @@ exports.soft_unerase = (request, response, next) => {
 exports.get_Onemuseo = (request, response, next) => {
   if(request.params.id_museo == request.session.id_museo || request.session.id_museo == 1){
     
-    Sala.fetchListMuseum(80)
+    Sala.fetchListMuseum(request.params.id_museo)
     .then(([rowsSalas, fieldData]) => {
       Museo.fecthOne(request.params.id_museo)
       .then(([rowsMuseo, fieldData]) => {
