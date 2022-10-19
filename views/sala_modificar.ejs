@@ -3,10 +3,10 @@
     <% for (let sala of salas){%>
     <main class="img-background">
             <div class="row">
-                <form id="modifySala" enctype="multipart/form-data">
+                <form id="modifySala" action="/museo/<%=museo%>/<%=sala.id_sala%>" enctype="multipart/form-data">
                 <div class="col s10 offset-s1">
                     <h4 class="white-text card-title"> <%=sala.nom_sala%> </h4> 
-                    <input id="id_museo" value="<%museo%>" style="display:none">
+                    <input id="id_museo" value="<%=museo%>" style="display:none">
                     <input id="id_sala" value="<%=sala.id_sala%>" style="display:none">
                     <div class="card">
                         <div class="card-content pb-0">

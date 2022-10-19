@@ -78,10 +78,11 @@ exports.sala_post = (request, response, next) => {
   }
 
   exports.update=(request,response,next)=>{
-    console.log("hiii")
+    
     if(request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
       
     ruta = "/museo/"+request.params.id_museo+"/sala"
+    console.log(request.body)
     Sala.update(
       request.body.nom_sala,
       request.body.desc_sala,

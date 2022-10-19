@@ -119,3 +119,14 @@ $(document).ready(function() {
         });
     });
 });
+
+const modifyForm = document.querySelector('#modifySala');
+modifyForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    Swal.fire(
+        '¡Éxito!',
+        'Se ha modificado la sala',
+        'success'
+      )
+    setTimeout(() =>  modifyForm.submit(), 1200);
+  });
