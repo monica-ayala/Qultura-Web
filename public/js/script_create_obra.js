@@ -3,6 +3,36 @@ var stepperInstace = new MStepper(stepper, {
     firstActive: 0
 })
 
+var changedFile = false;
+var changedAudio = false;
+
+$(document).ready(function() {
+
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.imgP').attr('src', e.target.result);
+            }
+    
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".file-upload").on('change', function(){
+     changedFile=true
+     readURL(this);
+    });
+
+    $("#uploadAudio").on('change', function(){
+        changedAudio=true
+        
+       });
+    
+   
+});
+
 $(document).ready(function() {
     $("#uploadObra").submit(function() {
         var img = new FormData($('#uploadObra')[0]);
@@ -64,13 +94,12 @@ $(document).ready(function() {
         let filetype = document.getElementById("event").value
         let filename = document.getElementById("filename").value
         let audioname = document.getElementById("audioname").value
-        console.log($("#uploadAudio"))
-        console.log($("#uploadFile"))
-        if($("#uploadAudio")!=="" && $("#uploadFile") !== ""){
+        
+        if(changedAudio && changedFile){
             // uploads both
             filename = Date.now()+'-imgMuseo.jpg'
             audioname = Date.now()+'-audioMuseo.mp3'
-            let route = '/uploads/'+filetype+'/'+filename+'/'+audioname
+            let route = '/uploads/museo/multiple/'+filename+'/'+audioname
 
             $.ajax({
                 url: route,
@@ -82,10 +111,11 @@ $(document).ready(function() {
             })
            
         }
-        else if ($("#uploadAudio")==="" && $("#uploadFile") !== ""){
+        else if (changedFile){
             // uploads img, changes img name, doesnt change audio
             filename = Date.now()+'-imgMuseo.jpg'
-            let route = '/uploads/'+filetype+'/'+filename+'/none'
+            let route = '/uploads/museo/'+filename
+
 
             $.ajax({
                 url: route,
@@ -97,10 +127,11 @@ $(document).ready(function() {
             })
 
         }
-        else if ($("#uploadAudio")!=="" && $("#uploadFile") === ""){
+        else if (changedAudio){
             // uploads audio, changes audio, doesnt change img
             audioname = Date.now()+'-audioMuseo.mp3'
-            let route = '/uploads/'+filetype+'/none'+'/'+audioname
+            let route = '/uploads/audio/museo/'+ audioname
+
 
             $.ajax({
                 url: route,
@@ -151,3 +182,14 @@ $(document).ready(function() {
         });
     });
 });
+
+const modifyForm = document.querySelector('form');
+modifyForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    Swal.fire(
+        '¡Éxito!',
+        'Se ha modificado la obra',
+        'success'
+      )
+    setTimeout(() =>  modifyForm.submit(), 1200);
+  });
