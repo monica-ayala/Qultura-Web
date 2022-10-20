@@ -37,6 +37,7 @@ exports.post_nuevo = (request, response, next) => {
       url_imagen,
       request.body.ubicacion_evento
     )
+    console.log(nuevo_evento)
     nuevo_evento.save()
     .then((result) => {
       for(let tag of request.body.sevento){
