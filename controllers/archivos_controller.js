@@ -26,6 +26,7 @@ const storage = multer.diskStorage({
 
 const storage_salas = multer.diskStorage({
     destination: (req, file, cb) => {
+      console.log("multiple")
       console.log(req.params)
         if (req.params.evento == 'museo') {
           cb(null, "public/uploads/museos"); // it will upload inside museum
