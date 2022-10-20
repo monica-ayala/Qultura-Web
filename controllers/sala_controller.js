@@ -2,6 +2,7 @@ const path = require("path");
 const filesystem = require('fs');
 const Sala = require("../models/sala"); 
 const Museo = require("../models/museo"); 
+const Obra = require("../models/obra"); 
 const request = require("express/lib/request");
 
 
@@ -36,7 +37,7 @@ exports.sala_get=(request,response,next)=>{
 
 exports.sala_post = (request, response, next) => {
     if (request.session.id_museo == request.params.id_museo || request.session.id_museo ==1){
-      
+      console.log("nueva")
       const nueva_sala = new Sala(
         request.body.nom_sala,
         request.body.desc_sala,
@@ -48,7 +49,7 @@ exports.sala_post = (request, response, next) => {
       ruta = "/museo/"+request.params.id_museo+"/sala"
       nueva_sala.save()
       .then((result) => {
-        response.redirect (ruta);
+        response.status(200).json({})
       }).catch(err => console.log(err));  
     }else{
       response.redirect('/')
@@ -58,18 +59,24 @@ exports.sala_post = (request, response, next) => {
 
   exports.update_get=(request,response,next)=>{
     if (request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
+      Obra.fetchList(request.params.id_sala)
+      .then(([rowsObra,fieldData])=>{
       Sala.fetchOne(request.params.id_sala)
       .then(([rowsSala,fieldData])=>{
         Museo.fetchOne(request.params.id_museo)
         .then(([rowsMuseo,fieldData])=>{
           response.render('sala_modificar',{
-            museo: rowsMuseo,
-            salas:rowsSala
+            museos: rowsMuseo,
+            salas:rowsSala,
+            museo: request.params.id_museo,
+            obras: rowsObra
           });
         })
         .catch(err=>console.log(err));
       })
       .catch(err=>console.log(err));
+    })
+    .catch(err=>console.log(err));
     }else{
       response.redirect('/')
     }
@@ -77,17 +84,17 @@ exports.sala_post = (request, response, next) => {
   }
 
   exports.update=(request,response,next)=>{
+    
     if(request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
       
-      url_imagen = request.file;
-    if((typeof(url_imagen) == "undefined")){
-        url_imagen = request.body.url_sala;
-    }else{
-        url_imagen = request.file.filename;
-    }
-    audio_sala = ""
     ruta = "/museo/"+request.params.id_museo+"/sala"
-    Sala.update(request.body.nom_sala,request.body.desc_sala,audio_sala,url_imagen,request.params.id_sala)
+    console.log(request.body)
+    Sala.update(
+      request.body.nom_sala,
+      request.body.desc_sala,
+      request.body.audio_sala,
+      request.body.img_sala,
+      request.params.id_sala)
     .then(() => {
       response.redirect(ruta);
     })

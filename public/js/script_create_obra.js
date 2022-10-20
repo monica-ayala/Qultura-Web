@@ -1,3 +1,40 @@
+var stepper = document.querySelector('.stepper');
+var stepperInstace = new MStepper(stepper, {
+    firstActive: 0
+})
+
+var changedFile = false;
+var changedAudio = false;
+
+$(document).ready(function() {
+
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.imgP').attr('src', e.target.result);
+            }
+    
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".file-upload").on('change', function(){
+     changedFile=true
+     console.log(changedFile)
+     console.log(changedAudio)
+     readURL(this);
+    });
+
+    $("#uploadAudio").on('change', function(){
+        changedAudio=true
+        console.log(changedAudio)
+       });
+    
+   
+});
+
 $(document).ready(function() {
     $("#uploadObra").submit(function() {
         var img = new FormData($('#uploadObra')[0]);
@@ -6,7 +43,7 @@ $(document).ready(function() {
         let audioname = document.getElementById("audioname").value
         filename = Date.now()+'-imgMuseo.jpg'
         audioname = Date.now()+'-audioMuseo.mp3'
-        let route = '/uploads/'+filetype+'/'+filename+'/'+audioname
+        let route = '/uploads/museo/multiple/'+filename+'/'+audioname
         id_museo = document.getElementById("id_museo").value
         id_sala = document.getElementById("id_sala").value
         
@@ -57,15 +94,14 @@ $(document).ready(function() {
     $("#modifyObra").submit(function() {
         var img = new FormData($('#modifyObra')[0]);
         let filetype = document.getElementById("event").value
-        let filename = document.getElementById("filename").value
-        let audioname = document.getElementById("audioname").value
-        console.log($("#uploadAudio"))
-        console.log($("#uploadFile"))
-        if($("#uploadAudio")!=="" && $("#uploadFile") !== ""){
+        let filename = document.getElementById("filename2").value
+        let audioname = document.getElementById("audioname2").value
+        
+        if(changedAudio && changedFile){
             // uploads both
             filename = Date.now()+'-imgMuseo.jpg'
             audioname = Date.now()+'-audioMuseo.mp3'
-            let route = '/uploads/'+filetype+'/'+filename+'/'+audioname
+            let route = '/uploads/museo/multiple/'+filename+'/'+audioname
 
             $.ajax({
                 url: route,
@@ -77,10 +113,11 @@ $(document).ready(function() {
             })
            
         }
-        else if ($("#uploadAudio")==="" && $("#uploadFile") !== ""){
+        else if (changedFile && !changedAudio){
             // uploads img, changes img name, doesnt change audio
             filename = Date.now()+'-imgMuseo.jpg'
-            let route = '/uploads/'+filetype+'/'+filename+'/none'
+            let route = '/uploads/museo/multiple/'+filename+'/none'
+
 
             $.ajax({
                 url: route,
@@ -92,10 +129,10 @@ $(document).ready(function() {
             })
 
         }
-        else if ($("#uploadAudio")!=="" && $("#uploadFile") === ""){
+        else if (changedAudio && !changedFile){
             // uploads audio, changes audio, doesnt change img
             audioname = Date.now()+'-audioMuseo.mp3'
-            let route = '/uploads/'+filetype+'/none'+'/'+audioname
+            let route = '/uploads/museo/multiple/none'+audioname
 
             $.ajax({
                 url: route,
@@ -146,3 +183,14 @@ $(document).ready(function() {
         });
     });
 });
+
+const modifyForm = document.querySelector('form');
+modifyForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    Swal.fire(
+        '¡Éxito!',
+        'Se ha modificado la obra',
+        'success'
+      )
+    setTimeout(() =>  modifyForm.submit(), 1200);
+  });

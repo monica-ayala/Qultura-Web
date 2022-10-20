@@ -109,7 +109,6 @@ exports.login_post = (request, response, next) => {
                 .then(([rowsid, fieldData]) => {
                   request.session.id_usuario = rowsid[0].id_user;
                   request.session.id_rol =rows[0].id_rol;
-                  console.log(request.session)
                   Usuario.getMuseum(rowsid[0].id_user)
                   .then(([rowsMuseum])=>{
                     request.session.id_museo = rowsMuseum[0].id_museo_user
