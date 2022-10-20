@@ -14,7 +14,7 @@
                                 <div class="card-content pb-0">
                                     <div class="card-header mb2">
                                     </div>
-                                    <form id="modifySala" action="/museo/<%=museo%>/<%=sala.id_sala%>" enctype="multipart/form-data">
+                                    <form id="modifySala" action="/museo/<%=museo%>" enctype="multipart/form-data">
                                         <ul class="stepper horizontal">
                                             <li class="step active">
                                                 <div class="step-title waves-effect">
@@ -96,13 +96,29 @@
                                                 <div class="step-content">
                                                   <!-- DESCRIPCIÓN -->
                                                   <div class="row">
-                                                    <% for (let obra of obras){%>
-                                                      <div> <%= obra.nom_obra %> </div>
-                                                      <a href="/museo/<%=m.id_museo%>/<%=sala.id_sala%>/<%=obra.id_obra%>"> link </a>
-                                                      <%}%>
+                                                    <a href="/museo/<%=m.id_museo%>/<%=sala.id_sala%>/nueva_obra" class="btn primary-color waves-dark"> Nueva obra </a>
+                                                    <ul id="cards" class="cards" style="padding-top:20px;margin-top:0px">
+                                                        <% for (let obra of obras){%>
+                                                        
+                                                            <li onclick="window.location.href = '/museo/<%=museo%>/<%=sala.id_sala%>/<%=obra.id_obra%>'" style="cursor: pointer;" class="card-pers card-panel z-depth-2 border-radius-6 mt-10 ">
+                                                              
+                                                              <a class="margin-0 center-align">
+                                                                <img class="imgr border-radius-8 image-n-margin" style="max-height: 130px;" src="/uploads/museos/<%=obra.img_obra%>">
+                                                              </a>
+                                                              <h6 class="primary-color-txt text-darken-3 mt-5 center-align"><b>
+                                                                  <%=obra.nom_obra%>
+                                                                </b></h6>
+                                                                <span class="center-align"> <%=obra.desc_obra.substring(0, 30)%></span>
+                                                              
+                                                              
+                                                            </li>
+                                                          
+                                                              <%}%>
+                                                      </ul>
+                                                      
                                                   </div>
                                                   
-                                                  <a href="/museo/<%=m.id_museo%>/<%=sala.id_sala%>/nueva_obra"> link </a>
+                                                  
                                                   
                                                   <div class="step-actions">
                                                     <div class="row">

@@ -315,14 +315,27 @@
                   <div class="step-title waves-effect"> Salas </div>
                   <div class="step-content">
                     <!-- DESCRIPCIÓN -->
-                    <div class="row">
+                 
+                    <ul id="cards" class="cards" style="padding-top:20px;margin-top:0px">
                       <% for (let sala of salas){%>
-                        <div> <%= sala.nom_sala %> </div>
-                        <a href="/museo/<%=museo.id_museo%>/<%=sala.id_sala%>"> link </a>
-                        <%}%>
-                    </div>
-                    
-                    <a href="/museo/<%=museo.id_museo%>/nueva_sala"> link </a>
+                      
+                          <li onclick="window.location.href = '/museo/<%=museo.id_museo%>/<%=sala.id_sala%>'" style="cursor: pointer;" class="card-pers card-panel z-depth-2 border-radius-6 mt-10 ">
+                            
+                            <a class="margin-0 center-align">
+                              <img class="imgr border-radius-8 image-n-margin" style="max-height: 130px;" src="/uploads/museos/<%=sala.img_sala%>">
+                            </a>
+                            <h6 class="primary-color-txt text-darken-3 mt-5 center-align"><b>
+                                <%=sala.nom_sala%>
+                              </b></h6>
+                              <span class="center-align"> <%=sala.desc_sala.substring(0, 30)%></span>
+                            
+                            
+                          </li>
+                        
+                            <%}%>
+                    </ul>
+
+                    <a href="/museo/<%=museo.id_museo%>/nueva_sala" class="btn primary-color waves-dark"> Nueva sala</a>
                     <%}%>
                     <div class="step-actions">
                       <div class="row">

@@ -314,3 +314,30 @@ main {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
   }
+
+  
+.scrolling-wrapper-flexbox {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  
+    .card {
+      flex: 0 0 auto;
+    }
+  }
+  
+  .card {
+    padding: 5px 10px;
+    margin: 10px;
+    border-radius: 5px;
+    background: #FFBBBB;
+  }
+  
+  .scrolling-wrapper, .scrolling-wrapper-flexbox {
+  
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }

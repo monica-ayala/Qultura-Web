@@ -8,13 +8,12 @@
                             <h4 class="white-text card-title">
                                 Nueva obra
                             </h4>
-                            <input id="id_museo" value="<%=museo%>" style="display:none">
-                            <input id="id_sala" value="<%=sala.id_sala%>" style="display:none">
+                            
                             <div class="card">
                                 <div class="card-content pb-0">
                                     <div class="card-header mb2">
                                     </div>
-                                    <form id="uploadObra" action="/museo/<%=museo%>/<%=sala.id_sala%>" enctype="multipart/form-data">
+                                    <form id="uploadObra" action="/museo/<%=museo%>/<%=sala%>" enctype="multipart/form-data">
                                         <ul class="stepper horizontal">
                                             <li class="step active">
                                                 <div class="step-title waves-effect">
@@ -30,17 +29,20 @@
                                                                     <div class="input-field">
                                                                         <input placeholder="Ej: Libertad" id="nom_obra" name="nom_obra" type="text"
                                                                             class="validate">
-                                                                        <label for="nom_obra"> Nombre de la obra </label>
+                                                                        <label for="nom_obra"> Nombre de la obra<span
+                                                                            class="required" required data-length="70" maxlength="70">*</span> </label>
                                                                     </div>
                                                                     <div class="input-field">
                                                                         <input placeholder="Ej: Libertad" id="autor_obra" name="autor_obra"
-                                                                            type="text" class="validate">
-                                                                        <label for="autor_obra"> Nombre del autor(a) </label>
+                                                                            type="text" class="validate" required data-length="50" maxlength="50">
+                                                                        <label for="autor_obra"> Nombre del autor(a) <span
+                                                                            class="required">*</span></label>
                                                                     </div>
                                                                     <div class="input-field">
                                                                         <input placeholder="Ej: Libertad" id="fecha_obra" name="fecha_obra"
-                                                                            type="text" class="validate">
-                                                                        <label for="fecha_obra"> Fecha de creación </label>
+                                                                            type="text" class="validate" required data-length="50" maxlength="50">
+                                                                        <label for="fecha_obra"> Fecha de creación <span
+                                                                            class="required">*</span></label>
                                                                     </div>
                                                                 </div>
                                                             </div>

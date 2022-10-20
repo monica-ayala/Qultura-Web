@@ -15,7 +15,7 @@
                                 <div class="card-content pb-0">
                                     <div class="card-header mb2">
                                     </div>
-                                    <form id="modifyObra" action="/museo/<%=museo%>/<%=sala.id_sala%>" enctype="multipart/form-data">
+                                    <form id="modifyObra" action="/museo/<%=museo%>/<%=sala%>" enctype="multipart/form-data">
                                         <ul class="stepper horizontal">
                                             <li class="step active">
                                                 <div class="step-title waves-effect">
@@ -30,8 +30,9 @@
                                                                 <div class="col s10 offset-s1">
                                                                     <div class="input-field">
                                                                         <input placeholder="Ej: Libertad" id="nom_obra" name="nom_obra" type="text"
-                                                                            value="<%=obra.nom_obra%>" class="validate">
-                                                                        <label for="nom_obra"> Nombre de la obra </label>
+                                                                            value="<%=obra.nom_obra%>" required class="validate" data-length="70" maxlength="70">
+                                                                        <label for="nom_obra"> Nombre de la obra <span
+                                                                            class="required">*</span></label>
                                                                     </div>
 
                                                                 </div>
@@ -40,13 +41,15 @@
                                                                 <div class="col offset-s1">
                                                                     <div class="input-field">
                                                                         <input placeholder="Ej: Libertad" id="autor_obra" name="autor_obra"
-                                                                            type="text" value="<%=obra.autor_obra%>" class="validate">
-                                                                        <label for="autor_obra"> Nombre del autor(a) </label>
+                                                                            type="text" value="<%=obra.autor_obra%>" required class="validate" data-length="50" maxlength="50">
+                                                                        <label for="autor_obra"> Nombre del autor(a) <span
+                                                                            class="required">*</span></label>
                                                                     </div>
                                                                     <div class="input-field">
                                                                         <input placeholder="Ej: Libertad" id="fecha_obra" name="fecha_obra"
-                                                                            type="text" value="<%=obra.fecha_obra%>" class="validate">
-                                                                        <label for="fecha_obra"> Fecha de creación </label>
+                                                                            type="text" value="<%=obra.fecha_obra%>" data-length="50" maxlength="50" required class="validate">
+                                                                        <label for="fecha_obra"> Fecha de creación <span
+                                                                            class="required">*</span></label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -84,11 +87,7 @@
                                                                     type="reset"> Siguiente <i
                                                                         class="material-icons right"> arrow_forward </i>
                                                                 </button> </div>
-                                                            <div class="col"><button type="submit" value="upload"
-                                                                    class="btn waves-effect waves-light green"><i
-                                                                        class="material-icons left">check</i>
-                                                                    Guardar Cambios
-                                                                </button></div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
