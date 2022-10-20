@@ -20,7 +20,7 @@ exports.get_nuevo=(request,response,next)=>{
 // Metodo post de un evento nuevo para que sea registrado 
 // en la base de datos, uso de multer para el manejo de imagenes
 
-exports.post_nuevo = (request, response, next) => {
+exports.post_nuevo = (request, response,next) => {
   let fecha_hora = request.body.fecha_start + " "+ request.body.fecha_end +" ";
   fecha_hora += request.body.hora_inicio + " "+ request.body.hora_fin;
     url_imagen = request.file;
@@ -37,7 +37,6 @@ exports.post_nuevo = (request, response, next) => {
       url_imagen,
       request.body.ubicacion_evento
     )
-    console.log(nuevo_evento)
     nuevo_evento.save()
     .then((result) => {
       for(let tag of request.body.sevento){

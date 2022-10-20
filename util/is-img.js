@@ -15,10 +15,10 @@ const storage = multer.diskStorage({
           cb(null, "public/uploads/eventos"); // it will upload inside events
       },
       filename: (req, file, cb) => {
-        cb(null, new Date().getTime() + '-' + file.originalname)
+        cb(null, new Date().getTime()+'-'+file.originalname)
       }
   })
-  
+
 
 
 const upload = multer({
@@ -29,9 +29,10 @@ const upload = multer({
     // missing filter for files uploaded
 }).single('url_imagen')
 module.exports = (req, res,next) => {
-  upload(req, res, (err) =>{
+  upload(req, res,next,(err) =>{
     if(err){console.log(err);}
+    console.log(req.body)
+    next();
 })
-next();
 }
 
