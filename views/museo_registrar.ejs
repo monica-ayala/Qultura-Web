@@ -3,7 +3,7 @@
     <% for (let museo of museos){%>
     <div class="row">
       <div class="col s10 offset-s1">
-        <h4 class="card-title white-text"> <%= museo.nom_museo %></h4> 
+        <h4 class="card-title white-text"> <%= museo.nom_museo %> </h4>
         <div class="card">
           <input id="id_museo" value="<%= museo.id_museo %>" style="display:none">
           <div class="card-content pb-0">
@@ -315,7 +315,8 @@
                   <div class="step-title waves-effect"> Salas </div>
                   <div class="step-content">
                     <!-- DESCRIPCIÓN -->
-                 
+                    <div class="row">
+                    <a href="/museo/<%=museo.id_museo%>/nueva_sala" class="btn primary-color waves-dark"> Nueva sala</a>
                     <ul id="cards" class="cards" style="padding-top:20px;margin-top:0px">
                       <% for (let sala of salas){%>
                       
@@ -334,8 +335,8 @@
                         
                             <%}%>
                     </ul>
-
-                    <a href="/museo/<%=museo.id_museo%>/nueva_sala" class="btn primary-color waves-dark"> Nueva sala</a>
+                    </div>
+                   
                     <%}%>
                     <div class="step-actions">
                       <div class="row">

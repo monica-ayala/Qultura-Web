@@ -7,7 +7,7 @@
                     <input style="display:none" id="id_obra" value="<%= obra.id_obra %>">
                         <div class="col s10 offset-s1">
                             <h4 class="white-text card-title">
-                                <%=obra.nom_obra%>
+                                <span><%=m[0].nom_museo%></span> > <span><%=s[0].nom_sala%></span> > <span><%=obra.nom_obra%></span>
                             </h4>
                             <input id="id_museo" value="<%=museo%>" style="display:none">
                             <input id="id_sala" value="<%=sala.id_sala%>" style="display:none">
