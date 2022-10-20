@@ -22,7 +22,7 @@ cron.schedule('0 11 * * *', () => {
                       .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
                           Museo.fetchMuseoName(current.id_museo_solicitud)
                               .then(([rowsMuseoName, fieldDataMuseoName]) => {
-                                  Solicitud.correoRecordatorio_send(current.id_solicitud, rowsUsuarioMuseo[0].correo_user, current.info_adicional, current.fecha_hora_sol, current.num_Visitantes, rowsMuseoName[0].nom_museo)
+                                  Solicitud.correoRecordatorio_send(current.id_solicitud, rowsUsuarioMuseo[0].correo_user, current.info_adicional, current.fecha_hora_sol, current.num_asistentes, rowsMuseoName[0].nom_museo)
                               }).catch(err => console.log(err));
                   }).catch(err => console.log(err));
               }

@@ -91,7 +91,7 @@ module.exports = class Solicitud {
             from: "no_reply_quapp@outlook.com",
             to: correo_usuario,
             subject: "Hoy es tu recorrido de museo",
-            text: "Tienes una cita hoy en el museo: " + nombreMuseo + ". \n" + "Informacion de la cita \n" + "id_solicitud: " + id_solicitud + "\n fecha: " + fecha_hora_sol + "\n numero de visitantes: " + num_Visitantes  
+            text: "Tienes una cita hoy en el museo: " + nombreMuseo + ". \n" + "Informacion de la cita \n" +  "fecha: " + fecha_hora_sol + "\n numero de visitantes: " + num_Visitantes  
         };
         transporter.sendMail(options,callbackPromise());
     }
