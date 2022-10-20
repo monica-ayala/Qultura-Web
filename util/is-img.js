@@ -28,7 +28,7 @@ const upload = multer({
     },
     // missing filter for files uploaded
 }).single('url_imagen')
-module.exports = (req, res) => {
+module.exports = (req, res,next) => {
   upload(req, res, (err) =>{
     if(err){console.log(err);}
 })
