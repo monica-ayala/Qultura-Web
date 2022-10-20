@@ -132,7 +132,7 @@ $(document).ready(function() {
         else if (changedAudio && !changedFile){
             // uploads audio, changes audio, doesnt change img
             audioname = Date.now()+'-audioMuseo.mp3'
-            let route = '/uploads/museo/multiple/none'+audioname
+            let route = '/uploads/museo/multiple/none/'+audioname
 
             $.ajax({
                 url: route,
