@@ -10,11 +10,11 @@
     <br>
     <div class="search_box">
       <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar (Nombre, Rol, Museo)">
-      <%if (rol==4){%>
-        <button class="waves-effect waves-light btn" href="#modal2" onclick="createUser()">Nuevo Usuario</button>
-          <%}%>
+     
     </div>
-    
+    <%if (rol==4){%>
+      <button class="waves-effect waves-light btn" href="#modal2" onclick="createUser()">Nuevo Usuario</button>
+        <%}%>
     <table id="myTable" class="centered">
 
       <tr class="header" id="title">
