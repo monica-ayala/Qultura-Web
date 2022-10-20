@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link rel="stylesheet" href="/css/style.css">
+    
   <link rel="stylesheet" href="/materialize-css/dist/css/materialize.css" media="screen,projection" />
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -40,4 +41,10 @@
   <ul id="dropdown123" class="dropdown-content" tabindex="0">
     <li tabindex="0"><a href="/usuario/logout">Cerrar Sesión</a></li>
   </ul>
+
+  <script>
+    $(document).ready(function() {
+      M.CharacterCounter.init($('input[type="text"]'));
+    });
+  </script>
 

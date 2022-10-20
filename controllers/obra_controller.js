@@ -74,16 +74,27 @@ exports.obra_post = (request, response, next) => {
 
 exports.update_get = (request, response, next) => {
   if (request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
-    Obra.fetchOne(request.params.id_obra)
-    .then(([rowsObra, fieldData]) => {
-      response.render("obra_modificar", {
-        obras: rowsObra,
-        museo: request.params.id_museo,
-        sala: request.params.id_sala,
-        obra: request.params.id_obra
-      });
+    Museo.fetchOne(request.params.id_museo)
+      .then(([rowsMuseo, fieldData]) => {
+      Sala.fetchOne(request.params.id_sala)
+        .then(([rowsSala, fieldData]) => {
+          Obra.fetchOne(request.params.id_obra)
+          .then(([rowsObra, fieldData]) => {
+            response.render("obra_modificar", {
+              obras: rowsObra,
+              museo: request.params.id_museo,
+              sala: request.params.id_sala,
+              obra: request.params.id_obra,
+              m: rowsMuseo,
+              s: rowsSala
+            });
+          })
+      .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
+  })
+  .catch((err) => console.log(err));
+    
   }else{
     response.redirect('/')
   }

@@ -1,89 +1,152 @@
 <%- include('includes/header_image.ejs') %>
-    <main>
-        <form id="uploadObra" enctype="multipart/form-data">
-            <input style="display:none" id="id_museo" value="<%= museo %>">
-            <input style="display:none" id="id_sala" value="<%= sala %>">
-            <div class="container">
-                <h1 class="white-text">Nueva obra</h1>
-
-                <div class="white min-container">
-                    <div class="row center margin-10">
-                        <!-- valign-wrapper -->
-                        <div class="col s5">
-                            <div class="row valign-wrapper">
-                                <div class="col s10">
-                                    <div class="card imgPicker">
-                                        <div class="card-image">
-                                            <input id="filename" style="display:none">
-                                            <input id="event" value="museo" style="display:none">
-                                            <img class="imgPicker imgP" src="/img/no-img.jpg">
-                                            <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
-                                                onclick="filebutton.click()"><i class="material-icons">edit</i></div>
-                                            <input class="file-upload" id="filebutton" type="file" name="uploadFile" id="uploadFile"
-                                                style="display:none">
-                                        </div>
+            <main class="img-background">
+                <div class="row">
+                    <input style="display:none" id="id_museo" value="<%= museo %>">
+                    <input style="display:none" id="id_sala" value="<%= sala %>">
+                    
+                        <div class="col s10 offset-s1">
+                            <h4 class="white-text card-title">
+                                Nueva obra
+                            </h4>
+                            
+                            <div class="card">
+                                <div class="card-content pb-0">
+                                    <div class="card-header mb2">
                                     </div>
+                                    <form id="uploadObra" action="/museo/<%=museo%>/<%=sala%>" enctype="multipart/form-data">
+                                        <ul class="stepper horizontal">
+                                            <li class="step active">
+                                                <div class="step-title waves-effect">
+                                                    <p>Información</p>
+                                                </div>
+                                                <div class="step-content">
+                                                    <div class="row">
+                                                        <div class="col s7">
+
+                                                            <!-- NOMBRE -->
+                                                            <div class="row center">
+                                                                <div class="col s10 offset-s1">
+                                                                    <div class="input-field">
+                                                                        <input placeholder="Ej: Libertad" id="nom_obra" name="nom_obra" type="text"
+                                                                            class="validate">
+                                                                        <label for="nom_obra"> Nombre de la obra<span
+                                                                            class="required" required data-length="70" maxlength="70">*</span> </label>
+                                                                    </div>
+                                                                    <div class="input-field">
+                                                                        <input placeholder="Ej: Libertad" id="autor_obra" name="autor_obra"
+                                                                            type="text" class="validate" required data-length="50" maxlength="50">
+                                                                        <label for="autor_obra"> Nombre del autor(a) <span
+                                                                            class="required">*</span></label>
+                                                                    </div>
+                                                                    <div class="input-field">
+                                                                        <input placeholder="Ej: Libertad" id="fecha_obra" name="fecha_obra"
+                                                                            type="text" class="validate" required data-length="50" maxlength="50">
+                                                                        <label for="fecha_obra"> Fecha de creación <span
+                                                                            class="required">*</span></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col s5">
+
+                                                            <div class="col s9 offset-s2">
+                                                                <input type="text" name="event" id="event" value="museo"
+                                                                    style="display:none">
+                                                                <input type="text" name="filename" id="filename"
+                                                                    style="display:none">
+                                                                <div id="imgMuseoValidate"> Selecciona una imagen para
+                                                                    la obra </div>
+                                                                <div class="card imgPicker">
+                                                                    <div class="card-image">
+                                                                        <input id="filename" style="display:none">
+                                                                        <input id="event" value="museo" style="display:none">
+                                                                        <img class="imgPicker imgP" src="/img/no-img.jpg">
+                                                                        <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
+                                                                            onclick="filebutton.click()"><i class="material-icons">edit</i></div>
+                                                                        <input class="file-upload" id="filebutton" type="file" name="uploadFile" id="uploadFile"
+                                                                            style="display:none">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="step-actions">
+                                                        <div class="row">
+                                                            <div class="col"> <button
+                                                                    class="waves-effect waves dark btn light-blue-secondary next-step"
+                                                                    type="reset"> Siguiente <i
+                                                                        class="material-icons right"> arrow_forward </i>
+                                                                </button> </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="step">
+                                                <div class="step-title waves-effect">
+                                                    <p>Descripción</p>
+                                                </div>
+                                                <div class="step-content">
+                                                    <div class="row">
+                                                        <div class="col s7">
+
+                                                            <!-- NOMBRE -->
+                                                            <div class="row center">
+                                                                <div class="col s10 offset-s1">
+                                                                    
+                                                                    <!-- DESCRIPCIÓN -->
+                                                                    <div class="input-field">
+                                                                        <textarea id="desc_obra" name="desc_obra"
+                                                                            class="materialize-textarea validate"
+                                                                            required></textarea>
+                                                                        <label for="desc_obra"> Descripción <span
+                                                                                class="required">*</span></label>
+                                                                        <span class="helper-text"
+                                                                            data-error="Este input es requerido"></span>
+                                                                    </div>
+                                                                
+                                                                    <div class="file-field input-field">
+                                                                        <div class="btn">
+                                                                            <input id="audioname" style="display:none">
+                                                                            <span> Mp3</span>
+                                                                            <input type="file" name="uploadAudio" id="uploadAudio">
+                                                                        </div>
+                                                                        <div class="file-path-wrapper">
+                                                                            <input placeholder="audioguía (archivo mp3)" class="file-path validate"
+                                                                                name="file" type="text">
+                                                                        </div>
+                            
+                                                                    </div>
+                                                                </div>
+                            
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="step-actions">
+                                                        <div class="row">
+                                                            
+                                                            <div class="col"><button type="submit" value="upload"
+                                                                    class="btn waves-effect waves-light green"><i
+                                                                        class="material-icons left">check</i>
+                                                                    Guardar Cambios
+                                                                </button></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </form>
                                 </div>
                             </div>
+                            
+                                
                         </div>
-                        <div class="col s7">
-                            <div class="row center">
-                                <div class="input-field col s10 offset-s1">
-                                    <input placeholder="Ej: Libertad" id="nom_obra" name="nom_obra" type="text"
-                                        class="validate">
-                                    <label for="nom_obra"> Nombre de la obra </label>
-                                </div>
-
-                                <div class="input-field col s10 offset-s1">
-                                    <div class="file-field input-field">
-                                        <input id="audioname" style="display:none">
-                                        <div class="btn">
-                                            <span> Mp3</span>
-                                            <input type="file" id="uploadAudio" name="uploadAudio">
-                                        </div>
-                                        <div class="file-path-wrapper">
-                                            <input placeholder="audioguía (archivo mp3)" class="file-path validate"
-                                                name="file" type="text">
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="col offset-s1">
-                                    <div class="input-field">
-                                        <input placeholder="Ej: Libertad" id="autor_obra" name="autor_obra" type="text"
-                                            class="validate">
-                                        <label for="autor_obra"> Nombre del autor(a) </label>
-                                    </div>
-                                    <div class="input-field">
-                                        <input placeholder="Ej: Libertad" id="fecha_obra" name="fecha_obra" type="text"
-                                            class="validate">
-                                        <label for="fecha_obra"> Fecha de creación </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row center margin-10">
-                        <div class="input-field col s10 offset-s1">
-                            <textarea id="desc_obra" name="desc_obra"
-                                class="materialize-textarea validate">  </textarea>
-                            <label for="desc_obra"> Descripción </label>
-                        </div>
-                        
-
-                        <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
-                            <i class="material-icons left">check</i>
-                            Guardar cambios
-                        </button>
-                    </div>
                 </div>
 
-            </div>
+<script src="/js/script_create_obra.js"></script>
+</main>
 
-        </form>
-    </main>
-    <script src="/js/script_create_obra.js"></script>
-    <%- include('includes/footer.ejs') %>
+<%- include('includes/footer.ejs') %>

@@ -1,100 +1,162 @@
 <%- include('includes/header_image.ejs') %>
-    <main>
-        <form id="modifyObra" enctype="multipart/form-data">
-
-            <% for (let obra of obras){%>
-                <div class="container">
-                    <h1 class="white-text">
-                        <%=obra.nom_obra%>
-                    </h1>
+<% for (let obra of obras){%>
+            <main class="img-background">
+                <div class="row">
                     <input style="display:none" id="id_museo" value="<%= museo %>">
                     <input style="display:none" id="id_sala" value="<%= sala %>">
                     <input style="display:none" id="id_obra" value="<%= obra.id_obra %>">
-                    <div class="white min-container">
-                        <div class="row center margin-10">
-                            <!-- valign-wrapper -->
-                            <div class="col s5">
-                                <div class="row valign-wrapper">
-                                    <div class="col s10">
-                                        <div class="card imgPicker">
-                                            <div class="card-image">
-                                                <input id="filename" value="<%obra.img_obra%>" style="display:none">
-                                                <input id="event" value="museo" style="display:none">
-                                                <img class="imgPicker imgP" src="/uploads/<%=obra.img_obra%>">
-                                                <input style="display:none" name="url_obra" value="<%=obra.img_obra%>">
-                                                <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
-                                                    onclick="filebutton.click()"><i class="material-icons">edit</i>
+                        <div class="col s10 offset-s1">
+                            <span class="white-text card-title">
+                                <span style="font-size:40px"><%=obra.nom_obra%> </span> <div><a href="/"> Página principal </a> > <a href="/museo/<%= museo %>"><%=m[0].nom_museo%></a> > <a href="/museo/<%= museo %>/<%= sala %>"><%=s[0].nom_sala%></a> > <a href="/museo/<%= museo %>/<%= sala %>/<%=obra.id_obra%>"><%=obra.nom_obra%></a></div> 
+                            </span>
+                            <input id="id_museo" value="<%=museo%>" style="display:none">
+                            <input id="id_sala" value="<%=sala.id_sala%>" style="display:none">
+                            <div class="card">
+                                <div class="card-content pb-0">
+                                    <div class="card-header mb2">
+                                    </div>
+                                    <form id="modifyObra" action="/museo/<%=museo%>/<%=sala%>" enctype="multipart/form-data">
+                                        <ul class="stepper horizontal">
+                                            <li class="step active">
+                                                <div class="step-title waves-effect">
+                                                    <p>Información</p>
                                                 </div>
-                                                <input class="file-upload" id="filebutton" type="file" name="uploadFile"
-                                                    style="display:none">
-                                            </div>
-                                        </div>
-                                    </div>
+                                                <div class="step-content">
+                                                    <div class="row">
+                                                        <div class="col s7">
+
+                                                            <!-- NOMBRE -->
+                                                            <div class="row center">
+                                                                <div class="col s10 offset-s1">
+                                                                    <div class="input-field">
+                                                                        <input placeholder="Ej: Libertad" id="nom_obra" name="nom_obra" type="text"
+                                                                            value="<%=obra.nom_obra%>" required class="validate" data-length="70" maxlength="70">
+                                                                        <label for="nom_obra"> Nombre de la obra <span
+                                                                            class="required">*</span></label>
+                                                                    </div>
+
+                                                                </div>
+                                                                
+                            
+                                                                <div class="col offset-s1">
+                                                                    <div class="input-field">
+                                                                        <input placeholder="Ej: Libertad" id="autor_obra" name="autor_obra"
+                                                                            type="text" value="<%=obra.autor_obra%>" required class="validate" data-length="50" maxlength="50">
+                                                                        <label for="autor_obra"> Nombre del autor(a) <span
+                                                                            class="required">*</span></label>
+                                                                    </div>
+                                                                    <div class="input-field">
+                                                                        <input placeholder="Ej: Libertad" id="fecha_obra" name="fecha_obra"
+                                                                            type="text" value="<%=obra.fecha_obra%>" data-length="50" maxlength="50" required class="validate">
+                                                                        <label for="fecha_obra"> Fecha de creación <span
+                                                                            class="required">*</span></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col s5">
+
+                                                            <div class="col s9 offset-s2">
+                                                                <input type="text" name="event" id="event" value="museo"
+                                                                    style="display:none">
+                                                                <input type="text" name="filename" id="filename"
+                                                                    value="<%=sala.img_sala%>" style="display:none">
+                                                                <div id="imgMuseoValidate"> Selecciona una imagen para
+                                                                    la sala </div>
+                                                                <div class="card imgPicker">
+                                                                    <div class="card-image">
+                                                                        <input id="filename2" value="<%=obra.img_obra%>" style="display:none">
+                                                                        <input id="event" value="museo" style="display:none">
+                                                                        <img class="imgPicker imgP" src="/uploads/museos/<%=obra.img_obra%>">
+                                                                        <input style="display:none" name="url_obra" value="<%=obra.img_obra%>">
+                                                                        <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
+                                                                            onclick="filebutton.click()"><i class="material-icons">edit</i>
+                                                                        </div>
+                                                                        <input class="file-upload" id="filebutton" type="file" name="uploadFile"
+                                                                            style="display:none">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="step-actions">
+                                                        <div class="row">
+                                                            <div class="col"> <button
+                                                                    class="waves-effect waves dark btn light-blue-secondary next-step"
+                                                                    type="reset"> Siguiente <i
+                                                                        class="material-icons right"> arrow_forward </i>
+                                                                </button> </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="step">
+                                                <div class="step-title waves-effect">
+                                                    <p>Descripción</p>
+                                                </div>
+                                                <div class="step-content">
+                                                    <div class="row">
+                                                        <div class="col s7">
+
+                                                            <!-- NOMBRE -->
+                                                            <div class="row center">
+                                                                <div class="col s10 offset-s1">
+                                                                    
+                                                                    <!-- DESCRIPCIÓN -->
+                                                                    <div class="input-field">
+                                                                        <textarea id="desc_obra" name="desc_obra"
+                                                                            class="materialize-textarea validate"
+                                                                            required><%=obra.desc_obra%></textarea>
+                                                                        <label for="desc_obra"> Descripción <span
+                                                                                class="required">*</span></label>
+                                                                        <span class="helper-text"
+                                                                            data-error="Este input es requerido"></span>
+                                                                    </div>
+                                                                
+                                                                    <div class="file-field input-field">
+                                                                        <div class="btn">
+                                                                            <input id="audioname2" value="<%=obra.audio_obra%>" style="display:none">
+                                                                            <span> Mp3</span>
+                                                                            <input type="file" name="uploadAudio" id="uploadAudio">
+                                                                        </div>
+                                                                        <div class="file-path-wrapper">
+                                                                            <input placeholder="audioguía (archivo mp3)" value="<%=obra.audio_obra%>" class="file-path validate"
+                                                                                name="file" type="text">
+                                                                        </div>
+                            
+                                                                    </div>
+                                                                </div>
+                            
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="step-actions">
+                                                        <div class="row">
+                                                            
+                                                            <div class="col"><button type="submit" value="upload"
+                                                                    class="btn waves-effect waves-light green"><i
+                                                                        class="material-icons left">check</i>
+                                                                    Guardar Cambios
+                                                                </button></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="col s7">
-                                <div class="row center">
-                                    <div class="input-field col s10 offset-s1">
-                                        <input placeholder="Ej: Libertad" id="nom_obra" name="nom_obra" type="text"
-                                            value="<%=obra.nom_obra%>" class="validate">
-                                        <label for="nom_obra"> Nombre de la obra </label>
-                                    </div>
-
-                                    <div class="input-field col s10 offset-s1">
-                                        <div class="file-field input-field">
-                                            <div class="btn">
-                                                <input id="audioname" value="<%=obra.audio_obra%>" style="display:none">
-                                                <span> Mp3</span>
-                                                <input type="file" id="uploadAudio">
-                                            </div>
-                                            <div class="file-path-wrapper">
-                                                <input placeholder="audioguía (archivo mp3)" class="file-path validate"
-                                                    value="<%=obra.audio_obra%>" name="file" type="text">
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col offset-s1">
-                                        <div class="input-field">
-                                            <input placeholder="Ej: Libertad" id="autor_obra" name="autor_obra"
-                                                type="text" value="<%=obra.autor_obra%>" class="validate">
-                                            <label for="autor_obra"> Nombre del autor(a) </label>
-                                        </div>
-                                        <div class="input-field">
-                                            <input placeholder="Ej: Libertad" id="fecha_obra" name="fecha_obra"
-                                                type="text" value="<%=obra.fecha_obra%>" class="validate">
-                                            <label for="fecha_obra"> Fecha de creación </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <%}%>
+                                
                         </div>
-
-                        <div class="row center margin-10">
-                            <div class="input-field col s10 offset-s1">
-                                <textarea id="desc_obra" name="desc_obra"
-                                    class="materialize-textarea validate"> <%=obra.desc_obra%> </textarea>
-                                <label for="desc_obra"> Descripción </label>
-                            </div>
-                            <div class="input-field col s10 offset-s1">
-                                <textarea id="subtitulo_obra" name="subtitulo_obra"
-                                    class="materialize-textarea validate"> <%=obra.subtitulo_obra%> </textarea>
-                                <label for="subtitulo_obra"> Subtítulos </label>
-                            </div>
-
-                            <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
-                                <i class="material-icons left">check</i>
-                                Guardar cambios
-                            </button>
-                        </div>
-                    </div>
-
                 </div>
-                <%}%>
-        </form>
-    </main>
-    <script src="/js/script_create_obra.js"></script>
+
+
+                <script src="/js/script_create_obra.js"></script>
+            </main>
 
 <%- include('includes/footer.ejs') %>

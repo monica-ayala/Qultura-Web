@@ -1,7 +1,7 @@
 <%- include('includes/header.ejs') %>
   <main>
     <div class="row">
-      <div class="content-wrapper-before blue-gradient" style="height:250px"">
+      <div class="content-wrapper-before blue-gradient" style="height:250px">
         <img class=" parallax-img" style="object-fit: cover; height:250px;width: 100%;opacity: 0.2;"
         src="/img/login.jpg" />
     </div>
@@ -17,7 +17,7 @@
     <div class="col s12 margin-0" style="padding:0px">
       <div class="container-pers" style="position:relative">
         <div class="row">
-          <%if (rol == 4){%>
+          <%if (rol === 4){%>
           <a href="/museo/nuevo_museo" style="position:absolute;top:40%;left:100%" class="waves-effect waves-light btn-floating primary-color"><i class="material-icons left">add</i></a>
           <%}%>
           <ul id="cards" class="cards">
@@ -25,7 +25,7 @@
               <%if(museo.status==1){%>
                 <li class="card-pers card-panel z-depth-3 border-radius-6 mt-10 card-animation-1">
                   <a class="margin-0 center-align">
-                    <img class="imgr border-radius-8 z-depth-4 image-n-margin" src="/uploads/<%=museo.imgP_museo%>">
+                    <img class="imgr border-radius-8 z-depth-4 image-n-margin" src="/uploads/museos/<%=museo.imgP_museo%>">
                   </a>
                   <h6 class="primary-color-txt text-darken-3 mt-5"><b>
                       <%=museo.nom_museo%>
@@ -73,27 +73,27 @@
               <li class="card-pers card-panel z-depth-3 border-radius-6 mt-10 card-animation-1">
                 <a class="margin-0 center-align">
                   <img class="imgr border-radius-8 z-depth-4 image-n-margin"
-                    src="/uploads/<%=evento.multimedia_evento%>">
+                    src="/uploads/eventos/<%=evento.multimedia_evento%>">
                 </a>
                 <h6 class="primary-color-txt text-darken-3 mt-5"><b>
                     <%=evento.info_evento%>
                   </b></h6>
                 <span>
-                  <%if( evento.fecha_hora_evento.substring(0,10)===evento.fecha_hora_evento.substring(11,21) ){%>
+                  <%if( evento.fecha_hora_evento.substring(0,12)===evento.fecha_hora_evento.substring(13,25) ){%>
                     <div class="valign-wrapper"> <i class="material-icons space-icon"> calendar_month </i>
-                      <p> Fecha: <%=evento.fecha_hora_evento.substring(0,10)%>
+                      <p> Fecha: <%=evento.fecha_hora_evento.substring(0,12)%>
                       </p>
                     </div>
                     <%}else{%>
                       <div class="valign-wrapper"> <i class="material-icons space-icon"> calendar_month </i>
-                        <p> Fecha: <%=evento.fecha_hora_evento.substring(0,10)%> -
-                            <%=evento.fecha_hora_evento.substring(11,21)%>
+                        <p> Fecha: <%=evento.fecha_hora_evento.substring(0,12)%> -
+                            <%=evento.fecha_hora_evento.substring(13,25)%>
                         </p>
                       </div>
                       <%}%>
                         <div class="valign-wrapper"> <i class="material-icons space-icon"> schedule </i>
-                          <p>Horario: <%=evento.fecha_hora_evento.substring(22,27)%> -
-                              <%=evento.fecha_hora_evento.substring(27,39)%>
+                          <p>Horario: <%=evento.fecha_hora_evento.substring(27,34)%> -
+                              <%=evento.fecha_hora_evento.substring(35,49)%>
                           </p>
                         </div>
                         <% for (let tag of tags){%>

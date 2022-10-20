@@ -65,12 +65,12 @@ module.exports = class Solicitud {
             .catch(err => console.log(err));
     }
 
-    static correo_send(id_solicitud, necesidades, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes){
+    static correo_send(id_solicitud, necesidades, correo_museo, info_adicional, fecha_hora_sol, num_Visitantes, usuario_necesidad){
         const options= {
             from: "no_reply_quapp@outlook.com",
             to: correo_museo,
             subject: "Solicitud especial de recorrido",
-            text: "Caracteristicas de solicitud \n  Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + info_adicional + "\n Click aqui para confirmar solicitud : https://qulturaqro.live/solicitud/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : https://qulturaqro.live/solicitud/negar/"+id_solicitud
+            text: "Caracteristicas de solicitud \n  Usuario: " + usuario_necesidad + " \n Fecha y hora: " + fecha_hora_sol + "\n Numero de asistentes: " + num_Visitantes + "\n Requerimientos especiales: " + necesidades + "\n Otro: " + info_adicional + "\n Click aqui para confirmar solicitud : https://qulturaqro.live/solicitud/aceptar/"+id_solicitud  + "\n Click aqui para denegar la solicitud : https://qulturaqro.live/solicitud/negar/"+id_solicitud
         };
         transporter.sendMail(options,callbackPromise());
     }
@@ -91,7 +91,7 @@ module.exports = class Solicitud {
             from: "no_reply_quapp@outlook.com",
             to: correo_usuario,
             subject: "Hoy es tu recorrido de museo",
-            text: "Tienes una cita hoy en el museo: " + nombreMuseo + ". \n" + "Informacion de la cita \n" + "id_solicitud: " + id_solicitud + "\n fecha: " + fecha_hora_sol + "\n numero de visitantes: " + num_Visitantes  
+            text: "Tienes una cita hoy en el museo: " + nombreMuseo + ". \n" + "Informacion de la cita \n" +  "fecha: " + fecha_hora_sol + "\n numero de visitantes: " + num_Visitantes  
         };
         transporter.sendMail(options,callbackPromise());
     }
