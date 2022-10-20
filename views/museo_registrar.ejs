@@ -3,7 +3,9 @@
     <% for (let museo of museos){%>
     <div class="row">
       <div class="col s10 offset-s1">
-        <h4 class="card-title white-text"> <%= museo.nom_museo %> </h4>
+        <span class="white-text card-title">
+          <span style="font-size:40px"><%=museo.nom_museo%> </span> <div><a href="/"> Página principal </a> > <a href="/museo/<%= museo.id_museo %>"><%=museo.nom_museo%></a></div>
+      </span>
         <div class="card">
           <input id="id_museo" value="<%= museo.id_museo %>" style="display:none">
           <div class="card-content pb-0">
