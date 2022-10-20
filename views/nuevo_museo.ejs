@@ -1,113 +1,304 @@
 <%- include('includes/header_image.ejs') %>
-    <main>
-        <script type="module" src="/js/script_maps.js"></script>
-        <form id="nuevo_imagen" method="POST" enctype="multipart/form-data">
-            <!-- Modal Structure -->
-            <div id="modal_link" class="modal bottom-sheet">
-                <div class="modal-content">
-                    <h4>Modal Header</h4>
-                    <div id="map" style="height: 400px;width: 100%;"></div>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                </div>
-            </div>
-
-            <!-- MODAL PARA SUBIR HORARIOS -->
-
-            <div id="modal_hr" class="modal">
-                <div class="modal-content">
-                    <h4>Horarios del museo</h4>
-                    <p>Elegir horario del museo</p>
-                </div>
-                <div class="modal-footer">
-                    <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
-                </div>
-            </div>
-
-            <div class="container">
-                <h1 class="white-text">Nuevo museo</h1>
-
-                <div class="white min-container">
-                    <div class="row center margin-10">
-                        <!-- valign-wrapper -->
-                        <div class="col s5">
-                            <div class="row valign-wrapper">
-                                <div class="col s10">
-                                    <div class="card imgPicker">
-                                        <div class="card-image">
-                                            <img class="imgPicker imgP" src="/img/no-img.jpg">
-                                            <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
-                                                onclick="filebutton.click()"><i class="material-icons">edit</i></div>
-                                            <input class="file-upload" id="filebutton" type="file" name="url_imagen"
-                                                style="display:none">
+    <main class="img-background">
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <h4 class="white-text card-title"> Regístra un nuevo museo</h4> 
+                    <div class="card">
+                        <div class="card-content pb-0">
+                            <div class="card-header mb2"> 
+                            </div>
+                            <form id="uploadForm" action="/" enctype="multipart/form-data">
+                            <ul class="stepper  linear horizontal">
+                            <li class="step active"> 
+                                <div class="step-title waves-effect"> <p>Información</p> </div>
+                                <div class="step-content">
+                                 <div class="row">
+                                     <div class="col s7">
+                            
+                                         <!-- NOMBRE -->
+                                         <div class="row center">
+                                           <div class="col s10 offset-s1">
+                                             <div class="input-field">
+                                                 <input id="nom_museo" name="nom_museo" type="text"
+                                                     class="validate" required data-length="70" maxlength="70">
+                                                 <label for="nom_museo"> Nombre del Museo <span class="required">*</span></label>
+                                                 <span class="helper-text" data-error="Este input es requerido"></span>
+                                             </div> 
+                                            
+                                             <!-- TELÉFONO -->
+                                             <div class="input-field">
+                                                 <input id="num_museo" name="num_museo" type="number"
+                                                     class="validate" required  maxlength="10"/>
+                                                 <label for="num_museo"> Teléfono de contacto <span class="required">*</span></label>
+                                                 <span class="helper-text" data-error="Este input es requerido"></span>
+                                             </div>
+                                            
+                                             <!-- DIRECCIÓN -->
+                                             <div class="input-field">
+                                                <input name="ubicacion_museo"
+                                                id="ubicacion_museo" type="text" class="validate" required data-length="50" maxlength="50">
+                                                <label for="ubicacion_museo"> Dirección <span class="required">*</span></label>
+                                                <span class="helper-text" data-error="Este input es requerido"></span>
+                                             </div>
+                                            </div>
+                                         </div>
+                                     </div>
+                                     <div class="col s5">
+                                        
+                                            <div class="col s9 offset-s2">
+                                                   <input type="text" name="event" id="event" value="museo" style="display:none">
+                                                   <input type="text" name="filename" id="filename" style="display:none">
+                                                   <div id="imgMuseoValidate"> Selecciona una imagen para el museo </div>
+                                                <div class="card imgPicker">
+                                                    <div class="card-image">
+                                                       <img class="imgPicker imgP" src="/img/no-img.jpg">
+                                                       <div class="primary-color waves-effect waves-light btn-floating halfway-fab button-upload"
+                                                           onclick="uploadFile.click()"><i class="material-icons">edit</i></div>
+                                                       <input class="file-upload" type="file" name="uploadFile" id="uploadFile" style="display:none" accept="image/*">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                 </div>
+                                   <div class="step-actions">
+                                      <div class="row">
+                                        <div class="col"> <button class="waves-effect waves dark btn light-blue-secondary next-step" type="reset"> Siguiente <i class="material-icons right"> arrow_forward </i> </button> </div>
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>
+                             <li class="step">
+                                <div class="step-title waves-effect"> Horarios </div>
+                                <div class="step-content">
+                                    <!-- Horarios -->
+                                    <div class="row">
+                                    <div class="col s6">
+                                        <ul class="collapsible">
+                                            <li id="li_l">
+                                                <div id="header_l" class="collapsible-header"> 
+                                                    <div class="switch">
+                                                        <span style="margin-right:30px"> Lunes -  ¿Este día abre el museo?  </span>
+                                                        <label>
+                                                          No
+                                                          <input id="checkbox_lun" type="checkbox">
+                                                          <span class="lever"></span>
+                                                          Sí
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="collapsible-body">
+                                                    <div class="row pb-0 mb-0">
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_inicio_lun" name="hr_inicio_lun" type="time" class="padding-0 margin-0" value="10:00">
+                                                            <label for="hr_inicio_lun"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_fin_lun" name="hr_fin_lun" type="time" class="padding-0 margin-0" value="17:00">
+                                                            <label for="hr_fin_lun"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                            </li>
+                                            <li id="li_m">
+                                                <div id="header_m" class="collapsible-header"> 
+                                                    <div class="switch">
+                                                        <span style="margin-right:30px"> Martes -  ¿Este día abre el museo?  </span>
+                                                        <label>
+                                                          No
+                                                          <input id="checkbox_mar" type="checkbox">
+                                                          <span class="lever"></span>
+                                                          Sí
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="collapsible-body">
+                                                    <div class="row pb-0 mb-0">
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_inicio_mar" name="hr_inicio_mar" type="time" class="padding-0 margin-0" value="10:00">
+                                                            <label for="hr_inicio_mar"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_fin_mar" name="hr_fin_mar" type="time" class="padding-0 margin-0" value="17:00">
+                                                            <label for="hr_fin_mar"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                            </li>
+                                            <li id="li_w">
+                                                <div id="header_w" class="collapsible-header"> 
+                                                    <div class="switch">
+                                                        <span style="margin-right:30px"> Miércoles -  ¿Este día abre el museo?  </span>
+                                                        <label>
+                                                          No
+                                                          <input id="checkbox_mie" type="checkbox">
+                                                          <span class="lever"></span>
+                                                          Sí
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="collapsible-body">
+                                                    <div class="row pb-0 mb-0">
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_inicio_mie" name="hr_inicio_mie" type="time" class="padding-0 margin-0" value="10:00">
+                                                            <label for="hr_inicio_mie"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_fin_mie" name="hr_fin_mie" type="time" class="padding-0 margin-0" value="17:00">
+                                                            <label for="hr_fin_mie"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                            </li>
+                                            <li id="li_j">
+                                                <div id="header_j" class="collapsible-header"> 
+                                                    <div class="switch">
+                                                        <span style="margin-right:30px"> Jueves -  ¿Este día abre el museo?  </span>
+                                                        <label>
+                                                          No
+                                                          <input id="checkbox_jue" type="checkbox">
+                                                          <span class="lever"></span>
+                                                          Sí
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="collapsible-body">
+                                                    <div class="row pb-0 mb-0">
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_inicio_jue" name="hr_inicio_jue" type="time" class="padding-0 margin-0" value="10:00">
+                                                            <label for="hr_inicio_jue"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_fin_jue" name="hr_fin_jue" type="time" class="padding-0 margin-0" value="17:00">
+                                                            <label for="hr_fin_jue"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                            </li>
+                                        </ul>
+                                    </div> 
+                                    <div class="col s6">
+                                        <ul class="collapsible">
+                                            <li id="li_v">
+                                                <div id="header_v" class="collapsible-header"> 
+                                                    <div class="switch">
+                                                        <span style="margin-right:30px"> Viernes -  ¿Este día abre el museo?  </span>
+                                                        <label>
+                                                          No
+                                                          <input id="checkbox_vie" type="checkbox">
+                                                          <span class="lever"></span>
+                                                          Sí
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="collapsible-body">
+                                                    <div class="row pb-0 mb-0">
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_inicio_vie" name="hr_inicio_vie" type="time" class="padding-0 margin-0" value="10:00">
+                                                            <label for="hr_inicio_vie"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_fin_vie" name="hr_fin_vie" type="time" class="padding-0 margin-0" value="17:00">
+                                                            <label for="hr_fin_vie"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                            </li>
+                                            <li id="li_s">
+                                                <div id="header_s" class="collapsible-header"> 
+                                                    <div class="switch">
+                                                        <span style="margin-right:30px"> Sábado -  ¿Este día abre el museo?  </span>
+                                                        <label>
+                                                          No
+                                                          <input id="checkbox_sab" type="checkbox">
+                                                          <span class="lever"></span>
+                                                          Sí
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="collapsible-body">
+                                                    <div class="row pb-0 mb-0">
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_inicio_sab" name="hr_inicio_sab" type="time" class="padding-0 margin-0" value="10:00">
+                                                            <label for="hr_inicio_sab"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_fin_sab" name="hr_fin_sab" type="time" class="padding-0 margin-0" value="17:00">
+                                                            <label for="hr_fin_sab"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                            </li>
+                                            <li id="li_d">
+                                                <div id="header_d" class="collapsible-header"> 
+                                                    <div class="switch">
+                                                        <span style="margin-right:30px"> Domingo -  ¿Este día abre el museo?  </span>
+                                                        <label>
+                                                          No
+                                                          <input id="checkbox_dom" type="checkbox">
+                                                          <span class="lever"></span>
+                                                          Sí
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="collapsible-body">
+                                                    <div class="row pb-0 mb-0">
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_inicio_dom" name="hr_inicio_dom" type="time" class="padding-0 margin-0" value="10:00">
+                                                            <label for="hr_inicio_dom"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                        <div class="input-field col s6 pb-0 mb-0">
+                                                            <input id="hr_fin_dom" name="hr_fin_dom" type="time" class="padding-0 margin-0" value="17:00">
+                                                            <label for="hr_fin_dom"> Hora inicio <span class="required">*</span></label>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="step-actions">
+                                        <div class="row">
+                                            <div class="col"> <button class="btn light-blue-secondary previous-step"> Anterior  <i class="material-icons left"> arrow_back </i> </button> </div>
+                                            <div class="col"> <button class="waves-effect waves dark btn light-blue-secondary next-step" type="reset"> Siguiente <i class="material-icons right"> arrow_forward </i> </button> </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col s7">
-                            <div class="row center">
-                                <div class="input-field col s10 offset-s1">
-                                    <input placeholder="Ej: MAQRO" id="nom_museo" name="nom_museo" type="text"
-                                        class="validate">
-                                    <label for="nom_museo"> Nombre del Museo </label>
-                                </div>
-
-                            </div>
-                            <div class="row center">
-                                <div class="col offset-s1">
-                                    <div class="col">
-                                        <a class="btn waves-effect waves-light primary-color"><i
-                                                class="material-icons left">add_box</i>Agregar salas </a>
+                             </li>
+                             <li class="step">
+                                 <div class="step-title waves-effect"> Descripción </div>
+                                 <div class="step-content">
+                                     <!-- DESCRIPCIÓN -->
+                                     <div class="row">
+                                     <div class="input-field col s10 offset-s1">
+                                         <textarea id="desc_museo" name="desc_museo"
+                                             class="materialize-textarea validate" required></textarea>
+                                         <label for="desc_museo"> Descripción <span class="required">*</span></label>
+                                         <span class="helper-text" data-error="Este input es requerido"></span>
+                                     </div>
                                     </div>
-                                    <div class="col">
-                                        <a class="btn waves-effect waves-light primary-color modal-trigger"
-                                            href="#modal_hr"><i class="material-icons left">calendar_month</i>Agregar
-                                            horarios </a>
+                                    
+                                    <div class="step-actions">
+                                        <div class="row">
+                                            <div class="col"> <button class="red btn btn-reset" type="reset"> Resetear <i class="material-icons left"> clear </i>  </button> </div>
+                                            <div class="col"> <button class="btn light-blue-secondary previous-step"> Anterior  <i class="material-icons left"> arrow_back </i> </button> </div>
+                                            <div class="col"><button type="submit" value="upload" class="btn waves-effect waves-light green"><i class="material-icons left">check</i>
+                                            Registrar Museo
+                                            </button></div>
+                                            <div class="col"> <button class="waves-effect waves dark btn light-blue-secondary next-step" type="reset"> Siguiente <i class="material-icons right"> arrow_forward </i> </button> </div>
+                                        </div>
                                     </div>
-                                </div>
-
-
-                            </div>
+                                 </div>
+                              </li>
+                        </form>
                         </div>
-
                     </div>
-
-                    <div class="row center margin-10">
-
-                        <div class="input-field col s5 offset-s1">
-                            <input placeholder="Ej: 442-212-2357" id="num_museo" name="num_museo" type="text"
-                                class="validate">
-                            <label for="num_museo"> Teléfono de contacto </label>
-                        </div>
-                        <div class="input-field col s5">
-                            <input placeholder="Ej: C. Ignacio Allende Sur 14" name="ubicacion_museo"
-                                id="ubicacion_museo" type="text" class="validate">
-                            <label for="ubicacion_museo"> Dirección </label>
-                        </div>
-                        <a style="margin-right:30px;margin-top:10px"
-                            class="btn-floating waves-effect waves-light primary-color modal-trigger"
-                            href="#modal_link"><i class="material-icons left">location_on</i> </a>
-                    </div>
-                    <div class="row center margin-10">
-                        <div class="input-field col s10 offset-s1">
-                            <textarea id="desc_museo" name="desc_museo"
-                                class="materialize-textarea validate"></textarea>
-                            <label for="desc_museo"> Descripción </label>
-                        </div>
-
-
-                        <button type="submit" value="upload" class="btn waves-effect waves-light green margin-10">
-                            <i class="material-icons left">check</i>
-                            Registrar museo
-                        </button>
-                    </div>
+                    
                 </div>
-
             </div>
-        </form>
+       
+        
+            
     </main>
-
-    <script src="/js/script_nuevo_museo.js"></script>
+    <script src="/js/script_stepper_museo.js"></script>
     <%- include('includes/footer.ejs') %>

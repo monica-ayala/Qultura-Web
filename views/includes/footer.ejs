@@ -21,24 +21,13 @@
       
     </div>
   </footer>
-  
-
   <script src="js/init.js"></script>
-  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="/js/profile.js"></script>
-  <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOonz9xYahAmBqfXi0Vy6zdrHAlj9Pdw8&callback=initMap&v=weekly"
-      defer
-    ></script>
-
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOonz9xYahAmBqfXi0Vy6zdrHAlj9Pdw8&callback=initMap&v=weekly" defer ></script>
   <script>
+    M.CharacterCounter.init()
     M.AutoInit();
-    var images = document.querySelectorAll('.parallax-img');
-    new simpleParallax(images);
-
-    //Para que cuente palabras en editar guia
-    $(document).ready(function() {
-    $('input#input_text, textarea#textarea2').characterCounter();
-  });
   </script>
+
 </html>

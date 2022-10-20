@@ -88,28 +88,27 @@ exports.register = (request, response, next) => {
 exports.museo_post = (request, response, next) => {
   if(request.session.id_rol == 4){
     if(request.session.id_museo == request.params.id_museo || request.session.id_museo == 1){
-      url_imagen = request.file;
-      if (typeof url_imagen == "undefined") {
-        url_imagen = "";
-      } else {
-        url_imagen = request.file.filename;
-      }
       link_ubi = "placeholder";
+      
       const nuevo_museo = new Museo(
         request.body.nom_museo,
         request.body.desc_museo,
         request.body.ubicacion_museo,
         link_ubi,
         request.body.num_museo,
-        url_imagen,
-        url_imagen
+        request.body.imgP_museo,
+        request.body.imgB_museo
       );
+      
       nuevo_museo
         .save()
         .then((result) => {
-          response.redirect("/museo");
-        })
-        .catch((err) => console.log(err));
+          for(let horario of request.body.horarios){
+            console.log(horario)
+            Museo.AsignarHorario(result[0].insertId,horario.dia,horario.fin,horario.inicio);
+          };
+          response.status(200).json({})
+        }).catch(err => console.log(err)); 
     }else{
       response.redirect('/')
     }
@@ -150,13 +149,18 @@ exports.soft_unerase = (request, response, next) => {
 
 exports.get_Onemuseo = (request, response, next) => {
   if(request.params.id_museo == request.session.id_museo || request.session.id_museo == 1){
-    Museo.fecthOne(request.params.id_museo)
-    .then(([rowsMuseos, fieldData]) => {
-      response.render("museo_registrar", {
-        museos: rowsMuseos,
-      });
-    })
-    .catch((err) => console.log(err));
+    
+    Sala.fetchListMuseum(request.params.id_museo)
+    .then(([rowsSalas, fieldData]) => {
+      Museo.fecthOne(request.params.id_museo)
+      .then(([rowsMuseo, fieldData]) => {
+        response.render("museo_registrar", {
+          museos: rowsMuseo,
+          salas: rowsSalas
+        });
+      })
+      .catch((err) => console.log(err));
+    }).catch(err => console.log(err));
   }else{
     response.redirect('/')
   }
@@ -175,21 +179,17 @@ exports.api_get_one = (request, response, next) => {
  };
 
 exports.museo_update = (request,response,next)=>{
+  
   if(request.session.id_rol == 4 || request.session.id_rol == 3){
     if (request.session.id_museo == request.body.id_museo || request.session.id_museo == 1){
-      url_imagen = request.file;
-      if (typeof url_imagen == "undefined") {
-        url_imagen = request.body.museo_url;
-      } else {
-        url_imagen = request.file.filename;
-      }
+      
       Museo.update_museo(
         request.body.nom_museo,
         request.body.desc_museo,
-        request.body.direccion_museo,
+        request.body.ubicacion_museo,
         request.body.num_museo,
-        url_imagen,
-        request.body.id_museo
+        request.body.imgP_museo,
+        request.params.id_museo
       )
         .then(() => {
           response.redirect("/");
