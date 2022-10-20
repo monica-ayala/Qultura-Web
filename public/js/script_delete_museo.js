@@ -33,13 +33,7 @@ function deleteMuseum(element){
             .then(response => response.json())
             .then(response => {
                 // Render museum list again
-                cards.innerHTML = ``;;
-                console.log(response.museos)
-                for(museo of response.museos){
-                    if(museo.status == 1){
-                        cards.innerHTML += `<li class="card-panel card-pers hoverable" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/uploads/${museo.imgP_museo}') no-repeat; background-size: cover;"> <div><a class="btn-floating green card-link" style="float:right;margin:0px;margin-left:10px"> <i class="material-icons">edit</i> </a><a onclick="deleteMuseum(this)" id="${museo.id_museo}" class="btn-floating red card-link" style="float:right;margin:0px"> <i class="material-icons">delete</i> </a> <h3 class="card-title white-text">${museo.nom_museo}</h3> <div class="card-content white-text"> <p> Tel: ${museo.num_museo}</p> <p> ${museo.desc_museo.substring(0, 100)} . . .</p></div></div></li>`;
-                    }
-                }
+                location.reload()
                 
             }).catch(err => {
                 console.log(err);
