@@ -73,27 +73,27 @@
               <li class="card-pers card-panel z-depth-3 border-radius-6 mt-10 card-animation-1">
                 <a class="margin-0 center-align">
                   <img class="imgr border-radius-8 z-depth-4 image-n-margin"
-                    src="/uploads/<%=evento.multimedia_evento%>">
+                    src="/uploads/eventos/<%=evento.multimedia_evento%>">
                 </a>
                 <h6 class="primary-color-txt text-darken-3 mt-5"><b>
                     <%=evento.info_evento%>
                   </b></h6>
                 <span>
-                  <%if( evento.fecha_hora_evento.substring(0,10)===evento.fecha_hora_evento.substring(11,21) ){%>
+                  <%if( evento.fecha_hora_evento.substring(0,12)===evento.fecha_hora_evento.substring(13,25) ){%>
                     <div class="valign-wrapper"> <i class="material-icons space-icon"> calendar_month </i>
-                      <p> Fecha: <%=evento.fecha_hora_evento.substring(0,10)%>
+                      <p> Fecha: <%=evento.fecha_hora_evento.substring(0,12)%>
                       </p>
                     </div>
                     <%}else{%>
                       <div class="valign-wrapper"> <i class="material-icons space-icon"> calendar_month </i>
-                        <p> Fecha: <%=evento.fecha_hora_evento.substring(0,10)%> -
-                            <%=evento.fecha_hora_evento.substring(11,21)%>
+                        <p> Fecha: <%=evento.fecha_hora_evento.substring(0,12)%> -
+                            <%=evento.fecha_hora_evento.substring(13,25)%>
                         </p>
                       </div>
                       <%}%>
                         <div class="valign-wrapper"> <i class="material-icons space-icon"> schedule </i>
-                          <p>Horario: <%=evento.fecha_hora_evento.substring(22,27)%> -
-                              <%=evento.fecha_hora_evento.substring(27,39)%>
+                          <p>Horario: <%=evento.fecha_hora_evento.substring(27,34)%> -
+                              <%=evento.fecha_hora_evento.substring(35,49)%>
                           </p>
                         </div>
                         <% for (let tag of tags){%>

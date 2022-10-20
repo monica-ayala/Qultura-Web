@@ -10,7 +10,7 @@ var current;
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
-cron.schedule('21 * * * *', () => {
+cron.schedule('0 11 * * *', () => {
   var date = new Date()
   var today = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
   Solicitud.fetchEverything()
@@ -22,7 +22,7 @@ cron.schedule('21 * * * *', () => {
                       .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
                           Museo.fetchMuseoName(current.id_museo_solicitud)
                               .then(([rowsMuseoName, fieldDataMuseoName]) => {
-                                  Solicitud.correoRecordatorio_send(current.id_solicitud, rowsUsuarioMuseo[0].correo_user, current.info_adicional, current.fecha_hora_sol, current.num_Visitantes, rowsMuseoName[0].nom_museo)
+                                  Solicitud.correoRecordatorio_send(current.id_solicitud, rowsUsuarioMuseo[0].correo_user, current.info_adicional, current.fecha_hora_sol, current.num_asistentes, rowsMuseoName[0].nom_museo)
                               }).catch(err => console.log(err));
                   }).catch(err => console.log(err));
               }
@@ -65,12 +65,14 @@ exports.elimina_solicitud=(request,response,next)=>{
       .then(([rowsMuseoUsuario, fieldDataMuseoUsuario]) => {
         User.fetchMuseoCorreo(rowsMuseoUsuario[0].id_user_museo)
           .then(([rowsUsuarioMuseo, fieldDataUsuarioMuseo]) => {
+            User.fetchMuseoCorreo(request.body.usuario_necesidad)
+          .then(([rowsUsuariosolicitud, fieldDataUsuarioMuseo]) => {
             solicitud_nueva.solicitud_save()
               .then(() => {
                 if(request.body.necesidades.length != 0){
                   Solicitud.solicitud_fetch_lastinsertion()
                     .then(([rowLastSolicitud, fieldDatalastSolicitud]) => {
-                      Solicitud.correo_send(rowLastSolicitud[0].LastSolicitud, request.body.necesidades_text , rowsUsuarioMuseo[0].correo_user, request.body.info_adicional, request.body.fecha_hora_sol, request.body.num_Visitantes)
+                      Solicitud.correo_send(rowLastSolicitud[0].LastSolicitud, request.body.necesidades_text , rowsUsuarioMuseo[0].correo_user, request.body.info_adicional, request.body.fecha_hora_sol, request.body.num_Visitantes, rowsUsuariosolicitud[0].correo_user)
                       for(var i = 0; i < request.body.necesidades.length; i++){
                         Solicitud.necesidades_save(rowLastSolicitud[0].LastSolicitud, request.body.necesidades[i],request.body.info_adicional,request.body.fecha_hora_sol, request.body.num_Visitantes,)
                         .catch(err => console.log(err));
@@ -80,6 +82,7 @@ exports.elimina_solicitud=(request,response,next)=>{
                 }
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
+      }).catch(err => console.log(err));
       }).catch(err => console.log(err));
   };
 
