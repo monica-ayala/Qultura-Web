@@ -1,10 +1,9 @@
-const { response } = require("express");
-const Usuario = require("../../models/usuario");
 
 
 $(document).ready(function(){
-    $('.formSelect').formSelect();
+    
     $('select').formSelect();
+    $('.formSelect').formSelect();
     $('#modal1').modal({
         onCloseEnd: function(){
            $('#modal1').empty();
@@ -12,7 +11,7 @@ $(document).ready(function(){
            $('select').empty();
         },
     });
-    
+   
   });
 
   $('.formSelect').on('contentChanged', function() {

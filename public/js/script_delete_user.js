@@ -1,5 +1,4 @@
-const { request } = require("express");
-const { redirect } = require("express/lib/response");
+
 // deleteUsuario
 // Funcion que se ejecuta al borrar un usuario
 // en donde se pregunta al usuario si desea continuar con la accion
