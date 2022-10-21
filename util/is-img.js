@@ -1,12 +1,6 @@
-const express= require('express');
-const bodyParser = require('body-parser');
-const cookieParser=require('cookie-parser');
-const session=require('express-session');
-const path = require('path');
+
 var multer = require('multer');
-const jwt = require("jsonwebtoken")
-const dotenv = require('dotenv');
-const { nextTick } = require('process');
+
 
 //Middleware para el manejo de las imagenes de eventos 
 const storage = multer.diskStorage({
@@ -26,7 +20,6 @@ const upload = multer({
     limits: {
         fileSize: 1000000000000000 //give no. of bytes
     },
-    // missing filter for files uploaded
 }).single('url_imagen')
 module.exports = (req, res,next) => {
   upload(req, res,next,(err) =>{

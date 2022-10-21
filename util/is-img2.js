@@ -1,12 +1,6 @@
-const express= require('express');
-const bodyParser = require('body-parser');
-const cookieParser=require('cookie-parser');
-const session=require('express-session');
-const path = require('path');
+
 var multer = require('multer');
-const jwt = require("jsonwebtoken")
-const dotenv = require('dotenv');
-const { nextTick } = require('process');
+
 
 //Middleware para el manejo de las imagenes de guias
 
