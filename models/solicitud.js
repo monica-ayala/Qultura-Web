@@ -1,7 +1,6 @@
 const db = require('../util/database');
 const dotenv = require('dotenv');
 
-//const bcrypt = require('bcryptjs');
 const nodemailer= require('nodemailer');
 const { callbackPromise } = require('nodemailer/lib/shared');
 const transporter= nodemailer.createTransport({
@@ -14,6 +13,11 @@ const transporter= nodemailer.createTransport({
 
 var user = "no_reply_quapp@outlook.com"
 var pass = "U4@4*s*7mqjF"
+
+// Modelo de Solicitudes 
+// Se realizan las llamadas hacia la base de datos
+// Tanto inserciones como seleccionar informacion en especifico
+// de las solicitudes en movil y correos electronicos
 
 
 module.exports = class Solicitud {

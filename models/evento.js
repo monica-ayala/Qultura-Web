@@ -1,5 +1,4 @@
 const db = require('../util/database');
-//const bcrypt = require('bcryptjs');
 
 // Modelo de Eventos 
 // Se realizan las llamadas hacia la base de datos

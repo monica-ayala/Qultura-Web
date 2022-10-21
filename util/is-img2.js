@@ -8,11 +8,12 @@ const jwt = require("jsonwebtoken")
 const dotenv = require('dotenv');
 const { nextTick } = require('process');
 
+//Middleware para el manejo de las imagenes de guias
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       console.log(file)
-          cb(null, "public/uploads/guias"); // it will upload inside events
+          cb(null, "public/uploads/guias"); // it will upload inside guias
       },
       filename: (req, file, cb) => {
         cb(null, new Date().getTime()+'-'+file.originalname)

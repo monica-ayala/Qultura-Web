@@ -1,5 +1,8 @@
 const db = require('../util/database');
-//const bcrypt = require('bcryptjs');
+
+// Modelo de Necesidades 
+// Se realizan las llamadas para las necesidades 
+// de las solicitudes
 
 module.exports = class Necesidad{
     // Constructor method for necesidad

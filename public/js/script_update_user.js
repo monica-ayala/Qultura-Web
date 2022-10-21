@@ -1,4 +1,5 @@
 
+// Inicializa elementos de la página 
 
 $(document).ready(function(){
     
@@ -130,7 +131,8 @@ function updateUser(){
   });
   
 // myFunction
-// Funcion para la busqueda de usuarios 
+// Funcion para la busqueda de usuarios por correos, 
+// nombre, museos y roles
 
   function myFunction() {
     // Declare variables

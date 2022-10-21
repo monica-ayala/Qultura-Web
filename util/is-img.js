@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken")
 const dotenv = require('dotenv');
 const { nextTick } = require('process');
 
-
+//Middleware para el manejo de las imagenes de eventos 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       console.log(file)
