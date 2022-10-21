@@ -79,21 +79,22 @@
                     <%=evento.info_evento%>
                   </b></h6>
                 <span>
-                  <%if( evento.fecha_hora_evento.substring(0,12)===evento.fecha_hora_evento.substring(13,25) ){%>
+                  <%if( evento.fecha_hora_evento.substring(0,10)===evento.fecha_hora_evento.substring(11,21) ){%>
                     <div class="valign-wrapper"> <i class="material-icons space-icon"> calendar_month </i>
-                      <p> Fecha: <%=evento.fecha_hora_evento.substring(0,12)%>
+                      <p> Fecha: <%=evento.fecha_hora_evento.substring(0,10)%>
                       </p>
                     </div>
                     <%}else{%>
                       <div class="valign-wrapper"> <i class="material-icons space-icon"> calendar_month </i>
-                        <p> Fecha: <%=evento.fecha_hora_evento.substring(0,12)%> -
-                            <%=evento.fecha_hora_evento.substring(13,25)%>
+                        <p> Fecha: <%=evento.fecha_hora_evento.substring(0,10)%> -
+                            <%=evento.fecha_hora_evento.substring(11,21)%>
                         </p>
                       </div>
                       <%}%>
                         <div class="valign-wrapper"> <i class="material-icons space-icon"> schedule </i>
-                          <p>Horario: <%=evento.fecha_hora_evento.substring(27,34)%> -
-                              <%=evento.fecha_hora_evento.substring(35,49)%>
+                          
+                          <p>Horario: <%=evento.fecha_hora_evento.substring(23,27)%> -
+                              <%=evento.fecha_hora_evento.substring(27,33)%>
                           </p>
                         </div>
                         <% for (let tag of tags){%>
